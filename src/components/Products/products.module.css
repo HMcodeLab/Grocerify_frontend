@@ -1,0 +1,8 @@
+.products_main {
+  height: fit-content;
+  width: 100%;
+  margin-block: 2vh;
+  gap: 1vw;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
