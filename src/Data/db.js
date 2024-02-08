@@ -1,10 +1,6 @@
 import pomegranate from '../../src/Assets/Images/products/pomegranate.png'
 import tide from '../../src/Assets/Images/products/tide.png'
 import shoe from '../../src/Assets/Images/products/shoe.png'
-import makeup from '../../src/Assets/Images/products/makeup1.png'
-import makeup1 from '../../src/Assets/Images/products/makeup2.png'
-import makeup2 from '../../src/Assets/Images/products/makeup3.png'
-import makeup3 from '../../src/Assets/Images/products/makeup4.png'
 import perfume from '../../src/Assets/Images/products/perfume.png'
 import camera from '../../src/Assets/Images/products/camera.png'
 
@@ -111,4 +107,12 @@ export const TopRatedProducts = [
 
     },
 
+]
+
+export const colorCombo = [
+    {
+        'Electronics': '#008080',
+        'Health and Beauty': '#FEC0C1',
+        'Grocery': '#224522'
+    }
 ]

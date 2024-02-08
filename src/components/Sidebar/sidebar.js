@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react'
 import '@splidejs/react-splide/css';
 import styles from './sidebar.module.css'
 import { ReactComponent as Hotdeals } from '../../Assets/Icons/hotdeals.svg'
+import { colorCombo } from '../../Data/db';
 import { ReactComponent as Sort } from '../../Assets/Icons/soryBy.svg'
 import { ReactComponent as Dropdown } from '../../Assets/Icons/dropdown.svg'
 import { ReactComponent as List } from '../../Assets/Icons/list.svg'
 import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import productimg from '../../Assets/Images/product.png'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { useSearchParams } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = (category) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(1);
+    console.log(category.category)
+    const [searchParams, setSearchParams] = useSearchParams();
+
 
     return (
         <div className={styles.main_sidebar} style={{ height: "fit-content" }}>
@@ -19,7 +24,7 @@ const Sidebar = () => {
                     <span>
 
                         <List />
-                        <h3>Categories</h3>
+                        <h3 style={{ textTransform: "capitalize" }}>{category.category || 'categories'}</h3>
                     </span>
                     <Dropdown />
 
@@ -66,7 +71,7 @@ const Sidebar = () => {
                     >
                         <SplideSlide >
                             <div className={styles.product_main}>
-                                <div className={styles.tag}>New</div>
+                                <div className={styles.tag} style={{ backgroundColor: colorCombo[0][searchParams.get('category')] }}>New</div>
                                 <img src={productimg} alt="" />
                                 <div className={styles.details}>
                                     <ul>
@@ -86,7 +91,7 @@ const Sidebar = () => {
                         </SplideSlide>
                         <SplideSlide>
                             <div className={styles.product_main}>
-                                <div className={styles.tag}>New</div>
+                                <div className={styles.tag} style={{ backgroundColor: colorCombo[0][searchParams.get('category')] }}>New</div>
                                 <img src={productimg} alt="" />
                                 <div className={styles.details}>
                                     <ul>

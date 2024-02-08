@@ -3,6 +3,7 @@ import Cards from '../Cards/cards'
 import styles from './products.module.css'
 
 const Products = (data) => {
+    console.log(data.data)
     return (
         <>
             <div className={styles.products_main}>

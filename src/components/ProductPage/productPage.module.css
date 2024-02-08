@@ -1,0 +1,35 @@
+.hero_image {
+  width: 100%;
+}
+.hero_image img {
+  width: 100%;
+}
+
+.product_container {
+  display: grid;
+  grid-template-columns: 1fr 3.5fr;
+  gap: 2vw;
+  padding-inline: var(--padding-inline);
+  padding-block: 3vh;
+}
+
+.products_main {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1vh 2vw;
+}
+.products_top {
+  display: flex;
+  justify-content: space-between;
+  color: var(--font-color-second);
+  font-family: var(--second-font);
+  font-weight: 400;
+  align-items: center;
+}
+.products_top h1 {
+  font-size: 1.2rem;
+}
+.products_top span {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

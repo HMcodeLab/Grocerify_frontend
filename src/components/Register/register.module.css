@@ -11,7 +11,7 @@
 .register_box_main {
   /* min-height: 80vh; */
   height: fit-content;
-  width: 35vw;
+  width: 32vw;
   background-color: rgba(255, 255, 255, 0.8);
   /* border: 1px solid red; */
   position: absolute;
@@ -64,6 +64,7 @@
   box-shadow: 0px 4px 4px rgb(209, 199, 199);
   padding-left: 40px;
   font-size: 1.02rem;
+  background-color: transparent;
 }
 .inputs input:focus {
   outline: none;

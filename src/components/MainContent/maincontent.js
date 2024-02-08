@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './maincontent.module.css'
 import Heroimage from '../../Assets/Images/heroimage.png'
 import '@splidejs/react-splide/css';
@@ -13,6 +13,23 @@ import makeup from '../../Assets/Images/products/makeup2.png'
 import banner_shirt from '../../Assets/Images/banner_shirt.jpg'
 
 const MainContent = () => {
+    const [productData, setProductData] = useState([]);
+
+    const fetchData = async () => {
+        try {
+            const res = await fetch(`http://192.168.0.153:8080/api/products`);
+            const response = await res.json();
+            console.log(response);
+            setProductData(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
     return (
 
         <div style={{ display: "flex", flexDirection: "column", gap: "5vh", width: "64vw" }}>
@@ -53,7 +70,7 @@ const MainContent = () => {
 
                     </span>
                 </div>
-                <Products data={newProducts} />
+                <Products data={productData.filter((val, id) => (id >= 2 && id <= 5))} />
 
             </div>
             <div className={styles.banner_main}>
@@ -122,7 +139,7 @@ const MainContent = () => {
 
                     </span>
                 </div>
-                <Products data={newProducts} />
+                <Products data={productData.filter((val, id) => id <= 3)} />
 
             </div>
 
@@ -141,7 +158,7 @@ const MainContent = () => {
 
                     </span>
                 </div>
-                <Products data={TopRatedProducts} />
+                <Products data={productData} />
 
             </div>
         </div>

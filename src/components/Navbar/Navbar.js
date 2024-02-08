@@ -34,11 +34,11 @@ const Navbar = () => {
                         <Cart />
 
                     </span>
-                    <span>
+                    <a href="/login" style={{ cursor: "pointer" }}>  <span>
                         <User />
                         <h5>Sign In</h5>
 
-                    </span>
+                    </span> </a>
                 </div>
             </div>
         </div>

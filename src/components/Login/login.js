@@ -3,13 +3,42 @@ import styles from './login.module.css';
 import { ReactComponent as Facebook } from '../../Assets/Icons/facebook.svg';
 import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
 import { ReactComponent as Apple } from '../../Assets/Icons/apple.svg';
+import axios from 'axios';
 
 const Login = () => {
     const [switchBtn, setSwitchBtn] = useState(1);
+    const [user, setUser] = useState({
+
+        username: "",
+
+        mobileNumber: "",
+        email: "",
+        password: ""
+
+    });
+
+    const generateOTP = async (username) => {
+        try {
+            const { data: { code }, status } = await axios.get('http://192.168.0.153:8080/api/generateOTP', { params: { username } });
+
+
+            // send mail with the OTP
+            if (status === 201) {
+                let text = `Your Password OTP is ${code}. Verify and recover your password.`;
+                await axios.post('/api/registerMail', { username, userEmail: username, text, subject: "Password OTP" })
+            }
+            return Promise.resolve(code);
+        } catch (error) {
+            return Promise.reject({ error });
+        }
+    }
+
+
 
     return (
         <div className={styles.register_container}>
             <div className={styles.register_box_main}>
+
                 {/* Main heading */}
                 <h1>Hi, Welcome Back</h1>
                 <div className={styles.input_main}>

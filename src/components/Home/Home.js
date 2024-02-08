@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div className={styles.home_main}>
 
-            <Sidebar />
+            <Sidebar category={""} />
             <MainContent />
         </div>
     )
