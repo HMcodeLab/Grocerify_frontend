@@ -11,15 +11,17 @@ import banner3 from '../../Assets/Images/banner3.png'
 import serum from '../../Assets/Images/products/serum.png'
 import makeup from '../../Assets/Images/products/makeup2.png'
 import banner_shirt from '../../Assets/Images/banner_shirt.jpg'
+import { BASE_URL_PRODUCTS } from '../../Api/api';
 
 const MainContent = () => {
     const [productData, setProductData] = useState([]);
+    // console.log(process.env.BASE_URL_PRODUCTS)
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`http://192.168.0.153:8080/api/products`);
+            const res = await fetch(`${BASE_URL_PRODUCTS}api/products`);
             const response = await res.json();
-            console.log(response);
+            // console.log(response);
             setProductData(response)
         } catch (error) {
             console.log(error)

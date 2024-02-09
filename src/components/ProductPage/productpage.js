@@ -8,6 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import Heroimage from '../../Assets/Images/electronics.jpg'
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { BASE_URL_PRODUCTS } from '../../Api/api';
 
 const ProductPage = (props) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +20,7 @@ const ProductPage = (props) => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`http://192.168.0.153:8080/api/products?category=${searchParams.get('category')}`);
+            const res = await fetch(`${BASE_URL_PRODUCTS}api/products?category=${searchParams.get('category')}`);
             const response = await res.json();
             console.log(response);
             setCategoryData(response)

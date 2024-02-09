@@ -8,9 +8,11 @@ import { ReactComponent as Facebook } from '../../Assets/Icons/facebook.svg';
 import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
 import { ReactComponent as Apple } from '../../Assets/Icons/apple.svg';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { BASE_URL_PRODUCTS, BASE_URL_USER } from '../../Api/api';
 
 const Register = () => {
-
+    const navigate = useNavigate();
     const [user, setuser] = useState({
         firstName: "",
         lastName: "",
@@ -20,18 +22,13 @@ const Register = () => {
     })
 
     const handleRegister = async () => {
-        console.log('called')
+        // console.log('called')
         try {
-            const res = await axios.get('http://192.168.0.153:5000/api/generateOTP', { params: { username: user.username } });
+            const res = await axios.post(`${BASE_URL_PRODUCTS}api/generateMobileOTP`, { mobile: Number(user.mobile) });
             console.log(res);
             if (res.status === 201) {
-                let text = `Your Password OTP is ${res.data.code}. Verify and recover your password.`;
-                const response = await axios.post('http://192.168.0.153:5000/api/registerMail', { username: user.username, userEmail: user.username, text, subject: "Password OTP" })
-                console.log(response)
+                navigate('/verify_otp')
             }
-
-
-
         }
         catch (error) {
             console.log(error)

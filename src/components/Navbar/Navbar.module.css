@@ -34,7 +34,7 @@
   background-color: var(--secondary);
   border: 1px solid var(--body);
   border-left: none;
-  color: var(--body);
+  color: var(--secondary);
 }
 .search input:focus {
   outline: none;

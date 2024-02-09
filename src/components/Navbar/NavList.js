@@ -14,7 +14,7 @@ const NavList = () => {
                 <a href={'/products?category=dairy'}> <li>Dairy</li> </a>
                 <a href={'/products?category=frozen'}>  <li>Frozen</li></a>
                 <a href={'/products?category=poultary'}>  <li>Poultary</li></a>
-                <a href={'/products/offers'}>  <li>Today's offer</li></a>
+                <a href={'/stores'}>  <li>Stores</li></a>
             </ul>
 
         </div>

@@ -4,6 +4,7 @@ import { ReactComponent as Facebook } from '../../Assets/Icons/facebook.svg';
 import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
 import { ReactComponent as Apple } from '../../Assets/Icons/apple.svg';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [switchBtn, setSwitchBtn] = useState(1);
@@ -81,7 +82,7 @@ const Login = () => {
                             <span>
                                 <p>New Here ?</p>
                                 {/* Sign up link */}
-                                <h5>Sign Up</h5>
+                                <Link to={'/register'}>  <h5>Sign Up</h5></Link>
                             </span>
                             {/* Social media login buttons */}
                             <div className={styles.btn_group}>
