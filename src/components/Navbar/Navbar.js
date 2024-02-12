@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 import styles from './Navbar.module.css'
-import { ReactComponent as Loc } from '../../Assets/Icons/location.svg'
+import { ReactComponent as Loc } from '../../Assets/Icons/loc.svg'
 import { ReactComponent as Cart } from '../../Assets/Icons/cart.svg'
 import { ReactComponent as User } from '../../Assets/Icons/user.svg'
 import { ReactComponent as Search } from '../../Assets/Icons/search.svg'
@@ -85,7 +85,8 @@ const Navbar = () => {
 
                 </div>
                 <div className={styles.location}>
-                    <Loc /><p>Delivery to</p><h5>{location}</h5>
+                    <Loc />
+                    <p>Delivery to</p><h5>{location}</h5>
 
                 </div>
                 <div className={styles.icons}>

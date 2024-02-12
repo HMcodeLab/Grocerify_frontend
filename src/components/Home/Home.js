@@ -8,7 +8,7 @@ const Home = () => {
 
 
     const [ShowpopUp, setShowpopUp] = useState(false)
-    console.log(localStorage.getItem('isShowLogin'))
+    // console.log(localStorage.getItem('isShowLogin'))
 
     const handleShowPopUp = () => {
         const scrollTop = document.documentElement.scrollTop;

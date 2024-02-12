@@ -1,9 +1,0 @@
-.cart_container_main {
-  min-height: 50vh;
-  width: 100%;
-  padding: 3rem 5vw;
-  border: 1px solid red;
-}
-.heading {
-  border-bottom: 1.5px solid var(--secondary);
-}

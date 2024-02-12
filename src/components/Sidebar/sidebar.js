@@ -8,6 +8,7 @@ import { ReactComponent as Dropdown } from '../../Assets/Icons/dropdown.svg'
 import { ReactComponent as List } from '../../Assets/Icons/list.svg'
 import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import productimg from '../../Assets/Images/product.png'
+import tv from '../../Assets/Images/products/tv.png'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useSearchParams } from 'react-router-dom';
 
@@ -30,14 +31,14 @@ const Sidebar = (category) => {
 
                 </span>
                 {isDropdownOpen === 1 && <ul key={1}>
-                    <li>Clothing</li>
-                    <li>Electronics</li>
-                    <li>Shoes</li>
-                    <li>Health</li>
-                    <li>Beauty</li>
-                    <li>Kids</li>
-                    <li>Sports</li>
-                    <li>Home Decor</li>
+                    <a href={'/products?category=Clothing'}> <li>Clothing</li></a>
+                    <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
+                    <a href={'/products?category=Shoes'}> <li>Shoes</li></a>
+                    <a href={'/products?category=Health and Beauty'}> <li>Health</li></a>
+                    <a href={'/products?category=Beauty'}> <li>Beauty</li> </a>
+                    <a href={'/products?category=Kids'}> <li>Kids</li> </a>
+                    <a href={'/products?category=sports'}>  <li>Sports</li></a>
+                    <a href={'/products?category=Home Decor'}>  <li>Home Decor</li></a>
                 </ul>}
             </div>
             <div className={styles.hotdeals_main}>
@@ -53,7 +54,7 @@ const Sidebar = (category) => {
                 <div style={{ width: "19vw" }}>
                     <Splide
                         options={{
-                            type: "loop",
+                            type: "fade",
                             perPage: 1,
                             pagination: false,
                             perMove: 1,

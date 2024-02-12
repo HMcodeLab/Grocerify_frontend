@@ -1,0 +1,14 @@
+.fontmont {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+.fontgo {
+  font-family: "Gorditas";
+}
+.txtc {
+  text-decoration: line-through;
+}
+.slide {
+  transform: translateX(-50%);
+  transform: translateY(-50%);
+}

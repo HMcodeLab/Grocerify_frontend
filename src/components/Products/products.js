@@ -1,6 +1,7 @@
 import React from 'react'
 import Cards from '../Cards/cards'
 import styles from './products.module.css'
+import { Link } from 'react-router-dom'
 
 const Products = (data) => {
     console.log(data.data)
@@ -10,9 +11,10 @@ const Products = (data) => {
                 {
                     data?.data?.map((val, ind) => {
                         return (
-                            <div key={ind}>
+                            <Link to={'/product/new'}> <div key={ind}>
                                 <Cards value={val} />
                             </div>
+                            </Link>
 
                         )
 
