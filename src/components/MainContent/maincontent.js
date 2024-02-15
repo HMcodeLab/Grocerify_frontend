@@ -34,7 +34,7 @@ const MainContent = () => {
 
     return (
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "5vh", width: "64vw" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "5vh", padding: "3vh 3vw" }}>
             <div className={styles.hero_image}>
                 <Splide
                     options={{

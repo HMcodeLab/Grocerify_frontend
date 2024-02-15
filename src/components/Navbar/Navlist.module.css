@@ -2,7 +2,7 @@
   height: 35px;
   width: 100%;
   background-color: var(--tert);
-  padding-inline: var(--padding-inline);
+  /* padding-inline: var(--padding-inline); */
   display: grid;
   align-items: center;
 }

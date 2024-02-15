@@ -52,3 +52,19 @@
   font-family: var(--primary-font);
   font-weight: 400;
 }
+
+.stars {
+  display: flex;
+  gap: 3px;
+}
+.stars svg {
+  height: 12px;
+  width: 12px;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  gap: 2px;
+}

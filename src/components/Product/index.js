@@ -9,7 +9,7 @@ import './product.css'
 import { useState } from 'react'
 import Extra from '../Extra';
 export default function Product() {
-    const [image, setimage] = useState('mobile.png')
+    const [image, setimage] = useState('/mobile.png')
     const [show, setshow] = useState('h-28')
     const [reportshow, setreportshow] = useState('hidden')
     const [reportValue, setreportValue] = useState('')
@@ -63,16 +63,16 @@ export default function Product() {
             <div className="w-1/2    ">
                 <div className="flex  border-r-2 border-b-2 py-5 pr-4 h-[519px]">
                     <div className=" w-1/4 space-y-3">
-                        <button onClick={() => setimage('mobile.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
+                        <button onClick={() => setimage('/mobile.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
                             <img src="/mobile1.png" />
                         </button>
-                        <button onClick={() => setimage('mobilebig2.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
+                        <button onClick={() => setimage('/mobilebig2.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
                             <img src="/mobile2.png" />
                         </button>
-                        <button onClick={() => setimage('mobilebig1.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
+                        <button onClick={() => setimage('/mobilebig1.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
                             <img src="/mobile3.png" />
                         </button>
-                        <button onClick={() => setimage('mobilebig3.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
+                        <button onClick={() => setimage('/mobilebig3.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
                             <img src="/mobile4.png" />
                         </button>
                     </div>

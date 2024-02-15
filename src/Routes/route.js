@@ -11,6 +11,13 @@ import Login from '../components/Login/login';
 import ProductPage from '../components/ProductPage/productpage';
 import VerifyOTP from '../components/verifyOTP/verifyOTP';
 import FeaturedStore from '../components/Stores/FeaturedStore';
+import ShopRegistration from '../components/shop_register/shop_register';
+import Footer from '../components/Footer';
+import Account from '../components/Account/Account';
+import Addresses from '../components/Address/Addresss';
+import Orders from '../components/Orders/orders';
+import MyOrders from '../components/Orders';
+import AddAddress from '../components/Address/AddAddress';
 
 const Router = () => {
     return (
@@ -49,7 +56,26 @@ const Router = () => {
                     <Route exact path={'/stores'} element={<FeaturedStore />}>
 
                     </Route>
+                    <Route exact path={'/shop_registration'} element={<ShopRegistration />}>
+
+                    </Route>
+                    <Route exact path={'/account'} element={<Account />}>
+
+                    </Route>
+                    <Route exact path={'/account/myOrders'} element={<MyOrders />}>
+
+                    </Route>
+                    <Route exact path={'/account/address'} element={<Addresses />}>
+
+                    </Route>
+                    <Route exact path={'/account/addresses/add_address'} element={<AddAddress />}>
+
+                    </Route>
+                    <Route exact path={'/account/addresses/edit_address'} element={<AddAddress />}>
+
+                    </Route>
                 </Routes>
+                <Footer />
             </BrowserRouter>
         </div>
     )

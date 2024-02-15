@@ -41,7 +41,7 @@ const Sidebar = (category) => {
                     <a href={'/products?category=Home Decor'}>  <li>Home Decor</li></a>
                 </ul>}
             </div>
-            <div className={styles.hotdeals_main}>
+            {/* <div className={styles.hotdeals_main}>
                 <span className={styles.heading}>
                     <span>
 
@@ -112,7 +112,7 @@ const Sidebar = (category) => {
                         </SplideSlide>
                     </Splide>
                 </div>
-            </div>
+            </div> */}
             <div className={styles.sortBy_main}>
                 <span className={styles.heading} onClick={() => { isDropdownOpen === 2 ? setIsDropdownOpen(null) : setIsDropdownOpen(2) }}>
                     <span>

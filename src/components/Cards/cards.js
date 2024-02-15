@@ -24,14 +24,14 @@ const Cards = (value) => {
                         <img src={value.value?.product_image_url} alt="" />
                     </div>
                     <div className={styles.details}>
-                        <span>
+                        <span className={styles.about}>
                             <h5>{value.value.sub_category_name}</h5>
                             <h5>{value?.value.variants1_weight} gm </h5>
                             <h5>₹ {value.value.variants1_mrp_price}</h5>
 
 
                         </span>
-                        <span>
+                        <span className={styles.stars}>
                             <Star />
                             <Star />
                             <Star />
