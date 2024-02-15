@@ -1,38 +1,43 @@
 import React, { useState } from 'react';
 import styles from './verifyOTP.module.css';
+import { ReactComponent as Cross } from '../../Assets/Icons/cross.svg';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { BASE_URL_PRODUCTS } from '../../Api/api';
 
-const VerifyOTP = () => {
+const VerifyOTP = ({ open, mobile, setismobileVerified }) => {
 
     const [user, setUser] = useState({
-        mobile: "",
+        mobile: mobile,
         otp: ""
     });
 
-    const verify = async (username) => {
+    const verify = async () => {
         try {
-            const { data: { code }, status } = await axios.get('http://192.168.0.153:8080/api/generateOTP', { params: { username } });
+            const res = await axios.post(`${BASE_URL_PRODUCTS}api/verifyMobileOTP`, {
+                mobile: user.mobile,
+                otp: user.otp
+            })
+            console.log(res);
+            if (res.status === 201) {
+                open(false);
+                setismobileVerified('success');
 
-
-            // send mail with the OTP
-            if (status === 201) {
-                let text = `Your Password OTP is ${code}. Verify and recover your password.`;
-                await axios.post('/api/registerMail', { username, userEmail: username, text, subject: "Password OTP" })
             }
-            return Promise.resolve(code);
         } catch (error) {
-            return Promise.reject({ error });
+            console.log(error)
         }
     }
 
 
 
     return (
-        <div className={styles.register_container}>
+        <div className={styles.register_container} >
             <div className={styles.register_box_main}>
-
+                <div className={styles.cross} onClick={() => open(false)}>
+                    <Cross />
+                </div>
                 {/* Main heading */}
                 <h1>Enter your OTP</h1>
                 <div className={styles.input_main}>
@@ -45,7 +50,7 @@ const VerifyOTP = () => {
                         <div>
                             {/* Email input */}
 
-                            <input type="number" placeholder="Enter Your OTP" />
+                            <input type="number" placeholder="Enter Your OTP" value={user.otp} onChange={(e) => setUser({ ...user, otp: e.target.value })} />
                         </div>
 
                     </div>
@@ -53,7 +58,7 @@ const VerifyOTP = () => {
                     <div className={styles.action_button}>
                         {/* Sign in button */}
                         <div className={styles.submit}>
-                            <button>Verify</button>
+                            <button onClick={verify}>Verify</button>
                         </div>
                         {/* Login options */}
 

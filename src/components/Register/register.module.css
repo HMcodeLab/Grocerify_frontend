@@ -37,6 +37,30 @@
   /* border: 1px solid red; */
   width: 70%;
 }
+
+.mobile_num {
+  display: relative;
+}
+.mobile_num p {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: black;
+  cursor: pointer;
+  color: var(--primary);
+}
+.mobile_num i {
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  color: black;
+  cursor: pointer;
+}
+
+.mobile_num i svg {
+  color: var(--primary);
+}
+
 .input_main h3 {
   font-family: var(--primary-font);
   font-weight: 500;
@@ -79,7 +103,8 @@
 }
 
 .submit button {
-  padding: 8px 15px;
+  height: 35px;
+  width: 80px;
   font-size: 1.02rem;
   background-color: var(--primary);
   color: var(--body);
