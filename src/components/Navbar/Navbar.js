@@ -3,25 +3,33 @@ import React, { useState, useEffect } from 'react'
 import styles from './Navbar.module.css'
 import { ReactComponent as Loc } from '../../Assets/Icons/loc.svg'
 import { ReactComponent as Cart } from '../../Assets/Icons/cart.svg'
+import { ReactComponent as Wishlist } from '../../Assets/Icons/wishlist_green.svg'
 import { ReactComponent as User } from '../../Assets/Icons/user.svg'
+import { ReactComponent as Account } from '../../Assets/Icons/account.svg'
 import { ReactComponent as Search } from '../../Assets/Icons/search.svg'
 import logoimg from '../../Assets/Images/logo.png';
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
     const [location, setLocation] = useState("");
+    const [token, settoken] = useState('')
+
+    useEffect(() => {
+        settoken(localStorage.getItem('GROC_USER_TOKEN'))
+    }, [localStorage.getItem('GROC_USER_TOKEN')])
+
 
     const getLocationAddress = async (lati, longi) => {
-        console.log(lati, longi);
+        // console.log(lati, longi);
         try {
             const res = await fetch(
                 `https://geocode.maps.co/reverse?lat=${lati}&lon=${longi}&api_key=65bb467db90ab669670150tzu3dcab7`
             );
             const response = await res.json();
-            console.log(response);
+            // console.log(response);
             setLocation(response.address.village);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 
@@ -45,7 +53,7 @@ const Navbar = () => {
             navigator.permissions
                 .query({ name: "geolocation" })
                 .then(function (result) {
-                    console.log(result);
+                    // console.log(result);
                     if (result.state === "granted") {
                         //If granted then you can directly call your function here
                         navigator.geolocation.getCurrentPosition(success, errors, options);
@@ -90,15 +98,24 @@ const Navbar = () => {
 
                 </div>
                 <div className={styles.icons}>
+                    <Link to={'/wishlist'}>  <span>
+                        <Wishlist />
+
+                    </span> </Link>
+
                     <Link to={'/cart'}>  <span>
                         <Cart />
 
                     </span> </Link>
-                    <a href="/login" style={{ cursor: "pointer" }}>  <span>
+                    {token ? < Link to="/account" style={{ cursor: "pointer" }}>  <span>
+                        <Account />
+
+
+                    </span> </Link> : < Link to="/login" style={{ cursor: "pointer" }}>  <span>
                         <User />
                         <h5>Sign In</h5>
 
-                    </span> </a>
+                    </span> </Link>}
                 </div>
             </div>
         </div >

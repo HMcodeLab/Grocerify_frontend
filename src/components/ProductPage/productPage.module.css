@@ -9,8 +9,11 @@
   display: grid;
   grid-template-columns: 1fr 3.5fr;
   gap: 2vw;
-  padding-inline: var(--padding-inline);
-  padding-block: 3vh;
+  /* padding-inline: var(--padding-inline); */
+  /* padding-block: 3vh; */
+}
+.product_container > span {
+  padding: 5vh 3vw;
 }
 
 .products_main {

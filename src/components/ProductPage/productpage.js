@@ -40,8 +40,11 @@ const ProductPage = (props) => {
 
     return (
         <div className={styles.product_container}>
-            <Sidebar category={searchParams.get('category')} />
-            <span style={{ display: "flex", flexDirection: "column", gap: "5vh", width: "64vw" }}>
+            <div style={{ backgroundColor: "var(--tert)" }}>
+
+                <Sidebar category={searchParams.get('category')} />
+            </div>
+            <span style={{ display: "flex", flexDirection: "column", gap: "5vh" }}>
                 <div className={styles.hero_image}>
                     <Splide
                         options={{

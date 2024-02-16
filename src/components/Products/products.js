@@ -11,10 +11,11 @@ const Products = (data) => {
                 {
                     data?.data?.map((val, ind) => {
                         return (
-                            <Link to={'/product/new'}> <div key={ind}>
+                            <div key={ind}>
+                                {/* <Link to={'/product/new'}>  */}
                                 <Cards value={val} />
+                                {/* // </Link> */}
                             </div>
-                            </Link>
 
                         )
 

@@ -15,9 +15,15 @@ import ShopRegistration from '../components/shop_register/shop_register';
 import Footer from '../components/Footer';
 import Account from '../components/Account/Account';
 import Addresses from '../components/Address/Addresss';
-import Orders from '../components/Orders/orders';
+// import Orders from '../components/Orders/orders';
 import MyOrders from '../components/Orders';
 import AddAddress from '../components/Address/AddAddress';
+import PaymentOptions from '../components/Account/PaymentOptions';
+import ContactUs from '../components/Account/ContactUs';
+import Coupons from '../components/Account/coupons';
+import ShippingPolicy from '../components/policies/ShippingPolicy';
+import ReturnPolicy from '../components/policies/ReturnPolicy';
+import Frequency from '../components/policies/Frequency';
 
 const Router = () => {
     return (
@@ -74,10 +80,31 @@ const Router = () => {
                     <Route exact path={'/account/addresses/edit_address'} element={<AddAddress />}>
 
                     </Route>
+                    <Route exact path={'/account/your_information'} element={<AddAddress />}>
+
+                    </Route>
+                    <Route exact path={'/account/payment'} element={<PaymentOptions />}>
+
+                    </Route>
+                    <Route exact path={'/contact_us'} element={<ContactUs />}>
+
+                    </Route>
+                    <Route exact path={'/account/coupons'} element={<Coupons />}>
+
+                    </Route>
+                    <Route exact path={'/shipping_policy'} element={<ShippingPolicy />}>
+
+                    </Route>
+                    <Route exact path={'/return_policy'} element={<ReturnPolicy />}>
+
+                    </Route>
+                    <Route exact path={'/faq'} element={<Frequency />}>
+
+                    </Route>
                 </Routes>
                 <Footer />
-            </BrowserRouter>
-        </div>
+            </BrowserRouter >
+        </div >
     )
 }
 

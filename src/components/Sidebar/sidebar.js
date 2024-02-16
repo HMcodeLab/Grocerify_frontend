@@ -41,78 +41,7 @@ const Sidebar = (category) => {
                     <a href={'/products?category=Home Decor'}>  <li>Home Decor</li></a>
                 </ul>}
             </div>
-            {/* <div className={styles.hotdeals_main}>
-                <span className={styles.heading}>
-                    <span>
 
-                        <Hotdeals />
-                        <h3>Hot Deals</h3>
-                    </span>
-
-
-                </span>
-                <div style={{ width: "19vw" }}>
-                    <Splide
-                        options={{
-                            type: "fade",
-                            perPage: 1,
-                            pagination: false,
-                            perMove: 1,
-                            wheel: false,
-                            arrows: false,
-                            autoplay: true,
-                            interval: 2000,
-                            speed: 1000,
-                            delay: 4,
-                            // duration:500,
-                            pauseOnHover: false,
-                            drag: true,
-
-                        }}
-                    >
-                        <SplideSlide >
-                            <div className={styles.product_main}>
-                                <div className={styles.tag} style={{ backgroundColor: colorCombo[0][searchParams.get('category')] }}>New</div>
-                                <img src={productimg} alt="" />
-                                <div className={styles.details}>
-                                    <ul>
-                                        <li>Apple</li>
-                                        <li>1 kg</li>
-                                        <li>₹ 110</li>
-                                    </ul>
-                                    <span>
-                                        <Star />
-                                        <Star />
-                                        <Star />
-                                        <Star />
-                                        <Star />
-                                    </span>
-                                </div>
-                            </div>
-                        </SplideSlide>
-                        <SplideSlide>
-                            <div className={styles.product_main}>
-                                <div className={styles.tag} style={{ backgroundColor: colorCombo[0][searchParams.get('category')] }}>New</div>
-                                <img src={productimg} alt="" />
-                                <div className={styles.details}>
-                                    <ul>
-                                        <li>Apple</li>
-                                        <li>1 kg</li>
-                                        <li>₹ 110</li>
-                                    </ul>
-                                    <span>
-                                        <Star />
-                                        <Star />
-                                        <Star />
-                                        <Star />
-                                        <Star />
-                                    </span>
-                                </div>
-                            </div>
-                        </SplideSlide>
-                    </Splide>
-                </div>
-            </div> */}
             <div className={styles.sortBy_main}>
                 <span className={styles.heading} onClick={() => { isDropdownOpen === 2 ? setIsDropdownOpen(null) : setIsDropdownOpen(2) }}>
                     <span>
@@ -139,6 +68,34 @@ const Sidebar = (category) => {
                     <li>
                         <input type="radio" name="relevence" id="5" />
                         <p>Relevence</p></li>
+
+
+                </ul>}
+            </div>
+            <div className={styles.sortBy_main}>
+                <span className={styles.heading} onClick={() => { isDropdownOpen === 3 ? setIsDropdownOpen(null) : setIsDropdownOpen(3) }}>
+                    <span>
+
+                        <Sort />
+                        <h3>Sort By Distance</h3>
+                    </span>
+                    <Dropdown />
+
+                </span>
+                {isDropdownOpen === 3 && <ul key={2}>
+                    <li>
+                        <input type="radio" name="popularity" id="1" />
+                        <p>Under 1 KM</p></li>
+                    <li>
+                        <input type="radio" name="highToLow" id="2" />
+                        <p>Between 1 - 2 KM</p></li>
+                    <li>
+                        <input type="radio" name="lowToHigh" id="3" />
+                        <p>Between 2 - 3 KM</p></li>
+                    <li>
+                        <input type="radio" name="discount" id="4" />
+                        <p>Under 5 KM</p></li>
+
 
 
                 </ul>}

@@ -58,6 +58,7 @@ const Register = () => {
                     mobile: user.mobile,
                 })
                 console.log(res);
+                localStorage.setItem('GROC_USER_TOKEN', res.data.token)
                 if (res.status == 201) {
                     toast.success('Registered Successfully')
                 }

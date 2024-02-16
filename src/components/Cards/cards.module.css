@@ -17,11 +17,14 @@
 .actions {
   display: none;
   position: absolute;
-  background-color: var(--primary);
+  background-color: rgba(67, 194, 67, 0.505);
   bottom: 30%;
   left: 50%;
   transform: translateX(-50%);
   padding: 6px 5px;
+}
+.rounded_div {
+  background-color: var(--primary);
 }
 .card_container:hover .inner_card_container {
   background-color: rgba(216, 216, 216, 0.5);
