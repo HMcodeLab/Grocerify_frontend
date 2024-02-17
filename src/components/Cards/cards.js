@@ -12,7 +12,7 @@ import { BASE_URL_PRODUCTS } from '../../Api/api';
 import { useSearchParams } from 'react-router-dom';
 
 const Cards = (value) => {
-    const { TotalCount, count, setcount } = useContext(Globalinfo)
+    const { TotalCount, count, setcount, TotalWishCount, wishcount, setWishcount } = useContext(Globalinfo)
     // console.log(value)
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -59,7 +59,8 @@ const Cards = (value) => {
         });
 
         // RemoveFromCart(id)
-        TotalCount()
+        // TotalCount()
+        TotalWishCount()
         // setshow(false)
     }
 
