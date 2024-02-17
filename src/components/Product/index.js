@@ -7,7 +7,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './product.css'
 import { useState } from 'react'
-import Extra from '../Extra';
+// import Extra from '../Extra';
 export default function Product() {
     const [image, setimage] = useState('/mobile.png')
     const [show, setshow] = useState('h-28')
@@ -28,7 +28,7 @@ export default function Product() {
     }
 
     return (<>
-        <Extra />
+        {/* <Extra /> */}
         {/* <div className=''>
         <div>
         <Splide 

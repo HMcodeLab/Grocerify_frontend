@@ -9,6 +9,7 @@ import { ReactComponent as Empty } from '../../Assets/Icons/emptystar.svg'
 import { BASE_URL_PRODUCTS } from '../../Api/api';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
+import { RWebShare } from 'react-web-share';
 
 export default function AddToWishlist() {
     const [Data, setData] = useState([])
@@ -95,7 +96,19 @@ export default function AddToWishlist() {
                                         <div className='flex justify-between pr-5 font-bold font2 text-[18px]'>
                                             <div>{item.product.products_title}</div>
                                             <div className='flex space-x-5 items-center '>
-                                                <button className=''><Share /></button>
+                                                <RWebShare
+                                                    data={{
+                                                        text: "Web Share - Grocerify",
+                                                        url: "https://www.linkedin.com/in/davinder--kumar/",
+                                                        title: "Grocerify",
+                                                    }}
+                                                    onClick={() =>
+                                                        console.log("shared successfully!")
+                                                    }
+                                                >
+                                                    <button className=''><Share /> </button>
+                                                    {/* <button>Share on Web</button> */}
+                                                </RWebShare>
                                                 <button className='' onClick={() => RemoveFromCart(item.product._id)}><Delete /></button>
                                             </div>
 

@@ -24,6 +24,7 @@ import Coupons from '../components/Account/coupons';
 import ShippingPolicy from '../components/policies/ShippingPolicy';
 import ReturnPolicy from '../components/policies/ReturnPolicy';
 import Frequency from '../components/policies/Frequency';
+import MoreStore from '../components/Stores/MoreStore';
 
 const Router = () => {
     return (
@@ -60,6 +61,9 @@ const Router = () => {
 
                     </Route>
                     <Route exact path={'/stores'} element={<FeaturedStore />}>
+
+                    </Route>
+                    <Route exact path={'/stores/more_store'} element={<MoreStore />}>
 
                     </Route>
                     <Route exact path={'/shop_registration'} element={<ShopRegistration />}>

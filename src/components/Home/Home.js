@@ -38,10 +38,12 @@ const Home = () => {
                         {
                             ShowpopUp && (
                                 <>
-                                    <div className={styles.model_container}>
-                                        <SignINModal setOpen={setShowpopUp} />
+                                    {localStorage.getItem('GROC_USER_TOKEN') ? <> </> :
 
-                                    </div>
+                                        <div className={styles.model_container}>
+                                            <SignINModal setOpen={setShowpopUp} />
+
+                                        </div>}
                                 </>
                             )
                         }
