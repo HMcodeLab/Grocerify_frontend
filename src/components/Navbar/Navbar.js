@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 // import { Link } from 'react-router-dom'
 import styles from './Navbar.module.css'
 import { ReactComponent as Loc } from '../../Assets/Icons/loc.svg'
@@ -9,12 +9,16 @@ import { ReactComponent as Account } from '../../Assets/Icons/account.svg'
 import { ReactComponent as Search } from '../../Assets/Icons/search.svg'
 import logoimg from '../../Assets/Images/logo.png';
 import { Link } from 'react-router-dom'
+import { Globalinfo } from '../../App'
 
 const Navbar = () => {
     const [location, setLocation] = useState("");
     const [token, settoken] = useState('')
+    const { TotalCount, count, setcount, wishcount, Total, TotalWishCount } = useContext(Globalinfo)
 
     useEffect(() => {
+        TotalCount()
+        TotalWishCount()
         settoken(localStorage.getItem('GROC_USER_TOKEN'))
     }, [localStorage.getItem('GROC_USER_TOKEN')])
 
@@ -100,13 +104,15 @@ const Navbar = () => {
                 <div className={styles.icons}>
                     <Link to={'/wishlist'}>  <span>
                         <Wishlist />
+                        <span className='relative right-2 bottom-2 text-[#58B310] text-sm'>{wishcount}</span>
 
                     </span> </Link>
 
-                    <Link to={'/cart'}>  <span>
-                        <Cart />
-
-                    </span> </Link>
+                    <Link to={'/cart'}>
+                        <span className='flex'>
+                            <Cart />
+                            <span className='relative right-2 bottom-2 text-[#58B310] text-sm'>{count}</span>
+                        </span> </Link>
                     {token ? < Link to="/account" style={{ cursor: "pointer" }}>  <span>
                         <Account />
 

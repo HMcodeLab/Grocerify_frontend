@@ -3,126 +3,192 @@ import { ReactComponent as Arrow } from '../../Assets/Icons/arrow.svg'
 import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { BASE_URL_PRODUCTS } from '../../Api/api'
+import { useContext } from 'react';
+import { Globalinfo } from '../../App';
+import Spinner from '../Spinner';
 export default function Addtocart() {
-    const [items, setitems] = useState([
-        { id: 0, quantity: 1, disable: 'hidden' },
-        { id: 1, quantity: 1, disable: 'hidden' },
-        { id: 2, quantity: 1, disable: 'hidden' },
-    ])
 
+    const [Data, setData] = useState([])
+    const [items, setitems] = useState([])
+    const [quantities, setquantities] = useState([{}])
+    const [subtotal, setsubtotal] = useState()
+    const [totalitems, settotalitems] = useState()
+    const [total, settotal] = useState()
+    const [deliverycharges, setdeliverycharges] = useState()
+    const [show, setshow] = useState(false)
+    const { TotalCount, count, setcount } = useContext(Globalinfo)
+    // console.log(Cntxt)
+
+    async function OrderSummery() {
+        // Fetchdata()
+        let url = BASE_URL_PRODUCTS + 'api/getcart?mobile=1234567890'
+        const data = await fetch(url)
+        const response = await data.json()
+        const final = response.cart;
+        let subttotal_amount = 0
+        let total_items = 0
+        let delivery = 0
+        let total = 0
+        // console.log(Data)
+        final.map((item) => {
+            let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+
+            subttotal_amount += price * item.quantity;
+            total_items += item.quantity;
+        })
+        setsubtotal(subttotal_amount)
+        settotalitems(total_items)
+        // console.log(subttotal_amount,total_items)
+    }
+
+    try {
+        useEffect(() => {
+            TotalCount()
+            // setcount(2)
+            setshow(true)
+            async function Fetchdata() {
+                let url = BASE_URL_PRODUCTS + 'api/getcart?mobile=1234567890'
+                const data = await fetch(url)
+                const response = await data.json()
+                //   console.log(response)
+
+                setData(response.cart)
+
+                // setitems([...Data])
+            }
+
+
+            Fetchdata()
+            OrderSummery()
+            setshow(false)
+
+        }, [])
+    } catch (error) {
+        console.log(error)
+    }
+
+
+
+
+    // console.log(items)
     // It is used to apply operation on decreasing the quantity of items
-    function NegativeButtonhandle(id) {
-        if (items[id].quantity == 1) {
-            temp[id].disable = 'hidden'
-        }
-        else {
-            temp[id].disable = ""
 
-            var temp = [...items];
+    async function NegativeButtonhandle(id) {
+        setshow(true)
 
-            temp[id].quantity -= 1;
+        let url2 = BASE_URL_PRODUCTS + 'api/removefromcart'
+        let bodydata2 = { mobile: 1234567890, productid: id, operation: "removeOne" }
 
-            setitems([...temp])
-        }
+        const data2 = await fetch(url2, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata2)
+        });
+        const response = await data2.json()
+
+        OrderSummery()
+        setData(response.data)
+        TotalCount()
+        setshow(false)
+
+        // console.log(response)
+        // setData(response)
     }
     // It is used to apply operation on increasing the quantity of items
 
-    function PositiveButtonhandle(id) {
+    async function PositiveButtonhandle(id) {
+        setshow(true)
+        let url2 = BASE_URL_PRODUCTS + 'api/addtocart'
+        let bodydata2 = { mobile: 1234567890, productid: id }
 
-        var temp = [...items];
-        temp[id].disable = ""
-        temp[id].quantity += 1;
-        setitems([...temp])
+        const data2 = await fetch(url2, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata2)
+        });
+        const response = await data2.json()
+        setData(response.data)
+        OrderSummery()
+        TotalCount()
+        setshow(false)
+
+        // console.log(response)
+
     }
-    function DeleteItem() {
-        console.log("delete")
+    async function DeleteItem(id) {
+        setshow(true)
+
+        let url2 = BASE_URL_PRODUCTS + 'api/removefromcart'
+        let bodydata2 = { mobile: 1234567890, productid: id, operation: "removeAll" }
+
+        const data2 = await fetch(url2, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata2)
+        });
+        const response = await data2.json()
+        OrderSummery()
+        setData(response.data)
+        TotalCount()
+        setshow(false)
+
     }
+
     return (<>
         <div className="w-full px-14 text-[#848484] space-y-4 py-5">
-            <div className="text-[24px] fontcart">YOUR CART (3 Items)</div>
+            <div className="text-[24px] fontcart">YOUR CART ({Data.length} Items)</div>
             <div className='h-[2px] w-full bg-[#848484] '></div>
             <div className='flex justify-between '>
+
                 <div className="leftside w-3/5    space-y-5">
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5]'>
-                        <div>
-                            <img src='/beauty1.png' />
-                        </div>
-                        <div className='flex flex-col w-full '>
-                            <div className='flex justify-between pr-5 font-bold fontcart text-[16px]'>
-                                <div>Hairloom tomato</div>
-                                <div >₹{500 * items[0]?.quantity}</div>
-                            </div>
-                            <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{500 * items[0]?.quantity}</div>
-                            <div className='flex justify-between pr-5  items-center mt-4'>
-                                <div className='flex  items-center space-x-2  w-fit'>
-                                    <button value="minus" onClick={() => NegativeButtonhandle(0)} className={`flex items-center ${items[0]?.disable}`}><FaMinus /></button>
-                                    <div className='min-w-7 min-h-6 bg-white border border-[rgb(175,175,175)] text-center'>{items[0]?.quantity}</div>
-                                    <button name="plus" onClick={() => PositiveButtonhandle(0)}><FaPlus /></button>
-                                </div>
-                                <button onClick={DeleteItem}><Delete /></button>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5]'>
-                        <div>
-                            <img src='/beauty1.png' />
-                        </div>
-                        <div className='flex flex-col w-full '>
-                            <div className='flex justify-between pr-5 font-bold fontcart text-[16px]'>
-                                <div>Hairloom tomato</div>
-                                <div >₹{500 * items[1]?.quantity}</div>
-                            </div>
-                            <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{500 * items[1]?.quantity}</div>
-                            <div className='flex justify-between pr-5  items-center mt-4'>
-                                <div className='flex  items-center space-x-2  w-fit'>
-                                    <button value="minus" onClick={() => NegativeButtonhandle(1)} className={`flex items-center ${items[1]?.disable}`}><FaMinus /></button>
-                                    <div className='min-w-7 min-h-6 bg-white border border-[rgb(175,175,175)] text-center'>{items[1]?.quantity}</div>
-                                    <button name="plus" onClick={() => PositiveButtonhandle(1)}><FaPlus /></button>
+                    {
+                        Data.map((item) => {
+                            // console.log(item)
+                            // setquantities({...quantities,id:item.product._id})
+                            let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+                            return (<>
+                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
+                                    <div className='w-28 h-28  flex justify-center items-center '>
+                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_image_url} />
+                                    </div>
+                                    <div className='flex flex-col w-full fontorder max-h-auto'>
+                                        <div className='flex justify-between pr-5 font-semibold text-[16px]'>
+                                            <div>{item.product.products_title} </div>
+                                            <div >₹{price}</div>
+                                        </div>
+                                        <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price}</div>
+                                        <div className='flex justify-between pr-5  items-center mt-4'>
+                                            <div className='flex  items-center space-x-2  w-fit mb-2'>
+                                                <button value="minus" onClick={() => NegativeButtonhandle(item.product._id)} className={`flex items-center ${items[0]?.disable}`}><FaMinus /></button>
+                                                <div className='min-w-7 min-h-6 bg-white border border-[rgb(175,175,175)] text-center'>{item.quantity}</div>
+                                                <button name="plus" onClick={() => PositiveButtonhandle(item.product._id)}><FaPlus /></button>
+                                            </div>
+                                            <button onClick={() => DeleteItem(item.product._id)}><Delete /></button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <button onClick={DeleteItem}><Delete /></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5]'>
-                        <div>
-                            <img src='/beauty1.png' />
-                        </div>
-                        <div className='flex flex-col w-full '>
-                            <div className='flex justify-between pr-5 font-bold fontcart text-[16px]'>
-                                <div>Hairloom tomato</div>
-                                <div >₹{500 * items[2]?.quantity}</div>
-                            </div>
-                            <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{500 * items[2]?.quantity}</div>
-                            <div className='flex justify-between pr-5  items-center mt-4'>
-                                <div className='flex  items-center space-x-2  w-fit'>
-                                    <button value="minus" onClick={() => NegativeButtonhandle(2)} className={`flex items-center ${items[2]?.disable}`}><FaMinus /></button>
-                                    <div className='min-w-7 min-h-6 bg-white border border-[rgb(175,175,175)] text-center'>{items[2]?.quantity}</div>
-                                    <button name="plus" onClick={() => PositiveButtonhandle(2)}><FaPlus /></button>
-                                </div>
-                                <button onClick={DeleteItem}><Delete /></button>
-                            </div>
-                        </div>
-                    </div>
-
+                            </>)
+                        })
+                    }
 
                 </div>
                 <div className='ordersummery w-[30%] bg-[#FAFAF5] rounded-lg border px-4 space-y-3 py-4 h-fit'>
                     <div className='fontcart font-bold'>Order Summery</div>
                     <div className='flex justify-between fontorder'>
                         <div>Subtotal</div>
-                        <div>₹{500 * items[0]?.quantity + 500 * items[1]?.quantity + 500 * items[2]?.quantity}</div>
+                        <div>₹{subtotal}</div>
                     </div>
                     <div className='flex justify-between fontorder'>
-                        <div>Shopping</div>
-                        <div>₹{500 * items[0]?.quantity + 500 * items[1]?.quantity + 500 * items[2]?.quantity}</div>
+                        <div>Total items</div>
+                        <div>₹{totalitems}</div>
                     </div>
-                    <div className='flex justify-between fontorder'>
+                    {/* <div className='flex justify-between fontorder'>
                         <div>Tax</div>
                         <div>₹0</div>
-                    </div>
+                    </div> */}
                     <div className='flex justify-between fontorder'>
                         <div>Cupon code</div>
                         <div>F5SFDI65</div>
@@ -136,7 +202,7 @@ export default function Addtocart() {
                     </div>
                     <div className='flex justify-between fontorder font-bold'>
                         <div>Total</div>
-                        <div>₹{500 * items[0]?.quantity + 500 * items[1]?.quantity + 500 * items[2]?.quantity}</div>
+                        <div>₹{subtotal}</div>
                     </div>
                     <button className=' flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold '>
                         <div>
@@ -146,6 +212,10 @@ export default function Addtocart() {
                     </button>
                 </div>
             </div>
+            {show ? <div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>
+                <Spinner className='' />
+
+            </div> : ''}
         </div>
 
     </>)

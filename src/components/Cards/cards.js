@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import styles from './cards.module.css'
 import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Wishlist } from '../../Assets/Icons/wishlist_green.svg'
@@ -6,15 +6,19 @@ import { ReactComponent as View } from '../../Assets/Icons/Eye.svg'
 import { ReactComponent as Cart } from '../../Assets/Icons/cartnew.svg'
 import { ReactComponent as Compare } from '../../Assets/Icons/compare.svg'
 import { colorCombo } from '../../Data/db'
+import { Globalinfo } from '../../App';
+import { BASE_URL_PRODUCTS } from '../../Api/api';
+
 import { useSearchParams } from 'react-router-dom';
 
 const Cards = (value) => {
+    const { TotalCount, count, setcount } = useContext(Globalinfo)
     // console.log(value)
     const [searchParams, setSearchParams] = useSearchParams();
 
     const Menus = [
         { name: "Like", icon: "Heart-outline", dis: "translate-x-0" },
-        { name: "Card", icon: "basket-outline", dis: "translate-x-16" },
+        { name: "Cart", icon: "basket-outline", dis: "translate-x-16" },
         { name: "Share", icon: "share-outline", dis: "translate-x-32" },
         // { name: "Photos", icon: "camera-outline", dis: "translate-x-48" },
         // { name: "Settings", icon: "settings-outline", dis: "translate-x-64" },
@@ -26,6 +30,39 @@ const Cards = (value) => {
     const [basketSize, setBasketSize] = useState(0);
     const [heartDirection, setHeartDirection] = useState(1); // 1 for increasing, -1 for decreasing
     const [basketDirection, setBasketDirection] = useState(1); // 1 for increasing, -1 for decreasing
+
+    // add to cart function
+
+    async function Addtocart(id) {
+        console.log('id')
+        // setshow(true)
+        let url = BASE_URL_PRODUCTS + 'api/addtocart'
+        let bodydata = { mobile: 1234567890, productid: id }
+        const data = await fetch(url, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata)
+        });
+
+        // RemoveFromCart(id)
+        TotalCount()
+        // setshow(false)
+    }
+    async function AddtoWishlist(id) {
+        console.log('first')
+        let url = BASE_URL_PRODUCTS + 'api/addtowishlist'
+        let bodydata = { mobile: 1234567890, productid: id }
+        const data = await fetch(url, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata)
+        });
+
+        // RemoveFromCart(id)
+        TotalCount()
+        // setshow(false)
+    }
+
 
     useEffect(() => {
         let heartInterval;
@@ -97,6 +134,20 @@ const Cards = (value) => {
         e.preventDefault();
     }
 
+    const handleClickAction = (e) => {
+        console.log(e.target.name)
+        if (e.target.name === 'basket-outline') {
+            // console.log('first')
+            Addtocart(value?.value?._id)
+
+        }
+        if (e.target.name === 'Heart-outline') {
+            console.log('first')
+            AddtoWishlist(value?.value?._id)
+
+        }
+    }
+
     return (
         <>
             <div className={styles.card_container}>
@@ -140,6 +191,7 @@ const Cards = (value) => {
                                                 }`}
                                             onMouseEnter={() => setActive(index)}
                                             onMouseLeave={() => setActive(active)}
+                                            onClick={handleClickAction}
                                         >
                                             <ion-icon name={menu.icon}></ion-icon>
                                         </span>
