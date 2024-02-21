@@ -1,33 +1,80 @@
 
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { BASE_URL_PRODUCTS } from './Api/api';
 import './App.css';
 import Router from './Routes/route';
+import { jwtDecode } from "jwt-decode";
+import axios from 'axios';
 
 export const Globalinfo = createContext()
 function App() {
-  const [count, setcount] = useState(0)
-  const [wishcount, setWishcount] = useState(0)
-  async function TotalCount() {
-    let url = BASE_URL_PRODUCTS + 'api/getcart?mobile=1234567890'
-    const data = await fetch(url)
-    const response = await data.json()
-    setcount(response.cart.length)
-    // console.log(response)
-    // setData(response.cart)
+  const [cartData, setCartData] = useState([])
+  const [wishListData, setWishListData] = useState([])
+  const [userDetail, setUserDetail] = useState();
+
+
+  useEffect(() => {
+    // console.log(cartData)
+    getUserDetails();
+    GetCart()
+    GetWishList()
+  }, [localStorage.getItem('GROC_USER_TOKEN'), userDetail?._id])
+
+
+  async function GetCart() {
+
+    if (userDetail?._id) {
+      try {
+        let url = BASE_URL_PRODUCTS + `api/getcart?mobile=${userDetail?.mobile}`
+        const data = await fetch(url)
+        const response = await data.json()
+        console.log(response)
+        setCartData(response?.cart || [])
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+
   }
-  async function TotalWishCount() {
-    let url = BASE_URL_PRODUCTS + 'api/getwishlist?mobile=1234567890'
-    const data = await fetch(url)
-    const response = await data.json()
-    setWishcount(response.wishlist.length)
-    console.log(response.wishlist.length)
-    // console.log(response)
-    // setData(response.cart)
+  async function GetWishList() {
+    try {
+      let url = BASE_URL_PRODUCTS + `api/getwishlist?mobile=${userDetail?.mobile}`
+      const data = await fetch(url)
+      const response = await data.json()
+      // console.log(response)
+      setWishListData(response?.wishlist || [])
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  const getUserDetails = async () => {
+    const token = localStorage.getItem('GROC_USER_TOKEN')
+    console.log(token)
+    if (token) {
+      const decoded = jwtDecode(token);
+      // console.log(decoded.email)
+      try {
+        const res = await axios.get(`${BASE_URL_PRODUCTS}api/user?email=${decoded.email}`)
+
+        setUserDetail(res.data.data)
+
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+    else {
+      setUserDetail({})
+    }
+
+
+  }
+
   return (
     <>
-      <Globalinfo.Provider value={{ count, TotalCount, setcount, TotalWishCount, wishcount, setWishcount }}>
+      <Globalinfo.Provider value={{ cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails }}>
         <div className="App">
 
           <Router />

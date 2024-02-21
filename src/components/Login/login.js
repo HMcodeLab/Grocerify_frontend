@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './login.module.css';
 import { ReactComponent as Facebook } from '../../Assets/Icons/facebook.svg';
 import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
@@ -10,9 +10,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from '../../helpers';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/joy';
+import { Globalinfo } from '../../App';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { userDetail, getUserDetails } = useContext(Globalinfo)
     const [btnLoader, setBtnLoader] = useState(false);
     const [switchBtn, setSwitchBtn] = useState(1);
     const [user, setUser] = useState({
@@ -21,6 +23,7 @@ const Login = () => {
         password: ""
 
     });
+    console.log(userDetail)
 
     const handleLogin = async () => {
         console.log(user)
@@ -41,6 +44,7 @@ const Login = () => {
                     console.log(res);
 
                     toast.success("Login Successfull")
+                    // getUserDetails()
                     localStorage.setItem('GROC_USER_TOKEN', res.data.token)
                     setTimeout(() => {
                         navigate('/')

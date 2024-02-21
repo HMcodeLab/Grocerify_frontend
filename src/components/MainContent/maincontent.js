@@ -72,7 +72,7 @@ const MainContent = () => {
 
                     </span>
                 </div>
-                <Products data={productData.filter((val, id) => (id >= 2 && id <= 5))} />
+                <Products data={productData.filter((val, id) => (id >= 2 && id <= 6))} />
 
             </div>
             <div className={styles.banner_main}>
@@ -132,6 +132,7 @@ const MainContent = () => {
 
             </div>
 
+
             <div className={`${styles.featured_main} ${styles.products_main}`}>
                 <div className={`${styles.featured_top} ${styles.products_top}`}>
                     <h1>Featured Products</h1>
@@ -141,7 +142,7 @@ const MainContent = () => {
 
                     </span>
                 </div>
-                <Products data={productData.filter((val, id) => id <= 3)} />
+                <Products data={productData.filter((val, id) => id <= 4)} />
 
             </div>
 

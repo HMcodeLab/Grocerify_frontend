@@ -13,6 +13,7 @@
   width: 100%;
   padding: 10px;
   position: relative;
+  /* border: 1px solid red; */
 }
 .actions {
   display: none;

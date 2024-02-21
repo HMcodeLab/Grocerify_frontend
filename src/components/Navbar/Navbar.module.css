@@ -1,6 +1,9 @@
 .nav_main {
   height: 72px;
   width: 100%;
+  position: sticky;
+  top: 0px;
+  z-index: 99;
   background-color: var(--secondary);
   padding-inline: 5vw;
   display: grid;

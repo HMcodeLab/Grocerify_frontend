@@ -8,6 +8,7 @@ import { BASE_URL_PRODUCTS } from '../../Api/api'
 import { useContext } from 'react';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
+import { Link } from 'react-router-dom';
 export default function Addtocart() {
 
     const [Data, setData] = useState([])
@@ -18,21 +19,22 @@ export default function Addtocart() {
     const [total, settotal] = useState()
     const [deliverycharges, setdeliverycharges] = useState()
     const [show, setshow] = useState(false)
-    const { TotalCount, count, setcount } = useContext(Globalinfo)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
     // console.log(Cntxt)
+    useEffect(() => {
+        OrderSummery()
+    }, [])
 
+
+
+    console.log(cartData)
     async function OrderSummery() {
-        // Fetchdata()
-        let url = BASE_URL_PRODUCTS + 'api/getcart?mobile=1234567890'
-        const data = await fetch(url)
-        const response = await data.json()
-        const final = response.cart;
+
+        const final = cartData;
         let subttotal_amount = 0
         let total_items = 0
-        let delivery = 0
-        let total = 0
-        // console.log(Data)
-        final.map((item) => {
+
+        final?.forEach((item) => {
             let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
 
             subttotal_amount += price * item.quantity;
@@ -40,46 +42,18 @@ export default function Addtocart() {
         })
         setsubtotal(subttotal_amount)
         settotalitems(total_items)
+
         // console.log(subttotal_amount,total_items)
     }
 
-    try {
-        useEffect(() => {
-            TotalCount()
-            // setcount(2)
-            setshow(true)
-            async function Fetchdata() {
-                let url = BASE_URL_PRODUCTS + 'api/getcart?mobile=1234567890'
-                const data = await fetch(url)
-                const response = await data.json()
-                //   console.log(response)
-
-                setData(response.cart)
-
-                // setitems([...Data])
-            }
 
 
-            Fetchdata()
-            OrderSummery()
-            setshow(false)
-
-        }, [])
-    } catch (error) {
-        console.log(error)
-    }
-
-
-
-
-    // console.log(items)
-    // It is used to apply operation on decreasing the quantity of items
 
     async function NegativeButtonhandle(id) {
         setshow(true)
 
         let url2 = BASE_URL_PRODUCTS + 'api/removefromcart'
-        let bodydata2 = { mobile: 1234567890, productid: id, operation: "removeOne" }
+        let bodydata2 = { mobile: userDetail?.mobile, productid: id, operation: "removeOne" }
 
         const data2 = await fetch(url2, {
             method: 'post',
@@ -90,7 +64,7 @@ export default function Addtocart() {
 
         OrderSummery()
         setData(response.data)
-        TotalCount()
+        GetCart()
         setshow(false)
 
         // console.log(response)
@@ -101,7 +75,7 @@ export default function Addtocart() {
     async function PositiveButtonhandle(id) {
         setshow(true)
         let url2 = BASE_URL_PRODUCTS + 'api/addtocart'
-        let bodydata2 = { mobile: 1234567890, productid: id }
+        let bodydata2 = { mobile: userDetail?.mobile, productid: id }
 
         const data2 = await fetch(url2, {
             method: 'post',
@@ -111,7 +85,7 @@ export default function Addtocart() {
         const response = await data2.json()
         setData(response.data)
         OrderSummery()
-        TotalCount()
+        GetCart()
         setshow(false)
 
         // console.log(response)
@@ -121,7 +95,7 @@ export default function Addtocart() {
         setshow(true)
 
         let url2 = BASE_URL_PRODUCTS + 'api/removefromcart'
-        let bodydata2 = { mobile: 1234567890, productid: id, operation: "removeAll" }
+        let bodydata2 = { mobile: userDetail?.mobile, productid: id, operation: "removeAll" }
 
         const data2 = await fetch(url2, {
             method: 'post',
@@ -130,29 +104,29 @@ export default function Addtocart() {
         });
         const response = await data2.json()
         OrderSummery()
-        setData(response.data)
-        TotalCount()
+
+        GetCart()
         setshow(false)
 
     }
 
     return (<>
         <div className="w-full px-14 text-[#848484] space-y-4 py-5">
-            <div className="text-[24px] fontcart">YOUR CART ({Data.length} Items)</div>
+            <div className="text-[24px] fontcart">YOUR CART ({cartData?.length} Items)</div>
             <div className='h-[2px] w-full bg-[#848484] '></div>
             <div className='flex justify-between '>
 
                 <div className="leftside w-3/5    space-y-5">
 
                     {
-                        Data.map((item) => {
+                        cartData.map((item) => {
                             // console.log(item)
                             // setquantities({...quantities,id:item.product._id})
                             let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
                             return (<>
                                 <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
                                     <div className='w-28 h-28  flex justify-center items-center '>
-                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_image_url} />
+                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
                                     </div>
                                     <div className='flex flex-col w-full fontorder max-h-auto'>
                                         <div className='flex justify-between pr-5 font-semibold text-[16px]'>
@@ -204,12 +178,13 @@ export default function Addtocart() {
                         <div>Total</div>
                         <div>₹{subtotal}</div>
                     </div>
-                    <button className=' flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold '>
-                        <div>
+                    <Link to={'/checkout'}> <button className=' flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold '>
+                        <div >
                             Continue to payments
                         </div>
                         <Arrow />
                     </button>
+                    </Link>
                 </div>
             </div>
             {show ? <div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>

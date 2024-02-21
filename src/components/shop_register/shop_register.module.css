@@ -94,6 +94,13 @@
   outline: none;
 }
 
+.inputs p::after {
+  content: "*";
+  height: 15px;
+  width: 15px;
+  margin-left: 3px;
+}
+
 .checkbox_div {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

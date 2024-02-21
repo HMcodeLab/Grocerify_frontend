@@ -11,7 +11,7 @@ const Checkbox = (value) => {
                         <path d="M4 14l8 7L24 7"></path>
                     </svg>
                 </span>
-                <p class="checkbox__textwrapper">{value.value}</p>
+                <h5 class="checkbox__textwrapper">{value.value}</h5>
             </label>
         </div>
     )

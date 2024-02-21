@@ -14,13 +14,13 @@ import { Globalinfo } from '../../App'
 const Navbar = () => {
     const [location, setLocation] = useState("");
     const [token, settoken] = useState('')
-    const { TotalCount, count, setcount, wishcount, Total, TotalWishCount } = useContext(Globalinfo)
-
-    useEffect(() => {
-        TotalCount()
-        TotalWishCount()
-        settoken(localStorage.getItem('GROC_USER_TOKEN'))
-    }, [localStorage.getItem('GROC_USER_TOKEN')])
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+    // console.log(cartData)
+    // useEffect(() => {
+    //     GetCart()
+    //     GetWishList()
+    //     settoken(localStorage.getItem('GROC_USER_TOKEN'))
+    // }, [localStorage.getItem('GROC_USER_TOKEN')])
 
 
     const getLocationAddress = async (lati, longi) => {
@@ -84,9 +84,9 @@ const Navbar = () => {
             <div className={styles.nav_row}>
                 <div className={styles.logo_container}>
 
-                    <a href="/">
+                    <Link to="/">
                         <img src={logoimg} alt="Logo not found" />
-                    </a>
+                    </Link>
                 </div>
                 <div className={styles.search}>
 
@@ -104,16 +104,16 @@ const Navbar = () => {
                 <div className={styles.icons}>
                     <Link to={'/wishlist'}>  <span>
                         <Wishlist />
-                        <span className='relative right-2 bottom-2 text-[#58B310] text-sm'>{wishcount}</span>
+                        <span className='relative right-2 bottom-2 text-[#58B310] text-sm'>{wishListData?.length}</span>
 
                     </span> </Link>
 
                     <Link to={'/cart'}>
                         <span className='flex'>
                             <Cart />
-                            <span className='relative right-2 bottom-2 text-[#58B310] text-sm'>{count}</span>
+                            <span className='relative right-2 bottom-2 text-[#58B310] text-sm'>{cartData?.length}</span>
                         </span> </Link>
-                    {token ? < Link to="/account" style={{ cursor: "pointer" }}>  <span>
+                    {userDetail?._id ? < Link to="/account" style={{ cursor: "pointer" }}>  <span>
                         <Account />
 
 

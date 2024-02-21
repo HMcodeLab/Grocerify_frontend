@@ -25,10 +25,7 @@ const Home = () => {
     return (
         <>
             <div className={styles.home_main} >
-                <div style={{ backgroundColor: "var(--tert)" }}>
-                    <Sidebar category={""} />
 
-                </div>
                 <MainContent />
 
             </div>

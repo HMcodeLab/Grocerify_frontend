@@ -36,14 +36,15 @@ const ProductPage = (props) => {
 
 
     // console.log(props)
+    //     <div style={{ backgroundColor: "var(--tert)" }}>
+
+    //     <Sidebar category={searchParams.get('category')} />
+    // </div>
 
 
     return (
         <div className={styles.product_container}>
-            <div style={{ backgroundColor: "var(--tert)" }}>
 
-                <Sidebar category={searchParams.get('category')} />
-            </div>
             <span style={{ display: "flex", flexDirection: "column", gap: "5vh" }}>
                 <div className={styles.hero_image}>
                     <Splide

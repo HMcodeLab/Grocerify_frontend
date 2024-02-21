@@ -1,23 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Navlist.module.css'
 import { Link } from 'react-router-dom'
+import { ReactComponent as HamBurger } from '../../Assets/Icons/hamburger.svg'
+import Sidebar from '../Sidebar/sidebar'
 
 const NavList = () => {
+
+    const [isOpenSidebar, setisOpenSidebar] = useState(false)
     return (
-        <div className={styles.nav_list_main}>
+        <>
+            <div className={styles.nav_list_main}>
 
-            <ul className={styles.nav_list}>
-                <a href={'/products?category=home'}> <li>Home</li></a>
-                <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
-                <a href={'/products?category=Grocery'}> <li>Groceries</li></a>
-                <a href={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></a>
-                <a href={'/products?category=dairy'}> <li>Dairy</li> </a>
-                <a href={'/products?category=frozen'}>  <li>Frozen</li></a>
-                <a href={'/products?category=poultary'}>  <li>Poultary</li></a>
-                <a href={'/stores'}>  <li>Stores</li></a>
-            </ul>
+                <ul className={styles.nav_list}>
+                    <li onClick={() => setisOpenSidebar(true)}>   <HamBurger /> <p>All</p> </li>
+                    <Link to={'/products?category=Electronics'}> <li>Electronics</li></Link>
+                    <Link to={'/products?category=Grocery'}> <li>Groceries</li></Link>
+                    <Link to={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></Link>
+                    <Link to={'/products?category=dairy'}> <li>Dairy</li> </Link>
+                    <Link to={'/products?category=frozen'}>  <li>Frozen</li></Link>
+                    <Link to={'/products?category=poultary'}>  <li>Poultary</li></Link>
+                    <Link to={'/stores'}>  <li>Stores</li></Link>
+                </ul>
 
-        </div>
+            </div>
+            {
+                isOpenSidebar && <div className={styles.sidebar_container}><div className={styles.main_sidebar}> <Sidebar category={""} />   </div>  <div className={styles.overlay} onClick={() => setisOpenSidebar(false)}></div> </div>
+            }
+        </>
     )
 }
 

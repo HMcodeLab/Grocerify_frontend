@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./YourAccount.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Globalinfo } from "../../App";
 
 const YourAccount = () => {
+  const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+
+  const navigate = useNavigate();
+  const handleLogOut = async () => {
+    localStorage.removeItem('GROC_USER_TOKEN')
+    navigate('/')
+    await getUserDetails();
+    await GetCart();
+    await GetWishList();
+  }
+
   return (
     <div className="main-div">
-      <h1 className="heading">YOUR ACCOUNT</h1>
+      <div className="heading">
+        <h1 >YOUR ACCOUNT</h1>
+        <button className="log_out" onClick={handleLogOut}>
+          Log Out
+        </button>
+      </div>
       <div className="cards">
         <Link to={'/account/myOrders'}>
           <div className="cd">

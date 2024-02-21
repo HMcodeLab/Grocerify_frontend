@@ -15,23 +15,9 @@ export default function AddToWishlist() {
     const [Data, setData] = useState([])
     const [Subtotal, setSubtotal] = useState(0)
     const [show, setshow] = useState(false)
-    const { TotalCount, count, setcount, TotalWishCount } = useContext(Globalinfo)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
 
-    useEffect(() => {
-        setshow(true)
-        async function Fetchdata() {
-            let url = BASE_URL_PRODUCTS + 'api/getwishlist?mobile=1234567890'
-            const data = await fetch(url)
-            const response = await data.json()
-            console.log(response)
-            setData(response.wishlist)
-            // setitems([...Data])
-        }
-        Fetchdata()
-        TotalCount()
-        TotalWishCount()
-        setshow(false)
-    }, [])
+
     // It is used to apply operation on decreasing the quantity of items
 
     function StarPrint(count) {
@@ -44,26 +30,26 @@ export default function AddToWishlist() {
         }
         return con;
     }
+
     async function Addtocart(id) {
         setshow(true)
         let url = BASE_URL_PRODUCTS + 'api/addtocart'
-        let bodydata = { mobile: 1234567890, productid: id }
+        let bodydata = { mobile: userDetail?.mobile, productid: id }
         const data = await fetch(url, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bodydata)
         });
 
-        RemoveFromCart(id)
-        TotalCount()
-        TotalWishCount()
+        RemoveFromWishlist(id)
+
         setshow(false)
     }
 
-    async function RemoveFromCart(id) {
+    async function RemoveFromWishlist(id) {
         setshow(true)
         let url2 = BASE_URL_PRODUCTS + 'api/removefromwishlist'
-        let bodydata2 = { mobile: 1234567890, productid: id }
+        let bodydata2 = { mobile: userDetail?.mobile, productid: id }
 
         const data2 = await fetch(url2, {
             method: 'post',
@@ -72,8 +58,8 @@ export default function AddToWishlist() {
         });
         const response = await data2.json()
         setData(response.data)
-        TotalCount()
-        TotalWishCount()
+        GetCart()
+        GetWishList()
         setshow(false)
     }
     return (<>
@@ -83,14 +69,14 @@ export default function AddToWishlist() {
             <div className='flex justify-center '>
                 <div className="w-[70%] space-y-5 ">
                     {
-                        Data.map((item) => {
+                        wishListData.map((item) => {
                             let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
                             let starcount = item.product.rating;
 
                             return (<>
                                 <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
                                     <div className='w-28 h-28  flex justify-center items-center '>
-                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_image_url} />
+                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
                                     </div>
                                     <div className='flex flex-col w-full space-y-2 py-3'>
                                         <div className='flex justify-between pr-5 font-bold font2 text-[18px]'>
@@ -109,7 +95,7 @@ export default function AddToWishlist() {
                                                     <button className=''><Share /> </button>
                                                     {/* <button>Share on Web</button> */}
                                                 </RWebShare>
-                                                <button className='' onClick={() => RemoveFromCart(item.product._id)}><Delete /></button>
+                                                <button className='' onClick={() => RemoveFromWishlist(item.product._id)}><Delete /></button>
                                             </div>
 
                                         </div>

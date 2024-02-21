@@ -6,14 +6,68 @@ import { FaPlus } from "react-icons/fa6";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './product.css'
-import { useState } from 'react'
-// import Extra from '../Extra';
+import { useEffect, useRef, useState } from 'react'
+
+import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { Link } from 'react-router-dom';
+import ReactImageMagnify from 'react-image-magnify';
+import ReactPlayer from 'react-player';
+import { useParams } from 'react-router-dom';
+
+
 export default function Product() {
+    const params = useParams();
+    console.log(params)
+    // console.log(window.location)
+    // console.log(props)
     const [image, setimage] = useState('/mobile.png')
     const [show, setshow] = useState('h-28')
     const [reportshow, setreportshow] = useState('hidden')
     const [reportValue, setreportValue] = useState('')
     const [showdelivery, setshowdelivery] = useState('hidden')
+    const [Data, setData] = useState([])
+    const [actualprice, setactualprice] = useState()
+    const [images, setimages] = useState([])
+    const [video, setvideo] = useState([])
+    // const [showvideo, setshowvideo] = useState(false)
+
+    const primaryRef = useRef(null);
+    const secondaryRef = useRef(null);
+
+    const slug = params.slug
+    // const slug = window.location.pathname;
+
+    let price = 0
+    useEffect(() => {
+        async function Fetchdata() {
+            try {
+                let url = BASE_URL_PRODUCTS + 'api/product/' + slug
+                const data = await fetch(url)
+                const response = await data.json()
+                // console.log(response)
+                price = response[0].variants1_mrp_price - (response[0].variants1_mrp_price * (response[0]["variants1_discount%"] / 100))
+
+                setactualprice(price)
+                setimage(response[0].product_primary_image_url)
+                setData(response[0])
+                setimages(response[0].product_images_url)
+                // console.log(response[0].product_videos_url[0])
+                setvideo(response[0].product_videos_url[0])
+                if (primaryRef.current) {
+                    // @ts-ignore
+                    primaryRef.current.sync(secondaryRef.current.splide);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+
+            // setitems([...Data])
+        }
+
+
+        Fetchdata()
+    }, [primaryRef, secondaryRef])
+
     function Showmore() {
         // console.log('hello')
         setshow('h-auto')
@@ -29,61 +83,105 @@ export default function Product() {
 
     return (<>
         {/* <Extra /> */}
-        {/* <div className=''>
-        <div>
-        <Splide 
-         options={ {
-            type:"loop",
-            height:'30%',
-            perPage:1,
-            pagination:true,
-            perMove:1,
-            wheel:false,
-            autoplay:false,
-            pauseOnHover:false,
-            arrows:true,
-          } }
-        aria-label="My Favorite Images">
-                <SplideSlide >
-                <div className='flex justify-center items-center'>
-                 <img className=' ' src='/logo192.png'/>
-                </div>
-
-  </SplideSlide>
-  <SplideSlide >
-            <div className='flex justify-center items-center'>
-                <img className=' ' src='/apple.png'/>
-                </div>
-  </SplideSlide>
-</Splide>
-        </div>
-    </div> */}
 
         <div className="flex  pb-5  justify-center px-16">
             <div className="w-1/2    ">
-                <div className="flex  border-r-2 border-b-2 py-5 pr-4 h-[519px]">
-                    <div className=" w-1/4 space-y-3">
-                        <button onClick={() => setimage('/mobile.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
-                            <img src="/mobile1.png" />
-                        </button>
-                        <button onClick={() => setimage('/mobilebig2.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
-                            <img src="/mobile2.png" />
-                        </button>
-                        <button onClick={() => setimage('/mobilebig1.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
-                            <img src="/mobile3.png" />
-                        </button>
-                        <button onClick={() => setimage('/mobilebig3.png')} className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3]">
-                            <img src="/mobile4.png" />
-                        </button>
+                <div className="flex  border-r-2 border-b-2 py-5 pr-4 h-[519px] ">
+                    <div className=" w-1/4 space-y-3 ">
+                        <Splide className='h-full'
+                            ref={(slider) => (primaryRef.current = slider)}
+                            options={{
+                                pagination: false,
+                                isNavigation: true,
+                                autoWidth: true,
+                                perPage: 4,
+                                // gap: "10px",
+                                direction: "ttb",
+                                height: "100%",
+                            }}
+                        >
+                            {
+                                // console.log(Data.product_images_url)
+                                images.map((item, index) => {
+                                    // console.log(item)
+                                    return (<>
+                                        <SplideSlide key={index}>
+                                            <div className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3] mb-2">
+                                                <img className='h-[60%] w-[70%] mix-blend-multiply' src={item} />
+                                            </div>
+                                        </SplideSlide>
+                                    </>)
+                                })
+                            }
+
+
+                            <SplideSlide >
+                                <div className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3] mb-2">
+                                    <ReactPlayer playing={false} muted height={70} width={150} url={video} />
+                                </div>
+                            </SplideSlide>
+                        </Splide>
+
                     </div>
-                    <div className="w-3/4  bg-[#f3f3f3] flex justify-center items-center max-h-full ">
-                        <img className="max-h-full" src={image} />
+                    <div className="w-3/4  bg-[#f3f3f3] flex justify-center items-center max-h-full mix-blend-multiply">
+
+                        <Splide
+                            ref={(slider) => (secondaryRef.current = slider)}
+                            options={{
+                                perPage: 1,
+                                pagination: false,
+                                arrows: false,
+                                width: "100%",
+                            }}
+                        >
+                            <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
+                                <img className='max-h-full mix-blend-multiply max-w-full' src={image} />
+                            </SplideSlide>
+                            {
+                                images.map((item) => {
+                                    // console.log()
+                                    return (<>
+                                        <SplideSlide id={`#${item}`} className='flex justify-center items-center bg-[#f3f3f3]'>
+                                            <ReactImageMagnify
+                                                {...{
+                                                    smallImage: {
+                                                        alt: "Wristwatch by Ted Baker London",
+                                                        isFluidWidth: true,
+                                                        src: item,
+                                                        borderRadius: 15,
+                                                        objectFit: "cover",
+                                                        // height:"45vh"
+                                                    },
+                                                    largeImage: {
+                                                        src: item,
+                                                        width: 500,
+                                                        borderRadius: 15,
+                                                        height: 600,
+                                                        objectFit: "cover",
+                                                    },
+                                                    enlargedImagePosition: "over"
+                                                }}
+                                            />
+
+                                        </SplideSlide>
+                                    </>)
+
+                                })
+                            }
+                            <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
+                                <ReactPlayer loop controls={false} url={video} />
+
+                            </SplideSlide>
+                        </Splide>
+
                     </div>
                 </div>
 
                 <div className='text-[#848484] text-[20px] space-y-2 mt-2 fontmont'>
                     <div className='text-[#848484] text-[20px]'>
-                        Apple iPhone 14 Pro Max (1 TB) - Space Black
+                        {
+                            Data.products_title
+                        }
                     </div>
                     <div className="flex space-x-2">
                         <Star />
@@ -93,7 +191,7 @@ export default function Product() {
                         <Star />
                     </div>
                     <div >
-                        ₹1,89,900
+                        ₹{actualprice}
                     </div>
                     <div className='text-[14px] '>
                         incl. of taxes (Also includes all applicable duties)
@@ -148,11 +246,10 @@ export default function Product() {
                 <div className='fontmont text-[#848484] mt-4 py-2 border-t-2'>
                     <div className='font-semibold'>About this item</div>
                     <ul className={`pl-8 space-y-1  overflow-y-hidden ${show}`} >
-                        <li className="list-disc">15.49 cm (6.1 inch) Super Retina XDR Display</li>
-                        <li className="list-disc">12MP + 12MP | 12MP Front Camera</li>
-                        <li className="list-disc">A14 Bionic Chip with Next Generation Neural Engine Processor</li>
-                        <li className="list-disc">12MP TrueDepth Front Camera with Night Mode, 4K Dolby Vision HDR Recording</li>
-                        <li className="list-disc">All Screen OLED Display</li>
+                        <li className="list-disc"> {
+                            Data.products_description
+                        }</li>
+
                     </ul>
                     <button className='flex items-center space-x-1' onClick={Showmore}>
                         <Down />
@@ -234,10 +331,7 @@ export default function Product() {
                     </div>
                 </div>
 
-                <div className='mt-3 fontmont '>
-                    <textarea placeholder='Write a review...' className='w-full h-60 pl-1 border outline-none resize-none' aria-expanded={false}></textarea>
-                    <div className='w-full flex justify-end relative bottom-10 '><button className='bg-[#58B310] rounded text-white px-2 py-1'>Submit</button></div>
-                </div>
+
             </div>
             <div className='w-1/2 pl-8 pt-4'>
                 <div className='text-[#848484] text-[20px] fontgo'>Nearest Stores</div>

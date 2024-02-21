@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar/Navbar';
 import NavList from '../components/Navbar/NavList';
 import Addtocart from '../components/AddToCart';
 import AddToWishlist from '../components/AddToWishlist'
-import Prod from '../components/Product/index'
+import Product from '../components/Product'
 import Home from '../components/Home/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from '../components/Register/register';
@@ -25,6 +25,9 @@ import ShippingPolicy from '../components/policies/ShippingPolicy';
 import ReturnPolicy from '../components/policies/ReturnPolicy';
 import Frequency from '../components/policies/Frequency';
 import MoreStore from '../components/Stores/MoreStore';
+import About from '../components/About/index'
+import LoginAndSecurity from '../components/Account/login&security';
+import Checkout from '../components/Checkout/index'
 
 const Router = () => {
     return (
@@ -57,7 +60,7 @@ const Router = () => {
                     <Route exact path={'/wishlist'} element={<AddToWishlist />}>
 
                     </Route>
-                    <Route exact path={'/product/new'} element={<Prod />}>
+                    <Route exact path={'/product/:slug'} element={<Product />}>
 
                     </Route>
                     <Route exact path={'/stores'} element={<FeaturedStore />}>
@@ -84,7 +87,7 @@ const Router = () => {
                     <Route exact path={'/account/addresses/edit_address'} element={<AddAddress />}>
 
                     </Route>
-                    <Route exact path={'/account/your_information'} element={<AddAddress />}>
+                    <Route exact path={'/account/your_information'} element={<LoginAndSecurity />}>
 
                     </Route>
                     <Route exact path={'/account/payment'} element={<PaymentOptions />}>
@@ -103,6 +106,12 @@ const Router = () => {
 
                     </Route>
                     <Route exact path={'/faq'} element={<Frequency />}>
+
+                    </Route>
+                    <Route exact path={'/about'} element={<About />}>
+
+                    </Route>
+                    <Route exact path={'/checkout'} element={<Checkout />}>
 
                     </Route>
                 </Routes>

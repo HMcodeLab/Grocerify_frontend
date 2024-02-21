@@ -31,21 +31,20 @@ const FeaturedStore = () => {
     };
 
     return (
-        <div className="flex flex-row gap-x-1 pt-8 pb-6 bg-[#F3F3F3]">
-            <div className="w-1/4 h-auto">
-                <div style={{ backgroundColor: "var(--tert)" }}>
-                    <Sidebar category={""} />
+        <div className="flex flex-row  bg-[#F3F3F3]">
+            <div className="w-1/4" style={{ backgroundColor: "var(--tert)" }}>
 
-                </div>
+                <Sidebar category={""} />
+
+
             </div>
 
             {/* right */}
-            <div className="flex flex-col gap-x-8 w-3/4">
-
+            <div className="flex flex-col w-3/4 pb-[20px]">
                 {/* map */}
-                <div className=" space-y-6">
+                <div className="pr-1 space-y-6">
                     <div>
-                        <div className="flex flex-row justify-between bg-[#222222] font-Gorditas text-[#FFFFFF] pt-1 pb-1 pl-4 pr-4 hover:bg-[#58B310]">
+                        {/* <div className="flex flex-row justify-between bg-[#222222] font-Gorditas text-[#FFFFFF] pt-1 pb-1 pl-4 pr-4 hover:bg-[#58B310]">
                             <p className="flex flex-row">
                                 <span className="pr-6">
                                     <img
@@ -58,7 +57,7 @@ const FeaturedStore = () => {
                             <p className="flex flex-row">
                                 Show More <span className="">&#9660;</span>
                             </p>
-                        </div>
+                        </div> */}
 
                         <div className="relative">
                             <img
@@ -186,105 +185,35 @@ const FeaturedStore = () => {
                         </div>
                     </div>
 
-                    {/* order now */}
-                    <div className="bg-[#EDF1E0] relative pr-10">
-                        <img
-                            src="../assests/images/ordernowleft.svg"
-                            className=" h-[450px]"
-                        />
-                        <img
-                            src="../assests/images/ordernowgp.svg"
-                            className="w-full h-[450px] absolute top-0"
-                        />
-                        <button className="absolute font-Montserrat bottom-5 left-[480px] bg-[#58B310] text-[#FFFFFF] rounded-2xl pt-1 pb-1 pr-4 pl-4 hover:bg-[#FFFFFF] hover:text-[#58B310] hover:text-bold hover:transition-all hover:scale-105">
-                            ORDER NOW
-                        </button>
-                    </div>
-
-                    {/* all stores */}
-                    <div className="bg-[#FFFFFF] pr-10">
-                        <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
-                            <p>FEATURED STORE</p>
-                            <p><Link to={"/morestore"}>
-                                Show More <span className="cursor-pointer">&#9660;</span></Link>
-                            </p>
+                    <div className="pr-8 pl-8 space-y-6">
+                        {/* order now */}
+                        <div className="bg-[#EDF1E0] relative">
+                            <img
+                                src="../assests/images/ordernowleft.svg"
+                                className=" h-full"
+                            />
+                            <img
+                                src="../assests/images/ordernowgp.png"
+                                className="w-full h-full absolute top-0 "
+                            />
+                            <button className="absolute font-Montserrat bottom-[5%] left-[42%] bg-[#58B310] text-[#FFFFFF] rounded-2xl pt-1 pb-1 pr-4 pl-4 hover:bg-[#FFFFFF] hover:text-[#58B310] hover:text-bold hover:transition-all hover:scale-105">
+                                ORDER NOW
+                            </button>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-3 p-4">
-                            <div className="relative group">
-                                <Link to={"/morestore"}>
-                                    <img
-                                        src="../assests/images/chandigarhstore.svg"
-                                        className="w-full group-hover:brightness-50 transition-all duration-300"
-                                    />
-                                    <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                        Chandigarh store
-                                    </p>
-                                    <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                        <h4 className="font-Gorditas text-xl">
-                                            Shop No, 2284/3, Mariwala Town
-                                        </h4>
-                                        <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                        <p>1km</p>
-                                        <span className="text-2xl text-center text-[#FFB800]">
-                                            &#9733;&#9733;&#9733;&#9733;&#9734;
-                                        </span>
-                                    </div>
-                                </Link>
+                        {/* all stores */}
+                        <div className="bg-[#FFFFFF]">
+                            <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
+                                <p>FEATURED STORE</p>
+                                <p>
+                                    <Link to={"/morestore"}>
+                                        Show More <span className="cursor-pointer">&#9660;</span>
+                                    </Link>
+                                </p>
                             </div>
 
-                            <div className="relative group">
-                                <Link to={"/morestore"}>
-                                    <img
-                                        src="../assests/images/ramgrocery.png"
-                                        className="w-full group-hover:brightness-50 transition-all duration-300"
-                                    />
-                                    <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                        RAM GROCERY STORE
-                                    </p>
-                                    <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                        <h4 className="font-Gorditas text-xl">
-                                            Shop No, 2284/3, Mariwala Town
-                                        </h4>
-                                        <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                        <p>1km</p>
-                                        <span className="text-2xl text-center text-[#FFB800]">
-                                            &#9733;&#9733;&#9733;&#9733;&#9734;
-                                        </span>
-                                    </div>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* whats new */}
-                    <div className="relative group pr-10">
-                        <img
-                            src="../assests/images/storeimg.svg"
-                            alt="what's new"
-                            className="w-full group-hover:brightness-50 group-hover:blur-0 transition-all duration-300"
-                        />
-                        <div className="absolute bottom-10 right-10 w-1/2 text-right space-y-1 opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                            <p className="font-Gorditas text-[44px] text-[#FFFFFF] leading-10">
-                                NEW FASHION STORE FOR GIRLS
-                            </p>
-                            <p className="font-Montserrat text-[#FFFFFF] text-[22px]">
-                                SAVE UPTO 40% OFF
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* top rated store */}
-                    <div className="bg-[#FFFFFF] pr-10">
-                        <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
-                            <p>TOP RATED STORE</p>
-                            <p> <Link to={"/morestore"}>
-                                Show More <span className="cursor-pointer">&#9660;</span></Link>
-                            </p>
-                        </div>
-                        <div className="p-4">
-                            <ReactOwlCarousel {...options}>
-                                <div className="relative group mr-3">
+                            <div className="grid grid-cols-2 gap-3 p-4">
+                                <div className="relative group">
                                     <Link to={"/morestore"}>
                                         <img
                                             src="../assests/images/chandigarhstore.svg"
@@ -305,7 +234,8 @@ const FeaturedStore = () => {
                                         </div>
                                     </Link>
                                 </div>
-                                <div className="relative group mr-3">
+
+                                <div className="relative group">
                                     <Link to={"/morestore"}>
                                         <img
                                             src="../assests/images/ramgrocery.png"
@@ -326,133 +256,209 @@ const FeaturedStore = () => {
                                         </div>
                                     </Link>
                                 </div>
-                                <div className="relative group mr-3">
-                                    <Link to={"/morestore"}>
-                                        <img
-                                            src="../assests/images/chandigarhstore.svg"
-                                            className="w-full group-hover:brightness-50 transition-all duration-300"
-                                        />
-                                        <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                            Chandigarh store
-                                        </p>
-                                        <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                            <h4 className="font-Gorditas text-xl">
-                                                Shop No, 2284/3, Mariwala Town
-                                            </h4>
-                                            <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                            <p>1km</p>
-                                            <span className="text-2xl text-center text-[#FFB800]">
-                                                &#9733;&#9733;&#9733;&#9733;&#9734;
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
-                                <div className="relative group mr-3">
-                                    <Link to={"/morestore"}>
-                                        <img
-                                            src="../assests/images/ramgrocery.png"
-                                            className="w-full group-hover:brightness-50 transition-all duration-300"
-                                        />
-                                        <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                            RAM GROCERY STORE
-                                        </p>
-                                        <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                            <h4 className="font-Gorditas text-xl">
-                                                Shop No, 2284/3, Mariwala Town
-                                            </h4>
-                                            <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                            <p>1km</p>
-                                            <span className="text-2xl text-center text-[#FFB800]">
-                                                &#9733;&#9733;&#9733;&#9733;&#9734;
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
-                                <div className="relative group mr-3">
-                                    <Link to={"/morestore"}>
-                                        <img
-                                            src="../assests/images/chandigarhstore.svg"
-                                            className="w-full group-hover:brightness-50 transition-all duration-300"
-                                        />
-                                        <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                            Chandigarh store
-                                        </p>
-                                        <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                            <h4 className="font-Gorditas text-xl">
-                                                Shop No, 2284/3, Mariwala Town
-                                            </h4>
-                                            <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                            <p>1km</p>
-                                            <span className="text-2xl text-center text-[#FFB800]">
-                                                &#9733;&#9733;&#9733;&#9733;&#9734;
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
-                            </ReactOwlCarousel>
-                        </div>
-                    </div>
-
-                    {/* ratings */}
-                    <div className="bg-[#FFFFFF] pr-10">
-                        <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
-                            <p>Rating</p>
-                            <p>
-                                Show More <span className="cursor-pointer">&#9660;</span>
-                            </p>
+                            </div>
                         </div>
 
-                        <div className="grid grid-cols-3">
-                            <div className="p-4 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
-                                <img
-                                    src="../assests/images/ratingimg1.svg"
-                                    className="w-full"
-                                />
-                                <div className="flex flex-row justify-between text-xl">
-                                    <h4 className="font-Gorditas text-[#000000]">Nemo enim</h4>
-                                    <span className="text-[#FFB800]">
-                                        &#9733;&#9733;&#9733;&#9733;&#9734;
-                                    </span>
-                                </div>
-                                <p className="font-andika text-sm">
-                                    “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis…”
+                        {/* whats new */}
+                        <div className="relative group">
+                            <img
+                                src="../assests/images/storeimg.svg"
+                                alt="what's new"
+                                className="w-full group-hover:brightness-50 group-hover:blur-0 transition-all duration-300"
+                            />
+                            <div className="absolute bottom-10 right-10 w-1/2 text-right space-y-1 opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <p className="font-Gorditas text-[44px] text-[#FFFFFF] leading-10">
+                                    NEW FASHION STORE FOR GIRLS
+                                </p>
+                                <p className="font-Montserrat text-[#FFFFFF] text-[22px]">
+                                    SAVE UPTO 40% OFF
                                 </p>
                             </div>
-                            <div className="p-4 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
-                                <img
-                                    src="../assests/images/ratingimg2.svg"
-                                    className="w-full"
-                                />
-                                <div className="flex flex-row justify-between text-xl">
-                                    <h4 className="font-Gorditas text-[#000000]">Amlo Sinha</h4>
-                                    <span className="text-[#FFB800]">
-                                        &#9733;&#9733;&#9733;&#9733;&#9734;
-                                    </span>
-                                </div>
-                                <p className="font-andika text-sm">
-                                    “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis…”
+                        </div>
+
+                        {/* top rated store */}
+                        <div className="bg-[#FFFFFF]">
+                            <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
+                                <p>TOP RATED STORE</p>
+                                <p>
+                                    {" "}
+                                    <Link to={"/morestore"}>
+                                        Show More <span className="cursor-pointer">&#9660;</span>
+                                    </Link>
                                 </p>
                             </div>
-                            <div className="p-4 pb-6 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
-                                <img
-                                    src="../assests/images/ratingimg3.svg"
-                                    className="w-full"
-                                />
-                                <div className="flex flex-row justify-between text-xl">
-                                    <h4 className="font-Gorditas text-[#000000]">Mauscosf</h4>
-                                    <span className="text-[#FFB800]">
-                                        &#9733;&#9733;&#9733;&#9733;&#9734;
-                                    </span>
-                                </div>
-                                <p className="font-andika text-sm">
-                                    “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis…”
+                            <div className="p-4">
+                                <ReactOwlCarousel {...options}>
+                                    <div className="relative group mr-3">
+                                        <Link to={"/morestore"}>
+                                            <img
+                                                src="../assests/images/chandigarhstore.svg"
+                                                className="w-full group-hover:brightness-50 transition-all duration-300"
+                                            />
+                                            <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                Chandigarh store
+                                            </p>
+                                            <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                                <h4 className="font-Gorditas text-xl">
+                                                    Shop No, 2284/3, Mariwala Town
+                                                </h4>
+                                                <h6 className="text-center pt-8">FURNITURE STORE</h6>
+                                                <p>1km</p>
+                                                <span className="text-2xl text-center text-[#FFB800]">
+                                                    &#9733;&#9733;&#9733;&#9733;&#9734;
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="relative group mr-3">
+                                        <Link to={"/morestore"}>
+                                            <img
+                                                src="../assests/images/ramgrocery.png"
+                                                className="w-full group-hover:brightness-50 transition-all duration-300"
+                                            />
+                                            <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                RAM GROCERY STORE
+                                            </p>
+                                            <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                                <h4 className="font-Gorditas text-xl">
+                                                    Shop No, 2284/3, Mariwala Town
+                                                </h4>
+                                                <h6 className="text-center pt-8">FURNITURE STORE</h6>
+                                                <p>1km</p>
+                                                <span className="text-2xl text-center text-[#FFB800]">
+                                                    &#9733;&#9733;&#9733;&#9733;&#9734;
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="relative group mr-3">
+                                        <Link to={"/morestore"}>
+                                            <img
+                                                src="../assests/images/chandigarhstore.svg"
+                                                className="w-full group-hover:brightness-50 transition-all duration-300"
+                                            />
+                                            <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                Chandigarh store
+                                            </p>
+                                            <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                                <h4 className="font-Gorditas text-xl">
+                                                    Shop No, 2284/3, Mariwala Town
+                                                </h4>
+                                                <h6 className="text-center pt-8">FURNITURE STORE</h6>
+                                                <p>1km</p>
+                                                <span className="text-2xl text-center text-[#FFB800]">
+                                                    &#9733;&#9733;&#9733;&#9733;&#9734;
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="relative group mr-3">
+                                        <Link to={"/morestore"}>
+                                            <img
+                                                src="../assests/images/ramgrocery.png"
+                                                className="w-full group-hover:brightness-50 transition-all duration-300"
+                                            />
+                                            <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                RAM GROCERY STORE
+                                            </p>
+                                            <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                                <h4 className="font-Gorditas text-xl">
+                                                    Shop No, 2284/3, Mariwala Town
+                                                </h4>
+                                                <h6 className="text-center pt-8">FURNITURE STORE</h6>
+                                                <p>1km</p>
+                                                <span className="text-2xl text-center text-[#FFB800]">
+                                                    &#9733;&#9733;&#9733;&#9733;&#9734;
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                    <div className="relative group mr-3">
+                                        <Link to={"/morestore"}>
+                                            <img
+                                                src="../assests/images/chandigarhstore.svg"
+                                                className="w-full group-hover:brightness-50 transition-all duration-300"
+                                            />
+                                            <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                Chandigarh store
+                                            </p>
+                                            <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                                <h4 className="font-Gorditas text-xl">
+                                                    Shop No, 2284/3, Mariwala Town
+                                                </h4>
+                                                <h6 className="text-center pt-8">FURNITURE STORE</h6>
+                                                <p>1km</p>
+                                                <span className="text-2xl text-center text-[#FFB800]">
+                                                    &#9733;&#9733;&#9733;&#9733;&#9734;
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </ReactOwlCarousel>
+                            </div>
+                        </div>
+
+                        {/* ratings */}
+                        <div className="bg-[#FFFFFF]">
+                            <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
+                                <p>Rating</p>
+                                <p>
+                                    Show More <span className="cursor-pointer">&#9660;</span>
                                 </p>
+                            </div>
+
+                            <div className="grid grid-cols-3">
+                                <div className="p-4 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
+                                    <img
+                                        src="../assests/images/ratingimg1.svg"
+                                        className="w-full"
+                                    />
+                                    <div className="flex flex-row justify-between text-xl">
+                                        <h4 className="font-Gorditas text-[#000000]">Nemo enim</h4>
+                                        <span className="text-[#FFB800]">
+                                            &#9733;&#9733;&#9733;&#9733;&#9734;
+                                        </span>
+                                    </div>
+                                    <p className="font-andika text-sm">
+                                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua. Ut enim ad minim veniam, quis…”
+                                    </p>
+                                </div>
+                                <div className="p-4 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
+                                    <img
+                                        src="../assests/images/ratingimg2.svg"
+                                        className="w-full"
+                                    />
+                                    <div className="flex flex-row justify-between text-xl">
+                                        <h4 className="font-Gorditas text-[#000000]">Amlo Sinha</h4>
+                                        <span className="text-[#FFB800]">
+                                            &#9733;&#9733;&#9733;&#9733;&#9734;
+                                        </span>
+                                    </div>
+                                    <p className="font-andika text-sm">
+                                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed ut labore et dolore magna aliqua. Ut enim ad minim
+                                        veniam, quis…”
+                                    </p>
+                                </div>
+                                <div className="p-4 pb-6 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
+                                    <img
+                                        src="../assests/images/ratingimg3.svg"
+                                        className="w-full"
+                                    />
+                                    <div className="flex flex-row justify-between text-xl">
+                                        <h4 className="font-Gorditas text-[#000000]">Mauscosf</h4>
+                                        <span className="text-[#FFB800]">
+                                            &#9733;&#9733;&#9733;&#9733;&#9734;
+                                        </span>
+                                    </div>
+                                    <p className="font-andika text-sm">
+                                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua. Ut enim ad minim veniam, quis…”
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

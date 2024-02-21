@@ -14,7 +14,7 @@ import { useSearchParams } from 'react-router-dom';
 
 const Sidebar = (category) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(1);
-    console.log(category.category)
+    // console.log(category.category)
     const [searchParams, setSearchParams] = useSearchParams();
 
 
@@ -78,6 +78,34 @@ const Sidebar = (category) => {
 
                         <Sort />
                         <h3>Sort By Distance</h3>
+                    </span>
+                    <Dropdown />
+
+                </span>
+                {isDropdownOpen === 3 && <ul key={2}>
+                    <li>
+                        <input type="radio" name="popularity" id="1" />
+                        <p>Under 1 KM</p></li>
+                    <li>
+                        <input type="radio" name="highToLow" id="2" />
+                        <p>Between 1 - 2 KM</p></li>
+                    <li>
+                        <input type="radio" name="lowToHigh" id="3" />
+                        <p>Between 2 - 3 KM</p></li>
+                    <li>
+                        <input type="radio" name="discount" id="4" />
+                        <p>Under 5 KM</p></li>
+
+
+
+                </ul>}
+            </div>
+            <div className={styles.sortBy_main}>
+                <span className={styles.heading} onClick={() => { isDropdownOpen === 3 ? setIsDropdownOpen(null) : setIsDropdownOpen(3) }}>
+                    <span>
+
+                        <Sort />
+                        <h3>Sort By Ratings</h3>
                     </span>
                     <Dropdown />
 
