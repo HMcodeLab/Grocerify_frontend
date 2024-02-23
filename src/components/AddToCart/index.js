@@ -30,18 +30,28 @@ export default function Addtocart() {
     console.log(cartData)
     async function OrderSummery() {
 
-        const final = cartData;
-        let subttotal_amount = 0
-        let total_items = 0
+        try {
+            const final = cartData;
+            let subttotal_amount = 0
+            let total_items = 0
 
-        final?.forEach((item) => {
-            let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+            final?.forEach((item) => {
+                if (item?.product) {
 
-            subttotal_amount += price * item.quantity;
-            total_items += item.quantity;
-        })
-        setsubtotal(subttotal_amount)
-        settotalitems(total_items)
+                    let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+
+                    subttotal_amount += price * item.quantity;
+                    total_items += item.quantity;
+                }
+            })
+            setsubtotal(subttotal_amount)
+            settotalitems(total_items)
+        } catch (error) {
+            return (<h1> Error</h1>)
+            console.log(error)
+        }
+
+
 
         // console.log(subttotal_amount,total_items)
     }
@@ -122,15 +132,18 @@ export default function Addtocart() {
                         cartData.map((item) => {
                             // console.log(item)
                             // setquantities({...quantities,id:item.product._id})
-                            let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+                            if (item?.product) {
+
+                                var price = item?.product?.variants1_mrp_price - (item?.product?.variants1_mrp_price * (item?.product["variants1_discount%"] / 100))
+                            }
                             return (<>
                                 <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
                                     <div className='w-28 h-28  flex justify-center items-center '>
-                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
+                                        <img className='max-h-full max-w-full mix-blend-multiply' src={item?.product?.product_primary_image_url} />
                                     </div>
                                     <div className='flex flex-col w-full fontorder max-h-auto'>
                                         <div className='flex justify-between pr-5 font-semibold text-[16px]'>
-                                            <div>{item.product.products_title} </div>
+                                            <div>{item?.product?.products_title} </div>
                                             <div >₹{price}</div>
                                         </div>
                                         <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price}</div>

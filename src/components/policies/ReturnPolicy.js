@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ReturnPolicy = () => {
+
+
+
     return (
         <Wrapper>
             <div className="container">

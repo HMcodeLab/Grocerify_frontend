@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar/Navbar';
 import NavList from '../components/Navbar/NavList';
 import Addtocart from '../components/AddToCart';
@@ -31,6 +31,12 @@ import Checkout from '../components/Checkout/index'
 import Editaddress from '../components/Address/EditAddress';
 
 const Router = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+
     return (
         <div>
 
