@@ -50,18 +50,17 @@ export default function Checkout() {
     }
 
     const createOrder = async (val) => {
-
+        // console.log("value", val)
         try {
             const res = await axios.post(`${BASE_URL_PRODUCTS}api/order`,
                 {
-                    "discound_coupon": {
+                    "discount_coupon": {
                         "coupon_code": "NEW-100",
                         "discount_price": 50,
                     },
 
                     shipping_address: userDetail.address[selectedAddress],
-                    productid: val?.product?._id,
-                    quantity: val?.quantity,
+                    products: [...val]
 
                 }, {
                 headers: {
@@ -69,9 +68,9 @@ export default function Checkout() {
                 }
             })
             console.log(res)
-            toast.success("Order Placed Successfully")
+            toast.success("Order Placed Successfully");
         } catch (error) {
-            // console.log(error.message)
+
             toast.error("An Error Occured");
         }
     }
@@ -79,11 +78,12 @@ export default function Checkout() {
     const handleOrder = async () => {
         if (paymentType === 'cod') {
 
+            var temp = [];
             cartData.forEach((val) => {
-
-                createOrder(val);
+                temp.push({ productid: val.product._id, quantity: val.quantity })
             })
 
+            createOrder(temp);
         }
         else {
             toast.error("Only COD is available right Now");
@@ -192,7 +192,7 @@ export default function Checkout() {
 
                 <button className='my-10 flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold '>
                     <div onClick={handleOrder}>
-                        Continue to payments
+                        {paymentType === 'cod' ? "Place Order" : "Continue to payments"}
                     </div>
 
                 </button>

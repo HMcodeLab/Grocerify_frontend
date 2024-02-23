@@ -5,8 +5,18 @@ import './App.css';
 import Router from './Routes/route';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 export const Globalinfo = createContext()
+
+const queryClient = new QueryClient()
+
 function App() {
   const [cartData, setCartData] = useState([])
   const [wishListData, setWishListData] = useState([])
@@ -75,10 +85,11 @@ function App() {
   return (
     <>
       <Globalinfo.Provider value={{ cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails }}>
-        <div className="App">
-
-          <Router />
-        </div >
+        <QueryClientProvider client={queryClient}>
+          <div className="App">
+            <Router />
+          </div >
+        </QueryClientProvider>
       </Globalinfo.Provider>
     </>
   );

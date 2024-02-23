@@ -3,27 +3,47 @@ import styles from './shop_register.module.css';
 import registerimage from '../../Assets/Images/registration.png'
 import Checkbox from '../Custom/checkbox';
 import toast, { Toaster } from 'react-hot-toast';
+import axios from 'axios';
+import { BASE_URL_PRODUCTS } from '../../Api/api';
+import CircularProgress from '@mui/joy/CircularProgress';
 
 const ShopRegistration = () => {
 
+    /* ed-o-neil-AvvdZlhDowA-unsplash 1 */
+
+
+
+
+    const [btnLoader, setBtnLoader] = useState(false);
     const [shopDetails, setShopDetails] = useState({
         shopName: "",
         OwnerName: "",
-        OwnerNumber: "",
+        OwnerNumber: 12342567,
         OwnerEmail: "",
         OwnerAdd: "",
         BusinessLicenceNumber: "",
         BusinessRegistrationNumber: "",
         TaxIdentificationNumber: "",
         TypeOfProductSold: "",
-        openingHours: "",
-        workingDays: "",
-        deliveryInfo: [],
+        openingHours: {
+            from: "10:00",
+            to: "3:00"
+        },
+        workingDays: 7,
+        deliveryInfo: {
+            "mon": true,
+            "tue": true,
+            "wed": true,
+            "thu": true,
+            "fri": true,
+            "sat": false,
+            "sun": false
+        },
         isProvideDeliveryService: false,
         deliveryArea: "",
-        deliveryCharges: "",
-        paymentType: "",
-        shopImage: "",
+        deliveryCharges: 200,
+        paymentType: "cod",
+        "shopImage": "https://img.restaurantguru.com/w312/h280/r9f6-Sahil-Chicken-Centre-interior.jpg",
         termsAndCondition: "",
         privacyPolicy: "",
         returnPolicy: "",
@@ -40,7 +60,11 @@ const ShopRegistration = () => {
         });
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        setBtnLoader(true);
+
+        console.log(shopDetails)
+
         if (shopDetails.shopName === "" ||
             shopDetails.OwnerName === "" ||
             shopDetails.OwnerNumber === "" ||
@@ -50,23 +74,32 @@ const ShopRegistration = () => {
             shopDetails.BusinessRegistrationNumber === "" ||
             shopDetails.TaxIdentificationNumber === "" ||
             shopDetails.TypeOfProductSold === "" ||
-            shopDetails.openingHours === "" ||
-            shopDetails.workingDays === "" ||
-            shopDetails.deliveryInfo.length === 0 ||
-            shopDetails.isProvideDeliveryService === false ||
             shopDetails.deliveryArea === "" ||
             shopDetails.deliveryCharges === "" ||
-            shopDetails.paymentType === "" ||
+
             shopDetails.shopImage === "" ||
             shopDetails.termsAndCondition === "" ||
             shopDetails.privacyPolicy === "" ||
             shopDetails.returnPolicy === "" ||
             shopDetails.refundPolicy === "") {
             toast.error("Enter valid Credentials")
+            setBtnLoader(false)
 
         }
         else {
-            toast.success("API Called");
+            try {
+                const res = await axios.post(`${BASE_URL_PRODUCTS}api/addshop`, {
+                    ...shopDetails
+                })
+                const response = res.json();
+                console.log(response)
+                toast.success('Shop Registered Successfully')
+                setBtnLoader(false)
+            } catch (error) {
+                console.log(error)
+                toast.error("Some Error Occured")
+                setBtnLoader(false)
+            }
         }
     }
 
@@ -215,7 +248,7 @@ const ShopRegistration = () => {
                                 <div>
                                     <span>
                                         <p>Shop Logo or Image Option (Upload Option)</p>
-                                        <input type="text" name='firstName' value={shopDetails.firstName} onChange={handleChange} />
+                                        <input type="text" name='shopImage' value={shopDetails.shopImage} onChange={handleChange} />
                                     </span>
 
                                 </div>
@@ -224,25 +257,25 @@ const ShopRegistration = () => {
 
                                     <span>
                                         <p>Terms and Condition</p>
-                                        <textarea type="text" name='firstName' rows={5} cols={50} value={shopDetails.firstName} onChange={handleChange} />
+                                        <textarea type="text" name='termsAndCondition' rows={5} cols={50} value={shopDetails.termsAndCondition} onChange={handleChange} />
                                     </span>
                                     <span>
                                         <p>Privacy Policy</p>
-                                        <textarea type="text" name='firstName' rows={5} cols={50} value={shopDetails.firstName} onChange={handleChange} />
+                                        <textarea type="text" name='privacyPolicy' rows={5} cols={50} value={shopDetails.privacyPolicy} onChange={handleChange} />
                                     </span>
                                     <span>
                                         <p>Refund Policy</p>
-                                        <textarea type="text" name='firstName' rows={5} cols={50} value={shopDetails.firstName} onChange={handleChange} />
+                                        <textarea type="text" name='refundPolicy' rows={5} cols={50} value={shopDetails.refundPolicy} onChange={handleChange} />
                                     </span>
                                     <span>
                                         <p>Return Policy</p>
-                                        <textarea type="text" name='firstName' rows={5} cols={50} value={shopDetails.firstName} onChange={handleChange} />
+                                        <textarea type="text" name='returnPolicy' rows={5} cols={50} value={shopDetails.returnPolicy} onChange={handleChange} />
                                     </span>
                                 </span>
 
                             </span>
                             <div className={styles.submit}>
-                                <button onClick={handleSubmit}>Submit</button>
+                                <button onClick={handleSubmit}>{btnLoader ? <CircularProgress size="sm" color="success" /> : "Register Shop"}</button>
                             </div>
 
                         </div>

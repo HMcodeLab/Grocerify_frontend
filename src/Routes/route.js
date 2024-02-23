@@ -28,6 +28,7 @@ import MoreStore from '../components/Stores/MoreStore';
 import About from '../components/About/index'
 import LoginAndSecurity from '../components/Account/login&security';
 import Checkout from '../components/Checkout/index'
+import Editaddress from '../components/Address/EditAddress';
 
 const Router = () => {
     return (
@@ -84,7 +85,7 @@ const Router = () => {
                     <Route exact path={'/account/addresses/add_address'} element={<AddAddress />}>
 
                     </Route>
-                    <Route exact path={'/account/addresses/edit_address'} element={<AddAddress />}>
+                    <Route exact path={'/account/addresses/edit_address'} element={<Editaddress />}>
 
                     </Route>
                     <Route exact path={'/account/your_information'} element={<LoginAndSecurity />}>
