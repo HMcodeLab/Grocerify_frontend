@@ -11,9 +11,12 @@ const YourAccount = () => {
   const handleLogOut = async () => {
     localStorage.removeItem('GROC_USER_TOKEN')
     navigate('/')
-    await getUserDetails();
-    await GetCart();
-    await GetWishList();
+    setTimeout(() => {
+      getUserDetails();
+      GetCart();
+      GetWishList();
+    }, 2000)
+
   }
 
   return (

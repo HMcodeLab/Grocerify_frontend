@@ -14,7 +14,7 @@ import { Globalinfo } from '../../App';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { userDetail, getUserDetails } = useContext(Globalinfo)
+    const { userDetail, getUserDetails, GetCart, GetWishList } = useContext(Globalinfo)
     const [btnLoader, setBtnLoader] = useState(false);
     const [switchBtn, setSwitchBtn] = useState(1);
     const [user, setUser] = useState({
@@ -42,8 +42,10 @@ const Login = () => {
                     })
 
                     console.log(res);
-
+                    getUserDetails()
                     toast.success("Login Successfull")
+                    GetCart()
+                    GetWishList()
                     // getUserDetails()
                     localStorage.setItem('GROC_USER_TOKEN', res.data.token)
                     setTimeout(() => {

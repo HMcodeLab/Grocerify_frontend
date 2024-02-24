@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './about.css'
 import { ReactComponent as Headphone } from '../../assests/headphone.svg'
 import { ReactComponent as Linkedin } from '../../assests/graylinkdin.svg'
@@ -6,6 +7,10 @@ import { ReactComponent as Insta } from '../../assests/grayinsta.svg'
 import { ReactComponent as Tw } from '../../assests/graytw.svg'
 
 export default function About() {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (<>
         <div className='bg-[#E6E6E6] pb-20'>
             <div className="w-full h-[350px] bg flex justify-center items-center fontabout2">

@@ -19,7 +19,10 @@ const Home = () => {
 
     useEffect(() => {
         document.addEventListener('scroll', handleShowPopUp);
-        localStorage.setItem('isShowLogin', true)
+        if (localStorage.getItem('isShowLogin') !== 'false') {
+
+            localStorage.setItem('isShowLogin', true)
+        }
     }, [])
 
     return (

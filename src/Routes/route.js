@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar/Navbar';
 import NavList from '../components/Navbar/NavList';
 import Addtocart from '../components/AddToCart';
@@ -29,8 +29,15 @@ import About from '../components/About/index'
 import LoginAndSecurity from '../components/Account/login&security';
 import Checkout from '../components/Checkout/index'
 import Editaddress from '../components/Address/EditAddress';
+import ChatBot from '../components/chatbot/chatbot';
 
 const Router = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+
     return (
         <div>
 
@@ -115,7 +122,11 @@ const Router = () => {
                     <Route exact path={'/checkout'} element={<Checkout />}>
 
                     </Route>
+                    {/* <Route exact path={'/chats'} element={<ChatBot />}>
+
+                    </Route> */}
                 </Routes>
+                <ChatBot />
                 <Footer />
             </BrowserRouter >
         </div >
