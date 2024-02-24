@@ -29,6 +29,7 @@ import About from '../components/About/index'
 import LoginAndSecurity from '../components/Account/login&security';
 import Checkout from '../components/Checkout/index'
 import Editaddress from '../components/Address/EditAddress';
+import ChatBot from '../components/chatbot/chatbot';
 
 const Router = () => {
 
@@ -121,7 +122,11 @@ const Router = () => {
                     <Route exact path={'/checkout'} element={<Checkout />}>
 
                     </Route>
+                    {/* <Route exact path={'/chats'} element={<ChatBot />}>
+
+                    </Route> */}
                 </Routes>
+                <ChatBot />
                 <Footer />
             </BrowserRouter >
         </div >
