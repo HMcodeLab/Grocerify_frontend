@@ -30,6 +30,8 @@ import LoginAndSecurity from '../components/Account/login&security';
 import Checkout from '../components/Checkout/index'
 import Editaddress from '../components/Address/EditAddress';
 import ChatBot from '../components/chatbot/chatbot';
+import StoreProduct from '../components/Stores/storeDetail/StoreProduct';
+import StoreDetails from '../components/Stores/storeDetail';
 
 const Router = () => {
 
@@ -122,9 +124,9 @@ const Router = () => {
                     <Route exact path={'/checkout'} element={<Checkout />}>
 
                     </Route>
-                    {/* <Route exact path={'/chats'} element={<ChatBot />}>
+                    <Route exact path={'/view_store'} element={<StoreDetails />}>
 
-                    </Route> */}
+                    </Route>
                 </Routes>
                 <ChatBot />
                 <Footer />
