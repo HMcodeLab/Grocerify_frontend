@@ -107,7 +107,7 @@ export default function Product() {
                                     return (<>
                                         <SplideSlide key={index}>
                                             <div className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3] mb-2">
-                                                <img className='h-[60%] w-[70%] mix-blend-multiply' src={item} />
+                                                <img className='h-[80px]  mix-blend-multiply' src={item} />
                                             </div>
                                         </SplideSlide>
                                     </>)
