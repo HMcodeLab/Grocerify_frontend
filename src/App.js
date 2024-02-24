@@ -35,7 +35,7 @@ function App() {
 
     if (userDetail?._id) {
       try {
-        let url = BASE_URL_PRODUCTS+`api/getcart?mobile=${userDetail?.mobile}`
+        let url = BASE_URL_PRODUCTS + `api/getcart?mobile=${userDetail?.mobile}`
         const data = await fetch(url)
         const response = await data.json()
         console.log(response.cart[0])
@@ -83,9 +83,7 @@ function App() {
 
   }
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+
 
 
   return (
