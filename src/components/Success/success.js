@@ -14,7 +14,7 @@ function Success() {
                     Invoice Date: 07-12-2023</p>
                 <div className="button-container">
                     <Link to={'/account/myOrders'}> <button className="view-order">VIEW ORDER</button></Link>
-                    <Link to={'/products'}>
+                    <Link to={'/'}>
                         <button className="continue-shopping">CONTINUE SHOPPING</button> </Link>
                 </div>
             </div>
