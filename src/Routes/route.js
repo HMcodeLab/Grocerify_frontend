@@ -133,6 +133,9 @@ const Router = () => {
                     <Route exact path={'/success'} element={<Success />}>
 
                     </Route>
+                    <Route exact path={'/test'} element={<Success />}>
+
+                    </Route>
                 </Routes>
                 <ChatBot />
                 <Footer />

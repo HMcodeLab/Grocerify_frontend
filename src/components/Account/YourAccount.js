@@ -5,17 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { Globalinfo } from "../../App";
 
 const YourAccount = () => {
-  const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+  const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, clearCart, clearWishList } = useContext(Globalinfo)
 
   const navigate = useNavigate();
   const handleLogOut = async () => {
     localStorage.removeItem('GROC_USER_TOKEN')
     navigate('/')
-    setTimeout(() => {
-      getUserDetails();
-      GetCart();
-      GetWishList();
-    }, 2000)
+
+    getUserDetails();
+    clearCart();
+    clearWishList();
+
 
   }
 

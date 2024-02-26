@@ -31,16 +31,16 @@ const FeaturedStore = () => {
     };
 
     return (
-        <div className="flex flex-row  bg-[#F3F3F3]">
-            <div className="w-1/4" style={{ backgroundColor: "var(--tert)" }}>
+        <div className=" bg-[#F3F3F3]">
+            {/* <div className="w-1/4" style={{ backgroundColor: "var(--tert)" }}>
 
                 <Sidebar category={""} />
 
 
-            </div>
+            </div> */}
 
             {/* right */}
-            <div className="flex flex-col w-3/4 pb-[20px]">
+            <div className="flex flex-col pb-[20px]">
                 {/* map */}
                 <div className="pr-1 space-y-6">
                     <div>

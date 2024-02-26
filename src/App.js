@@ -83,12 +83,19 @@ function App() {
 
   }
 
+  const clearCart = () => {
+    setCartData([])
+  }
+  const clearWishList = () => {
+    setWishListData([]);
+  }
+
 
 
 
   return (
     <>
-      <Globalinfo.Provider value={{ cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails }}>
+      <Globalinfo.Provider value={{ cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, clearCart, clearWishList }}>
         <QueryClientProvider client={queryClient}>
           <div className="App">
             <Router />

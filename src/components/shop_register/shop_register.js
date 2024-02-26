@@ -15,57 +15,60 @@ const ShopRegistration = () => {
 
 
     const [btnLoader, setBtnLoader] = useState(false);
-    const [shopDetails, setShopDetails] = useState({
-        shopName: "",
+    const [sellerDetails, setSellerDetails] = useState({
+
         OwnerName: "",
-        OwnerNumber: 12342567,
+        OwnerMobile: "",
         OwnerEmail: "",
-        OwnerAdd: "",
-
-
-
+        OwnerDOB: "",
+        OwnerAddress: "",
+        Aadhar: "",
+        PanCard: "",
+        password: ""
 
     })
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setShopDetails({
-            ...shopDetails,
+        setSellerDetails({
+            ...sellerDetails,
             [name]: value,
         });
     };
 
     const handleSubmit = async () => {
         setBtnLoader(true);
-
-        console.log(shopDetails)
-
-        if (shopDetails.shopName === "" ||
-            shopDetails.OwnerName === "" ||
-            shopDetails.OwnerNumber === "" ||
-            shopDetails.OwnerEmail === "" ||
-            shopDetails.OwnerAdd === ""
+        if (sellerDetails.OwnerName === "" ||
+            sellerDetails.OwnerMobile === "" ||
+            sellerDetails.OwnerEmail === "" ||
+            sellerDetails.OwnerDOB === "" ||
+            sellerDetails.OwnerAddress === "" ||
+            sellerDetails.Aadhar === "" ||
+            sellerDetails.PanCard === "" ||
+            sellerDetails.password === ""
         ) {
-            toast.error("Enter valid Credentials")
+            toast.error("Enter Valid Credentials")
             setBtnLoader(false)
 
         }
         else {
             try {
-                const res = await axios.post(`${BASE_URL_PRODUCTS}api/addshop`, {
-                    ...shopDetails
+                const res = await axios.post(`${BASE_URL_PRODUCTS}api/registerseller`, {
+                    ...sellerDetails
                 })
-                const response = res.json();
-                console.log(response)
-                toast.success('Shop Registered Successfully')
+                // const response = await res.json();
+                // console.log(response)
+                toast.success('Seller Registered Successfully')
                 setBtnLoader(false)
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 toast.error("Some Error Occured")
                 setBtnLoader(false)
             }
         }
     }
+
+    // console.log(sellerDetails)
 
     return (
 
@@ -83,37 +86,38 @@ const ShopRegistration = () => {
                         </div>
                         <div className={styles.scrollable_form}>
                             <span className={styles.inputs}>
+
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Shop Name</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="OwnerName">Owner/Manager Name</label>
+                                    <input type="text" value={sellerDetails.OwnerName} name="OwnerName" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Owner/Manager Name: Name</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="OwnerMobile">Owner/Manager Contact Number</label>
+                                    <input type="text" value={sellerDetails.OwnerMobile} name="OwnerMobile" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Owner/Manager Contact Number:</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="OwnerEmail">Owner/Manager Email Address</label>
+                                    <input type="text" value={sellerDetails.OwnerEmail} name="OwnerEmail" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Owner/Manager Email Address:</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="OwnerDOB">Owner/Manager Birth Date</label>
+                                    <input type="date" value={sellerDetails.OwnerDOB} name="OwnerDOB" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Owner/Manager Birth Date:</label>
-                                    <input type="date" id="Shop-name" />
+                                    <label for="OwnerAddress">Owner/Manager Physical Address</label>
+                                    <input type="text" value={sellerDetails.OwnerAddress} name="OwnerAddress" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Owner/Manager Physical Address:</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="Aadhar">Adhar Number</label>
+                                    <input type="text" value={sellerDetails.Aadhar} name="Aadhar" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">Adhar Number:</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="PanCard">PAN Card</label>
+                                    <input type="text" value={sellerDetails.PanCard} name="PanCard" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="Shop-name">PAN Card:</label>
-                                    <input type="text" id="Shop-name" />
+                                    <label for="OwnerPan">Password</label>
+                                    <input type="text" value={sellerDetails.password} name="password" onChange={handleChange} />
                                 </div>
 
                             </span>
