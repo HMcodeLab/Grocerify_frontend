@@ -5,11 +5,12 @@ import Slider from "../Orders/slider";
 
 function Account() {
   const hrStyle = {
-    width: '92%',
+    width: '90%',
     height: '1px',
     backgroundColor: '#58B310',
     border: 'none',
     marginTop: '70px',
+    marginLeft: "5%",
     position: 'relative',
   };
 

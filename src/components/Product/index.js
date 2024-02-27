@@ -21,11 +21,11 @@ export default function Product() {
     const navigate = useNavigate();
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
     const params = useParams();
-    console.log(params)
+    // console.log(params)
     // console.log(window.location)
     // console.log(props)
     const [image, setimage] = useState('/mobile.png')
-    const [show, setshow] = useState('h-28')
+    const [show, setshow] = useState('h-23')
     const [reportshow, setreportshow] = useState('hidden')
     const [reportValue, setreportValue] = useState('')
     const [showdelivery, setshowdelivery] = useState('hidden')
@@ -33,24 +33,23 @@ export default function Product() {
     const [actualprice, setactualprice] = useState()
     const [images, setimages] = useState([])
     const [video, setvideo] = useState([])
+    const [store, setstore] = useState([])
     // const [showvideo, setshowvideo] = useState(false)
 
     const primaryRef = useRef(null);
     const secondaryRef = useRef(null);
 
-    const slug = params.slug
-    // const slug = window.location.pathname;
-
-    let price = 0
+    const slug = params.slug;
+    let price = 0;
     useEffect(() => {
         async function Fetchdata() {
             try {
                 let url = BASE_URL_PRODUCTS + 'api/product/' + slug
                 const data = await fetch(url)
                 const response = await data.json()
-                // console.log(response)
-                price = response[0].variants1_mrp_price - (response[0].variants1_mrp_price * (response[0]["variants1_discount%"] / 100))
-
+                console.log(response)
+                price = response[0].stores[0].variants1_mrp_price - (response[0].stores[0].variants1_mrp_price * (response[0].stores[0]["variants1_discount%"] / 100))
+                setstore(response[0].stores)
                 setactualprice(price)
                 setimage(response[0].product_primary_image_url)
                 setData(response[0])
@@ -64,10 +63,7 @@ export default function Product() {
             } catch (error) {
                 console.log(error)
             }
-
-            // setitems([...Data])
         }
-
 
         Fetchdata()
     }, [primaryRef, secondaryRef])
@@ -127,6 +123,9 @@ export default function Product() {
         }
     }
 
+    console.log(Data)
+
+
     return (<>
         {/* <Extra /> */}
 
@@ -180,14 +179,14 @@ export default function Product() {
                                 width: "100%",
                             }}
                         >
-                            <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
+                            {/* <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
                                 <img className='max-h-full mix-blend-multiply max-w-full' src={image} />
-                            </SplideSlide>
+                            </SplideSlide> */}
                             {
-                                images.map((item) => {
+                                images.map((item, ind) => {
                                     // console.log()
                                     return (<>
-                                        <SplideSlide id={`#${item}`} className='flex justify-center items-center bg-[#f3f3f3]'>
+                                        <SplideSlide id={`#${item}`} className='flex justify-center items-center bg-[#f3f3f3]' key={ind}>
                                             <ReactImageMagnify
                                                 {...{
                                                     smallImage: {
@@ -216,7 +215,6 @@ export default function Product() {
                             }
                             <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
                                 <ReactPlayer loop controls={false} url={video} />
-
                             </SplideSlide>
                         </Splide>
 
@@ -236,16 +234,8 @@ export default function Product() {
                         <Star />
                         <Star />
                     </div>
-                    <div >
-                        ₹{actualprice}
-                    </div>
-                    <div className='text-[14px] '>
-                        incl. of taxes (Also includes all applicable duties)
-                    </div>
-                    <div className='flex w-full justify-between '>
-                        <button className='bg-[#58B310] px-4 py-1 rounded text-white text-[16px]' onClick={Addtocart} >Add To Cart</button>
-                        <button className='bg-[#58B310] px-4 py-1 rounded text-white text-[16px]' onClick={handleBuy}>Buy Now</button>
-                    </div>
+
+
                 </div>
 
                 <div className='border-t-2 pt-3 mt-4 space-y-2 fontmont'>
@@ -297,22 +287,24 @@ export default function Product() {
                         }</li>
 
                     </ul>
-                    <button className='flex items-center space-x-1' onClick={Showmore}>
-                        <Down />
-                        <div className='font-semibold'>Show more</div>
-                    </button>
+                    {show === "h-23" && (Data.products_description?.length > 100) &&
+                        <button className='flex items-center space-x-1' onClick={Showmore}>
+                            <Down />
+                            <div className='font-semibold'>Show more</div>
+                        </button>
+                    }
 
                 </div>
 
-                <div className='flex items-center space-x-1 mt-4 cursor-pointer' onClick={() => setreportshow('')}>
+                {/* <div className='flex items-center space-x-1 mt-4 cursor-pointer' onClick={() => setreportshow('')}>
                     <Box />
                     <div className='text-[#58B310]' >Reporting an issue with this product</div>
-                </div>
+                </div> */}
 
-                <div className={`flex items-center pl-4 mt-2  ${reportshow}`}>
+                {/* <div className={`flex items-center pl-4 mt-2  ${reportshow}`}>
                     <input value={reportValue} onChange={(e) => setreportValue(e.target.value)} className='w-[45%] py-1  border-1 border-[#c6f79b] outline-none rounded-r-lg focus-within:border-[#abeb74] focus-within:shadow-lg pl-1' />
                     <button onClick={() => console.log(reportValue)} className='bg-[#58B310] text-white h-full relative right-16 rounded-r-lg px-2 py-1 '>Report</button>
-                </div>
+                </div> */}
 
                 <div onClick={ShowDeliveryContent} className='flex w-full justify-between py-4 border-t-2 mt-4 fontmont  text-[#848484] text-[16px] cursor-pointer'>
                     <div>Delivery & Returns</div>
@@ -352,7 +344,8 @@ export default function Product() {
                         </div>
                         <div className='flex w-[170px] justify-between  items-center  mt-2'>
                             <div className='w-20 h-16 border' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img className='w-full h-full' src='/apple.png' /></div>
-                            <div className='w-20 h-16 flex justify-center items-center bg-gray-400' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><FaPlus /></div>
+                            <div className='w-20 h-16 border' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img className='w-full h-full' src='/apple.png' /></div>
+
                         </div>
                     </div>
 
@@ -373,7 +366,7 @@ export default function Product() {
                             </div>
                         </div>
 
-                        <div className='text-center mt-2'>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”</div>
+                        <div className='text-center mt-2 text-sm'>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”</div>
                     </div>
                 </div>
 
@@ -382,169 +375,47 @@ export default function Product() {
             <div className='w-1/2 pl-8 pt-4'>
                 <div className='text-[#848484] text-[20px] fontgo'>Nearest Stores</div>
                 <div className='w-full space-y-5'>
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
-                        <div className=' flex items-center justify-center relative'>
-                            <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                <div className='text-[10px]'>20%</div>
-                                <div className='text-[8px]'>off</div>
-                            </div>
-                            <img className='h-full w-full ' src='/target.png' />
 
-                        </div>
-                        <div className='flex flex-col w-full fontmont text-[#848484]'>
-                            <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                <div>The Target</div>
-                                <div className='flex '>
-                                    <div>₹2000</div>
-                                    <div className='txtc text-[10px]'>₹3000</div>
+                    {
+                        store.length > 0 && store.map((item) => {
+                            // console.log(item)
+                            return (<>
+                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
+                                    <div className=' flex items-center justify-center relative'>
+                                        <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
+                                            <div className='text-[10px]'>100%</div>
+                                            <div className='text-[8px]'>off</div>
+                                        </div>
+                                        <img className='max-h-52 max-w-32' src={item.shop_primary_image_url} />
+
+                                    </div>
+                                    <div className='flex flex-col w-full fontmont text-[#848484]'>
+                                        <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
+                                            <div>{item.shopName}</div>
+                                            <div className='flex '>
+                                                <div>₹2000</div>
+                                                <div className='txtc text-[10px]'>₹3000</div>
+                                            </div>
+                                        </div>
+                                        <div>{item.ShopAddress}</div>
+                                        <div>Delivery by Sun, 12 Feb</div>
+                                        <div>2.1km</div>
+                                        <div className='flex justify-between items-center'>
+                                            <div className='text-[14px] text-[#58B310] font-semibold'>Open now  -pm</div>
+                                            <div className='flex gap-3'>
+                                                <button className='border border-[var(--primary)] rounded-sm px-3 py-1'>Add To Cart</button>
+                                                <button className='border border-[var(--primary)] px-3 py-1'>Buy Now</button>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>Sector 22C , Chandigarh (Electronics)</div>
-                            <div>Delivery by Sun, 12 Feb</div>
-                            <div>2.1km</div>
-                            <div className='flex justify-between items-center'>
-                                <div className='text-[14px] text-[#58B310] font-semibold'>Open now  - 11noon - 9:30pm</div>
-                                <button>Buy Now</button>
+                            </>)
+                        })
 
-                            </div>
-                        </div>
-                    </div>
+                    }
 
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
-                        <div className=' flex items-center justify-center relative'>
-                            <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                <div className='text-[10px]'>20%</div>
-                                <div className='text-[8px]'>off</div>
-                            </div>
-                            <img className='h-full w-full ' src='/target.png' />
-
-                        </div>
-                        <div className='flex flex-col w-full fontmont text-[#848484]'>
-                            <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                <div>The Target</div>
-                                <div className='flex '>
-                                    <div>₹2000</div>
-                                    <div className='txtc text-[10px]'>₹3000</div>
-                                </div>
-                            </div>
-                            <div>Sector 22C , Chandigarh (Electronics)</div>
-                            <div>Delivery by Sun, 12 Feb</div>
-                            <div>2.1km</div>
-                            <div className='flex justify-between items-center'>
-                                <div className='text-[14px] text-[#58B310] font-semibold'>Open now  - 11noon - 9:30pm</div>
-                                <button>Buy Now</button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
-                        <div className=' flex items-center justify-center relative'>
-                            <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                <div className='text-[10px]'>20%</div>
-                                <div className='text-[8px]'>off</div>
-                            </div>
-                            <img className='h-full w-full ' src='/target.png' />
-
-                        </div>
-                        <div className='flex flex-col w-full fontmont text-[#848484]'>
-                            <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                <div>The Target</div>
-                                <div className='flex '>
-                                    <div>₹2000</div>
-                                    <div className='txtc text-[10px]'>₹3000</div>
-                                </div>
-                            </div>
-                            <div>Sector 22C , Chandigarh (Electronics)</div>
-                            <div>Delivery by Sun, 12 Feb</div>
-                            <div>2.1km</div>
-                            <div className='flex justify-between items-center'>
-                                <div className='text-[14px] text-[#58B310] font-semibold'>Open now  - 11noon - 9:30pm</div>
-                                <button>Buy Now</button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
-                        <div className=' flex items-center justify-center relative'>
-                            <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                <div className='text-[10px]'>20%</div>
-                                <div className='text-[8px]'>off</div>
-                            </div>
-                            <img className='h-full w-full ' src='/target.png' />
-
-                        </div>
-                        <div className='flex flex-col w-full fontmont text-[#848484]'>
-                            <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                <div>The Target</div>
-                                <div className='flex '>
-                                    <div>₹2000</div>
-                                    <div className='txtc text-[10px]'>₹3000</div>
-                                </div>
-                            </div>
-                            <div>Sector 22C , Chandigarh (Electronics)</div>
-                            <div>Delivery by Sun, 12 Feb</div>
-                            <div>2.1km</div>
-                            <div className='flex justify-between items-center'>
-                                <div className='text-[14px] text-[#58B310] font-semibold'>Open now  - 11noon - 9:30pm</div>
-                                <button>Buy Now</button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
-                        <div className=' flex items-center justify-center relative'>
-                            <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                <div className='text-[10px]'>20%</div>
-                                <div className='text-[8px]'>off</div>
-                            </div>
-                            <img className='h-full w-full ' src='/target.png' />
-
-                        </div>
-                        <div className='flex flex-col w-full fontmont text-[#848484]'>
-                            <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                <div>The Target</div>
-                                <div className='flex '>
-                                    <div>₹2000</div>
-                                    <div className='txtc text-[10px]'>₹3000</div>
-                                </div>
-                            </div>
-                            <div>Sector 22C , Chandigarh (Electronics)</div>
-                            <div>Delivery by Sun, 12 Feb</div>
-                            <div>2.1km</div>
-                            <div className='flex justify-between items-center'>
-                                <div className='text-[14px] text-[#58B310] font-semibold'>Open now  - 11noon - 9:30pm</div>
-                                <button>Buy Now</button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
-                        <div className=' flex items-center justify-center relative'>
-                            <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                <div className='text-[10px]'>20%</div>
-                                <div className='text-[8px]'>off</div>
-                            </div>
-                            <img className='h-full w-full ' src='/target.png' />
-
-                        </div>
-                        <div className='flex flex-col w-full fontmont text-[#848484]'>
-                            <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                <div>The Target</div>
-                                <div className='flex '>
-                                    <div>₹2000</div>
-                                    <div className='txtc text-[10px]'>₹3000</div>
-                                </div>
-                            </div>
-                            <div>Sector 22C , Chandigarh (Electronics)</div>
-                            <div>Delivery by Sun, 12 Feb</div>
-                            <div>2.1km</div>
-                            <div className='flex justify-between items-center'>
-                                <div className='text-[14px] text-[#58B310] font-semibold'>Open now  - 11noon - 9:30pm</div>
-                                <button>Buy Now</button>
-
-                            </div>
-                        </div>
-                    </div>
 
 
                 </div>

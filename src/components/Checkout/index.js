@@ -81,6 +81,7 @@ export default function Checkout() {
     }
 
     const handleOrder = async () => {
+
         if (paymentType === 'cod') {
 
             var temp = [];

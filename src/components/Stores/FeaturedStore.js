@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Sidebar from "../Sidebar/sidebar";
+import { BASE_URL_PRODUCTS } from "../../Api/api";
 
 const FeaturedStore = () => {
     const [index, setIndex] = useState(0);
+    const [ShopData, setShopData] = useState()
     const totalSlides = 3;
     const handleWheel = (event) => {
         const scrollDirection = Math.sign(event.deltaY);
@@ -16,6 +18,24 @@ const FeaturedStore = () => {
             return Math.max(0, Math.min(newIndex, totalSlides - 1));
         });
     };
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+
+    const fetchData = async () => {
+        try {
+            const res = await fetch(`${BASE_URL_PRODUCTS}api/shops`);
+            const response = await res.json();
+            console.log(response.data)
+            setShopData(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
 
     const slideStyle = {
         transform: `translateY(-${index * 50}%)`,
@@ -32,32 +52,12 @@ const FeaturedStore = () => {
 
     return (
         <div className=" bg-[#F3F3F3]">
-            {/* <div className="w-1/4" style={{ backgroundColor: "var(--tert)" }}>
 
-                <Sidebar category={""} />
-
-
-            </div> */}
-
-            {/* right */}
             <div className="flex flex-col pb-[20px]">
                 {/* map */}
                 <div className="pr-1 space-y-6">
                     <div>
-                        {/* <div className="flex flex-row justify-between bg-[#222222] font-Gorditas text-[#FFFFFF] pt-1 pb-1 pl-4 pr-4 hover:bg-[#58B310]">
-                            <p className="flex flex-row">
-                                <span className="pr-6">
-                                    <img
-                                        src="../assests/images/storeicon.svg"
-                                        className="text-[#FFFFFF]"
-                                    />
-                                </span>
-                                Stores Near Me
-                            </p>
-                            <p className="flex flex-row">
-                                Show More <span className="">&#9660;</span>
-                            </p>
-                        </div> */}
+
 
                         <div className="relative">
                             <img
@@ -213,49 +213,36 @@ const FeaturedStore = () => {
                             </div>
 
                             <div className="grid grid-cols-2 gap-3 p-4">
-                                <div className="relative group">
-                                    <Link to={"/view_store"}>
-                                        <img
-                                            src="../assests/images/chandigarhstore.svg"
-                                            className="w-full group-hover:brightness-50 transition-all duration-300"
-                                        />
-                                        <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                            Chandigarh store
-                                        </p>
-                                        <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                            <h4 className="font-Gorditas text-xl">
-                                                Shop No, 2284/3, Mariwala Town
-                                            </h4>
-                                            <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                            <p>1km</p>
-                                            <span className="text-2xl text-center text-[#FFB800]">
-                                                &#9733;&#9733;&#9733;&#9733;&#9734;
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
+                                {
+                                    ShopData?.map((val, ind) => {
+                                        return (
+                                            <div className="relative group" key={ind}>
+                                                <Link to={"/store/" + val._id}>
+                                                    <img
+                                                        src={val.shopImages[0]}
+                                                        className="w-full group-hover:brightness-50 transition-all duration-300"
+                                                    />
+                                                    <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                        {val.shopName}
+                                                    </p>
+                                                    <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
+                                                        <h4 className="font-Gorditas text-xl">
+                                                            {val.shopAddress}
+                                                        </h4>
+                                                        <h6 className="text-center pt-8">FURNITURE STORE</h6>
+                                                        <p>1km</p>
+                                                        <span className="text-2xl text-center text-[#FFB800]">
+                                                            &#9733;&#9733;&#9733;&#9733;&#9734;
+                                                        </span>
+                                                    </div>
+                                                </Link>
+                                            </div>
+                                        )
+                                    })
+                                }
 
-                                <div className="relative group">
-                                    <Link to={"/view_store"}>
-                                        <img
-                                            src="../assests/images/ramgrocery.png"
-                                            className="w-full group-hover:brightness-50 transition-all duration-300"
-                                        />
-                                        <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
-                                            RAM GROCERY STORE
-                                        </p>
-                                        <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                            <h4 className="font-Gorditas text-xl">
-                                                Shop No, 2284/3, Mariwala Town
-                                            </h4>
-                                            <h6 className="text-center pt-8">FURNITURE STORE</h6>
-                                            <p>1km</p>
-                                            <span className="text-2xl text-center text-[#FFB800]">
-                                                &#9733;&#9733;&#9733;&#9733;&#9734;
-                                            </span>
-                                        </div>
-                                    </Link>
-                                </div>
+
+
                             </div>
                         </div>
 
@@ -277,7 +264,7 @@ const FeaturedStore = () => {
                         </div>
 
                         {/* top rated store */}
-                        <div className="bg-[#FFFFFF]">
+                        {/* <div className="bg-[#FFFFFF]">
                             <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
                                 <p>TOP RATED STORE</p>
                                 <p>
@@ -396,7 +383,7 @@ const FeaturedStore = () => {
                                     </div>
                                 </ReactOwlCarousel>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* ratings */}
                         <div className="bg-[#FFFFFF]">

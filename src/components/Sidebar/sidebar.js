@@ -13,7 +13,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useSearchParams } from 'react-router-dom';
 
 const Sidebar = (category) => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(1);
+    const [isDropdownOpen, setIsDropdownOpen] = useState([1, 2, 3, 4, 5, 6]);
     // console.log(category.category)
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -30,7 +30,7 @@ const Sidebar = (category) => {
                     <Dropdown />
 
                 </span>
-                {isDropdownOpen === 1 && <ul key={1}>
+                {isDropdownOpen.includes(1) && <ul key={1}>
                     <a href={'/products?category=Clothing'}> <li>Clothing</li></a>
                     <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
                     <a href={'/products?category=Shoes'}> <li>Shoes</li></a>
@@ -52,7 +52,7 @@ const Sidebar = (category) => {
                     <Dropdown />
 
                 </span>
-                {isDropdownOpen === 2 && <ul key={2}>
+                {isDropdownOpen.includes(2) && <ul key={2}>
                     <li>
                         <input type="radio" name="popularity" id="1" />
                         <p>Popularity</p></li>
@@ -82,7 +82,7 @@ const Sidebar = (category) => {
                     <Dropdown />
 
                 </span>
-                {isDropdownOpen === 3 && <ul key={2}>
+                {isDropdownOpen.includes(3) && <ul key={3}>
                     <li>
                         <input type="radio" name="popularity" id="1" />
                         <p>Under 1 KM</p></li>
@@ -110,7 +110,7 @@ const Sidebar = (category) => {
                     <Dropdown />
 
                 </span>
-                {isDropdownOpen === 3 && <ul key={2}>
+                {isDropdownOpen.includes(4) && <ul key={4}>
                     <li>
                         <input type="radio" name="popularity" id="1" />
                         <p>Under 1 KM</p></li>

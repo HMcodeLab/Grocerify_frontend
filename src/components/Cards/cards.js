@@ -11,8 +11,10 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
 const Cards = (value) => {
-    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+
     console.log(value)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+    // console.log(value)
     const [searchParams, setSearchParams] = useSearchParams();
 
     const Menus = [
@@ -166,7 +168,7 @@ const Cards = (value) => {
                             <span className={styles.about}>
                                 <h5>{value.value.sub_category_name}</h5>
                                 <h5>{value?.value.variants1_weight} gm </h5>
-                                <h5>₹ {value.value.variants1_mrp_price}</h5>
+                                <h5>₹ {value.value?.stores[0]?.variants1_mrp_price}</h5>
 
 
                             </span>

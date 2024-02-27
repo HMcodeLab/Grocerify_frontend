@@ -1,26 +1,70 @@
 import React, { useState, useEffect } from "react";
 import { BASE_URL_PRODUCTS } from "../../../Api/api";
 import Products from "../../Products/products";
+import { useParams } from 'react-router-dom';
+import Spinner from "../../Spinner";
+import { cropString } from "../../../helpers/helper_function";
 
 const StoreProduct = () => {
-
-  const [productData, setProductData] = useState([]);
+  const params = useParams();
+  const [shopData, setShopData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [searchvalue, setSearchValue] = useState('');
+  const [shopProducts, setShopProducts] = useState([]);
   // console.log(process.env.BASE_URL_PRODUCTS)
 
+
+
   const fetchData = async () => {
+
     try {
-      const res = await fetch(`${BASE_URL_PRODUCTS}api/products`);
+      const res = await fetch(`${BASE_URL_PRODUCTS}api/productsbystore?shop=${params.id}`);
       const response = await res.json();
-      // console.log(response);
-      setProductData(response)
+      console.log(response.shop);
+      setShopData(response.shop)
+      setShopProducts(response.shop.products);
+      setLoading(false);
     } catch (error) {
       console.log(error)
+      setLoading(false);
     }
   }
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [params.id])
+
+
+  useEffect(() => {
+
+    console.log(searchvalue)
+
+    let temp = shopData?.products?.filter((val, ind) => {
+      return val.slug.toLowerCase().includes(searchvalue.toLowerCase());
+
+    })
+    console.log(temp)
+    setShopProducts(temp)
+  }, [searchvalue])
+
+  if (!shopData) {
+    return (
+      <div style={{ position: "fixed", top: "0px", left: "0px", height: "100vh", width: "100%", backgroundColor: "white" }}>
+        <Spinner />
+      </div>
+    )
+  }
+
+
+  const handleSearch = (e) => {
+    console.log(e.target.value)
+    setSearchValue(e.target.value);
+
+  }
+
+
+
+
 
   return (
     <div className="flex flex-row ">
@@ -28,30 +72,30 @@ const StoreProduct = () => {
       <div className="flex flex-col gap-4 pt-4 pb-6 pl-8 pr-8 bg-[#F3F3F3] w-full">
         <div className="flex flex-col gap-2 w-full">
           <div className="flex flex-row gap-2 w-full">
-            <img src="../assests/images/foood.png" className="w-3/5 h-auto" />
-            <div className="flex flex-col gap-2 w-1/5 h-auto">
-              <img src="../assests/images/storeimg.png" className="" />
-              <img src="../assests/images/storeimg2.png" className="" />
+            <img src={shopData?.shopImages[0]} className="w-3/5 h-auto" />
+            <div className="flex flex-col gap-2 w-1/5 h-[100%]">
+              <img src={shopData?.shopImages[1]} className="h-[50%]" />
+              <img src={shopData?.shopImages[2]} className="h-[50%]" />
             </div>
-            <img src="../assests/images/storeimg3.png" className="w-1/5" />
+            <img src={shopData?.shopImages[3]} className="w-1/5" />
           </div>
           <div className="flex flex-col">
             <p className="text-[#000000] text-[40px] font-Gorditas">
-              WOODEN LIFE STORE{" "}
+              {shopData?.shopName}{" "}
             </p>
             <p className="text-[#222222] text-[20px] font-Montserrat w-[400px]">
-              Shop No, 2284/3, Mariwala Town
+              {shopData?.ShopAddress}
             </p>
-            <p className="text-[#222222] text-[20px] font-Montserrat w-[400px]">
+            {/* <p className="text-[#222222] text-[20px] font-Montserrat w-[400px]">
               Sector 7, Chandigarh
-            </p>
+            </p> */}
           </div>
           <div className="flex flex-row gap-2">
             <p className="text-[#58B310] text-[14px] font-Montserrat">
               Open now -
             </p>
             <p className="text-[#222222] text-[14px] font-Montserrat">
-              9:30 am - 11pm(Today)
+              {shopData?.openingHours?.from} am - {shopData?.openingHours?.to}pm(Today)
             </p>
           </div>
           <div className="flex flex-row gap-2">
@@ -98,6 +142,7 @@ const StoreProduct = () => {
               <input
                 type="text"
                 placeholder="Search"
+                onChange={handleSearch}
                 className="border border-gray-300 text-[#888888] font-Montserrat text-[16px] px-2 py-1 rounded-tr-full rounded-br-full h-[22px] w-[286px]"
               />
             </div>
@@ -121,7 +166,34 @@ const StoreProduct = () => {
         {/* products */}
         {/* <div className="bg-[#FFFFFF] grid grid-cols-4 gap-10 p-8 border"> */}
 
-        <Products data={productData} />
+        <div className="bg-[#FFFFFF] grid grid-cols-5 gap-10 p-8">
+          {
+            shopProducts?.map((val, ind) => {
+              return (
+                <>
+                  <div className="flex flex-col gap-2 p-4 hover:bg-[#F3F3F3] transform transition-transform duration-300 ease-in-out hover:scale-105">
+                    <img src={val.product_primary_image_url} className="w-auto h-[140px] object-contain" />
+                    <div className="flex flex-col text-[#848484]">
+                      <div className="flex flex-row justify-between items-center">
+                        <p className="font-Gorditas">{val.brand} </p>
+                        <span className="text-xl text-center text-[#FFB800]">
+                          &#9733;&#9733;&#9733;&#9733;&#9734;
+                        </span>
+                      </div>
+                      <p className="font-Montserrat font-semibold text-[14px]">
+                        {cropString(val.products_title, 10)}
+                      </p>
+                      <p className="font-Montserrat font-semibold text-[14px]">
+                        ₹10,000
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )
+            })
+          }
+        </div>
+
 
 
         {/* </div> */}

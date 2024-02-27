@@ -46,6 +46,40 @@
   font-family: var(--primary-font);
   color: var(--body);
 }
+.search {
+  position: relative;
+}
+
+.search_data {
+  height: fit-content;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  top: 30px;
+  /* min-height: 10vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0px;
+  border-radius: 5px 5px 0px 0px;
+  z-index: 45678;
+  color: grey;
+}
+
+.search_data p {
+  text-align: center;
+  border-bottom: 1px solid grey;
+  padding: 8px;
+}
+
+.search_data p:hover {
+  background-color: var(--primary);
+  color: black;
+}
+.search_data p:not(:hover) {
+  background-color: white;
+  color: var(--secondary);
+}
 
 .location {
   display: flex;

@@ -10,10 +10,15 @@ import { ReactComponent as Search } from '../../Assets/Icons/search.svg'
 import logoimg from '../../Assets/Images/logo.png';
 import { Link } from 'react-router-dom'
 import { Globalinfo } from '../../App'
+import axios from 'axios'
+import { BASE_URL_PRODUCTS } from '../../Api/api'
+import { cropString } from '../../helpers/helper_function'
 
 const Navbar = () => {
     const [location, setLocation] = useState("");
     const [token, settoken] = useState('')
+    const [searchInput, setSearchInput] = useState('');
+    const [searchOutputData, setSearchOutputData] = useState();
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
     // console.log(cartData)
     // useEffect(() => {
@@ -77,6 +82,37 @@ const Navbar = () => {
         handleLocation();
     }, []);
 
+    const handleSearchChange = (e) => {
+        console.log(e.target.value)
+        setSearchInput(e.target.value)
+
+
+
+    }
+
+
+    const fetchSearchData = async () => {
+        try {
+            if (searchInput?.length >= 2) {
+                console.log(searchInput)
+                const res = await axios.get(`${BASE_URL_PRODUCTS}api/products?search=` + searchInput);
+                console.log(res.data);
+                setSearchOutputData(res.data)
+
+            }
+        } catch (error) {
+            console.log(error)
+
+
+
+        }
+    }
+
+    useEffect(() => {
+        fetchSearchData()
+
+    }, [searchInput]);
+
     // console.log(location)
 
     return (
@@ -93,8 +129,18 @@ const Navbar = () => {
                     <div className={styles.search_icon}>
                         <Search />
                     </div>
-                    <input type="text" name="search" id="" placeholder='search here ....' />
-
+                    <input type="text" name="search" id="" placeholder='search here ....' onChange={handleSearchChange} />
+                    {searchInput.length > 2 && <div className={styles.search_data}>
+                        {
+                            searchOutputData?.map((val, ind) => {
+                                return (
+                                    <>
+                                        <a href={`/product/${val.slug}`}> <p>{cropString(val.products_title, 27)}</p></a>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>}
                 </div>
                 <div className={styles.location}>
                     <Loc />

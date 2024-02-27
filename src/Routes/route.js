@@ -127,7 +127,7 @@ const Router = () => {
                     <Route exact path={'/checkout'} element={<Checkout />}>
 
                     </Route>
-                    <Route exact path={'/view_store'} element={<StoreDetails />}>
+                    <Route exact path={'/store/:id'} element={<StoreDetails />}>
 
                     </Route>
                     <Route exact path={'/success'} element={<Success />}>
