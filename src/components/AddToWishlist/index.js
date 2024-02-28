@@ -17,7 +17,7 @@ export default function AddToWishlist() {
     const [show, setshow] = useState(false)
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
 
-
+    console.log(wishListData)
     // It is used to apply operation on decreasing the quantity of items
 
     function StarPrint(count) {
@@ -64,17 +64,17 @@ export default function AddToWishlist() {
     }
     return (<>
         <div className="w-full px-20 text-[#848484] space-y-4 py-5">
-            <div className="text-[24px] fontcart">My Wishlist ({Data.length} Items)</div>
+            <div className="text-[24px] fontcart">My Wishlist ({wishListData.length} Items)</div>
             <div className='h-[2px] w-full bg-[#848484] '></div>
             <div className='flex justify-center '>
                 <div className="w-[70%] space-y-5 ">
                     {
-                        wishListData.map((item) => {
-                            let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+                        wishListData.map((item, index) => {
+                            let price = item.product.stores[0].variants1_mrp_price - (item.product.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100))
                             let starcount = item.product.rating;
 
                             return (<>
-                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
+                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center ' key={index}>
                                     <div className='w-28 h-28  flex justify-center items-center '>
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
                                     </div>
@@ -93,7 +93,7 @@ export default function AddToWishlist() {
                                                     }
                                                 >
                                                     <button className=''><Share /> </button>
-                                                    {/* <button>Share on Web</button> */}
+
                                                 </RWebShare>
                                                 <button className='' onClick={() => RemoveFromWishlist(item.product._id)}><Delete /></button>
                                             </div>
@@ -108,8 +108,8 @@ export default function AddToWishlist() {
                                         <div className='text-[#426B1F] fontcart text-[14px] mt-3 flex justify-between pr-2 items-center'>
                                             <div>₹{price}</div>
                                             <div className='flex space-x-3 font2'>
-                                                <button className='bg-white px-3 py-1 text-[16px] shadow-lg'>In Stock</button>
-                                                <button className='bg-white px-3 py-1 text-[16px] shadow-lg' onClick={() => Addtocart(item.product._id)}>Add To Cart</button>
+                                                {item.product.stores[0].stock && <button className='bg-white px-3 py-1 text-[16px] shadow-lg'>In Stock</button>}
+                                                <button className='bg-white px-3 py-1 text-[16px] shadow-lg' onClick={() => Addtocart(item.product._id, item.product.stores[0].store)}>Add To Cart</button>
                                             </div>
                                         </div>
 

@@ -21,24 +21,28 @@ export default function Addtocart() {
     const [show, setshow] = useState(false)
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
     // console.log(Cntxt)
+
+
+
     useEffect(() => {
         OrderSummery()
-    }, [])
+    }, [cartData])
 
 
 
-    console.log(cartData)
     async function OrderSummery() {
+        console.log(cartData)
 
         try {
             const final = cartData;
             let subttotal_amount = 0
             let total_items = 0
 
+
             final?.forEach((item) => {
                 if (item?.product) {
 
-                    let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
+                    let price = item.product.stores[0].variants1_mrp_price - (item.product.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100));
 
                     subttotal_amount += price * item.quantity;
                     total_items += item.quantity;
@@ -47,8 +51,9 @@ export default function Addtocart() {
             setsubtotal(subttotal_amount)
             settotalitems(total_items)
         } catch (error) {
-            return (<h1> Error</h1>)
             console.log(error)
+
+
         }
 
 
@@ -134,7 +139,7 @@ export default function Addtocart() {
                             // setquantities({...quantities,id:item.product._id})
                             if (item?.product) {
 
-                                var price = item?.product?.variants1_mrp_price - (item?.product?.variants1_mrp_price * (item?.product["variants1_discount%"] / 100))
+                                var price = item?.product?.stores[0]?.variants1_mrp_price - (item?.product?.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100))
                             }
                             return (<>
                                 <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
@@ -146,7 +151,7 @@ export default function Addtocart() {
                                             <div>{item?.product?.products_title} </div>
                                             <div >₹{price}</div>
                                         </div>
-                                        <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price}</div>
+                                        <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price * item.quantity}</div>
                                         <div className='flex justify-between pr-5  items-center mt-4'>
                                             <div className='flex  items-center space-x-2  w-fit mb-2'>
                                                 <button value="minus" onClick={() => NegativeButtonhandle(item.product._id)} className={`flex items-center ${items[0]?.disable}`}><FaMinus /></button>

@@ -9,6 +9,7 @@ import Heroimage from '../../Assets/Images/electronics.jpg'
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { getCategoryBanner } from '../../helpers';
 
 const ProductPage = (props) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -64,14 +65,12 @@ const ProductPage = (props) => {
 
                         }}>
                         <SplideSlide>
-                            <img src={Heroimage} alt="banner  not found" />
+                            <img src={getCategoryBanner(searchParams.get('category'))} alt="banner  not found" />
                         </SplideSlide>
                         <SplideSlide>
-                            <img src={Heroimage} alt="banner  not found" />
+                            <img src={getCategoryBanner(searchParams.get('category'))} alt="banner  not found" />
                         </SplideSlide>
-                        <SplideSlide>
-                            <img src={Heroimage} alt="banner not found" />
-                        </SplideSlide>
+
                     </Splide>
                 </div>
                 <div className={`${styles.newProducts_main} ${styles.products_main}`}>

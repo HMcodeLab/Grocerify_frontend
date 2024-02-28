@@ -34,10 +34,10 @@ const Cards = (value) => {
 
     // add to cart function
 
-    async function Addtocart(id) {
+    async function Addtocart(id, storeid) {
         try {
             let url = BASE_URL_PRODUCTS + 'api/addtocart'
-            let bodydata = { mobile: userDetail?.mobile, productid: id }
+            let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
             const data = await fetch(url, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -50,10 +50,10 @@ const Cards = (value) => {
 
 
     }
-    async function AddtoWishlist(id) {
+    async function AddtoWishlist(id, storeid) {
         try {
             let url = BASE_URL_PRODUCTS + 'api/addtowishlist'
-            let bodydata = { mobile: userDetail?.mobile, productid: id }
+            let bodydata = { mobile: userDetail?.mobile, productid: id, shopID: storeid }
             const data = await fetch(url, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -144,12 +144,12 @@ const Cards = (value) => {
         console.log(e.target.name)
         if (e.target.name === 'basket-outline') {
             // console.log('first')
-            Addtocart(value?.value?._id)
+            Addtocart(value?.value?._id, value?.value?.stores[0].store);
 
         }
         if (e.target.name === 'Heart-outline') {
             console.log('first')
-            AddtoWishlist(value?.value?._id)
+            AddtoWishlist(value?.value?._id, value?.value?.stores[0].store)
 
         }
     }
@@ -168,7 +168,7 @@ const Cards = (value) => {
                             <span className={styles.about}>
                                 <h5>{value.value.sub_category_name}</h5>
                                 <h5>{value?.value.variants1_weight} gm </h5>
-                                <h5>₹ {value.value?.stores[0]?.variants1_mrp_price}</h5>
+                                {value.value.stores && <h5>₹ {value.value?.stores[0]?.variants1_mrp_price}</h5>}
 
 
                             </span>
