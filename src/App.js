@@ -21,6 +21,7 @@ function App() {
   const [cartData, setCartData] = useState([])
   const [wishListData, setWishListData] = useState([])
   const [userDetail, setUserDetail] = useState();
+  const [checkoutData, setCheckoutData] = useState();
 
 
   useEffect(() => {
@@ -95,7 +96,7 @@ function App() {
 
   return (
     <>
-      <Globalinfo.Provider value={{ cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, clearCart, clearWishList }}>
+      <Globalinfo.Provider value={{ cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, clearCart, clearWishList, checkoutData, setCheckoutData }}>
         <QueryClientProvider client={queryClient}>
           <div className="App">
             <Router />

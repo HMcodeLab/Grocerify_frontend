@@ -37,6 +37,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .categories_main li,
 .sortBy_main li {
   list-style-type: none;

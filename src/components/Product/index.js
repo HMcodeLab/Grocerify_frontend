@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Product() {
     const navigate = useNavigate();
-    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
     const params = useParams();
     // console.log(params)
     // console.log(window.location)
@@ -81,30 +81,31 @@ export default function Product() {
         }
     }
 
-    async function Addtocart() {
+    async function addToCart(storeid) {
         let id = Data._id;
         try {
             let url = BASE_URL_PRODUCTS + 'api/addtocart'
-            let bodydata = { mobile: userDetail?.mobile, productid: id }
+            let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
             const data = await fetch(url, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(bodydata)
             });
-            toast.success("Added to Cart")
             GetCart()
+            toast.success('Added To Cart')
         } catch (error) {
             console.log(error)
-            toast.error('An Error Occured')
+            toast.error('Error Adding To Cart');
         }
 
 
     }
-    const handleBuy = async () => {
+    console.log(Data)
+    const handleBuy = async (storeid) => {
         let id = Data._id;
         try {
             let url = BASE_URL_PRODUCTS + 'api/addtocart'
-            let bodydata = { mobile: userDetail?.mobile, productid: id }
+            let bodydata = { mobile: userDetail?.mobile, productid: id, storeID: storeid }
             const data = await fetch(url, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -114,7 +115,9 @@ export default function Product() {
             console.log(response)
             if (response.success) {
                 GetCart()
-                navigate('/checkout')
+                navigate(`/checkout`)
+                setCheckoutData([Data]);
+
 
             }
         } catch (error) {
@@ -296,15 +299,6 @@ export default function Product() {
 
                 </div>
 
-                {/* <div className='flex items-center space-x-1 mt-4 cursor-pointer' onClick={() => setreportshow('')}>
-                    <Box />
-                    <div className='text-[#58B310]' >Reporting an issue with this product</div>
-                </div> */}
-
-                {/* <div className={`flex items-center pl-4 mt-2  ${reportshow}`}>
-                    <input value={reportValue} onChange={(e) => setreportValue(e.target.value)} className='w-[45%] py-1  border-1 border-[#c6f79b] outline-none rounded-r-lg focus-within:border-[#abeb74] focus-within:shadow-lg pl-1' />
-                    <button onClick={() => console.log(reportValue)} className='bg-[#58B310] text-white h-full relative right-16 rounded-r-lg px-2 py-1 '>Report</button>
-                </div> */}
 
                 <div onClick={ShowDeliveryContent} className='flex w-full justify-between py-4 border-t-2 mt-4 fontmont  text-[#848484] text-[16px] cursor-pointer'>
                     <div>Delivery & Returns</div>
@@ -403,8 +397,8 @@ export default function Product() {
                                         <div className='flex justify-between items-center'>
                                             <div className='text-[14px] text-[#58B310] font-semibold'>Open now  -pm</div>
                                             <div className='flex gap-3'>
-                                                <button className='border border-[var(--primary)] rounded-sm px-3 py-1'>Add To Cart</button>
-                                                <button className='border border-[var(--primary)] px-3 py-1'>Buy Now</button>
+                                                <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={() => addToCart(item.store)}>Add To Cart</button>
+                                                <button className='border border-[var(--primary)] px-3 py-1' onClick={() => handleBuy(item?.store)}>Buy Now</button>
 
                                             </div>
 

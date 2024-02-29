@@ -10,17 +10,28 @@ import { Globalinfo } from '../../App';
 import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
 import CircularProgress from '@mui/joy/CircularProgress';
+import { useSearchParams } from 'react-router-dom';
+
+
+
 export default function Checkout() {
     const navigate = useNavigate()
-    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+    const [searchparams, setSearchParams] = useSearchParams();
+    const jsonString = (searchparams.get('item'));
+    // const parsedString = (jsonString)
+    // console.log(jsonString)
+
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
 
     const [selectedAddress, setSelectedAddress] = useState(0);
     const [btnLoader, setbtnLoader] = useState(false)
     const [subtotal, setsubtotal] = useState()
+    const [originalPrice, setOriginalPrice] = useState(0)
+
     const [totalitems, settotalitems] = useState()
     const [paymentType, setpaymentType] = useState();
-    console.log(cartData[0]?.quantity)
-
+    // console.log(cartData[0]?.quantity)
+    console.log([checkoutData])
 
     useEffect(() => {
         OrderSummery()
@@ -30,21 +41,38 @@ export default function Checkout() {
 
     // console.log(cartData)
     async function OrderSummery() {
+        console.log(checkoutData)
 
-        const final = cartData;
-        let subttotal_amount = 0
-        let total_items = 0
+        try {
+            const final = checkoutData;
+            console.log(final)
+            let subttotal_amount = 0
+            let total_items = 0
+            let original_price = 0;
 
-        final?.forEach((item) => {
-            let price = item.product.variants1_mrp_price - (item.product.variants1_mrp_price * (item.product["variants1_discount%"] / 100))
 
-            subttotal_amount += price * item.quantity;
-            total_items += item.quantity;
-        })
-        setsubtotal(subttotal_amount)
-        settotalitems(total_items)
+            final?.forEach((item) => {
+                console.log(item)
+                if (item?.stores?.length) {
+                    console.log(item.stores[0])
+                    let price = item.stores[0].variants1_mrp_price - (item.stores[0].variants1_mrp_price * (item.stores[0].variants1_discount_per / 100));
+                    subttotal_amount += price;
 
-        // console.log(subttotal_amount,total_items)
+                    original_price += item.stores[0].variants1_mrp_price;
+
+                }
+            })
+
+            console.log(subttotal_amount)
+            setOriginalPrice(original_price)
+            setsubtotal(subttotal_amount)
+            settotalitems(total_items)
+        } catch (error) {
+            console.log(error)
+
+
+        }
+
     }
     const handleChangepayment = (e) => {
         console.log(e.target.name)
@@ -70,7 +98,7 @@ export default function Checkout() {
                     'Authorization': ` Bearer ${localStorage.getItem('GROC_USER_TOKEN')}`
                 }
             })
-            console.log(res)
+            // console.log(res)
             setbtnLoader(false)
             toast.success("Order Placed Successfully");
             navigate('/success')
@@ -85,8 +113,8 @@ export default function Checkout() {
         if (paymentType === 'cod') {
 
             var temp = [];
-            cartData.forEach((val) => {
-                temp.push({ productid: val.product._id, quantity: val.quantity })
+            checkoutData.forEach((val) => {
+                temp.push({ productid: val._id, quantity: 1, shopid: val.stores[0].store })
             })
 
             createOrder(temp);
@@ -175,7 +203,7 @@ export default function Checkout() {
                     <div className='flex flex-col pl-6 space-y-4'>
                         <div className='flex justify-between'>
                             <span>Price</span>
-                            <span className='font-[550px]'> Rs . {subtotal} </span>
+                            <span className='font-[550px]'> Rs . {originalPrice} </span>
                         </div>
                         <div className='flex justify-between'>
                             <span>Delivery</span>
@@ -183,7 +211,7 @@ export default function Checkout() {
                         </div>
                         <div className='flex justify-between'>
                             <span>Discount Price</span>
-                            <span className='font-[550px]'>Rs . 0</span>
+                            <span className='font-[550px]'>Rs .{originalPrice - subtotal}</span>
                         </div>
                         <div className='bg-[#58B310] h-[2px]'></div>
                         <div className='flex justify-between'>

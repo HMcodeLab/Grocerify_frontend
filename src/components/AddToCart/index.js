@@ -19,12 +19,13 @@ export default function Addtocart() {
     const [total, settotal] = useState()
     const [deliverycharges, setdeliverycharges] = useState()
     const [show, setshow] = useState(false)
-    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
     // console.log(Cntxt)
 
 
 
     useEffect(() => {
+        setCheckoutData(cartData);
         OrderSummery()
     }, [cartData])
 
@@ -55,10 +56,6 @@ export default function Addtocart() {
 
 
         }
-
-
-
-        // console.log(subttotal_amount,total_items)
     }
 
 

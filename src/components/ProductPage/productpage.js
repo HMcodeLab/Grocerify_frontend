@@ -14,14 +14,43 @@ import { getCategoryBanner } from '../../helpers';
 const ProductPage = (props) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [categoryData, setCategoryData] = useState();
+
+
+    const checkForQuery = () => {
+
+        let query_string = ``;
+        let temp = {};
+
+        // console.log(searchParams);
+        console.log([...searchParams.keys()]);
+        if ([...searchParams.keys()].length) {
+            [...searchParams.keys()].forEach((val) => {
+
+
+                (query_string += `&${String(val)}=${searchParams.get(val)}`)
+
+            });
+
+        } else {
+
+            console.log("we don't have a query");
+        }
+
+        // console.log("final value of object is ::: ", query_string);
+        return query_string;
+    };
+
+
     useEffect(() => {
         console.log(searchParams.get('category'))
+        const query = checkForQuery()
+        console.log(query)
 
     }, [])
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`${BASE_URL_PRODUCTS}api/products?category=${searchParams.get('category')}`);
+            const res = await fetch(`${BASE_URL_PRODUCTS}api/products?${checkForQuery()}`);
             const response = await res.json();
             console.log(response);
             setCategoryData(response)
@@ -36,11 +65,6 @@ const ProductPage = (props) => {
 
 
 
-    // console.log(props)
-    //     <div style={{ backgroundColor: "var(--tert)" }}>
-
-    //     <Sidebar category={searchParams.get('category')} />
-    // </div>
 
 
     return (

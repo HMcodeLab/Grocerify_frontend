@@ -11,11 +11,38 @@ import productimg from '../../Assets/Images/product.png'
 import tv from '../../Assets/Images/products/tv.png'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
+import { BASE_URL_PRODUCTS } from '../../Api/api';
 
 const Sidebar = (category) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState([1, 2, 3, 4, 5, 6]);
     // console.log(category.category)
     const [searchParams, setSearchParams] = useSearchParams();
+    const [subCategory, setSubCategory] = useState([]);
+
+
+    const fetchSubCategory = async () => {
+
+        try {
+            if (searchParams.get('category')) {
+                const res = await axios.get(`${BASE_URL_PRODUCTS}api/categories/${searchParams.get('category')}`)
+                console.log(res.data.subcategories);
+                setSubCategory(res.data.subcategories);
+
+            }
+        } catch (error) {
+            console.log(error)
+            setSubCategory([])
+        }
+
+    }
+
+    useEffect(() => {
+        fetchSubCategory();
+    }, [searchParams.get('category')])
+
+
+    console.log(subCategory)
 
 
     return (
@@ -30,16 +57,33 @@ const Sidebar = (category) => {
                     <Dropdown />
 
                 </span>
-                {isDropdownOpen.includes(1) && <ul key={1}>
-                    <a href={'/products?category=Clothing'}> <li>Clothing</li></a>
-                    <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
-                    <a href={'/products?category=Shoes'}> <li>Shoes</li></a>
-                    <a href={'/products?category=Health and Beauty'}> <li>Health</li></a>
-                    <a href={'/products?category=Beauty'}> <li>Beauty</li> </a>
-                    <a href={'/products?category=Kids'}> <li>Kids</li> </a>
-                    <a href={'/products?category=sports'}>  <li>Sports</li></a>
-                    <a href={'/products?category=Home Decor'}>  <li>Home Decor</li></a>
-                </ul>}
+                {isDropdownOpen.includes(1) &&
+                    <>
+                        {searchParams.get('category') == null ?
+                            <ul key={1}>
+                                <a href={'/products?category=Clothing'}> <li>Clothing</li></a>
+                                <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
+                                <a href={'/products?category=Shoes'}> <li>Shoes</li></a>
+                                <a href={'/products?category=Health and Beauty'}> <li>Health</li></a>
+                                <a href={'/products?category=Beauty'}> <li>Beauty</li> </a>
+                                <a href={'/products?category=Kids'}> <li>Kids</li> </a>
+                                <a href={'/products?category=sports'}>  <li>Sports</li></a>
+                                <a href={'/products?category=Home Decor'}>  <li>Home Decor</li></a>
+                            </ul> : <ul>
+                                {
+                                    subCategory.map((val, ind) => {
+                                        return (
+                                            <>
+                                                {console.log(searchParams.get('subcategory') === val?.Subcategory_Name)}
+                                                <a href={`/products?category=${searchParams.get('category')}&subcategory=` + val?.Subcategory_Name}  > <li style={searchParams.get('subcategory') === val?.Subcategory_Name ? { backgroundColor: "white" } : {}} >{val?.Subcategory_Name}</li></a>
+                                            </>
+
+                                        )
+                                    })
+                                }
+                            </ul>}
+                    </>
+                }
             </div>
 
             <div className={styles.sortBy_main}>

@@ -9,6 +9,7 @@ import { BASE_URL_PRODUCTS } from '../../Api/api';
 
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+import { cropString } from '../../helpers/helper_function'
 
 const Cards = (value) => {
 
@@ -152,6 +153,7 @@ const Cards = (value) => {
             AddtoWishlist(value?.value?._id, value?.value?.stores[0].store)
 
         }
+
     }
 
     return (
@@ -166,7 +168,7 @@ const Cards = (value) => {
                         </div>
                         <div className={styles.details}>
                             <span className={styles.about}>
-                                <h5>{value.value.sub_category_name}</h5>
+                                <h5>{cropString(value.value.products_title, 10)}</h5>
                                 <h5>{value?.value.variants1_weight} gm </h5>
                                 {value.value.stores && <h5>₹ {value.value?.stores[0]?.variants1_mrp_price}</h5>}
 

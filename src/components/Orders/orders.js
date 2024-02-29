@@ -48,7 +48,7 @@ export default function Orders() {
             {OrderData?.orders.map((val, ind) => {
                 return (
                     <>
-                        <div className='w-full text-[15px] border rounded-t-xl mt-3' key={ind}>
+                        <div className='w-full text-[15px] border rounded-t-xl mt-3' key={ind} >
                             <div className="flex justify-between fontmons bg-[#D9D9D9] pt-4 rounded-t-xl px-3 text-[#848484]">
                                 <div className="flex space-x-40">
                                     <div className="flex flex-col">
