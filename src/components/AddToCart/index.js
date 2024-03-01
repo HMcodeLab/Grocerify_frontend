@@ -8,9 +8,11 @@ import { BASE_URL_PRODUCTS } from '../../Api/api'
 import { useContext } from 'react';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 export default function Addtocart() {
 
+    const navigate = useNavigate();
     const [Data, setData] = useState([])
     const [items, setitems] = useState([])
     const [quantities, setquantities] = useState([{}])
@@ -25,9 +27,14 @@ export default function Addtocart() {
 
 
     useEffect(() => {
+
         setCheckoutData(cartData);
         OrderSummery()
     }, [cartData])
+
+    console.log(cartData);
+
+
 
 
 
@@ -122,6 +129,17 @@ export default function Addtocart() {
 
     }
 
+    const handleCheckout = () => {
+        console.log(cartData);
+        let temp = [];
+        cartData.forEach((val) => {
+            temp.push({ productid: val.product._id, price: val.product.stores[0].variants1_mrp_price, discount: val.product.stores[0].variants1_discount_per, quantity: val.quantity, shopid: val.shopID })
+        })
+
+        localStorage.setItem('CHECKOUT_DATA', JSON.stringify(temp));
+        navigate('/checkout')
+    }
+
     return (<>
         <div className="w-full px-14 text-[#848484] space-y-4 py-5">
             <div className="text-[24px] fontcart">YOUR CART ({cartData?.length} Items)</div>
@@ -193,13 +211,13 @@ export default function Addtocart() {
                         <div>Total</div>
                         <div>₹{subtotal}</div>
                     </div>
-                    <Link to={'/checkout'}> <button className=' flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold '>
+                    <button className='flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold' onClick={handleCheckout}>
                         <div >
                             Continue to payments
                         </div>
                         <Arrow />
                     </button>
-                    </Link>
+
                 </div>
             </div>
             {show ? <div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>

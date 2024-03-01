@@ -21,7 +21,9 @@ export default function Checkout() {
     // const parsedString = (jsonString)
     // console.log(jsonString)
 
-    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+
+    const [checkoutData, setCheckoutData] = useState([]);
 
     const [selectedAddress, setSelectedAddress] = useState(0);
     const [btnLoader, setbtnLoader] = useState(false)
@@ -31,49 +33,59 @@ export default function Checkout() {
     const [totalitems, settotalitems] = useState()
     const [paymentType, setpaymentType] = useState();
     // console.log(cartData[0]?.quantity)
-    console.log([checkoutData])
+
 
     useEffect(() => {
-        OrderSummery()
-    }, [])
+        let temp = localStorage.getItem('CHECKOUT_DATA');
+        temp = JSON.parse(temp);
+        console.log(temp)
+        setCheckoutData(temp)
+
+    }, [localStorage.getItem('CHECKOUT_DATA')])
 
 
 
-    // console.log(cartData)
-    async function OrderSummery() {
-        console.log(checkoutData)
+    useEffect(() => {
 
-        try {
-            const final = checkoutData;
-            console.log(final)
-            let subttotal_amount = 0
-            let total_items = 0
-            let original_price = 0;
+        async function OrderSummery() {
 
 
-            final?.forEach((item) => {
-                console.log(item)
-                if (item?.stores?.length) {
-                    console.log(item.stores[0])
-                    let price = item.stores[0].variants1_mrp_price - (item.stores[0].variants1_mrp_price * (item.stores[0].variants1_discount_per / 100));
+            try {
+                const final = checkoutData;
+                console.log(final)
+                let subttotal_amount = 0
+                let total_items = 0
+                let original_price = 0;
+
+
+                final?.forEach((item) => {
+                    console.log(item)
+
+                    let price = item.price - (item.price * (item.discount / 100));
                     subttotal_amount += price;
 
-                    original_price += item.stores[0].variants1_mrp_price;
+                    original_price += item.price;
 
-                }
-            })
 
-            console.log(subttotal_amount)
-            setOriginalPrice(original_price)
-            setsubtotal(subttotal_amount)
-            settotalitems(total_items)
-        } catch (error) {
-            console.log(error)
+                })
 
+                console.log(subttotal_amount)
+                setOriginalPrice(original_price)
+                setsubtotal(subttotal_amount)
+                settotalitems(total_items)
+            } catch (error) {
+                console.log(error)
+
+
+            }
 
         }
 
-    }
+
+        OrderSummery()
+    }, [checkoutData])
+
+
     const handleChangepayment = (e) => {
         console.log(e.target.name)
         setpaymentType(e.target.name)
@@ -112,12 +124,9 @@ export default function Checkout() {
 
         if (paymentType === 'cod') {
 
-            var temp = [];
-            checkoutData.forEach((val) => {
-                temp.push({ productid: val._id, quantity: 1, shopid: val.stores[0].store })
-            })
 
-            createOrder(temp);
+
+            createOrder(checkoutData);
         }
         else {
             toast.error("Only COD is available right Now");

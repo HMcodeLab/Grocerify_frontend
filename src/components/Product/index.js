@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Product() {
     const navigate = useNavigate();
+
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
     const params = useParams();
     // console.log(params)
@@ -100,33 +101,18 @@ export default function Product() {
 
 
     }
-    console.log(Data)
+
     const handleBuy = async (storeid) => {
-        let id = Data._id;
-        try {
-            let url = BASE_URL_PRODUCTS + 'api/addtocart'
-            let bodydata = { mobile: userDetail?.mobile, productid: id, storeID: storeid }
-            const data = await fetch(url, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(bodydata)
-            });
-            const response = await data.json()
-            console.log(response)
-            if (response.success) {
-                GetCart()
-                navigate(`/checkout`)
-                setCheckoutData([Data]);
+        console.log(Data)
+        let temp = [];
+        temp.push({ productid: Data._id, price: Data.stores[0].variants1_mrp_price, discount: Data.stores[0].variants1_discount_per, quantity: 1, shopid: storeid })
 
-
-            }
-        } catch (error) {
-            console.log(error)
-            toast.error('An Error Occured')
-        }
+        console.log(temp)
+        localStorage.setItem('CHECKOUT_DATA', JSON.stringify(temp))
+        navigate('/checkout');
     }
 
-    console.log(Data)
+
 
 
     return (<>
