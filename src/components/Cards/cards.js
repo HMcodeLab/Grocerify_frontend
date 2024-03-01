@@ -10,6 +10,7 @@ import { BASE_URL_PRODUCTS } from '../../Api/api';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { cropString } from '../../helpers/helper_function'
+import { RWebShare } from 'react-web-share';
 
 const Cards = (value) => {
 
@@ -203,7 +204,22 @@ const Cards = (value) => {
                                                 onMouseLeave={() => setActive(active)}
                                                 onClick={handleClickAction}
                                             >
-                                                <ion-icon name={menu.icon}></ion-icon>
+                                                {
+                                                    menu.icon == 'share-outline' ? <RWebShare
+                                                        data={{
+                                                            text: "Web Share - Grocerify",
+                                                            url: "https://www.linkedin.com/in/davinder--kumar/",
+                                                            title: "Grocerify",
+                                                        }}
+                                                        onClick={() =>
+                                                            console.log("shared successfully!")
+                                                        }
+                                                    >
+                                                        <ion-icon name={menu.icon}></ion-icon>
+
+                                                    </RWebShare> : <ion-icon name={menu.icon}></ion-icon>
+                                                }
+
                                             </span>
                                             <span
                                                 className={`${active === index
