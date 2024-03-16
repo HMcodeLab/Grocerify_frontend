@@ -5,16 +5,20 @@ import { ReactComponent as Wishlist } from '../../Assets/Icons/wishlist_green.sv
 
 import { colorCombo } from '../../Data/db'
 import { Globalinfo } from '../../App';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { cropString } from '../../helpers/helper_function'
 import { RWebShare } from 'react-web-share';
+import { useLocation } from 'react-router-dom'
 
 const Cards = (value) => {
-
-    console.log(value)
+    const location = useLocation()
+    // console.log(location)
+    // console.log(window.location.origin)
+    // console.log(navigate)
+    // console.log(value)
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
     // console.log(value)
     const [searchParams, setSearchParams] = useSearchParams();
@@ -38,7 +42,7 @@ const Cards = (value) => {
 
     async function Addtocart(id, storeid) {
         try {
-            let url = BASE_URL_PRODUCTS + 'api/addtocart'
+            let url = BASE_URL + 'api/addtocart'
             let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
             const data = await fetch(url, {
                 method: 'post',
@@ -54,14 +58,14 @@ const Cards = (value) => {
     }
     async function AddtoWishlist(id, storeid) {
         try {
-            let url = BASE_URL_PRODUCTS + 'api/addtowishlist'
+            let url = BASE_URL + 'api/addtowishlist'
             let bodydata = { mobile: userDetail?.mobile, productid: id, shopID: storeid }
             const data = await fetch(url, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(bodydata)
             });
-
+            console.log(data);
             GetWishList()
         } catch (error) {
             console.log(error)
@@ -151,6 +155,7 @@ const Cards = (value) => {
         }
         if (e.target.name === 'Heart-outline') {
             console.log('first')
+            console.log(value?.value)
             AddtoWishlist(value?.value?._id, value?.value?.stores[0].store)
 
         }
@@ -208,12 +213,10 @@ const Cards = (value) => {
                                                     menu.icon == 'share-outline' ? <RWebShare
                                                         data={{
                                                             text: "Web Share - Grocerify",
-                                                            url: "https://www.linkedin.com/in/davinder--kumar/",
+                                                            url: `${window.location.origin}/product/${value.value.slug}`,
                                                             title: "Grocerify",
                                                         }}
-                                                        onClick={() =>
-                                                            console.log("shared successfully!")
-                                                        }
+
                                                     >
                                                         <ion-icon name={menu.icon}></ion-icon>
 

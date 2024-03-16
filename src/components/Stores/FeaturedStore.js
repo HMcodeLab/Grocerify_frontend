@@ -4,7 +4,7 @@ import ReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Sidebar from "../Sidebar/sidebar";
-import { BASE_URL_PRODUCTS } from "../../Api/api";
+import { BASE_URL } from "../../Api/api";
 
 const FeaturedStore = () => {
     const [index, setIndex] = useState(0);
@@ -26,7 +26,7 @@ const FeaturedStore = () => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`${BASE_URL_PRODUCTS}api/shops`);
+            const res = await fetch(`${BASE_URL}api/shops`);
             const response = await res.json();
             console.log(response.data)
             setShopData(response.data)

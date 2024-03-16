@@ -4,7 +4,7 @@ import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
-import { BASE_URL_PRODUCTS } from '../../Api/api'
+import { BASE_URL } from '../../Api/api'
 import { useContext } from 'react';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
@@ -71,7 +71,7 @@ export default function Addtocart() {
     async function NegativeButtonhandle(id) {
         setshow(true)
 
-        let url2 = BASE_URL_PRODUCTS + 'api/removefromcart'
+        let url2 = BASE_URL + 'api/removefromcart'
         let bodydata2 = { mobile: userDetail?.mobile, productid: id, operation: "removeOne" }
 
         const data2 = await fetch(url2, {
@@ -93,7 +93,7 @@ export default function Addtocart() {
 
     async function PositiveButtonhandle(id) {
         setshow(true)
-        let url2 = BASE_URL_PRODUCTS + 'api/addtocart'
+        let url2 = BASE_URL + 'api/addtocart'
         let bodydata2 = { mobile: userDetail?.mobile, productid: id }
 
         const data2 = await fetch(url2, {
@@ -113,7 +113,7 @@ export default function Addtocart() {
     async function DeleteItem(id) {
         setshow(true)
 
-        let url2 = BASE_URL_PRODUCTS + 'api/removefromcart'
+        let url2 = BASE_URL + 'api/removefromcart'
         let bodydata2 = { mobile: userDetail?.mobile, productid: id, operation: "removeAll" }
 
         const data2 = await fetch(url2, {

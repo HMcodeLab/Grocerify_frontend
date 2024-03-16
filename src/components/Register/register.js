@@ -13,7 +13,7 @@ import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
 import { ReactComponent as Apple } from '../../Assets/Icons/apple.svg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { BASE_URL_PRODUCTS, BASE_URL_USER } from '../../Api/api';
+import { BASE_URL, BASE_URL_USER } from '../../Api/api';
 import VerifyOTP from '../verifyOTP/verifyOTP';
 import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from '../../helpers';
@@ -49,7 +49,7 @@ const Register = () => {
         }
         else {
             try {
-                const res = await axios.post(`${BASE_URL_PRODUCTS}api/register`, {
+                const res = await axios.post(`${BASE_URL}api/register`, {
 
                     password: user.password,
                     email: user.email,
@@ -84,7 +84,7 @@ const Register = () => {
         setismobileVerified('loading')
 
         try {
-            const res = await axios.post(`${BASE_URL_PRODUCTS}api/generateMobileOTP`, { mobile: Number(user.mobile) });
+            const res = await axios.post(`${BASE_URL}api/generateMobileOTP`, { mobile: Number(user.mobile) });
             console.log(res);
             if (res.status === 201) {
                 setshowOTPModal(true)

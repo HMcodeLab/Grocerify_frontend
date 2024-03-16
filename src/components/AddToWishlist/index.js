@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
 import { ReactComponent as Empty } from '../../Assets/Icons/emptystar.svg'
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
 import { RWebShare } from 'react-web-share';
@@ -33,7 +33,7 @@ export default function AddToWishlist() {
 
     async function Addtocart(id) {
         setshow(true)
-        let url = BASE_URL_PRODUCTS + 'api/addtocart'
+        let url = BASE_URL + 'api/addtocart'
         let bodydata = { mobile: userDetail?.mobile, productid: id }
         const data = await fetch(url, {
             method: 'post',
@@ -48,7 +48,7 @@ export default function AddToWishlist() {
 
     async function RemoveFromWishlist(id) {
         setshow(true)
-        let url2 = BASE_URL_PRODUCTS + 'api/removefromwishlist'
+        let url2 = BASE_URL + 'api/removefromwishlist'
         let bodydata2 = { mobile: userDetail?.mobile, productid: id }
 
         const data2 = await fetch(url2, {

@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 import Heroimage from '../../Assets/Images/electronics.jpg'
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 import { getCategoryBanner } from '../../helpers';
 
 const ProductPage = (props) => {
@@ -50,7 +50,7 @@ const ProductPage = (props) => {
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`${BASE_URL_PRODUCTS}api/products?${checkForQuery()}`);
+            const res = await fetch(`${BASE_URL}api/products?${checkForQuery()}`);
             const response = await res.json();
             console.log(response);
             setCategoryData(response)

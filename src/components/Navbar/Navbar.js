@@ -11,7 +11,7 @@ import logoimg from '../../Assets/Images/logo.png';
 import { Link } from 'react-router-dom'
 import { Globalinfo } from '../../App'
 import axios from 'axios'
-import { BASE_URL_PRODUCTS } from '../../Api/api'
+import { BASE_URL } from '../../Api/api'
 import { cropString } from '../../helpers/helper_function'
 
 const Navbar = () => {
@@ -95,7 +95,7 @@ const Navbar = () => {
         try {
             if (searchInput?.length >= 2) {
                 console.log(searchInput)
-                const res = await axios.get(`${BASE_URL_PRODUCTS}api/products?search=` + searchInput);
+                const res = await axios.get(`${BASE_URL}api/products?search=` + searchInput);
                 console.log(res.data);
                 setSearchOutputData(res.data)
 

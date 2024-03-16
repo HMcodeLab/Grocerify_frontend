@@ -11,15 +11,15 @@ import banner3 from '../../Assets/Images/banner3.png'
 import serum from '../../Assets/Images/products/serum.png'
 import makeup from '../../Assets/Images/products/makeup2.png'
 import banner_shirt from '../../Assets/Images/banner_shirt.jpg'
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 
 const MainContent = () => {
     const [productData, setProductData] = useState([]);
-    // console.log(process.env.BASE_URL_PRODUCTS)
+    // console.log(process.env.BASE_URL)
 
     const fetchData = async () => {
         try {
-            const res = await fetch(`${BASE_URL_PRODUCTS}api/products`);
+            const res = await fetch(`${BASE_URL}api/products`);
             const response = await res.json();
             // console.log(response);
             setProductData(response)
@@ -34,7 +34,7 @@ const MainContent = () => {
 
     return (
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "20px", padding: "40px 40px", backgroundColor: "#F3F3F3" }}>
+        <div className={styles.hero_carousel_main} style={{ display: "flex", flexDirection: "column", gap: "20px", padding: "40px 40px", backgroundColor: "#F3F3F3" }} >
             <div className={styles.hero_image}>
                 <Splide
                     options={{
@@ -196,7 +196,7 @@ const MainContent = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-3 sm:grid sm:grid-cols-2 sm:justify-between">
                     <div className="p-4 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
                         <img
                             src="../assests/images/ratingimg1.svg"
@@ -231,7 +231,7 @@ const MainContent = () => {
                             quis…”
                         </p>
                     </div>
-                    <div className="p-4 pb-6 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
+                    <div className="p-4 pb-6 hover:bg-[#f3f3f3] space-y-1 hover:scale-105 sm:hidden">
                         <img
                             src="../assests/images/ratingimg3.svg"
                             className="w-full"

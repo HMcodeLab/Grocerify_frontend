@@ -72,3 +72,8 @@
   font-size: 0.85rem;
   gap: 2px;
 }
+@media (max-width: 800px) {
+  .about h5 {
+    font-size: 0.7rem;
+  }
+}

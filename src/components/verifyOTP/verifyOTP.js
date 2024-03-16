@@ -4,7 +4,7 @@ import { ReactComponent as Cross } from '../../Assets/Icons/cross.svg';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 
 const VerifyOTP = ({ open, mobile, setismobileVerified }) => {
 
@@ -15,7 +15,7 @@ const VerifyOTP = ({ open, mobile, setismobileVerified }) => {
 
     const verify = async () => {
         try {
-            const res = await axios.post(`${BASE_URL_PRODUCTS}api/verifyMobileOTP`, {
+            const res = await axios.post(`${BASE_URL}api/verifyMobileOTP`, {
                 mobile: user.mobile,
                 otp: user.otp
             })

@@ -12,7 +12,7 @@ import tv from '../../Assets/Images/products/tv.png'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 
 const Sidebar = (category) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState([1, 2, 3, 4, 5, 6]);
@@ -25,7 +25,7 @@ const Sidebar = (category) => {
 
         try {
             if (searchParams.get('category')) {
-                const res = await axios.get(`${BASE_URL_PRODUCTS}api/categories/${searchParams.get('category')}`)
+                const res = await axios.get(`${BASE_URL}api/categories/${searchParams.get('category')}`)
                 console.log(res.data.subcategories);
                 setSubCategory(res.data.subcategories);
 
@@ -61,7 +61,7 @@ const Sidebar = (category) => {
                     <>
                         {searchParams.get('category') == null ?
                             <ul key={1}>
-                                <a href={'/products?category=Clothing'}> <li>Clothing</li></a>
+                                {/* <a href={'/products?category=Clothing'}> <li>Clothing</li></a> */}
                                 <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
                                 <a href={'/products?category=Shoes'}> <li>Shoes</li></a>
                                 <a href={'/products?category=Health and Beauty'}> <li>Health</li></a>

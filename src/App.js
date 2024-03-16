@@ -1,14 +1,11 @@
 
 import { createContext, useState, useEffect } from 'react';
-import { BASE_URL_PRODUCTS } from './Api/api';
+import { BASE_URL } from './Api/api';
 import './App.css';
 import Router from './Routes/route';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 import {
-  useQuery,
-  useMutation,
-  useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
@@ -36,7 +33,7 @@ function App() {
 
     if (userDetail?._id) {
       try {
-        let url = BASE_URL_PRODUCTS + `api/getcart?mobile=${userDetail?.mobile}`
+        let url = BASE_URL + `api/getcart?mobile=${userDetail?.mobile}`
         const data = await fetch(url)
         const response = await data.json()
         console.log(response.cart[0])
@@ -45,12 +42,18 @@ function App() {
         console.log(error)
       }
     }
+    else {
+      let temp = localStorage.getItem('GROC_LOCAL_CART');
+      // console.log(temp);
+      let temp2 = JSON.parse(temp)
+      console.log(temp2);
+    }
 
 
   }
   async function GetWishList() {
     try {
-      let url = BASE_URL_PRODUCTS + `api/getwishlist?mobile=${userDetail?.mobile}`
+      let url = BASE_URL + `api/getwishlist?mobile=${userDetail?.mobile}`
       const data = await fetch(url)
       const response = await data.json()
       // console.log(response)
@@ -68,7 +71,7 @@ function App() {
       const decoded = jwtDecode(token);
       // console.log(decoded.email)
       try {
-        const res = await axios.get(`${BASE_URL_PRODUCTS}api/user?email=${decoded.email}`)
+        const res = await axios.get(`${BASE_URL}api/user?email=${decoded.email}`)
         console.log(res.data.data)
         setUserDetail(res.data.data)
 

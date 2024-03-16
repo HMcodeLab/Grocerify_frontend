@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { BASE_URL_PRODUCTS } from "../../Api/api"
+import { BASE_URL } from "../../Api/api"
 import Spinner from "../Spinner"
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -17,92 +17,92 @@ export default function AddAddress() {
         const [city, setcity] = useState()
         const [state, setstate] = useState()
         const [make_default, setmake_default] = useState(false)
-const [show, setshow] = useState(false)
-const navigate=useNavigate()
-        async function Addaddress(){
+        const [show, setshow] = useState(false)
+        const navigate = useNavigate()
+        async function Addaddress() {
                 setshow(true)
                 try {
-                if(!full_name ||!mobile ||!country ||!zip ||!address_line_1 ||!address_line_2 ||!landmark ||!city ||!state){
-                        toast.warn('Every input must be filled', {
-                                position: "top-center",
-                                autoClose: 1000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: false,
-                                draggable: true,
-                                progress: undefined,
-                                theme: "colored",
-                                // transition: 'Bounce'
+                        if (!full_name || !mobile || !country || !zip || !address_line_1 || !address_line_2 || !landmark || !city || !state) {
+                                toast.warn('Every input must be filled', {
+                                        position: "top-center",
+                                        autoClose: 1000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: false,
+                                        draggable: true,
+                                        progress: undefined,
+                                        theme: "colored",
+                                        // transition: 'Bounce'
                                 });
-                }
-                else{
-                     
-                        let temp=localStorage.getItem('GROC_USER_TOKEN')
-               
+                        }
+                        else {
 
-                // console.log(temp)
-                
-                        let url= `${BASE_URL_PRODUCTS}api/addaddress`
-                        let address1={address:{full_name,city,state,landmark,address_line_1,address_line_2,country,mobile,zip},make_default}
-                       
-                        //     console.log(stringifyObject(address1))
-                const data=await fetch(url, {
-                    method: 'post',
-                    headers: {'Content-Type':'application/json','Authorization': 'Bearer '+temp},
-                    body: JSON.stringify(address1)
-                   });
-                   let response=await data.json()
-                   if(response.success){
-                        toast.success('Address Saved Successfully', {
-                                position: "top-center",
-                                autoClose: 1000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: false,
-                                draggable: true,
-                                progress: undefined,
-                                theme: "colored",
-                                // transition: 'Bounce'
+                                let temp = localStorage.getItem('GROC_USER_TOKEN')
+
+
+                                // console.log(temp)
+
+                                let url = `${BASE_URL}api/addaddress`
+                                let address1 = { address: { full_name, city, state, landmark, address_line_1, address_line_2, country, mobile, zip }, make_default }
+
+                                //     console.log(stringifyObject(address1))
+                                const data = await fetch(url, {
+                                        method: 'post',
+                                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + temp },
+                                        body: JSON.stringify(address1)
                                 });
-                                navigate('/account/address')
-                   }
-                   else{
-                        toast.error('Server error', {
-                                position: "top-center",
-                                autoClose: 1000,
-                                hideProgressBar: false,
-                                closeOnClick: true,
-                                pauseOnHover: false,
-                                draggable: true,
-                                progress: undefined,
-                                theme: "colored",
-                                // transition: 'Bounce'
-                                });
-                   }
-                }
+                                let response = await data.json()
+                                if (response.success) {
+                                        toast.success('Address Saved Successfully', {
+                                                position: "top-center",
+                                                autoClose: 1000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                // transition: 'Bounce'
+                                        });
+                                        navigate('/account/address')
+                                }
+                                else {
+                                        toast.error('Server error', {
+                                                position: "top-center",
+                                                autoClose: 1000,
+                                                hideProgressBar: false,
+                                                closeOnClick: true,
+                                                pauseOnHover: false,
+                                                draggable: true,
+                                                progress: undefined,
+                                                theme: "colored",
+                                                // transition: 'Bounce'
+                                        });
+                                }
+                        }
                 } catch (error) {
-                        console.log("dfdsf"+error)
+                        console.log("dfdsf" + error)
                 }
-        
+
                 // RemoveFromCart(id)
                 // TotalCount()
                 setshow(false)
         }
 
         return (<>
-        <ToastContainer
-position="top-center"
-autoClose={1000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover={false}
-theme="colored"
-// transition: Bounce
-/>
+                <ToastContainer
+                        position="top-center"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover={false}
+                        theme="colored"
+                // transition: Bounce
+                />
                 <div className="flex font-semibold text-[#848484] pl-20 pt-3">
                         <Link to='/account' className="text-[#848484]">Your Account &gt;</Link>
                         <Link to='/security' className="">Your Addresses &gt;</Link>
@@ -151,19 +151,19 @@ theme="colored"
                                                 </label>
                                         </div>
                                         <div className="flex space-x-1">
-                                                <input  onChange={(e)=>setmake_default(e.target.checked)} className="h-5 w-5 accent-[#58B310] text-white" type="checkbox" />
+                                                <input onChange={(e) => setmake_default(e.target.checked)} className="h-5 w-5 accent-[#58B310] text-white" type="checkbox" />
                                                 <div>Make this my default browser</div>
                                         </div>
                                         <div className="flex w-full justify-center">
-                                                <button onClick={()=>Addaddress()} className=" px-4 py-1 shadow-lg rounded bg-[#58B310] text-white">Save</button>
+                                                <button onClick={() => Addaddress()} className=" px-4 py-1 shadow-lg rounded bg-[#58B310] text-white">Save</button>
 
                                         </div>
                                 </div>
                         </div>
-                        { show?<div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>
-            <Spinner className=''/>
+                        {show ? <div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>
+                                <Spinner className='' />
 
-            </div>:''}
+                        </div> : ''}
                 </div>
         </>)
 }

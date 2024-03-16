@@ -5,7 +5,7 @@ import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
 import { ReactComponent as Apple } from '../../Assets/Icons/apple.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from '../../helpers';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ const Login = () => {
             }
             else {
                 try {
-                    const res = await axios.post(`${BASE_URL_PRODUCTS}api/loginWithEmail`, {
+                    const res = await axios.post(`${BASE_URL}api/loginWithEmail`, {
                         email: user.email,
                         password: user.password,
                     })
@@ -70,7 +70,7 @@ const Login = () => {
             }
             else {
                 try {
-                    const res = await axios.post(`${BASE_URL_PRODUCTS}api/loginWithMobile`, {
+                    const res = await axios.post(`${BASE_URL}api/loginWithMobile`, {
                         mobile: user.mobile,
                         password: user.password,
                     })

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom"
-import { BASE_URL_PRODUCTS } from "../../Api/api"
+import { BASE_URL } from "../../Api/api"
 import { jwtDecode } from "jwt-decode"
 import Spinner from "../Spinner"
 import { ToastContainer, toast } from 'react-toastify';
@@ -32,7 +32,7 @@ export default function Editaddress(props) {
                         try {
                                 let token = jwtDecode(temp)
                                 let emaild = token.email;
-                                let url = `${BASE_URL_PRODUCTS}api/user/address/${address_id}?email=${emaild}`
+                                let url = `${BASE_URL}api/user/address/${address_id}?email=${emaild}`
 
                                 const data = await fetch(url)
                                 let response = await data.json()
@@ -71,7 +71,7 @@ export default function Editaddress(props) {
                                 });
                         }
                         else {
-                                let url = `${BASE_URL_PRODUCTS}api/updateaddress`
+                                let url = `${BASE_URL}api/updateaddress`
                                 let address1 = { address_id, address: { full_name, city, state, landmark, address_line_1, address_line_2, country, mobile, zip }, make_default }
 
                                 const data = await fetch(url, {

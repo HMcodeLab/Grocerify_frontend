@@ -100,3 +100,28 @@
 .banner2 span::after {
   content: "";
 }
+
+@media (max-width: 800px) {
+  .hero_carousel_main {
+    border: 1px solid red;
+    width: 100vw;
+    padding: 10px 10px !important;
+  }
+
+  .banner_main {
+    display: flex;
+    gap: 2%;
+    height: fit-content;
+  }
+  .banner_main > img {
+    width: 66%;
+    height: auto;
+    object-fit: cover;
+    /* border: 1px solid red; */
+  }
+  .hotdeals_main {
+    width: 32%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+  }
+}

@@ -11,12 +11,12 @@ module.exports = {
       },
     },
     screens: {
-      'xsm': { 'min': '300px', 'max': '720px' },
-      'sm': { 'min': '721px', 'max': '767px' },
-      'md': { 'min': '768px', 'max': '1023px' },
-      'lg': { 'min': '1024px', 'max': '1279px' },
-      'xl': { 'min': '1280px', 'max': '1535px' },
-      '2xl': { 'min': '1536px' },
+      'sm': { 'min': '320px', 'max': '720px' },
+      'md': { 'min': '721px', 'max': '1000px' },
+
+      'lg': { 'min': '1024px', 'max': '1500px' },
+      'xl': { 'min': '1501px', 'max': '1600px' },
+      '2xl': { 'min': '1601px' },
     },
   },
   plugins: [],

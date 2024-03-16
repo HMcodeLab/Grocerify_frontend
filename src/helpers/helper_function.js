@@ -20,7 +20,7 @@ export const cropString = (str, num) => {
         if (window.innerWidth > 700) {
             newstr = str.slice(0, num + 10);
         } else {
-            newstr = str.slice(0, num);
+            newstr = str.slice(0, num + 5);
         }
         console.log(newstr);
         const result = newstr.concat("...");

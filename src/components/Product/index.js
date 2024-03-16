@@ -8,7 +8,7 @@ import '@splidejs/react-splide/css';
 import './product.css'
 import { useEffect, useRef, useState, useContext } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 import { Link } from 'react-router-dom';
 import ReactImageMagnify from 'react-image-magnify';
 import ReactPlayer from 'react-player';
@@ -45,7 +45,7 @@ export default function Product() {
     useEffect(() => {
         async function Fetchdata() {
             try {
-                let url = BASE_URL_PRODUCTS + 'api/product/' + slug
+                let url = BASE_URL + 'api/product/' + slug
                 const data = await fetch(url)
                 const response = await data.json()
                 console.log(response)
@@ -85,7 +85,7 @@ export default function Product() {
     async function addToCart(storeid) {
         let id = Data._id;
         try {
-            let url = BASE_URL_PRODUCTS + 'api/addtocart'
+            let url = BASE_URL + 'api/addtocart'
             let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
             const data = await fetch(url, {
                 method: 'post',

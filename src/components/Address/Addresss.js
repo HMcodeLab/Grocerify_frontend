@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
-import { BASE_URL_PRODUCTS } from "../../Api/api";
+import { BASE_URL } from "../../Api/api";
 import Spinner from "../Spinner";
 
 export default function Addresses() {
@@ -12,7 +12,7 @@ export default function Addresses() {
     const [show, setshow] = useState(false)
 
     async function RemoveAddress(id) {
-        let url = BASE_URL_PRODUCTS + 'api/removeaddress'
+        let url = BASE_URL + 'api/removeaddress'
         // let address={}
         try {
             const data = await fetch(url, {
@@ -47,7 +47,7 @@ export default function Addresses() {
         async function Fetchdata() {
             setshow(true)
             try {
-                let url = BASE_URL_PRODUCTS + 'api/user?mobile=' + token.mobile
+                let url = BASE_URL + 'api/user?mobile=' + token.mobile
 
                 const data = await fetch(url)
                 const response = await data.json()

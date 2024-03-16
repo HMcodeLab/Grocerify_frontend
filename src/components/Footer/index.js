@@ -10,26 +10,27 @@ import { ReactComponent as Whatsapp } from '../../assests/Whatsapp.svg'
 import Mask from '../../Assets/Icons/Mask.svg'
 import WhatsappFooter from '../../Assets/Icons/whatsapp_footer.svg'
 import { Link } from 'react-router-dom'
+import './footer.css'
 export default function Footer() {
     return (<>
         <div className="h-fit w-full  bg-[#333333] text-white  pt-10 font ">
             <div className='flex justify-between mx-[5vw]'>
-                <div className='w-45'><img src='/logo.png' /></div>
+                <div className='w-45 sm:w-28'><img src='/logo.png' /></div>
                 <Link to={"whatsapp://send?phone=1234567890&text=Hello%2C%20I%20would%20like%20to%20chat"}>
-                    <img src={WhatsappFooter} alt="..." className='w-40 mr-10' />
+                    <img src={WhatsappFooter} alt="..." className='w-40 mr-10 sm:w-28 sm:mr-5' />
                 </Link>
             </div>
 
-            <div className='flex justify-between py-[3vh] mx-[5vw]'>
-                <div className="w-48">
+            <div className='lg:grid lg:grid-col-5 lg:justify-between py-[3vh] mx-[5vw] sm:grid sm:grid-cols-2 category '>
+                <div className="sm:hidden">
 
                     <div className='pt-2'>Discover endless possibilities with our one-stop shop for all your needs! Explore a world of endless options, where you can find everything you need in one place!</div>
                 </div>
 
-                <div className=" space-y-5  ">
+                <div className=" space-y-5 sm:space-y-4  ">
                     <div className="flex items-start space-x-2">
                         <Loc className='mt-1 text-[#c7eca9]' />
-                        <div className='text-[#FFFFFF] text-[16px] font max-w-60'>
+                        <div className='text-[#FFFFFF] text-[16px] font'>
                             ThemesGround ,789 main road anytown,CA 12345 USA
                         </div>
                     </div>
@@ -53,14 +54,14 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className=" text-[#FFFFFF] flex flex-col  space-y-4 ">
+                <div className=" text-[#FFFFFF] flex flex-col  space-y-4 sm:space-y-3 ">
                     <Link className='font' to={'/about'}>About Us</Link>
                     <Link className='font' to={'/contact_us'}>Contact Us</Link>
                     <Link className='font' to='/about#teams'>Our Team</Link>
 
                 </div>
 
-                <div className="text-[#FFFFFF] flex flex-col  space-y-4">
+                <div className="text-[#FFFFFF] flex flex-col  space-y-4 sm:space-y-3 sm:justify-start">
                     <Link to={'/products?category=Electronics'}> Electronics</Link>
                     <Link className='font' to={'/products?category=Grocery'}> Groceries</Link>
                     <Link className='font' to={'/products?category=Health and Beauty'}> Health & Beauty</Link>
@@ -70,7 +71,7 @@ export default function Footer() {
                     <Link className='font' to={'/stores'}> Stores</Link>
                 </div>
 
-                <div className="text-[#FFFFFF] flex flex-col   space-y-4 pl-5">
+                <div className="text-[#FFFFFF] flex flex-col   space-y-4 sm:space-y-3 pl-5">
 
                     <Link to={'/privacy_policy'} className='font'>Privacy Policy</Link>
                     <Link to={'/return_policy'} className='font'>Return Policy</Link>

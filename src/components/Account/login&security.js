@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import VerifyOTP from "../verifyOTP/verifyOTP"
-import { BASE_URL_PRODUCTS } from "../../Api/api"
+import { BASE_URL } from "../../Api/api"
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { FaCircleCheck } from "react-icons/fa6";
@@ -34,7 +34,7 @@ export default function LoginAndSecurity() {
             try {
                 let token = jwtDecode(temp)
                 let emaild = token.email;
-                let url = `${BASE_URL_PRODUCTS}api/user?email=${emaild}`
+                let url = `${BASE_URL}api/user?email=${emaild}`
 
                 const data = await fetch(url)
                 let response = await data.json()
@@ -70,8 +70,8 @@ export default function LoginAndSecurity() {
         setismobileVerified('loading')
 
         try {
-            // let url=`${BASE_URL_PRODUCTS}api/generateMobileOTP`
-            const res = await axios.post(`${BASE_URL_PRODUCTS}api/generateMobileOTP`, { mobile: Number(mobile) });
+            // let url=`${BASE_URL}api/generateMobileOTP`
+            const res = await axios.post(`${BASE_URL}api/generateMobileOTP`, { mobile: Number(mobile) });
             // console.log(res);
             if (res.status === 201) {
                 setshowOTPModal(true)
@@ -144,7 +144,7 @@ export default function LoginAndSecurity() {
 
                 // console.log(temp)
 
-                let url = `${BASE_URL_PRODUCTS}api/updateuser`
+                let url = `${BASE_URL}api/updateuser`
                 let address1 = { firstName, lastName, email, mobile }
                 //    console.log(address1);
                 //     console.log(stringifyObject(address1))

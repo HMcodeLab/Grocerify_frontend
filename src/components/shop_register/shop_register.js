@@ -4,7 +4,7 @@ import registerimage from '../../Assets/Images/registration.png'
 import Checkbox from '../Custom/checkbox';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 import CircularProgress from '@mui/joy/CircularProgress';
 
 const ShopRegistration = () => {
@@ -53,7 +53,7 @@ const ShopRegistration = () => {
         }
         else {
             try {
-                const res = await axios.post(`${BASE_URL_PRODUCTS}api/registerseller`, {
+                const res = await axios.post(`${BASE_URL}api/registerseller`, {
                     ...sellerDetails
                 })
                 // const response = await res.json();

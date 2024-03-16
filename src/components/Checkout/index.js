@@ -5,7 +5,7 @@ import { ReactComponent as Pay } from '../../assests/pay.svg'
 import { ReactComponent as Order } from '../../assests/order.svg'
 import { FaPlus } from "react-icons/fa6";
 import './checkout.css'
-import { BASE_URL_PRODUCTS } from '../../Api/api';
+import { BASE_URL } from '../../Api/api';
 import { Globalinfo } from '../../App';
 import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
@@ -39,6 +39,7 @@ export default function Checkout() {
         let temp = localStorage.getItem('CHECKOUT_DATA');
         temp = JSON.parse(temp);
         console.log(temp)
+
         setCheckoutData(temp)
 
     }, [localStorage.getItem('CHECKOUT_DATA')])
@@ -92,10 +93,16 @@ export default function Checkout() {
     }
 
     const createOrder = async (val) => {
+        let temp2 = [];
+        console.log(val)
+        val.forEach((val) => {
+            temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid });
+        })
         // console.log("value", val)
+        console.log(temp2)
         setbtnLoader(true)
         try {
-            const res = await axios.post(`${BASE_URL_PRODUCTS}api/order`,
+            const res = await axios.post(`${BASE_URL}api/order`,
                 {
                     "discount_coupon": {
                         "coupon_code": "NEW-100",
@@ -103,7 +110,7 @@ export default function Checkout() {
                     },
 
                     shipping_address: userDetail.address[selectedAddress],
-                    products: [...val]
+                    products: [...temp2]
 
                 }, {
                 headers: {

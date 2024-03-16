@@ -47,10 +47,10 @@ const Router = () => {
 
 
 
-            <BrowserRouter onUpdate={() => window.scrollTo(0, 0)}>
+            <BrowserRouter>
                 <ScrollToTop />
                 <Navbar />
-                <NavList />
+                {window.innerWidth > 800 && <NavList />}
                 <Routes>
                     <Route exact path={'/'} element={<Home />}>
 
@@ -124,7 +124,7 @@ const Router = () => {
                     <Route exact path={'/about'} element={<About />}>
 
                     </Route>
-                    <Route exact path={'/checkout'} element={<Checkout />}>
+                    <Route exact path={'/checkout'} element={localStorage.getItem('GROC_USER_TOKEN') ? <Checkout /> : <Login />}>
 
                     </Route>
                     <Route exact path={'/store/:id'} element={<StoreDetails />}>

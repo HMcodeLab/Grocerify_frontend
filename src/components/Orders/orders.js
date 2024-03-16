@@ -1,4 +1,4 @@
-import { BASE_URL_PRODUCTS } from '../../Api/api'
+import { BASE_URL } from '../../Api/api'
 import { ReactComponent as Down } from '../../assests/down.svg'
 import { useQuery, useIsFetching } from '@tanstack/react-query'
 import { formatDate } from '../../helpers/helper_function'
@@ -11,7 +11,7 @@ export default function Orders() {
     const { data: OrderData, isError } = useQuery({
         queryKey: ['orders'],
         queryFn: () =>
-            fetch(`${BASE_URL_PRODUCTS}api/getorders`, {
+            fetch(`${BASE_URL}api/getorders`, {
                 headers: {
                     'Authorization': ` Bearer ${localStorage.getItem('GROC_USER_TOKEN')}`
                 }

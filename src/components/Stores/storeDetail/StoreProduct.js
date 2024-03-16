@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL_PRODUCTS } from "../../../Api/api";
+import { BASE_URL } from "../../../Api/api";
 import Products from "../../Products/products";
 import { useParams } from 'react-router-dom';
 import Spinner from "../../Spinner";
 import { cropString } from "../../../helpers/helper_function";
+import Cards from "../../Cards/cards";
 
 const StoreProduct = () => {
   const params = useParams();
@@ -11,14 +12,14 @@ const StoreProduct = () => {
   const [loading, setLoading] = useState(true);
   const [searchvalue, setSearchValue] = useState('');
   const [shopProducts, setShopProducts] = useState([]);
-  // console.log(process.env.BASE_URL_PRODUCTS)
+  // console.log(process.env.BASE_URL)
 
 
 
   const fetchData = async () => {
 
     try {
-      const res = await fetch(`${BASE_URL_PRODUCTS}api/productsbystore?shop=${params.id}`);
+      const res = await fetch(`${BASE_URL}api/productsbystore?shop=${params.id}`);
       const response = await res.json();
       console.log(response.shop);
       setShopData(response.shop)
@@ -171,7 +172,8 @@ const StoreProduct = () => {
             shopProducts?.map((val, ind) => {
               return (
                 <>
-                  <div className="flex flex-col gap-2 p-4 hover:bg-[#F3F3F3] transform transition-transform duration-300 ease-in-out hover:scale-105">
+                  <Cards value={val} />
+                  {/* <div className="flex flex-col gap-2 p-4 hover:bg-[#F3F3F3] transform transition-transform duration-300 ease-in-out hover:scale-105">
                     <img src={val.product_primary_image_url} className="w-auto h-[140px] object-contain" />
                     <div className="flex flex-col text-[#848484]">
                       <div className="flex flex-row justify-between items-center">
@@ -187,7 +189,7 @@ const StoreProduct = () => {
                         ₹10,000
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </>
               )
             })
