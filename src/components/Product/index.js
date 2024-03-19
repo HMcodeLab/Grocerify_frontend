@@ -10,11 +10,13 @@ import { useEffect, useRef, useState, useContext } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { BASE_URL } from '../../Api/api';
 import { Link } from 'react-router-dom';
-import ReactImageMagnify from 'react-image-magnify';
+// import ReactImageMagnify from 'react-image-magnify';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import { Globalinfo } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import ProductImages from '../ProductImages/productCarousel';
+import axios from 'axios';
 
 
 export default function Product() {
@@ -22,9 +24,7 @@ export default function Product() {
 
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
     const params = useParams();
-    // console.log(params)
-    // console.log(window.location)
-    // console.log(props)
+
     const [image, setimage] = useState('/mobile.png')
     const [show, setshow] = useState('h-23')
     const [reportshow, setreportshow] = useState('hidden')
@@ -46,10 +46,11 @@ export default function Product() {
         async function Fetchdata() {
             try {
                 let url = BASE_URL + 'api/product/' + slug
-                const data = await fetch(url)
-                const response = await data.json()
+                const data = await axios.get(url)
+                const response = data.data;
                 console.log(response)
-                price = response[0].stores[0].variants1_mrp_price - (response[0].stores[0].variants1_mrp_price * (response[0].stores[0]["variants1_discount%"] / 100))
+
+                price = response[0].stores[0].variants1_mrp_price - (response[0]?.stores[0]?.variants1_mrp_price * (response[0].stores[0]?.variants1_discount_per / 100))
                 setstore(response[0].stores)
                 setactualprice(price)
                 setimage(response[0].product_primary_image_url)
@@ -67,7 +68,7 @@ export default function Product() {
         }
 
         Fetchdata()
-    }, [primaryRef, secondaryRef])
+    }, [primaryRef.current, secondaryRef.current])
 
     function Showmore() {
         // console.log('hello')
@@ -113,101 +114,21 @@ export default function Product() {
     }
 
 
-
+    // console.log(Data)
 
     return (<>
         {/* <Extra /> */}
 
         <div className="flex  pb-5  justify-center px-16">
-            <div className="w-1/2    ">
+            <div className="w-[55%]    ">
                 <div className="flex  border-r-2 border-b-2 py-5 pr-4 h-[519px] ">
-                    <div className=" w-1/4 space-y-3 ">
-                        <Splide className='h-full'
-                            ref={(slider) => (primaryRef.current = slider)}
-                            options={{
-                                pagination: false,
-                                isNavigation: true,
-                                autoWidth: true,
-                                perPage: 4,
-                                // gap: "10px",
-                                direction: "ttb",
-                                height: "100%",
-                            }}
-                        >
-                            {
-                                // console.log(Data.product_images_url)
-                                images.map((item, index) => {
-                                    // console.log(item)
-                                    return (<>
-                                        <SplideSlide key={index}>
-                                            <div className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3] mb-2">
-                                                <img className='h-[80px]  mix-blend-multiply' src={item} />
-                                            </div>
-                                        </SplideSlide>
-                                    </>)
-                                })
-                            }
+                    <ProductImages
+                        data={Data?.product_images_url?.map(
+                            (val) => val
+                        )}
 
+                    />
 
-                            <SplideSlide >
-                                <div className="w-32 h-24 flex justify-center items-center bg-[#f3f3f3] mb-2">
-                                    <ReactPlayer playing={false} muted height={70} width={150} url={video} />
-                                </div>
-                            </SplideSlide>
-                        </Splide>
-
-                    </div>
-                    <div className="w-3/4  bg-[#f3f3f3] flex justify-center items-center max-h-full mix-blend-multiply">
-
-                        <Splide
-                            ref={(slider) => (secondaryRef.current = slider)}
-                            options={{
-                                perPage: 1,
-                                pagination: false,
-                                arrows: false,
-                                width: "100%",
-                            }}
-                        >
-                            {/* <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
-                                <img className='max-h-full mix-blend-multiply max-w-full' src={image} />
-                            </SplideSlide> */}
-                            {
-                                images.map((item, ind) => {
-                                    // console.log()
-                                    return (<>
-                                        <SplideSlide id={`#${item}`} className='flex justify-center items-center bg-[#f3f3f3]' key={ind}>
-                                            <ReactImageMagnify
-                                                {...{
-                                                    smallImage: {
-                                                        alt: "Wristwatch by Ted Baker London",
-                                                        isFluidWidth: true,
-                                                        src: item,
-                                                        borderRadius: 15,
-                                                        objectFit: "cover",
-                                                        // height:"45vh"
-                                                    },
-                                                    largeImage: {
-                                                        src: item,
-                                                        width: 500,
-                                                        borderRadius: 15,
-                                                        height: 600,
-                                                        objectFit: "cover",
-                                                    },
-                                                    enlargedImagePosition: "over"
-                                                }}
-                                            />
-
-                                        </SplideSlide>
-                                    </>)
-
-                                })
-                            }
-                            <SplideSlide className='flex justify-center items-center  bg-[#f3f3f3]'>
-                                <ReactPlayer loop controls={false} url={video} />
-                            </SplideSlide>
-                        </Splide>
-
-                    </div>
                 </div>
 
                 <div className='text-[#848484] text-[20px] space-y-2 mt-2 fontmont'>
@@ -352,7 +273,7 @@ export default function Product() {
 
 
             </div>
-            <div className='w-1/2 pl-8 pt-4'>
+            <div className='w-[45%] pl-8 pt-4'>
                 <div className='text-[#848484] text-[20px] fontgo'>Nearest Stores</div>
                 <div className='w-full space-y-5'>
 
@@ -363,7 +284,8 @@ export default function Product() {
                                 <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4'>
                                     <div className=' flex items-center justify-center relative'>
                                         <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                            <div className='text-[10px]'>100%</div>
+                                            <div className='text-[10px]'>{item?.
+                                                variants1_discount_per}%</div>
                                             <div className='text-[8px]'>off</div>
                                         </div>
                                         <img className='max-h-52 max-w-32' src={item.shop_primary_image_url} />
