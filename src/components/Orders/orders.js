@@ -23,7 +23,7 @@ export default function Orders() {
     })
 
     if (isFetching) {
-        return <Spinner />
+        return <div style={{ backgroundColor: "white", opacity: "0.95", position: "fixed", height: "100vh", width: "100%", top: "0px", left: "0px", zIndex: "999" }}> <Spinner /></div>
     }
     if (isError) {
         return <h2>Some Error Occured whle Fetching</h2>
@@ -35,14 +35,14 @@ export default function Orders() {
     return (<>
 
 
-        <div className=''>
+        <div className='my-4'>
             <div className='flex space-x-4 text-[#848484] text-[16px] mt-4'>
-                <div>1 order placed in</div>
+                {/* <div>1 order placed in</div>
                 <select className='bg-[#F3F3F3] outline-none px-2'>
                     <option>Past 1 months</option>
                     <option>Past 3 months</option>
                     <option>Past 6 months</option>
-                </select>
+                </select> */}
             </div>
 
             {OrderData?.orders.map((val, ind) => {
@@ -60,16 +60,16 @@ export default function Orders() {
                                         <div className="">Rs. {val.order_price}</div>
                                     </div>
                                     <div className="flex flex-col">
-                                        <div className="">Ship To</div>
+                                        <div className="">Shipped To</div>
                                         <div className="">{val.shipping_address.full_name}</div>
                                     </div>
                                 </div>
 
                                 <div className="flex flex-col ">
-                                    <div>Order #16273536</div>
+                                    <div> #{val.order_id}</div>
                                     <div className="flex space-x-5">
-                                        <div>View Order Details</div>
-                                        <div className='flex items-center'>Inovoice <Down className='ml-1' /></div>
+                                        {/* <div>View Order Details</div> */}
+                                        {/* <div className='flex items-center'>Inovoice <Down className='ml-1' /></div> */}
                                     </div>
                                 </div>
                             </div>
@@ -77,24 +77,24 @@ export default function Orders() {
                             <div className='flex justify-between items-center px-3 fontmons pt-3 text-[#848484]'>
                                 <div className='flex items-center'>
                                     <div className='flex flex-col'>
-                                        <div className='text-[20px]'>Arriving Today</div>
-                                        <div className='text-[14px]'>Not Yet Dispatched</div>
+                                        {/* <div className='text-[20px]'>Arriving Today</div> */}
+                                        <div className='text-[14px]'>{val.status}</div>
                                         <div className='h-36 w-36 flex justify-center items-center '>
                                             <img className='h-[70px] w-auto' src={val.product.product_primary_image_url} />
                                         </div>
                                     </div>
-                                    <div className='fontgob text-[14px]'>{val.product.products_title}</div>
+                                    <div className='fontgob text-[14px] w-[50vw]'>{val.product.products_title}</div>
                                 </div>
 
                                 <div className='flex flex-col space-y-10'>
-                                    <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button>
-                                    <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Edit Order</button>
+                                    {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
+                                    <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded'>Cancel Order</button>
                                 </div>
                             </div>
                         </div>
-                        <div className='w-full fontmons bg-[#D9D9D9] py-3 pl-3 rounded-b-xl'>
+                        {/* <div className='w-full fontmons bg-[#D9D9D9] py-3 pl-3 rounded-b-xl'>
                             <button className='text-[#58B310]'>Archieve Order</button>
-                        </div>
+                        </div> */}
                     </>
                 )
             })}

@@ -90,7 +90,7 @@
 }
 .inputs h6 {
   position: absolute;
-  bottom: -15px;
+  bottom: -20px;
   right: 0px;
   font-size: 0.85rem;
   font-weight: 400;
@@ -112,7 +112,7 @@
 }
 
 .action_button {
-  margin-block: 3vh 0vh;
+  margin-block: 5vh 0vh;
   display: flex;
   flex-direction: column;
   gap: 2vh;

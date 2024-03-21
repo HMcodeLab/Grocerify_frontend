@@ -7,6 +7,7 @@ import Products from '../Products/products';
 import { newProducts, TopRatedProducts } from '../../Data/db';
 import { ReactComponent as Dropdown } from '../../Assets/Icons/dropdown.svg'
 import { ReactComponent as Hotdeals } from '../../Assets/Icons/hotdeals.svg'
+import { ReactComponent as St } from '../../Assets/Icons/star.svg'
 import banner3 from '../../Assets/Images/banner3.png'
 import serum from '../../Assets/Images/products/serum.png'
 import makeup from '../../Assets/Images/products/makeup2.png'
@@ -76,7 +77,12 @@ const MainContent = () => {
 
             </div>
             <div className={styles.banner_main}>
-                <img src={banner3} alt="banner not found" />
+                <div className='w-[70%] sm:w-full sm:h-[200px]'>
+                    <img className='w-full h-full' src={banner3} alt="banner not found" />
+                    <div className='relative bottom-[50%] translate-y-[-50%] w-[35%] left-[7%] sm:w-[55%]'>
+                        <p className='font-Gorditas  text-white text-[30px] sm:text-[20px] '>Get  ready to slay with our Stunning Makeup Collection!!</p>
+                    </div>
+                </div>
                 <div className={styles.hotdeals_main}>
                     <span className={styles.heading}>
                         <span>
@@ -87,8 +93,9 @@ const MainContent = () => {
 
 
                     </span>
-                    <div >
+                    <div className='h-[88%]'>
                         <Splide
+                            className='h-[100%]'
                             options={{
                                 type: "loop",
                                 perPage: 1,
@@ -106,23 +113,30 @@ const MainContent = () => {
 
                             }}
                         >
-                            <SplideSlide >
+                            <SplideSlide className='h-full'>
                                 <div className={styles.product_card}>
-                                    <div className={styles.tag}>New</div>
-                                    <img src={serum} alt="" />
                                     <div className={styles.details}>
                                         <h5>KDRFF Hair Serum</h5>
 
                                     </div>
+                                    <div>
+                                        <div className={styles.tag}>New</div>
+                                        <img className='' src={serum} alt="" />
+                                    </div>
                                 </div>
                             </SplideSlide>
-                            <SplideSlide >
+                            <SplideSlide className='h-full'>
                                 <div className={styles.product_card}>
-                                    <div className={styles.tag}>New</div>
-                                    <img src={makeup} alt="" />
                                     <div className={styles.details}>
                                         <h5>KDRFF Hair Serum</h5>
 
+                                    </div>
+                                    <div>
+                                        <div className={styles.tag}>New</div>
+                                        <img className='' src={serum} alt="" />
+                                        <div className='flex'>
+                                            {/* <img src='../../Assets/Icons/star.svg'/> */}
+                                        </div>
                                     </div>
                                 </div>
                             </SplideSlide>

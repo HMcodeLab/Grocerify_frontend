@@ -46,7 +46,7 @@ const Sidebar = (category) => {
 
 
     return (
-        <div className={styles.main_sidebar} style={{ height: "fit-content" }}>
+        <div className={styles.main_sidebar} >
             <div className={styles.categories_main}>
                 <span className={styles.heading} onClick={() => { isDropdownOpen === 1 ? setIsDropdownOpen(null) : setIsDropdownOpen(1) }}>
                     <span>

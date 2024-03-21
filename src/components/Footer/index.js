@@ -29,7 +29,7 @@ export default function Footer() {
 
                 <div className=" space-y-5 sm:space-y-4  ">
                     <div className="flex items-start space-x-2">
-                        <Loc className='mt-1 text-[#c7eca9]' />
+                        <Loc className='mt-1 text-[#c7eca9] w-[23px] h-[23px]' />
                         <div className='text-[#FFFFFF] text-[16px] font'>
                             ThemesGround ,789 main road anytown,CA 12345 USA
                         </div>
@@ -79,8 +79,8 @@ export default function Footer() {
                     <Link to={'/terms'} className='font'>Terms Of Service</Link>
                     <Link className='font' to={'/faq'}>FAQ</Link>
                     <Link to={'/account/ctons'} className='font'>Coupons</Link>
-                    <Link to={'/shop_registration'} className='flex space-x-2 justify-self-start'>
-                        <img src={Mask} alt="" /> <h4>PARTNER WITH US</h4> </Link>
+                    <Link to={'/shop_registration'} className='flex space-x-2 justify-self-start items-center'>
+                        <img className='w-[23px] ' src={Mask} alt="" /> <h4>PARTNER WITH US</h4> </Link>
                 </div>
 
 

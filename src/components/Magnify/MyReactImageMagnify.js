@@ -21,7 +21,7 @@ const MyReactImageMagnify = ({ props, img }) => {
 
         // imgRef?.current!.style.transform = `scale(2) translate(calc(${-percentX / 2}%), ${-percentY / 2}%)`;
         if (imgRef && imgRef.current) {
-            imgRef.current.style.transform = `scale(2) translate(calc(${-percentX / 2}%), ${-percentY / 2}%)`;
+            imgRef.current.style.transform = `scale(1.7) translate(calc(${-percentX / 2}%), ${-percentY / 2}%)`;
         }
 
 

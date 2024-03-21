@@ -141,12 +141,12 @@ export default function Addtocart() {
     }
 
     return (<>
-        <div className="w-full px-14 text-[#848484] space-y-4 py-5">
+        <div className="w-full px-14 text-[#848484] space-y-4 py-5 sm:px-4">
             <div className="text-[24px] fontcart">YOUR CART ({cartData?.length} Items)</div>
             <div className='h-[2px] w-full bg-[#848484] '></div>
-            <div className='flex justify-between '>
+            <div className='flex justify-between sm:flex-col'>
 
-                <div className="leftside w-3/5    space-y-5">
+                <div className="leftside w-3/5  sm:w-full  space-y-5">
 
                     {
                         cartData.map((item) => {
@@ -157,7 +157,7 @@ export default function Addtocart() {
                                 var price = item?.product?.stores[0]?.variants1_mrp_price - (item?.product?.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100))
                             }
                             return (<>
-                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center '>
+                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center sm:flex-col sm:w-full '>
                                     <div className='w-28 h-28  flex justify-center items-center '>
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item?.product?.product_primary_image_url} />
                                     </div>
@@ -182,7 +182,7 @@ export default function Addtocart() {
                     }
 
                 </div>
-                <div className='ordersummery w-[30%] bg-[#FAFAF5] rounded-lg border px-4 space-y-3 py-4 h-fit'>
+                <div className='ordersummery w-[30%] bg-[#FAFAF5] rounded-lg border px-4 space-y-3 py-4 h-fit sm:w-full sm:mt-4'>
                     <div className='fontcart font-bold'>Order Summery</div>
                     <div className='flex justify-between fontorder'>
                         <div>Subtotal</div>

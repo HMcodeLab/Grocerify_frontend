@@ -9,13 +9,13 @@
 .category {
   /* border: 1px solid red; */
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
   gap: 2rem;
   /* padding-right: 5rem; */
   /* font-size: 0.9rem; */
 }
 .category > div {
-  align-items: center;
+  /* align-items: center; */
 }
 
 @media (max-width: 800px) {

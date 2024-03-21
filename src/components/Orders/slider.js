@@ -3,7 +3,7 @@ import '@splidejs/react-splide/css';
 export default function Slider() {
   return (<>
     <div className='my-4'>
-      <div className='text-[32px] fontgobs text-[#848484] '>Your Browsing History</div>
+      <div className='text-[32px] fontgobs text-[#848484] sm:text-[24px] '>Your Browsing History</div>
       <Splide
 
         options={{

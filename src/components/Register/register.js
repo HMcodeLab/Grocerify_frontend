@@ -156,15 +156,15 @@ const Register = () => {
                                 <button>{btnLoader ? <CircularProgress size="sm" color="success" /> : "Sign Up"}</button>
                             </div>
                             {/* Login options */}
-                            <div className={styles.login_options}>
+                            {/* <div className={styles.login_options}>
                                 <p>sign in With</p>
-                                {/* Social media login buttons */}
+                                
                                 <div className={styles.btn_group}>
                                     <span><Facebook /></span>
                                     <span><Google /></span>
                                     <span><Apple /></span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

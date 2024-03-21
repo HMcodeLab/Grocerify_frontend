@@ -10,7 +10,8 @@
 .cards-extra {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  justify-content: center;
+  /* justify-content: center; */
+  padding: 15px 15px;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
@@ -39,6 +40,7 @@
   align-items: center;
   justify-content: center;
   padding-left: 25px;
+  /* justify-content: center; */
 }
 
 .title {
@@ -79,5 +81,14 @@
       1,
       1fr
     ); /* Two cards in one row for smaller screens */
+  }
+}
+@media (min-width: 320px) and (max-width: 500px) {
+  .cards-extra {
+    margin: 18px !important;
+    gap: 15px;
+  }
+  .card-extra {
+    height: 160px;
   }
 }

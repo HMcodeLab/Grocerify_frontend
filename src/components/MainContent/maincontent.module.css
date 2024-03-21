@@ -28,6 +28,7 @@
 .banner_main {
   display: flex;
   gap: 2%;
+  height: 270px;
 }
 .banner_main > img {
   width: 66%;
@@ -40,42 +41,56 @@
 }
 .heading span {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 .heading h3 {
   font-size: 1rem;
   font-family: var(--second-font);
   color: var(--font-color-second);
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 .product_card {
-  position: relative;
-  display: grid;
-  place-items: center;
+  /* position: relative; */
+  /* display: grid; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  /* place-items: center; */
   /* border: 1px solid red; */
+  /* height: 260px; */
 }
+
+.product_card img {
+  width: max-content;
+  transform: translate(-70px, -21px);
+}
+
 .tag {
   background-color: #fec0c1;
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  position: relative;
+  /* top: 10px; */
+  left: 120px;
   border-radius: 100%;
   height: 50px;
   width: 50px;
   display: grid;
   place-items: center;
   color: var(--body);
+  font-family: Gorditas;
 }
 
 .details {
-  position: absolute;
+  /* position: absolute; */
   /* border: 1px solid red; */
   width: 40%;
   left: 10px;
 }
 .details h5 {
   color: var(--primary);
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-family: Gorditas;
+  font-weight: 600;
 }
 
 .banner2 {
@@ -103,7 +118,7 @@
 
 @media (max-width: 800px) {
   .hero_carousel_main {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 100vw;
     padding: 10px 10px !important;
   }
@@ -123,5 +138,11 @@
     width: 32%;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 10px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .hotdeals_main {
+    display: none;
   }
 }

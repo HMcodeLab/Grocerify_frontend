@@ -135,7 +135,7 @@ const Login = () => {
                         <div className={styles.action_button}>
                             {/* Sign in button */}
                             <div className={styles.submit}>
-                                <button onClick={handleLogin}>{btnLoader ? <CircularProgress size="sm" color="success" /> : "Sign Up"}</button>
+                                <button onClick={handleLogin}>{btnLoader ? <CircularProgress size="sm" color="success" /> : "Login"}</button>
                             </div>
                             {/* Login options */}
                             <div className={styles.login_options}>
@@ -145,11 +145,11 @@ const Login = () => {
                                     <Link to={'/register'}>  <h5>Sign Up</h5></Link>
                                 </span>
                                 {/* Social media login buttons */}
-                                <div className={styles.btn_group}>
+                                {/* <div className={styles.btn_group}>
                                     <span><Facebook /></span>
                                     <span><Google /></span>
                                     <span><Apple /></span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

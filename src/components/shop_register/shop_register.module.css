@@ -129,3 +129,11 @@
   color: white;
   font-weight: 500;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .form_main {
+    top: 20%;
+    right: 5%;
+    width: 90%;
+  }
+}

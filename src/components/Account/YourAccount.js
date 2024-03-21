@@ -22,13 +22,13 @@ const YourAccount = () => {
   return (
     <div className="main-div">
       <div className="heading">
-        <h1 >YOUR ACCOUNT</h1>
+        <h1 className="sm:text-[26px] " >YOUR ACCOUNT</h1>
         <button className="log_out" onClick={handleLogOut}>
           Log Out
         </button>
       </div>
       <div className="cards">
-        <Link to={'/account/myOrders'}>
+        <Link className="w-full" to={'/account/myOrders'}>
           <div className="cd">
             <div className="image">
               <img
@@ -43,7 +43,7 @@ const YourAccount = () => {
           </div>
         </Link>
         {/* </Link> */}
-        <Link to={'/account/your_information'}>
+        <Link className="w-full" to={'/account/your_information'}>
           <div className="cd">
             <div className="image">
               <img
@@ -57,7 +57,7 @@ const YourAccount = () => {
             </div>
           </div>
         </Link>
-        <Link to={'/account/address'}>
+        <Link className="w-full" to={'/account/address'}>
           <div className="cd">
             <div className="image">
               <img
@@ -71,18 +71,18 @@ const YourAccount = () => {
             </div>
           </div>
         </Link>
-        <Link to={'/contact_us'}>
+        <Link className="w-full" to={'/contact_us'}>
           <div className="cd">
             <div className="image">
               <img src="../assests/icons/contact.svg" alt="Order" />
             </div>
             <div className="cd-body">
               <h5 className="cd-title">Contact Us</h5>
-              <p className="cd-text"></p>
+              {/* <p className="cd-text"></p> */}
             </div>
           </div>
         </Link>
-        <Link to={'/account/payment'}>
+        <Link className="w-full" to={'/account/payment'}>
           <div className="cd">
             <div className="image">
               <img src="../assests/icons/Mask group.svg" alt="Order" />
@@ -93,18 +93,18 @@ const YourAccount = () => {
             </div>
           </div>
         </Link>
-        <Link to={'/account/coupons'}>
+        <Link className="w-full" to={'/account/coupons'}>
           <div className="cd">
             <div className="image">
               <img src="../assests/icons/ph_gift.svg" alt="Order" />
             </div>
             <div className="cd-body">
               <h5 className="cd-title">COUPON</h5>
-              <p className="cd-text"></p>
+              {/* <p className="cd-text"></p> */}
             </div>
           </div>
         </Link>
-        <Link to={'/shop_registration'}>
+        <Link className="w-full" to={'/shop_registration'}>
           <div className="cd" style={{ border: "2px dashed #d9d9d9" }}>
             <div className="image">
               <img src="../assests/icons/addstore.svg" alt="Order" />

@@ -9,12 +9,12 @@ function Account() {
     height: '1px',
     backgroundColor: '#58B310',
     border: 'none',
-    marginTop: '70px',
+    marginTop: '40px',
     marginLeft: "5%",
     position: 'relative',
   };
 
-  return <div style={{ paddingBlock: "7vh" }}>
+  return <div className="sm:pb-5" style={{ paddingTop: "7vh", paddingBottom: "7vh" }}>
     <YourAccount />
     <hr style={hrStyle} />
     <Cards />
