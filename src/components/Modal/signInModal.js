@@ -141,7 +141,7 @@ const SignINModal = ({ setOpen }) => {
                                 <input type="password" placeholder="Enter Your Password" name="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} />
                             </div>
                             {/* Forgot password link */}
-                            <h6>Forgot password?</h6>
+                            {/* <h6>Forgot password?</h6> */}
                         </div>
                         {/* Action buttons */}
                         <div className={styles.action_button}>

@@ -137,7 +137,7 @@ const Router = () => {
 
                     </Route>
                 </Routes>
-                <ChatBot />
+                {/* <ChatBot /> */}
                 <Footer />
             </BrowserRouter >
         </div >

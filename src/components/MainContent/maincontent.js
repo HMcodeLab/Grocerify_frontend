@@ -67,11 +67,11 @@ const MainContent = () => {
             <div className={`${styles.newProducts_main} ${styles.products_main}`}>
                 <div className={`${styles.newProducts_top} ${styles.products_top}`}>
                     <h1>New Products</h1>
-                    <span>
+                    {/* <span>
                         <h5>Show More </h5>
                         <Dropdown />
 
-                    </span>
+                    </span> */}
                 </div>
                 <Products data={productData.filter((val, id) => (id >= 2 && id <= 6))} />
 
@@ -150,11 +150,11 @@ const MainContent = () => {
             <div className={`${styles.featured_main} ${styles.products_main}`}>
                 <div className={`${styles.featured_top} ${styles.products_top}`}>
                     <h1>Featured Products</h1>
-                    <span>
+                    {/* <span>
                         <h5>Show More </h5>
                         <Dropdown />
 
-                    </span>
+                    </span> */}
                 </div>
                 <Products data={productData.filter((val, id) => id <= 4)} />
 
@@ -169,11 +169,11 @@ const MainContent = () => {
             <div className={`${styles.featured_main} ${styles.products_main}`}>
                 <div className={`${styles.featured_top} ${styles.products_top}`}>
                     <h1>Top Rated Products</h1>
-                    <span>
+                    {/* <span>
                         <h5>Show More </h5>
                         <Dropdown />
 
-                    </span>
+                    </span> */}
                 </div>
                 <Products data={productData} />
 
@@ -189,9 +189,9 @@ const MainContent = () => {
                         </span>
                         Stores Near Me
                     </p>
-                    <p className="flex flex-row">
+                    {/* <p className="flex flex-row">
                         Show More <span className="">&#9660;</span>
-                    </p>
+                    </p> */}
                 </div>
                 <div>
                     <img
@@ -205,9 +205,9 @@ const MainContent = () => {
             <div className="bg-[#FFFFFF]">
                 <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
                     <p>Rating</p>
-                    <p>
+                    {/* <p>
                         Show More <span className="cursor-pointer">&#9660;</span>
-                    </p>
+                    </p> */}
                 </div>
 
                 <div className="grid grid-cols-3 sm:grid sm:grid-cols-2 sm:justify-between">

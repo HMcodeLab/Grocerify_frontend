@@ -13,8 +13,10 @@ import { Globalinfo } from '../../App'
 import axios from 'axios'
 import { BASE_URL } from '../../Api/api'
 import { cropString } from '../../helpers/helper_function'
+import BottomNav from '../BottomNav/bottomnav'
 
 const Navbar = () => {
+
     const [location, setLocation] = useState("");
     const [token, settoken] = useState('')
     const [searchInput, setSearchInput] = useState('');
@@ -113,7 +115,6 @@ const Navbar = () => {
 
     }, [searchInput]);
 
-    // console.log(location)
 
     return (
         <div className={`${styles.nav_main}`}>
@@ -170,6 +171,12 @@ const Navbar = () => {
                     </span> </Link>}
                 </div>
             </div>
+            {window.innerWidth < 600 && (
+                <div className={styles.bottomnav}>
+                    {" "}
+                    <BottomNav />
+                </div>
+            )}
         </div >
     )
 }

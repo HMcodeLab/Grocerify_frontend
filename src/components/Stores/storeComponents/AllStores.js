@@ -7,9 +7,9 @@ const AllStores = () => {
     <div className="store1">
       <div className="store1-text">
         <h3>FEATURED STORE</h3>
-        <h4>
+        {/* <h4>
           Show More <span className="arrow-down-icon">&#9660;</span>
-        </h4>
+        </h4> */}
       </div>
       <div className="img-featured">
         <div className="img-featured-overlay">

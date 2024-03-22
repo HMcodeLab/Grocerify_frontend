@@ -43,15 +43,7 @@ export default function LoginAndSecurity() {
                 setlastName(response.data.lastName)
                 setmobile(response.data.mobile)
                 console.log(response)
-                //   setcity(response.data.city)
-                //   setcountry(response.data.country)
-                //   setstate(response.data.state)
-                //   setfull_name(response.data.full_name)
-                //   setmobile(response.data.mobile)
-                //   setlandmark(response.data.landmark)
-                //   setzip(response.data.zip)
-                //   setaddress_line_1(response.data.address_line_1)
-                //   setaddress_line_2(response.data.address_line_2)
+
 
             } catch (error) {
                 console.log("dfdsf" + error)

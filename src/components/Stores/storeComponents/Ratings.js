@@ -6,9 +6,9 @@ const Ratings = () => {
     <div className="rating">
       <div className="rating-text">
         <h3>Rating</h3>
-        <h4>
+        {/* <h4>
           Show More <span className="arrow-down-icon">&#9660;</span>
-        </h4>
+        </h4> */}
       </div>
       <div className="img-rating">
         <div className="ratingimg">

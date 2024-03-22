@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'Gorditas': ['Gorditas'],
+        'Gorditas': ['Poppins'],
         'Montserrat': ['Montserrat', 'sans-serif'],
         'Inter': ['Inter', 'sans-serif'],
       },

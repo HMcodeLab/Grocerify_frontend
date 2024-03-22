@@ -21,9 +21,9 @@ const NearMe = () => {
           </span>
           Stores Near Me
         </h3>
-        <h4>
+        {/* <h4>
           Show More <span className="arrow-down-icon">&#9660;</span>
-        </h4>
+        </h4> */}
       </div>
 
       <div style={{ height: '70vh', width: '100%' }}>

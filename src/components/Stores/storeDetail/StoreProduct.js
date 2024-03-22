@@ -204,9 +204,9 @@ const StoreProduct = () => {
         <div className="bg-[#FFFFFF] flex flex-col gap-2">
           <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
             <p className="font-Gorditas text-[20px]">Rating</p>
-            <p className="font-Gorditas text-[20px]">
+            {/* <p className="font-Gorditas text-[20px]">
               Show More <span className="cursor-pointer">&#9660;</span>
-            </p>
+            </p> */}
           </div>
 
           <div className="grid grid-cols-3 gap-4">

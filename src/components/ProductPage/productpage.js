@@ -100,11 +100,11 @@ const ProductPage = (props) => {
                 <div className={`${styles.newProducts_main} ${styles.products_main}`}>
                     <div className={`${styles.newProducts_top} ${styles.products_top}`}>
                         <h1>New Products</h1>
-                        <span>
+                        {/* <span>
                             <h5>Show More </h5>
                             <Dropdown />
 
-                        </span>
+                        </span> */}
                     </div>
                     <Products data={categoryData} />
 

@@ -389,9 +389,9 @@ const FeaturedStore = () => {
                         <div className="bg-[#FFFFFF]">
                             <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
                                 <p>Rating</p>
-                                <p>
+                                {/* <p>
                                     Show More <span className="cursor-pointer">&#9660;</span>
-                                </p>
+                                </p> */}
                             </div>
 
                             <div className="grid grid-cols-3">

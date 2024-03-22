@@ -88,7 +88,7 @@ export default function Orders() {
 
                                 <div className='flex flex-col space-y-10'>
                                     {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
-                                    <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded'>Cancel Order</button>
+                                    {(val.status != "delivered" || val.status != "ordered") && <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded'>Cancel Order</button>}
                                 </div>
                             </div>
                         </div>
