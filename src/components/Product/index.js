@@ -10,11 +10,10 @@ import { useEffect, useRef, useState, useContext } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { BASE_URL } from '../../Api/api';
 import { Link } from 'react-router-dom';
-// import ReactImageMagnify from 'react-image-magnify';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { useParams } from 'react-router-dom';
 import { Globalinfo } from '../../App';
-import { useNavigate } from 'react-router-dom';
 import ProductImages from '../ProductImages/productCarousel';
 import axios from 'axios';
 
@@ -84,21 +83,29 @@ export default function Product() {
     }
 
     async function addToCart(storeid) {
-        let id = Data._id;
-        try {
-            let url = BASE_URL + 'api/addtocart'
-            let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
-            const data = await fetch(url, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(bodydata)
-            });
-            GetCart()
-            toast.success('Added To Cart')
-        } catch (error) {
-            console.log(error)
-            toast.error('Error Adding To Cart');
+
+        if (localStorage.getItem('GROC_USER_TOKEN')) {
+            let id = Data._id;
+            try {
+                let url = BASE_URL + 'api/addtocart'
+                let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
+                const data = await fetch(url, {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bodydata)
+                });
+                GetCart()
+                toast.success('Added To Cart')
+            } catch (error) {
+                console.log(error)
+                toast.error('Error Adding To Cart');
+            }
         }
+        else {
+            navigate('/login')
+        }
+
+
 
 
     }

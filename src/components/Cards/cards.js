@@ -11,10 +11,11 @@ import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { cropString } from '../../helpers/helper_function'
 import { RWebShare } from 'react-web-share';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Cards = (value) => {
     const location = useLocation()
+    const navigate = useNavigate()
     // console.log(location)
     // console.log(window.location.origin)
     // console.log(navigate)
@@ -149,14 +150,29 @@ const Cards = (value) => {
     const handleClickAction = (e) => {
         console.log(e.target.name)
         if (e.target.name === 'basket-outline') {
+
+            if (localStorage.getItem('GROC_USER_TOKEN')) {
+
+                Addtocart(value?.value?._id, value?.value?.stores[0].store);
+            }
+            else {
+                navigate('/login')
+            }
+
             // console.log('first')
-            Addtocart(value?.value?._id, value?.value?.stores[0].store);
 
         }
         if (e.target.name === 'Heart-outline') {
-            console.log('first')
-            console.log(value?.value)
-            AddtoWishlist(value?.value?._id, value?.value?.stores[0].store)
+            if (localStorage.getItem('GROC_USER_TOKEN')) {
+
+                AddtoWishlist(value?.value?._id, value?.value?.stores[0].store)
+            }
+            else {
+                navigate('/login')
+            }
+
+
+
 
         }
 

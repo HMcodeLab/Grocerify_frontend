@@ -53,7 +53,7 @@ export default function Checkout() {
 
             try {
                 const final = checkoutData;
-                console.log(final)
+                // console.log(final)
                 let subttotal_amount = 0
                 let total_items = 0
                 let original_price = 0;
@@ -130,15 +130,49 @@ export default function Checkout() {
     const handleOrder = async () => {
 
         if (paymentType === 'cod') {
-
-
-
             createOrder(checkoutData);
         }
         else {
-            toast.error("Only COD is available right Now");
+            loadRazorpay()
         }
     }
+    const loadRazorpay = () => {
+        if (!paymentType) {
+            toast.error("Select Payment Type");
+        } else {
+            const script = document.createElement('script');
+            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+            script.async = true;
+            document.body.appendChild(script);
+            script.onload = () => {
+                const options = {
+                    // key: 'rzp_test_ovrL1ExhTWhDv2',
+                    key: 'rzp_test_jmLsdK6FoWIRSe',
+                    amount: subtotal * 100, // Amount in paisa
+                    currency: 'INR',
+                    name: 'Hoping minds',
+                    description: 'Product description',
+                    image: '',
+                    handler: function (response) {
+                        createOrder(checkoutData)
+                        // router.push('/profile?tab=booking-history')
+                        // Handle success
+                        // alert(response.razorpay_payment_id);
+                    },
+                    prefill: {
+                        name: 'Customer Name',
+                        email: 'customer@example.com',
+                        contact: '8283929792'
+                    },
+                    theme: {
+                        color: '#3399cc'
+                    }
+                };
+                const rzp = new window.Razorpay(options);
+                rzp.open();
+            };
+        }
+    };
 
 
     const handleChangeAddress = (e) => {

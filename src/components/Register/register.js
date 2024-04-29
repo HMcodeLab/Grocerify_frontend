@@ -12,7 +12,7 @@ import { ReactComponent as Facebook } from '../../Assets/Icons/facebook.svg';
 import { ReactComponent as Google } from '../../Assets/Icons/google.svg';
 import { ReactComponent as Apple } from '../../Assets/Icons/apple.svg';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL, BASE_URL_USER } from '../../Api/api';
 import VerifyOTP from '../verifyOTP/verifyOTP';
 import toast, { Toaster } from 'react-hot-toast';
@@ -155,16 +155,19 @@ const Register = () => {
                             <div className={styles.submit} onClick={handleRegister}>
                                 <button>{btnLoader ? <CircularProgress size="sm" color="success" /> : "Sign Up"}</button>
                             </div>
-                            {/* Login options */}
-                            {/* <div className={styles.login_options}>
-                                <p>sign in With</p>
-                                
-                                <div className={styles.btn_group}>
+                            <div className={styles.login_options}>
+                                <span style={{ display: "flex" }}>
+                                    <p>Already a User ? </p>
+                                    {/* Sign up link */}
+                                    <Link to={'/login'} style={{ textDecoration: "underline" }}>  <h5>Log in</h5></Link>
+                                </span>
+                                {/* Social media login buttons */}
+                                {/* <div className={styles.btn_group}>
                                     <span><Facebook /></span>
                                     <span><Google /></span>
                                     <span><Apple /></span>
-                                </div>
-                            </div> */}
+                                </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -142,7 +142,7 @@ const Login = () => {
                                 <span>
                                     <p>New Here ?</p>
                                     {/* Sign up link */}
-                                    <Link to={'/register'}>  <h5>Sign Up</h5></Link>
+                                    <Link to={'/register'} style={{ textDecoration: "underline" }}>  <h5>Sign Up</h5></Link>
                                 </span>
                                 {/* Social media login buttons */}
                                 {/* <div className={styles.btn_group}>
