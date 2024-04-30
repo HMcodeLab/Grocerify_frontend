@@ -96,7 +96,7 @@ export default function Checkout() {
         let temp2 = [];
         console.log(val)
         val.forEach((val) => {
-            temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid });
+            temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid._id });
         })
         // console.log("value", val)
         console.log(temp2)
@@ -123,7 +123,7 @@ export default function Checkout() {
             navigate('/success')
         } catch (error) {
             setbtnLoader(false)
-            toast.error("An Error Occured");
+            toast.error("An ");
         }
     }
 
