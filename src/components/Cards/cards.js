@@ -201,6 +201,7 @@ const Cards = (value) => {
                                 <Star />
                                 <Star />
                                 <Star />
+                                <Star />
                             </span>
                         </div>
                         <div className={`relative max-h-[4.4rem] px-6 rounded-t-xl ${styles.actions}`}>
