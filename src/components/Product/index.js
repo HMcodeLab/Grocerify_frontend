@@ -160,7 +160,7 @@ export default function Product() {
                         {/* custom */}
                         <div className='border-t-2 pt-3 mt-4 sm:px-4 space-y-2 fontmont'>
                             <div className='text-[#848484] text-[16px] '>Colour - Midnight Grey</div>
-                            <div className='flex space-x-3'>
+                            {/* <div className='flex space-x-3'>
                                 <button className='h-5 w-5 bg-black rounded-full'></button>
                                 <button className='h-5 w-5 bg-[#FEE4FF] rounded-full'></button>
                                 <button className='h-5 w-5 bg-[#F9EDCE] rounded-full'></button>
@@ -173,7 +173,7 @@ export default function Product() {
                                     <button className='bg-[#f3f3f3] px-2 rounded'>258 GB</button>
                                     <button className='bg-[#f3f3f3] px-2 rounded'>128 GB</button>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className='w-[45%] pl-8 pt-4 sm:px-4 sm:w-full'>
