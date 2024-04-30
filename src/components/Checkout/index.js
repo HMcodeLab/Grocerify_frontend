@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Loc } from '../../assests/location_green.svg'
 import { ReactComponent as Pay } from '../../assests/pay.svg'
 import { ReactComponent as Order } from '../../assests/order.svg'
-import { FaPlus } from "react-icons/fa6";
+
 import './checkout.css'
 import { BASE_URL } from '../../Api/api';
 import { Globalinfo } from '../../App';
