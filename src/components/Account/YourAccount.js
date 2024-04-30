@@ -93,17 +93,17 @@ const YourAccount = () => {
             </div>
           </div>
         </Link> */}
-        <Link className="w-full" to={'/account/coupons'}>
+        {/* <Link className="w-full" to={'/account/coupons'}>
           <div className="cd">
             <div className="image">
               <img src="../assests/icons/ph_gift.svg" alt="Order" />
             </div>
             <div className="cd-body">
               <h5 className="cd-title">COUPON</h5>
-              {/* <p className="cd-text"></p> */}
+              
             </div>
           </div>
-        </Link>
+        </Link> */}
         <Link className="w-full" to={'/shop_registration'}>
           <div className="cd" style={{ border: "2px dashed #d9d9d9" }}>
             <div className="image">

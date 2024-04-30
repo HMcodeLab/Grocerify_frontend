@@ -13,7 +13,7 @@ export default function Slider() {
           perMove: 1,
           wheel: false,
           autoplay: false,
-          pauseOnHover: false,
+          pauseOnHover: true,
           arrows: true,
         }}
         aria-label="My Favorite Images">

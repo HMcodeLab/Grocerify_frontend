@@ -59,7 +59,7 @@ const FeaturedStore = () => {
                     <div>
 
 
-                        <div className="relative">
+                        {/* <div className="relative">
                             <img
                                 src="../assests/images/map.png"
                                 className="object-cover w-full h-[600px]"
@@ -182,7 +182,7 @@ const FeaturedStore = () => {
                                     </div>{" "}
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="pr-8 pl-8 space-y-6">
@@ -196,9 +196,9 @@ const FeaturedStore = () => {
                                 src="../assests/images/ordernowgp.png"
                                 className="w-full h-full absolute top-0 "
                             />
-                            <button className="absolute font-Montserrat bottom-[5%] left-[42%] bg-[#58B310] text-[#FFFFFF] rounded-2xl pt-1 pb-1 pr-4 pl-4 hover:bg-[#FFFFFF] hover:text-[#58B310] hover:text-bold hover:transition-all hover:scale-105">
+                            {/* <button className="absolute font-Montserrat bottom-[5%] left-[42%] bg-[#58B310] text-[#FFFFFF] rounded-2xl pt-1 pb-1 pr-4 pl-4 hover:bg-[#FFFFFF] hover:text-[#58B310] hover:text-bold hover:transition-all hover:scale-105">
                                 ORDER NOW
-                            </button>
+                            </button> */}
                         </div>
 
                         {/* all stores */}

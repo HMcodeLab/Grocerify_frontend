@@ -53,8 +53,8 @@ const Login = () => {
                     }, 1000);
 
                 } catch (error) {
-                    console.log(error);
-                    toast.error("Some Error Occured while Login")
+                    console.log(error.response.data.error);
+                    toast.error(error.response.data.error)
                 } finally {
                     setBtnLoader(false)
                 }

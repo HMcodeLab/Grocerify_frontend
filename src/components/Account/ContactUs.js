@@ -10,7 +10,7 @@ const ContactUs = () => {
   return (
     <div className="m-16 flex flex-col space-y-8 font-Montserrat">
       <div className="flex flex-row text-center">
-        <Link to={"/"} className="font-semibold ml-20 pl-36 text-[#333333]">
+        <Link to={"/account"} className="font-semibold ml-20 pl-36 text-[#333333]">
           Your Account {" >"}
         </Link>
         <p className="bg-light-green ml-2 text-[#55A813]">Contact Us</p>

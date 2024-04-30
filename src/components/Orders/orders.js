@@ -3,10 +3,14 @@ import { ReactComponent as Down } from '../../assests/down.svg'
 import { useQuery, useIsFetching } from '@tanstack/react-query'
 import { formatDate } from '../../helpers/helper_function'
 import Spinner from '../Spinner'
+import { toast, Toaster } from 'react-hot-toast';
+import axios from 'axios'
+import { useState } from 'react'
 
 
 export default function Orders() {
     const isFetching = useIsFetching()
+    const [btnLoader, setBtnLoader] = useState(false)
 
     const { data: OrderData, isError } = useQuery({
         queryKey: ['orders'],
@@ -29,12 +33,31 @@ export default function Orders() {
         return <h2>Some Error Occured whle Fetching</h2>
     }
 
+    const CancelOrder = async (id) => {
+        setBtnLoader(true);
+        try {
+            const res = await axios.post(`${BASE_URL}api/cancelorder`,
+                { orderID: id }, {
+                headers: {
+                    'Authorization': ` Bearer ${localStorage.getItem('GROC_USER_TOKEN')}`
+                }
+            })
+            console.log(res)
+            setBtnLoader(false)
+            toast.success("Order Cancelled");
+
+        } catch (error) {
+            setBtnLoader(false)
+            toast.error("Unable to cancel Order");
+        }
+    }
+
     console.log(OrderData)
 
 
     return (<>
 
-
+        <Toaster />
         <div className='my-4'>
             <div className='flex space-x-4 text-[#848484] text-[16px] mt-4'>
                 {/* <div>1 order placed in</div>
@@ -88,7 +111,7 @@ export default function Orders() {
 
                                 <div className='flex flex-col space-y-10'>
                                     {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
-                                    {(val.status != "delivered" || val.status != "ordered") && <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded'>Cancel Order</button>}
+                                    {(val.status == "shipped" || val.status == "ordered") ? <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button> : val.status === "cancelled" ? <button className='border border-red-700 px-3 py-[2px] text-red-700 rounded pointer-events-none cursor-not-allowed'>Cancelled</button> : <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button>}
                                 </div>
                             </div>
                         </div>

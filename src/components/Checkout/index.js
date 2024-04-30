@@ -36,7 +36,12 @@ export default function Checkout() {
 
 
     useEffect(() => {
-        let temp = localStorage.getItem('CHECKOUT_DATA');
+        getUserDetails()
+    }, [])
+
+
+    useEffect(() => {
+        let temp = localStorage.getItem('CHECKOUT_DATA')
         temp = JSON.parse(temp);
         console.log(temp)
 
@@ -53,10 +58,9 @@ export default function Checkout() {
 
             try {
                 const final = checkoutData;
-                // console.log(final)
                 let subttotal_amount = 0
                 let total_items = 0
-                let original_price = 0;
+                let original_price = 0
 
 
                 final?.forEach((item) => {
@@ -94,12 +98,12 @@ export default function Checkout() {
 
     const createOrder = async (val) => {
         let temp2 = [];
-        console.log(val)
+        // console.log(val)
         val.forEach((val) => {
             temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid._id });
         })
         // console.log("value", val)
-        console.log(temp2)
+        // console.log(temp2)
         setbtnLoader(true)
         try {
             const res = await axios.post(`${BASE_URL}api/order`,
@@ -223,18 +227,7 @@ export default function Checkout() {
                     </div>
 
                     <div className='flex flex-col pl-6 space-y-4'>
-                        {/* <label htmlFor='credit' className='space-x-2'>
-                            <input className='accent-[#58B310]' type='radio' name='credit' id='credit' checked={paymentType === "credit"} onChange={handleChangepayment} />
-                            <span className='cursor-pointer'>Credit / Debit card</span>
-                        </label> */}
-                        {/* <label htmlFor='upi' className='space-x-2'>
-                            <input className='accent-[#58B310]' type='radio' name='upi' id='upi' checked={paymentType === "upi"} onChange={handleChangepayment} />
-                            <span className='cursor-pointer'>UPI</span>
-                        </label> */}
-                        {/* <label htmlFor='netbanking' className='space-x-2'>
-                            <input className='accent-[#58B310]' type='radio' name='netbanking' id='netbanking' checked={paymentType === "netbanking"} onChange={handleChangepayment} />
-                            <span className='cursor-pointer'>Net Banking</span>
-                        </label> */}
+
                         <label htmlFor='cod' className='space-x-2'>
                             <input className='accent-[#58B310]' type='radio' name='cod' id='cod' checked={paymentType === "cod"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>Cash On Delivery</span>
@@ -278,8 +271,8 @@ export default function Checkout() {
                     </div>
                 </div>
 
-                <button className='my-10 flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold '>
-                    <div onClick={handleOrder}>
+                <button className='my-10 flex fontorder bg-[#426B1F] text-white items-center w-full  rounded-lg justify-around h-10 font-semibold ' onClick={handleOrder}>
+                    <div >
                         {btnLoader ? <CircularProgress size="sm" color="success" /> : (paymentType === 'cod' ? "Place Order" : "Continue to payments")}
 
                     </div>

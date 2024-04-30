@@ -2,7 +2,7 @@ import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Down } from '../../Assets/Icons/down.svg'
 import { ReactComponent as Box } from '../../Assets/Icons/chatbox.svg'
 import { ReactComponent as Emptystar } from '../../Assets/Icons/emptystar.svg'
-import { FaPlus } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp, FaPlus, FaUpDown } from "react-icons/fa6";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './product.css'
@@ -25,7 +25,7 @@ export default function Product() {
     const params = useParams();
 
     const [image, setimage] = useState('/mobile.png')
-    const [show, setshow] = useState('h-23')
+    const [show, setshow] = useState('h-[4rem]')
     const [reportshow, setreportshow] = useState('hidden')
     const [reportValue, setreportValue] = useState('')
     const [showdelivery, setshowdelivery] = useState('hidden')
@@ -69,10 +69,7 @@ export default function Product() {
         Fetchdata()
     }, [primaryRef.current, secondaryRef.current])
 
-    function Showmore() {
-        // console.log('hello')
-        setshow('h-auto')
-    }
+
     function ShowDeliveryContent() {
         if (showdelivery == 'hidden') {
             setshowdelivery('')
@@ -111,7 +108,7 @@ export default function Product() {
     }
 
     const handleBuy = async (storeid) => {
-        console.log(Data)
+        // console.log(Data)
         let temp = [];
         temp.push({ productid: Data._id, price: Data.stores[0].variants1_mrp_price, discount: Data.stores[0].variants1_discount_per, quantity: 1, shopid: storeid })
 
@@ -121,7 +118,7 @@ export default function Product() {
     }
 
 
-    // console.log(Data)
+    console.log(Data.products_description?.length)
 
     return (<>
         {/* <Extra /> */}
@@ -259,12 +256,19 @@ export default function Product() {
                             }</li>
 
                         </ul>
-                        {show === "h-23" && (Data.products_description?.length > 100) &&
-                            <button className='flex items-center space-x-1' onClick={Showmore}>
-                                <Down />
+                        {show === "h-[4rem]" && (Data.products_description?.length > 200) &&
+                            <button className='flex items-center space-x-1' onClick={() => setshow('h-auto')}>
+                                <FaAngleDown />
                                 <div className='font-semibold'>Show more</div>
                             </button>
                         }
+                        {show === "h-auto" &&
+                            <button className='flex items-center space-x-1' onClick={() => setshow('h-[4rem]')}>
+                                <FaAngleUp />
+                                <div className='font-semibold'>Show Less</div>
+                            </button>
+                        }
+
 
                     </div>
 

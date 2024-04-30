@@ -53,6 +53,7 @@ const MainContent = () => {
                         delay: 4,
                         pauseOnHover: false,
                         drag: true,
+                        pauseOnHover: true,
 
                     }}>
                     <SplideSlide>

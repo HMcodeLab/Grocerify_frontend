@@ -18,8 +18,8 @@ function Account() {
     <YourAccount />
     {/* <hr style={hrStyle} /> */}
     {/* <Cards /> */}
-    <hr style={hrStyle} />
-    <div style={{ paddingInline: "5vw" }}> <Slider /></div>
+    {/* <hr style={hrStyle} /> */}
+    {/* <div style={{ paddingInline: "5vw" }}> <Slider /></div> */}
   </div>;
 }
 

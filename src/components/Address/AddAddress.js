@@ -19,10 +19,16 @@ export default function AddAddress() {
         const [make_default, setmake_default] = useState(false)
         const [show, setshow] = useState(false)
         const navigate = useNavigate()
+
         async function Addaddress() {
-                setshow(true)
+
                 try {
-                        if (!full_name || !mobile || !country || !zip || !address_line_1 || !address_line_2 || !landmark || !city || !state) {
+                        if (mobile.toString().length != 10) {
+                                toast.error("Mobile Number is not valid")
+                                return;
+                        }
+
+                        if (!full_name || !mobile || !country || !zip || !address_line_1 || !address_line_2 || !city || !state) {
                                 toast.warn('Every input must be filled', {
                                         position: "top-center",
                                         autoClose: 1000,
@@ -34,9 +40,10 @@ export default function AddAddress() {
                                         theme: "colored",
                                         // transition: 'Bounce'
                                 });
+                                return;
                         }
                         else {
-
+                                setshow(true)
                                 let temp = localStorage.getItem('GROC_USER_TOKEN')
 
 
@@ -84,8 +91,7 @@ export default function AddAddress() {
                         console.log("dfdsf" + error)
                 }
 
-                // RemoveFromCart(id)
-                // TotalCount()
+
                 setshow(false)
         }
 

@@ -35,6 +35,7 @@ const ProductImages = (props) => {
 
     const options = {
         pagination: false,
+        pauseOnHover: true,
         isNavigation: true,
         autoWidth: true,
         gap: "10px",
