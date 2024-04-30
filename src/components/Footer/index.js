@@ -73,10 +73,10 @@ export default function Footer() {
 
                 <div className="text-[#FFFFFF] flex flex-col   space-y-4 sm:space-y-3 pl-5">
 
-                    <Link to={'/privacy_policy'} className='font'>Privacy Policy</Link>
+                    {/* <Link to={'/privacy_policy'} className='font'>Privacy Policy</Link> */}
                     <Link to={'/return_policy'} className='font'>Return Policy</Link>
                     <Link to={'shipping_policy'} className='font'>Shipping Policy</Link>
-                    <Link to={'/terms'} className='font'>Terms Of Service</Link>
+                    {/* <Link to={'/terms'} className='font'>Terms Of Service</Link> */}
                     <Link className='font' to={'/faq'}>FAQ</Link>
                     <Link to={'/account/coupons'} className='font'>Coupons</Link>
                     <Link to={'/shop_registration'} className='flex space-x-2 justify-self-start items-center'>

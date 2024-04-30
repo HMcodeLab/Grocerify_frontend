@@ -63,10 +63,6 @@ const ProductPage = (props) => {
         fetchData();
     }, [searchParams.get('category')])
 
-
-
-
-
     return (
         <div className={styles.product_container}>
 
