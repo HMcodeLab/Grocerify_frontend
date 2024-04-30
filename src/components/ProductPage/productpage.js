@@ -72,7 +72,7 @@ const ProductPage = (props) => {
 
             <span style={{ display: "flex", flexDirection: "column", gap: "5vh" }}>
                 <div className={styles.hero_image}>
-                    <Splide
+                    <Splide style={{ height: "100%" }}
                         options={{
                             type: "loop",
                             perPage: 1,
@@ -81,18 +81,18 @@ const ProductPage = (props) => {
                             wheel: false,
                             arrows: false,
                             autoplay: true,
-                            interval: 2000,
-                            speed: 1000,
-                            delay: 4,
+                            interval: 5000,
+                            speed: 6000,
+                            delay: 3,
                             pauseOnHover: false,
                             drag: true,
 
                         }}>
-                        <SplideSlide>
-                            <img src={getCategoryBanner(searchParams.get('category'))} alt="banner  not found" />
+                        <SplideSlide >
+                            <img src={getCategoryBanner(searchParams.get('category'))[0]} alt="banner  not found" />
                         </SplideSlide>
                         <SplideSlide>
-                            <img src={getCategoryBanner(searchParams.get('category'))} alt="banner  not found" />
+                            <img src={getCategoryBanner(searchParams.get('category'))[1]} alt="banner  not found" />
                         </SplideSlide>
 
                     </Splide>
@@ -100,11 +100,7 @@ const ProductPage = (props) => {
                 <div className={`${styles.newProducts_main} ${styles.products_main}`}>
                     <div className={`${styles.newProducts_top} ${styles.products_top}`}>
                         <h1>New Products</h1>
-                        {/* <span>
-                            <h5>Show More </h5>
-                            <Dropdown />
 
-                        </span> */}
                     </div>
                     <Products data={categoryData} />
 

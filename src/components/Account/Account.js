@@ -16,8 +16,8 @@ function Account() {
 
   return <div className="sm:pb-5" style={{ paddingTop: "7vh", paddingBottom: "7vh" }}>
     <YourAccount />
-    <hr style={hrStyle} />
-    <Cards />
+    {/* <hr style={hrStyle} /> */}
+    {/* <Cards /> */}
     <hr style={hrStyle} />
     <div style={{ paddingInline: "5vw" }}> <Slider /></div>
   </div>;

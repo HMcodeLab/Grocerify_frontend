@@ -17,10 +17,12 @@ import { BASE_URL, BASE_URL_USER } from '../../Api/api';
 import VerifyOTP from '../verifyOTP/verifyOTP';
 import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from '../../helpers';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 
 const Register = () => {
     const navigate = useNavigate();
     const [showOTPModal, setshowOTPModal] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
     const [btnLoader, setBtnLoader] = useState(false);
     const [ismobileVerified, setismobileVerified] = useState('error')
     const [user, setuser] = useState({
@@ -59,8 +61,9 @@ const Register = () => {
                 })
                 console.log(res);
                 localStorage.setItem('GROC_USER_TOKEN', res.data.token)
-                if (res.status == 201) {
+                if (res.status === 201) {
                     toast.success('Registered Successfully')
+                    navigate('/login');
                 }
             } catch (error) {
 
@@ -144,9 +147,13 @@ const Register = () => {
                                 {ismobileVerified === 'success' ? <i> <FaCircleCheck /> </i> : ismobileVerified === 'loading' ? <i style={{ top: "0px" }}> <CircularProgress size="sm" color="success" /> </i> : <p onClick={handlesendOTP}>Verify</p>}
                             </span>
                             {/* Password input */}
-                            <span>
+                            <span style={{ position: "relative" }}>
                                 <Lock />
-                                <input type="password" placeholder='Enter Your Password' name='password' value={user.password} onChange={handleChange} />
+                                <input type={showPassword ? "text" : "password"} placeholder='Enter Your Password' name='password' value={user.password} onChange={handleChange} />
+                                <span style={{ position: "absolute", top: "0px", right: "35px" }}> {
+                                    showPassword ? <IoEyeOutline color="#1dbf73" size={18} onClick={() => setShowPassword((prev) => !prev)} /> : <IoEyeOffOutline color='#1dbf73' size={18} onClick={() => setShowPassword((prev) => !prev)} />
+                                }
+                                </span>
                             </span>
                         </span>
                         {/* Action buttons */}
@@ -161,12 +168,7 @@ const Register = () => {
                                     {/* Sign up link */}
                                     <Link to={'/login'} style={{ textDecoration: "underline" }}>  <h5>Log in</h5></Link>
                                 </span>
-                                {/* Social media login buttons */}
-                                {/* <div className={styles.btn_group}>
-                                    <span><Facebook /></span>
-                                    <span><Google /></span>
-                                    <span><Apple /></span>
-                                </div> */}
+
                             </div>
                         </div>
                     </div>

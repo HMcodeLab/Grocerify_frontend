@@ -64,7 +64,7 @@ export default function AddAddress() {
                                                 theme: "colored",
                                                 // transition: 'Bounce'
                                         });
-                                        navigate('/account/address')
+                                        navigate(-1)
                                 }
                                 else {
                                         toast.error('Server error', {

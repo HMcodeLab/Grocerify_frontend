@@ -86,7 +86,7 @@ const Sidebar = (category) => {
                 }
             </div>
 
-            <div className={styles.sortBy_main}>
+            {/* <div className={styles.sortBy_main}>
                 <span className={styles.heading} onClick={() => { isDropdownOpen === 2 ? setIsDropdownOpen(null) : setIsDropdownOpen(2) }}>
                     <span>
 
@@ -115,8 +115,8 @@ const Sidebar = (category) => {
 
 
                 </ul>}
-            </div>
-            <div className={styles.sortBy_main}>
+            </div> */}
+            {/* <div className={styles.sortBy_main}>
                 <span className={styles.heading} onClick={() => { isDropdownOpen === 3 ? setIsDropdownOpen(null) : setIsDropdownOpen(3) }}>
                     <span>
 
@@ -143,8 +143,8 @@ const Sidebar = (category) => {
 
 
                 </ul>}
-            </div>
-            <div className={styles.sortBy_main}>
+            </div> */}
+            {/* <div className={styles.sortBy_main}>
                 <span className={styles.heading} onClick={() => { isDropdownOpen === 3 ? setIsDropdownOpen(null) : setIsDropdownOpen(3) }}>
                     <span>
 
@@ -171,7 +171,7 @@ const Sidebar = (category) => {
 
 
                 </ul>}
-            </div>
+            </div> */}
         </div>
     )
 }

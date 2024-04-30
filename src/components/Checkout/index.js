@@ -25,7 +25,7 @@ export default function Checkout() {
 
     const [checkoutData, setCheckoutData] = useState([]);
 
-    const [selectedAddress, setSelectedAddress] = useState(0);
+    const [selectedAddress, setSelectedAddress] = useState(null);
     const [btnLoader, setbtnLoader] = useState(false)
     const [subtotal, setsubtotal] = useState()
     const [originalPrice, setOriginalPrice] = useState(0)
@@ -128,6 +128,10 @@ export default function Checkout() {
     }
 
     const handleOrder = async () => {
+        if (selectedAddress === null) {
+            toast.error("Enter Your Address");
+            return;
+        }
 
         if (paymentType === 'cod') {
             createOrder(checkoutData);
@@ -219,25 +223,25 @@ export default function Checkout() {
                     </div>
 
                     <div className='flex flex-col pl-6 space-y-4'>
-                        <label htmlFor='credit' className='space-x-2'>
+                        {/* <label htmlFor='credit' className='space-x-2'>
                             <input className='accent-[#58B310]' type='radio' name='credit' id='credit' checked={paymentType === "credit"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>Credit / Debit card</span>
-                        </label>
-                        <label htmlFor='upi' className='space-x-2'>
+                        </label> */}
+                        {/* <label htmlFor='upi' className='space-x-2'>
                             <input className='accent-[#58B310]' type='radio' name='upi' id='upi' checked={paymentType === "upi"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>UPI</span>
-                        </label>
-                        <label htmlFor='netbanking' className='space-x-2'>
+                        </label> */}
+                        {/* <label htmlFor='netbanking' className='space-x-2'>
                             <input className='accent-[#58B310]' type='radio' name='netbanking' id='netbanking' checked={paymentType === "netbanking"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>Net Banking</span>
-                        </label>
+                        </label> */}
                         <label htmlFor='cod' className='space-x-2'>
                             <input className='accent-[#58B310]' type='radio' name='cod' id='cod' checked={paymentType === "cod"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>Cash On Delivery</span>
                         </label>
-                        <label htmlFor='emi' className='space-x-2'>
-                            <input className='accent-[#58B310]' type='radio' name='emi' id='emi' checked={paymentType === "emi"} onChange={handleChangepayment} />
-                            <span className='cursor-pointer'>EMI</span>
+                        <label htmlFor='Pay Online' className='space-x-2'>
+                            <input className='accent-[#58B310]' type='radio' name='online' id='online' checked={paymentType === "online"} onChange={handleChangepayment} />
+                            <span className='cursor-pointer'>Pay Online</span>
                         </label>
                     </div>
                 </div>

@@ -9,6 +9,8 @@ import { ReactComponent as Dropdown } from '../../Assets/Icons/dropdown.svg'
 import { ReactComponent as Hotdeals } from '../../Assets/Icons/hotdeals.svg'
 import { ReactComponent as St } from '../../Assets/Icons/star.svg'
 import banner3 from '../../Assets/Images/banner3.png'
+import grocery2 from '../../Assets/Images/grocery2.png'
+import electronicsBanner from '../../Assets/Images/electronicsBanner.png'
 import serum from '../../Assets/Images/products/serum.png'
 import makeup from '../../Assets/Images/products/makeup2.png'
 import banner_shirt from '../../Assets/Images/banner_shirt.jpg'
@@ -57,10 +59,10 @@ const MainContent = () => {
                         <img src={Heroimage} alt="banner  not found" />
                     </SplideSlide>
                     <SplideSlide>
-                        <img src={Heroimage} alt="banner  not found" />
+                        <img src={grocery2} alt="banner  not found" />
                     </SplideSlide>
                     <SplideSlide>
-                        <img src={Heroimage} alt="banner not found" />
+                        <img src={electronicsBanner} alt="banner not found" />
                     </SplideSlide>
                 </Splide>
             </div>

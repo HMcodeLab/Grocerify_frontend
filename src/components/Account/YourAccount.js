@@ -82,7 +82,7 @@ const YourAccount = () => {
             </div>
           </div>
         </Link>
-        <Link className="w-full" to={'/account/payment'}>
+        {/* <Link className="w-full" to={'/account/payment'}>
           <div className="cd">
             <div className="image">
               <img src="../assests/icons/Mask group.svg" alt="Order" />
@@ -92,7 +92,7 @@ const YourAccount = () => {
               <p className="cd-text">Edit or add payment methods</p>
             </div>
           </div>
-        </Link>
+        </Link> */}
         <Link className="w-full" to={'/account/coupons'}>
           <div className="cd">
             <div className="image">
