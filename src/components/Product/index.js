@@ -299,7 +299,7 @@ export default function Product() {
                             <Emptystar />
                             <Emptystar />
                             <Emptystar />
-                            <Emptystar />
+                            
                         </div>
                     </div>
 
