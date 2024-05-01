@@ -43,7 +43,7 @@ const ContactUs = () => {
               }}
               className="text-center mt-6 font-semibold ml-24 shadow-md rounded-md pt-1 pb-1 pl-2 pr-2 hover:bg-[#58B310] hover:text-white transition-all duration-300 text-[#848484]"
             >
-              <Link to={"/"}>Start Chatting</Link>
+              <Link to={"https://wa.me/qr/S3LVDB3Y3SB3H1"}>Start Chatting</Link>
             </button>
           </div>
         </div>
@@ -64,17 +64,15 @@ const ContactUs = () => {
               }}
               className="text-center mt-20 font-semibold ml-24 shadow-md rounded-md p-1 w-2/5 hover:bg-[#58B310] hover:text-white transition-all duration-300 text-[#848484]"
             >
-              <Link to={"/"}>Call Me</Link>
+              <Link to={"tel:77177667030"}>Call Me</Link>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="text-lg text-center font-bold text-[#848484]">
-        Here are a few things you can take care of on your own
-      </div>
 
-      <div className="flex flex-row font-semibold justify-center item-center space-x-24">
+
+      {/* <div className="flex flex-row font-semibold justify-center item-center space-x-24">
         <div className="items-baseline text-center justify-center item-center">
           <img
             src="../assests/icons/arcticons_parcel-tracker.svg"
@@ -117,7 +115,7 @@ const ContactUs = () => {
             Update Payment Info
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

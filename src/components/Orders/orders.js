@@ -111,7 +111,7 @@ export default function Orders() {
 
                                 <div className='flex flex-col space-y-10'>
                                     {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
-                                    {(val.status == "shipped" || val.status == "ordered") ? <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button> : val.status === "cancelled" ? <button className='border border-red-700 px-3 py-[2px] text-red-700 rounded pointer-events-none cursor-not-allowed'>Cancelled</button> : <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button>}
+                                    {(val.status == "shipped" || val.status == "ordered") ? <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button> : val.status === "cancelled" ? <button className='border border-red-700 px-3 py-[2px] text-red-700 rounded pointer-events-none cursor-not-allowed'>Cancelled</button> : <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' >Delivered</button>}
                                 </div>
                             </div>
                         </div>
