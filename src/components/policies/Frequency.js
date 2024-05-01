@@ -255,7 +255,7 @@ const Wrapper = styled.div`
   }
 
   .nav ul {
-    position: fixed;
+    position: sticky;
     list-style-type: none;
     margin: 0;
     padding: 0;
