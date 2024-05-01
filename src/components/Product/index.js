@@ -188,7 +188,7 @@ export default function Product() {
                                                         variants1_discount_per}%</div>
                                                     <div className='text-[8px]'>off</div>
                                                 </div>
-                                                <img className='max-h-52 max-w-32' src={item.store.shop_primary_image_url} />
+                                                <img className='max-h-52 max-w-32' src={item?.store?.shopImages[0]} />
 
                                             </div>
                                             <div className='flex flex-col w-full fontmont text-[#848484] gap-2'>
