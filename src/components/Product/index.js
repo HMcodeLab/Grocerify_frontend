@@ -256,7 +256,7 @@ export default function Product() {
                             }</li>
 
                         </ul>
-                        {show === "h-[4rem]" && (Data.products_description?.length > 200) &&
+                        {show === "h-[4rem]" && (Data.products_description?.length > 150) &&
                             <button className='flex items-center space-x-1' onClick={() => setshow('h-auto')}>
                                 <FaAngleDown />
                                 <div className='font-semibold'>Show more</div>
