@@ -292,7 +292,7 @@ export default function Product() {
                         </div>
                     </div>
 
-                    <div className='flex w-full justify-between py-4  border-t-2 fontmont  text-[#848484] text-[16px]  sm:px-4'>
+                    {/* <div className='flex w-full justify-between py-4  border-t-2 fontmont  text-[#848484] text-[16px]  sm:px-4'>
                         <div>Reviews</div>
                         <div className='flex'>
                             <Emptystar />
@@ -301,9 +301,9 @@ export default function Product() {
                             <Emptystar />
                             
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className='flex justify-between mt-2 w-full  sm:px-4 '>
+                    {/* <div className='flex justify-between mt-2 w-full  sm:px-4 '>
                         <div className='flex flex-col gap-2 w-[40%]'>
                             <div className='flex w-full justify-between   '>
                                 <div className='w-[47%] border' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img className='w-full h-full' src='/apple.png' /></div>
@@ -335,7 +335,7 @@ export default function Product() {
 
                             <div className='text-center mt-2 text-sm'>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”</div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
 
