@@ -16,7 +16,9 @@ import { useParams } from 'react-router-dom';
 import { Globalinfo } from '../../App';
 import ProductImages from '../ProductImages/productCarousel';
 import axios from 'axios';
-
+import { ReactComponent as Starfilled } from '../../Assets/Icons/star.svg'
+import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
+import { ReactComponent as Empty } from '../../Assets/Icons/emptystar.svg'
 
 export default function Product() {
     const navigate = useNavigate();
@@ -34,6 +36,7 @@ export default function Product() {
     const [images, setimages] = useState([])
     const [video, setvideo] = useState([])
     const [store, setstore] = useState([])
+    const [Ratings, setRatings] = useState([])
     // const [showvideo, setshowvideo] = useState(false)
 
     const primaryRef = useRef(null);
@@ -47,9 +50,14 @@ export default function Product() {
                 let url = BASE_URL + 'api/product/' + slug
                 const data = await axios.get(url)
                 const response = data.data;
-                console.log(response)
+                // console.log(response)
 
                 price = response[0].stores[0].variants1_mrp_price - (response[0]?.stores[0]?.variants1_mrp_price * (response[0].stores[0]?.variants1_discount_per / 100))
+                
+                const data1=await fetch(BASE_URL + 'api/reviews/' + response[0]._id)
+                const response1=await data1.json()
+
+                setRatings(response1?.reviews)
                 // console.log(response)
                 setstore(response[0].stores)
                 setactualprice(price)
@@ -69,6 +77,8 @@ export default function Product() {
         Fetchdata()
     }, [primaryRef.current, secondaryRef.current])
 
+ 
+    
 
     function ShowDeliveryContent() {
         if (showdelivery == 'hidden') {
@@ -117,8 +127,17 @@ export default function Product() {
         navigate('/checkout');
     }
 
-
-    console.log(Data.products_description?.length)
+    function StarPrint(count) {
+        let con = []
+        for (let index = 0; index < count; index++) {
+            con.push(<span><Starfilled /></span>)
+        }
+        for (let index = 0; index < 5 - count; index++) {
+            con.push(<span className=''><Empty className='h-[20px] w-[20px]' /></span>)
+        }
+        return con;
+    }
+    // console.log(Data.products_description?.length)
 
     return (<>
         {/* <Extra /> */}
@@ -315,26 +334,30 @@ export default function Product() {
 
                             </div>
                         </div> */}
-
-                        <div className=' fontmont w-full'>
+                    {
+                        Ratings?.map((item)=>{
+return(<>
+  <div className=' fontmont w-full'>
                             <div className='flex justify-between'>
                                 <div className='flex space-x-3 items-center'>
                                     <div className='rounded-full h-8 w-8 border bg-slate-400 flex justify-center items-center'>
                                         <img src='/logo192.png' />
                                     </div>
-                                    <div>Davinder Kumar</div>
+                                    <div>{item?.reviewBy?.firstName} {item?.reviewBy?.lastName}</div>
                                 </div>
                                 <div className='flex '>
-                                    <Star />
-                                    <Star />
-                                    <Star />
-                                    <Star />
-                                    <Star />
+                                    {
+                                        StarPrint(item?.rating)
+                                    }
                                 </div>
                             </div>
 
-                            <div className='text-left mt-2 text-sm'>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”</div>
+                            <div className='text-left mt-2 text-sm'>“{item?.review}”</div>
                         </div>
+</>)
+                        })
+                    }
+                      
                     </div>
                 </div>
 
