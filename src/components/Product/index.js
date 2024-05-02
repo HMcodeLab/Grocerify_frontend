@@ -53,9 +53,9 @@ export default function Product() {
                 // console.log(response)
 
                 price = response[0].stores[0].variants1_mrp_price - (response[0]?.stores[0]?.variants1_mrp_price * (response[0].stores[0]?.variants1_discount_per / 100))
-                
-                const data1=await fetch(BASE_URL + 'api/reviews/' + response[0]._id)
-                const response1=await data1.json()
+
+                const data1 = await fetch(BASE_URL + 'api/reviews/' + response[0]._id)
+                const response1 = await data1.json()
 
                 setRatings(response1?.reviews)
                 // console.log(response)
@@ -77,8 +77,8 @@ export default function Product() {
         Fetchdata()
     }, [primaryRef.current, secondaryRef.current])
 
- 
-    
+
+
 
     function ShowDeliveryContent() {
         if (showdelivery == 'hidden') {
@@ -120,7 +120,7 @@ export default function Product() {
     const handleBuy = async (storeid) => {
         // console.log(Data)
         let temp = [];
-        temp.push({ productid: Data._id, price: Data.stores[0].variants1_mrp_price, discount: Data.stores[0].variants1_discount_per, quantity: 1, shopid: storeid })
+        temp.push({ productid: Data._id, price: Data.stores[0].variants1_mrp_price, discount: Data.stores[0].variants1_discount_per, quantity: 1, shopid: storeid._id })
 
         console.log(temp)
         localStorage.setItem('CHECKOUT_DATA', JSON.stringify(temp))
@@ -318,7 +318,7 @@ export default function Product() {
                             <Emptystar />
                             <Emptystar />
                             <Emptystar />
-                            
+
                         </div>
                     </div>
 
@@ -334,30 +334,30 @@ export default function Product() {
 
                             </div>
                         </div> */}
-                    {
-                        Ratings?.map((item)=>{
-return(<>
-  <div className=' fontmont w-full'>
-                            <div className='flex justify-between'>
-                                <div className='flex space-x-3 items-center'>
-                                    <div className='rounded-full h-8 w-8 border bg-slate-400 flex justify-center items-center'>
-                                        <img src='/logo192.png' />
-                                    </div>
-                                    <div>{item?.reviewBy?.firstName} {item?.reviewBy?.lastName}</div>
-                                </div>
-                                <div className='flex '>
-                                    {
-                                        StarPrint(item?.rating)
-                                    }
-                                </div>
-                            </div>
+                        {
+                            Ratings?.map((item) => {
+                                return (<>
+                                    <div className=' fontmont w-full'>
+                                        <div className='flex justify-between'>
+                                            <div className='flex space-x-3 items-center'>
+                                                <div className='rounded-full h-8 w-8 border bg-slate-400 flex justify-center items-center'>
+                                                    <img src='/logo192.png' />
+                                                </div>
+                                                <div>{item?.reviewBy?.firstName} {item?.reviewBy?.lastName}</div>
+                                            </div>
+                                            <div className='flex '>
+                                                {
+                                                    StarPrint(item?.rating)
+                                                }
+                                            </div>
+                                        </div>
 
-                            <div className='text-left mt-2 text-sm'>“{item?.review}”</div>
-                        </div>
-</>)
-                        })
-                    }
-                      
+                                        <div className='text-left mt-2 text-sm'>“{item?.review}”</div>
+                                    </div>
+                                </>)
+                            })
+                        }
+
                     </div>
                 </div>
 
