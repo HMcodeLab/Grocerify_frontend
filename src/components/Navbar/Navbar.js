@@ -144,7 +144,7 @@ const Navbar = () => {
                     <p>Delivery to</p><h5>{location}</h5>
 
                 </div>
-                {userDetail?._id && <div className='text-white'>
+                {userDetail?._id && window.innerWidth > 800 && <div className='text-white'>
                     Hello ,  {userDetail.firstName}
                 </div>}
                 <div className={styles.icons}>

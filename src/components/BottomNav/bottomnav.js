@@ -27,9 +27,9 @@ const BottomNav = () => {
           <span onClick={() => router("/")}>
             <Home />
           </span>
-          <span onClick={() => router("/products")}>
+          {/* <span onClick={() => router("/products")}>
             <List />
-          </span>
+          </span> */}
 
           {userDetail?._id ? <span onClick={() => router("/cart")}>
             <Cart />
