@@ -98,7 +98,7 @@
 .icons {
   display: flex;
   font-family: var(--primary-font);
-  gap: 3.5vw;
+  gap: 2.5vw;
   align-items: center;
 }
 .icons span {

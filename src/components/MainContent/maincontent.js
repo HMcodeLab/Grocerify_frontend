@@ -50,7 +50,7 @@ const MainContent = () => {
                         autoplay: true,
                         interval: 2000,
                         speed: 1000,
-                        delay: 4,
+                        delay: 2,
                         pauseOnHover: false,
                         drag: true,
                         pauseOnHover: true,

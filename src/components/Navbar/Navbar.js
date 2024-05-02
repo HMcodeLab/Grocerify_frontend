@@ -22,12 +22,8 @@ const Navbar = () => {
     const [searchInput, setSearchInput] = useState('');
     const [searchOutputData, setSearchOutputData] = useState();
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
-    // console.log(cartData)
-    // useEffect(() => {
-    //     GetCart()
-    //     GetWishList()
-    //     settoken(localStorage.getItem('GROC_USER_TOKEN'))
-    // }, [localStorage.getItem('GROC_USER_TOKEN')])
+    console.log(userDetail)
+
 
 
     const getLocationAddress = async (lati, longi) => {
@@ -148,6 +144,9 @@ const Navbar = () => {
                     <p>Delivery to</p><h5>{location}</h5>
 
                 </div>
+                {userDetail?._id && <div className='text-white'>
+                    Hello <br /> {userDetail.firstName}
+                </div>}
                 <div className={styles.icons}>
                     <Link to={'/wishlist'}>  <span>
                         <Wishlist />

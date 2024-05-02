@@ -27,3 +27,23 @@ a {
   text-decoration: none;
   color: unset;
 }
+
+._3Ifyx {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0rem !important;
+  padding: 0em !important;
+  font-size: 2em;
+}
+._3Ifyx input {
+  border: none !important;
+}
+.css-13cymwt-control {
+  border-width: 0.5px;
+  border-color: rgba(223, 222, 222, 0.8) !important;
+}
+
+._3sXmFundefined {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

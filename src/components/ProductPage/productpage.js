@@ -77,10 +77,10 @@ const ProductPage = (props) => {
                             wheel: false,
                             arrows: false,
                             autoplay: true,
-                            interval: 5000,
-                            speed: 6000,
-                            delay: 3,
-                            pauseOnHover: false,
+                            interval: 2000,
+                            speed: 1000,
+                            delay: 2,
+                            pauseOnHover: true,
                             drag: true,
 
                         }}>

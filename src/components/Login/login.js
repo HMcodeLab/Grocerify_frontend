@@ -33,6 +33,7 @@ const Login = () => {
 
             if (!validateEmail(user.email)) {
                 toast.error('Enter valid Email  Address')
+                setBtnLoader(false)
             }
             else {
                 try {
@@ -78,6 +79,10 @@ const Login = () => {
                     console.log(res);
 
                     toast.success('Login Successfull')
+                    getUserDetails()
+
+                    GetCart()
+                    GetWishList()
                     navigate('/')
                     localStorage.setItem('GROC_USER_TOKEN', res.data.token)
                 } catch (error) {

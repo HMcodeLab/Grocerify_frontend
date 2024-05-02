@@ -62,13 +62,16 @@ const Register = () => {
                 console.log(res);
                 localStorage.setItem('GROC_USER_TOKEN', res.data.token)
                 if (res.status === 201) {
-                    toast.success('Registered Successfully')
                     navigate('/login');
+                    setTimeout(() => {
+                        toast.success('Registered Successfully')
+
+                    }, 1000);
                 }
             } catch (error) {
 
-                console.log(error)
-                toast.error("Register Failed")
+                console.log(error.response)
+                toast.error(error.response.data.error)
             } finally {
                 setBtnLoader(false)
             }

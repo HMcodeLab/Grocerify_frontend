@@ -2,12 +2,21 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { BASE_URL } from "../../Api/api"
 import Spinner from "../Spinner"
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
+import toast, { Toaster } from "react-hot-toast";
+import {
+        CountrySelector,
+        StateSelector,
+        CitySelector,
+} from "volkeno-react-country-state-city";
+import "volkeno-react-country-state-city/dist/index.css";
 
-import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function AddAddress() {
-        const [country, setcountry] = useState()
+        const [country, setcountry] = useState("");
+        const [state, setstate] = useState("");
+
         const [full_name, setfull_name] = useState()
         const [mobile, setmobile] = useState()
         const [zip, setzip] = useState()
@@ -15,42 +24,36 @@ export default function AddAddress() {
         const [address_line_2, setaddress_line_2] = useState()
         const [landmark, setlandmark] = useState()
         const [city, setcity] = useState()
-        const [state, setstate] = useState()
+
         const [make_default, setmake_default] = useState(false)
         const [show, setshow] = useState(false)
         const navigate = useNavigate()
 
+
+
         async function Addaddress() {
 
                 try {
-                        if (mobile.toString().length != 10) {
+                        if (!full_name || !mobile || !country || !zip || !address_line_1 || !address_line_2 || !city || !state) {
+                                toast.error("Every input field must be filled")
+                                return;
+                        }
+
+                        if (mobile?.toString().length != 10) {
                                 toast.error("Mobile Number is not valid")
                                 return;
                         }
 
-                        if (!full_name || !mobile || !country || !zip || !address_line_1 || !address_line_2 || !city || !state) {
-                                toast.warn('Every input must be filled', {
-                                        position: "top-center",
-                                        autoClose: 1000,
-                                        hideProgressBar: false,
-                                        closeOnClick: true,
-                                        pauseOnHover: false,
-                                        draggable: true,
-                                        progress: undefined,
-                                        theme: "colored",
-                                        // transition: 'Bounce'
-                                });
-                                return;
-                        }
+
                         else {
                                 setshow(true)
                                 let temp = localStorage.getItem('GROC_USER_TOKEN')
 
 
-                                // console.log(temp)
+                                console.log(temp)
 
                                 let url = `${BASE_URL}api/addaddress`
-                                let address1 = { address: { full_name, city, state, landmark, address_line_1, address_line_2, country, mobile, zip }, make_default }
+                                let address1 = { address: { full_name, city: city.name, state: state.name, landmark, address_line_1, address_line_2, country: country.name, mobile, zip }, make_default }
 
                                 //     console.log(stringifyObject(address1))
                                 const data = await fetch(url, {
@@ -60,31 +63,11 @@ export default function AddAddress() {
                                 });
                                 let response = await data.json()
                                 if (response.success) {
-                                        toast.success('Address Saved Successfully', {
-                                                position: "top-center",
-                                                autoClose: 1000,
-                                                hideProgressBar: false,
-                                                closeOnClick: true,
-                                                pauseOnHover: false,
-                                                draggable: true,
-                                                progress: undefined,
-                                                theme: "colored",
-                                                // transition: 'Bounce'
-                                        });
+                                        toast.success('Address Saved Successfully');
                                         navigate(-1)
                                 }
                                 else {
-                                        toast.error('Server error', {
-                                                position: "top-center",
-                                                autoClose: 1000,
-                                                hideProgressBar: false,
-                                                closeOnClick: true,
-                                                pauseOnHover: false,
-                                                draggable: true,
-                                                progress: undefined,
-                                                theme: "colored",
-                                                // transition: 'Bounce'
-                                        });
+                                        toast.error('Server error');
                                 }
                         }
                 } catch (error) {
@@ -94,21 +77,18 @@ export default function AddAddress() {
 
                 setshow(false)
         }
+        const handleCountryChange = (e) => {
+                setcountry(e);
+        };
+        const handleStateChange = (e) => {
+                setstate(e);
+        };
+        const handleCityChange = (e) => {
+                setcity(e);
+        };
 
         return (<>
-                <ToastContainer
-                        position="top-center"
-                        autoClose={1000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover={false}
-                        theme="colored"
-                // transition: Bounce
-                />
+                <Toaster />
                 <div className="flex font-semibold text-[#848484] pl-20 pt-3">
                         <Link to='/account' className="text-[#848484]">Your Account &gt;</Link>
                         <Link to='/security' className="">Your Addresses &gt;</Link>
@@ -118,10 +98,7 @@ export default function AddAddress() {
                         <div className="w-[40%] ">
                                 <div className="font-bold text-[#848484] text-[32px] my-2 text-center fontgobs" >Add Address</div>
                                 <div className="w-full text-[#848484] space-y-5 fontmons">
-                                        <label htmlFor="country" className="w-full shadow-md py-2 px-4">
-                                                <p className="font-semibold">Country</p>
-                                                <input required type="text" id="country" name="country" value={country} onChange={(e) => setcountry(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
-                                        </label>
+
                                         <label htmlFor="full_name" className="w-full shadow-md py-2 px-4">
                                                 <p className="font-semibold">Full Name</p>
                                                 <input required id="full_name" name="full_name" type="text" value={full_name} onChange={(e) => setfull_name(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
@@ -144,16 +121,43 @@ export default function AddAddress() {
                                         </label>
                                         <label htmlFor="Landmark" className="w-full shadow-md py-2 px-4">
                                                 <p className="font-semibold">Landmark</p>
-                                                <input required id="Landmark" name="Landmark" type="text" value={landmark} onChange={(e) => setlandmark(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
+                                                <input required id="Landmark" name="Landmark" type="text" value={landmark} onChange={(e) => setlandmark(e.target.value)} className="w-full mt-2 outline-none border-[1px] pl-2 py-1" />
+                                        </label>
+                                        <label htmlFor="country" className="w-full shadow-md py-2 px-4">
+                                                <p className="font-semibold">Country</p>
+                                                {/* <input required type="text" id="country" name="country" value={country} onChange={(e) => setcountry(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" /> */}
+                                                <CountrySelector
+                                                        onChange={handleCountryChange}
+                                                        name="country"
+                                                        placeholder="Select a country"
+                                                        value={country}
+                                                        className=""
+                                                        styleContainer={{ padding: "0px !important" }}
+                                                />
                                         </label>
                                         <div className="flex w-full">
                                                 <label htmlFor="city" className="w-full shadow-md py-2 px-4">
-                                                        <p className="font-semibold">city / city </p>
-                                                        <input required id="city" name="city" type="text" value={city} onChange={(e) => setcity(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
+
+                                                        <p className="font-semibold">State</p>
+                                                        {/* <input required id="city" name="city" type="text" value={city} onChange={(e) => setcity(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" /> */}
+                                                        <StateSelector
+                                                                country={country}
+                                                                value={state}
+                                                                countryPlaceholder="Select state"
+                                                                onChange={handleStateChange}
+                                                                styleContainer={{ padding: "0px !important" }}
+                                                        />
                                                 </label>
                                                 <label htmlFor="state" className="w-full shadow-md py-2 px-4">
-                                                        <p className="font-semibold">State</p>
-                                                        <input required id="state" name="state" type="text" value={state} onChange={(e) => setstate(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
+                                                        <p className="font-semibold">city</p>
+                                                        {/* <input required id="state" name="state" type="text" value={state} onChange={(e) => setstate(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" /> */}
+                                                        <CitySelector
+                                                                state={state}
+                                                                value={city}
+                                                                statePlaceholder="Select City"
+                                                                onChange={handleCityChange}
+                                                                placeholder="Select City"
+                                                        />
                                                 </label>
                                         </div>
                                         <div className="flex space-x-1">
