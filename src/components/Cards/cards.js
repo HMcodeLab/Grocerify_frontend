@@ -183,7 +183,7 @@ const Cards = (value) => {
             <Link to={`/product/${value.value.slug}`}>
                 <div className={styles.card_container} >
 
-                    <div className={styles.inner_card_container}>
+                    <div className={styles.inner_card_container} onClick={() => setShowHeartPopup(true)}>
 
                         <div className={styles.image_container}>
                             <img src={value.value?.product_primary_image_url} alt="" />
@@ -197,6 +197,7 @@ const Cards = (value) => {
 
                             </span>
                             <span className={styles.stars}>
+                                <Star />
                                 <Star />
                                 <Star />
                                 <Star />
@@ -252,16 +253,7 @@ const Cards = (value) => {
                                     </li>
                                 ))}
                             </ul>
-                            {showHeartPopup && (
-                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-120px] ">
-                                    <div
-                                        className="p-4 rounded-lg border-gray-300"
-                                        style={{ width: `${heartSize}px`, height: `${heartSize}px` }}
-                                    >
-                                        <img src="/wish_lg.svg" alt="" />
-                                    </div>
-                                </div>
-                            )}
+
                             {showBasketPopup && (
                                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-200px]">
                                     <div
@@ -275,11 +267,23 @@ const Cards = (value) => {
                                     </div>
                                 </div>
                             )}
+                            {showHeartPopup && (
+                                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-120px]">
+                                    <div
+                                        className="p-4 rounded-lg border-gray-300"
+                                        style={{
+                                            width: `${heartSize} px`, height: `${heartSize}px`,
+                                        }}
+                                    >
+                                        <img src="/wish_lg.svg" alt="" />
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                     </div>
                 </div >
-            </Link>
+            </Link >
         </>
     )
 }

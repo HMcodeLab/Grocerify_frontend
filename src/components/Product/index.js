@@ -2,7 +2,7 @@ import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Down } from '../../Assets/Icons/down.svg'
 import { ReactComponent as Box } from '../../Assets/Icons/chatbox.svg'
 import { ReactComponent as Emptystar } from '../../Assets/Icons/emptystar.svg'
-import { FaPlus } from "react-icons/fa6";
+import { FaAngleDown, FaAngleUp, FaPlus, FaUpDown } from "react-icons/fa6";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './product.css'
@@ -25,7 +25,7 @@ export default function Product() {
     const params = useParams();
 
     const [image, setimage] = useState('/mobile.png')
-    const [show, setshow] = useState('h-23')
+    const [show, setshow] = useState('h-[4rem]')
     const [reportshow, setreportshow] = useState('hidden')
     const [reportValue, setreportValue] = useState('')
     const [showdelivery, setshowdelivery] = useState('hidden')
@@ -69,10 +69,7 @@ export default function Product() {
         Fetchdata()
     }, [primaryRef.current, secondaryRef.current])
 
-    function Showmore() {
-        // console.log('hello')
-        setshow('h-auto')
-    }
+
     function ShowDeliveryContent() {
         if (showdelivery == 'hidden') {
             setshowdelivery('')
@@ -111,7 +108,7 @@ export default function Product() {
     }
 
     const handleBuy = async (storeid) => {
-        console.log(Data)
+        // console.log(Data)
         let temp = [];
         temp.push({ productid: Data._id, price: Data.stores[0].variants1_mrp_price, discount: Data.stores[0].variants1_discount_per, quantity: 1, shopid: storeid })
 
@@ -121,7 +118,7 @@ export default function Product() {
     }
 
 
-    // console.log(Data)
+    console.log(Data.products_description?.length)
 
     return (<>
         {/* <Extra /> */}
@@ -191,7 +188,7 @@ export default function Product() {
                                                         variants1_discount_per}%</div>
                                                     <div className='text-[8px]'>off</div>
                                                 </div>
-                                                <img className='max-h-52 max-w-32' src={item.store.shop_primary_image_url} />
+                                                <img className='max-h-52 max-w-32' src={item?.store?.shopImages[0]} />
 
                                             </div>
                                             <div className='flex flex-col w-full fontmont text-[#848484] gap-2'>
@@ -259,12 +256,19 @@ export default function Product() {
                             }</li>
 
                         </ul>
-                        {show === "h-23" && (Data.products_description?.length > 100) &&
-                            <button className='flex items-center space-x-1' onClick={Showmore}>
-                                <Down />
+                        {show === "h-[4rem]" && (Data.products_description?.length > 150) &&
+                            <button className='flex items-center space-x-1' onClick={() => setshow('h-auto')}>
+                                <FaAngleDown />
                                 <div className='font-semibold'>Show more</div>
                             </button>
                         }
+                        {show === "h-auto" &&
+                            <button className='flex items-center space-x-1' onClick={() => setshow('h-[4rem]')}>
+                                <FaAngleUp />
+                                <div className='font-semibold'>Show Less</div>
+                            </button>
+                        }
+
 
                     </div>
 
@@ -295,12 +299,12 @@ export default function Product() {
                             <Emptystar />
                             <Emptystar />
                             <Emptystar />
-                            <Emptystar />
+                            
                         </div>
                     </div>
 
                     <div className='flex justify-between mt-2 w-full  sm:px-4 '>
-                        <div className='flex flex-col gap-2 w-[40%]'>
+                        {/* <div className='flex flex-col gap-2 w-[40%]'>
                             <div className='flex w-full justify-between   '>
                                 <div className='w-[47%] border' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img className='w-full h-full' src='/apple.png' /></div>
                                 <div className='w-[47%] border' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img className='w-full h-full' src='/apple.png' /></div>
@@ -310,9 +314,9 @@ export default function Product() {
                                 <div className='w-[47%] border' data-bs-toggle="modal" href="#exampleModalToggle" role="button"><img className='w-full h-full' src='/apple.png' /></div>
 
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className=' fontmont w-[55%]'>
+                        <div className=' fontmont w-full'>
                             <div className='flex justify-between'>
                                 <div className='flex space-x-3 items-center'>
                                     <div className='rounded-full h-8 w-8 border bg-slate-400 flex justify-center items-center'>
@@ -329,7 +333,7 @@ export default function Product() {
                                 </div>
                             </div>
 
-                            <div className='text-center mt-2 text-sm'>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”</div>
+                            <div className='text-left mt-2 text-sm'>“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”</div>
                         </div>
                     </div>
                 </div>

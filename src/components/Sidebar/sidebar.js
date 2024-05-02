@@ -48,7 +48,9 @@ const Sidebar = (category) => {
     return (
         <div className={styles.main_sidebar} >
             <div className={styles.categories_main}>
-                <span className={styles.heading} onClick={() => { isDropdownOpen === 1 ? setIsDropdownOpen(null) : setIsDropdownOpen(1) }}>
+                <span className={styles.heading}
+                // onClick={() => { isDropdownOpen === 1 ? setIsDropdownOpen(null) : setIsDropdownOpen(1) }}
+                >
                     <span>
 
                         <List />
@@ -63,12 +65,11 @@ const Sidebar = (category) => {
                             <ul key={1}>
                                 {/* <a href={'/products?category=Clothing'}> <li>Clothing</li></a> */}
                                 <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
-                                <a href={'/products?category=Shoes'}> <li>Shoes</li></a>
-                                <a href={'/products?category=Health and Beauty'}> <li>Health</li></a>
-                                <a href={'/products?category=Beauty'}> <li>Beauty</li> </a>
-                                <a href={'/products?category=Kids'}> <li>Kids</li> </a>
-                                <a href={'/products?category=sports'}>  <li>Sports</li></a>
-                                <a href={'/products?category=Home Decor'}>  <li>Home Decor</li></a>
+                                <a href={'/products?category=Grocery'}> <li>Groceries</li></a>
+                                <a href={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></a>
+                                <a href={'/products?category=dairy'}> <li>Dairy</li> </a>
+                                <a href={'/products?category=frozen'}>  <li>Frozen</li></a>
+                                <a href={'/products?category=poultary'}>  <li>Poultary</li></a>
                             </ul> : <ul>
                                 {
                                     subCategory.map((val, ind) => {

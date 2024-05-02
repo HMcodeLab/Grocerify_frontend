@@ -5,7 +5,7 @@ const PaymentOptions = () => {
   return (
     <div className="mt-4 ml-20 mr-20 mb-10 flex flex-col space-y-5 font-Montserrat">
       <div className="flex flex-row text-center">
-        <Link to={"/"} className="font-semibold text-[#848484]">
+        <Link to={"/account"} className="font-semibold text-[#848484]">
           Your Account {" >"}
         </Link>
         <p className="bg-light-green ml-2 text-[#55A813]">
@@ -56,7 +56,7 @@ const PaymentOptions = () => {
       <div className="flex flex-col pt-6 pl-8 pb-6 rounded-md border space-y-6">
         <div className="flex flex-row space-x-32">
           <p className="text-3xl text-[#848484]">
-          Your purchase preference {" "}
+            Your purchase preference {" "}
           </p>
           <p className="text-[#55A813] pt-2">Set As Default Preference</p>
         </div>

@@ -13,7 +13,7 @@ export default function MyOrders() {
     return (<>
         <div className="px-20 w-full pt-3">
             <div className="flex fontmons">
-                <div className='text-[#848484] fontmons font-semibold'>Your Account &gt;</div>
+                <Link to={'/account'} className='text-[#848484] fontmons font-semibold'>Your Account &gt;</Link>
                 <div className='text-[#58B310] fontmons'>Your Orders</div>
             </div>
 
