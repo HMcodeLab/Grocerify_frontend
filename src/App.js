@@ -36,7 +36,7 @@ function App() {
         let url = BASE_URL + `api/getcart?mobile=${userDetail?.mobile}`
         const data = await fetch(url)
         const response = await data.json()
-        console.log(response.cart[0])
+        console.log(response.cart)
         setCartData(response?.cart || [])
       } catch (error) {
         console.log(error)

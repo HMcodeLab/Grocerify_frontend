@@ -99,7 +99,7 @@ const StoreProduct = () => {
               {shopData?.openingHours?.from} am - {shopData?.openingHours?.to}pm(Today)
             </p>
           </div>
-          <div className="flex flex-row gap-2">
+          {/* <div className="flex flex-row gap-2">
             <button className="flex flex-row items-center bg-[#D9D9D9] font-semibold text-[#000000] text-[14px] font-Montserrat rounded-md pl-2 pr-2 pt-1 pb-1 gap-1">
               {" "}
               <span>
@@ -124,7 +124,7 @@ const StoreProduct = () => {
               </span>{" "}
               Share
             </button>
-          </div>
+          </div> */}
         </div>
         <div>
           {" "}
@@ -148,7 +148,7 @@ const StoreProduct = () => {
               />
             </div>
           </div>
-          <div className="flex flex-row gap-4">
+          {/* <div className="flex flex-row gap-4">
             <div className="w-[200px] bg-[#58B310] text-[#FFFFFF] text-[16px] pl-2 pt-1 pb-1 pr-2 rounded-md font-semibold font-Montserrat">
               30% OFF up to ₹75 use code FEAST
             </div>
@@ -161,7 +161,7 @@ const StoreProduct = () => {
             <div className="w-[200px] bg-[#58B310] text-[#FFFFFF] text-[16px] pl-2 pt-1 pb-1 pr-2 rounded-md font-semibold font-Montserrat">
               30% OFF up to ₹75 use code FEAST
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* products */}
@@ -213,42 +213,37 @@ const StoreProduct = () => {
             <div className="p-4 hover:bg-[#f3f3f3] space-y-1 transform transition-transform duration-300 ease-in-out hover:scale-105">
               <img src="../assests/images/ratingimg1.svg" className="w-full" />
               <div className="flex flex-row justify-between text-xl">
-                <h4 className="font-Gorditas text-[#000000]">Nemo enim</h4>
+                <h4 className="font-Gorditas text-[#000000]">Nemo Singh</h4>
                 <span className="text-[#FFB800]">
                   &#9733;&#9733;&#9733;&#9733;&#9734;
                 </span>
               </div>
               <p className="font-andika text-sm pb-4">
-                “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis…”
+                “As a busy professional, I rely heavily on online shopping for my everyday needs, and this store has become my go-to destination. ”
               </p>
             </div>
             <div className="p-4 hover:bg-[#f3f3f3] space-y-1 transform transition-transform duration-300 ease-in-out hover:scale-105">
               <img src="../assests/images/ratingimg2.svg" className="w-full" />
               <div className="flex flex-row justify-between text-xl">
-                <h4 className="font-Gorditas text-[#000000]">Amlo Sinha</h4>
+                <h4 className="font-Gorditas text-[#000000]">Anmol Sinha</h4>
                 <span className="text-[#FFB800]">
                   &#9733;&#9733;&#9733;&#9733;&#9734;
                 </span>
               </div>
               <p className="font-andika text-sm">
-                “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis…”
+                “ I've been using this online store for a while now, and I'm always impressed with the wide selection of products available. Whether it's groceries, electronics, or household items, they seem to have everything I need. ”
               </p>
             </div>
             <div className="p-4 hover:bg-[#f3f3f3] space-y-1 transform transition-transform duration-300 ease-in-out hover:scale-105">
               <img src="../assests/images/ratingimg3.svg" className="w-full" />
               <div className="flex flex-row justify-between text-xl">
-                <h4 className="font-Gorditas text-[#000000]">Mauscosf</h4>
+                <h4 className="font-Gorditas text-[#000000]">Naina Sharma</h4>
                 <span className="text-[#FFB800]">
                   &#9733;&#9733;&#9733;&#9733;&#9734;
                 </span>
               </div>
               <p className="font-andika text-sm">
-                “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis…”
+                “I recently had an issue with an order I placed, and I was pleasantly surprised by the exceptional customer service I received from this online store.”
               </p>
             </div>
           </div>

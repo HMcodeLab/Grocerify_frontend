@@ -97,10 +97,11 @@ export default function Checkout() {
     }
 
     const createOrder = async (val) => {
+        console.log(val)
         let temp2 = [];
         // console.log(val)
-        val.forEach((val) => {
-            temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid._id });
+        val?.forEach((val) => {
+            temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid });
         })
         // console.log("value", val)
         // console.log(temp2)
@@ -121,11 +122,12 @@ export default function Checkout() {
                     'Authorization': ` Bearer ${localStorage.getItem('GROC_USER_TOKEN')}`
                 }
             })
-            // console.log(res)
+            console.log(res)
             setbtnLoader(false)
             toast.success("Order Placed Successfully");
             navigate('/success')
         } catch (error) {
+            console.log(error)
             setbtnLoader(false)
             toast.error("An ");
         }
@@ -203,8 +205,8 @@ export default function Checkout() {
 
                         {userDetail?.address.map((val, ind) => {
                             return (
-                                <label htmlFor='address1' className='space-x-2' key={ind}>
-                                    <input className='accent-[#58B310]' type='radio' name={ind} id='address1' onChange={handleChangeAddress} checked={selectedAddress === Number(ind)} />
+                                <label htmlFor={`address${ind}`} className='space-x-2' key={ind}>
+                                    <input className='accent-[#58B310]' type='radio' name={ind} id={`address${ind}`} onChange={handleChangeAddress} checked={selectedAddress === Number(ind)} />
                                     <span className='cursor-pointer'>{val.full_name} , {val?.mobile} , {val?.zip} , {val?.address_line_1} , {val?.address_line_2} , {val.landmark},{val.city},{val?.state} </span>
                                 </label>
                             )

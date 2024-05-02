@@ -145,7 +145,7 @@ const Navbar = () => {
 
                 </div>
                 {userDetail?._id && <div className='text-white'>
-                    Hello <br /> {userDetail.firstName}
+                    Hello ,  {userDetail.firstName}
                 </div>}
                 <div className={styles.icons}>
                     <Link to={'/wishlist'}>  <span>

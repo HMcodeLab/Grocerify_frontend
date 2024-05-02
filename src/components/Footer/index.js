@@ -11,7 +11,16 @@ import Mask from '../../Assets/Icons/Mask.svg'
 import WhatsappFooter from '../../Assets/Icons/whatsapp_footer.svg'
 import { Link } from 'react-router-dom'
 import './footer.css'
+import { useEffect } from 'react'
 export default function Footer() {
+
+
+    const handelClick = () => {
+
+        window.scrollTo(0, 0)
+
+    }
+
     return (<>
         <div className="h-fit w-full  bg-[#333333] text-white  pt-10 font ">
             <div className='flex justify-between mx-[5vw]'>
@@ -57,7 +66,7 @@ export default function Footer() {
                 <div className=" text-[#FFFFFF] flex flex-col  space-y-4 sm:space-y-3 ">
                     <Link className='font' to={'/about'}>About Us</Link>
                     <Link className='font' to={'/contact_us'}>Contact Us</Link>
-                    <Link className='font' to='/about#teams'>Our Team</Link>
+                    {/* <Link className='font' to='/about#teams'>Our Team</Link> */}
 
                 </div>
 

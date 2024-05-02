@@ -134,6 +134,7 @@ const Cards = (value) => {
     }, [showHeartPopup, showBasketPopup, heartDirection, basketDirection]);
 
     const handleIconClick = (e, index) => {
+        handleClickAction(e)
         e.preventDefault()
         setActive(index);
         if (Menus[index].name === "Like") {
@@ -141,6 +142,7 @@ const Cards = (value) => {
         } else if (Menus[index].name === "Card") {
             setShowBasketPopup(true);
         }
+
     };
 
     const handleClick = (e) => {
@@ -148,7 +150,7 @@ const Cards = (value) => {
     }
 
     const handleClickAction = (e) => {
-        console.log(e.target.name)
+        console.log(e)
         if (e.target.name === 'basket-outline') {
 
             if (localStorage.getItem('GROC_USER_TOKEN')) {
@@ -183,7 +185,7 @@ const Cards = (value) => {
             <Link to={`/product/${value.value.slug}`}>
                 <div className={styles.card_container} >
 
-                    <div className={styles.inner_card_container} onClick={() => setShowHeartPopup(true)}>
+                    <div className={styles.inner_card_container}>
 
                         <div className={styles.image_container}>
                             <img src={value.value?.product_primary_image_url} alt="" />
@@ -214,17 +216,17 @@ const Cards = (value) => {
                                     <span className="w-3.5 h-3.5 bg-transparent absolute top-4 -right-[18px] rounded-tl-[11px] shadow-myShadow2"></span>
                                 </span>
                                 {Menus.map((menu, index) => (
-                                    <li key={index} className="w-16">
+                                    <li key={index} className="w-16" onClick={(e) => { handleIconClick(e, index) }}>
                                         <a
                                             className="flex flex-col text-center pt-6"
-                                            onClick={(e) => handleIconClick(e, index)}
+
                                         >
                                             <span
                                                 className={`text-xl cursor-pointer duration-500 ${index === active && "-mt-6 text-white"
                                                     }`}
                                                 onMouseEnter={() => setActive(index)}
                                                 onMouseLeave={() => setActive(active)}
-                                                onClick={handleClickAction}
+
                                             >
                                                 {
                                                     menu.icon == 'share-outline' ? <RWebShare
