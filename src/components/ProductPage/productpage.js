@@ -61,6 +61,7 @@ const ProductPage = (props) => {
 
     useEffect(() => {
         fetchData();
+        // window.location.reload()
     }, [searchParams.get('category')])
 
     return (
@@ -89,6 +90,9 @@ const ProductPage = (props) => {
                         </SplideSlide>
                         <SplideSlide>
                             <img src={getCategoryBanner(searchParams.get('category'))[1]} alt="banner  not found" />
+                        </SplideSlide>
+                        <SplideSlide>
+                            <img src={getCategoryBanner(searchParams.get('category'))[2]} alt="banner  not found" />
                         </SplideSlide>
 
                     </Splide>

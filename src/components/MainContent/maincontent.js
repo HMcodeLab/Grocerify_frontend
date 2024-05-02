@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './maincontent.module.css'
-import Heroimage from '../../Assets/Images/heroimage.png'
+import Heroimage from '../../Assets/Images/groceryBanner.png'
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import Products from '../Products/products';
@@ -12,7 +12,6 @@ import banner3 from '../../Assets/Images/banner3.png'
 import grocery2 from '../../Assets/Images/grocery2.png'
 import electronicsBanner from '../../Assets/Images/electronicsBanner.png'
 import serum from '../../Assets/Images/products/serum.png'
-import makeup from '../../Assets/Images/products/makeup2.png'
 import banner_shirt from '../../Assets/Images/banner_shirt.jpg'
 import { BASE_URL } from '../../Api/api';
 
@@ -37,7 +36,7 @@ const MainContent = () => {
 
     return (
 
-        <div className={styles.hero_carousel_main} style={{ display: "flex", flexDirection: "column", gap: "20px", padding: "40px 40px", backgroundColor: "#F3F3F3" }} >
+        <div className={styles.hero_carousel_main} style={{ display: "flex", flexDirection: "column", gap: "20px", padding: "20px 40px", backgroundColor: "#F3F3F3" }} >
             <div className={styles.hero_image}>
                 <Splide
                     options={{
