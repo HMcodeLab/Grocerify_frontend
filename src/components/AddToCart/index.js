@@ -39,7 +39,7 @@ export default function Addtocart() {
 
 
     async function OrderSummery() {
-        console.log(cartData)
+        // console.log(cartData)
 
         try {
             const final = cartData;
