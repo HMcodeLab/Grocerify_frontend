@@ -240,12 +240,10 @@ const Frequency = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  overflow-x: hidden;
   font-family: Arial, Helvetica, sans-serif;
 
   .nav {
     width: 25%;
-    height:400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -256,6 +254,7 @@ const Wrapper = styled.div`
 
   .nav ul {
     position: sticky;
+    top: 90px;
     list-style-type: none;
     margin: 0;
     padding: 0;
