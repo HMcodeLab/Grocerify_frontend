@@ -19,6 +19,7 @@ import axios from 'axios';
 import { ReactComponent as Starfilled } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
 import { ReactComponent as Empty } from '../../Assets/Icons/emptystar.svg'
+import { getDateAfterFiveDays } from '../../helpers/helper_function';
 
 export default function Product() {
     const navigate = useNavigate();
@@ -163,13 +164,13 @@ export default function Product() {
                                     Data.products_title
                                 }
                             </div>
-                            <div className="flex space-x-2">
+                            {/* <div className="flex space-x-2">
                                 <Star />
                                 <Star />
                                 <Star />
                                 <Star />
                                 <Star />
-                            </div>
+                            </div> */}
 
 
                         </div>
@@ -247,24 +248,21 @@ export default function Product() {
                     <div className=' fontmont text-[#848484] space-y-1 mt-5 sm:px-4'>
                         <div className='flex justify-between'>
                             <div>Brand</div>
-                            <div className='text-end'>Apple</div>
+                            <div className='text-end'>{Data?.brand}</div>
                         </div>
                         <div className='flex justify-between'>
-                            <div>Model</div>
-                            <div className='text-end'>iPhone 7</div>
+                            <div>Category</div>
+                            <div className='text-end'>{Data?.parent_category_name}</div>
                         </div>
                         <div className='flex justify-between'>
-                            <div>Network Service Provider</div>
-                            <div className='text-end'>Unlocked For All Carriers</div>
+                            <div>Weight</div>
+                            <div className='text-end'>{Data?.variants1_weight}</div>
                         </div>
                         <div className='flex justify-between'>
-                            <div>Operating System</div>
-                            <div className='text-end'>iOS</div>
+                            <div>sub category</div>
+                            <div className='text-end'>{Data?.sub_category_name}</div>
                         </div>
-                        <div className='flex justify-between'>
-                            <div>Cellular Technology</div>
-                            <div className='text-end'>5G</div>
-                        </div>
+
                     </div>
 
                     <div className='fontmont text-[#848484] mt-4 py-2 sm:px-4 border-t-2'>
@@ -300,7 +298,7 @@ export default function Product() {
                     <div className={`fontmont text-[#848484] pl-5  sm:px-4 ${showdelivery}`}>
                         <div className='font-semibold'>This product will delivered to you</div>
                         <ul className='pl-8'>
-                            <li className='list-disc'>By 22 Feburary</li>
+                            <li className='list-disc'>By {getDateAfterFiveDays()}</li>
                         </ul>
                         <div>
                             <div className='font-semibold'>This product is not refundable</div>
@@ -313,13 +311,13 @@ export default function Product() {
 
                     <div className='flex w-full justify-between py-4  border-t-2 fontmont  text-[#848484] text-[16px]  sm:px-4'>
                         <div>Reviews</div>
-                        <div className='flex'>
+                        {/* <div className='flex'>
                             <Emptystar />
                             <Emptystar />
                             <Emptystar />
                             <Emptystar />
 
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className='flex justify-between mt-2 w-full  sm:px-4 '>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import styles from './cards.module.css'
 import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
-import { ReactComponent as Wishlist } from '../../Assets/Icons/wishlist_green.svg'
 
-import { colorCombo } from '../../Data/db'
 import { Globalinfo } from '../../App';
 import { BASE_URL } from '../../Api/api';
 
@@ -12,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { cropString } from '../../helpers/helper_function'
 import { RWebShare } from 'react-web-share';
 import { useLocation, useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast'
 
 const Cards = (value) => {
     const location = useLocation()
@@ -51,8 +50,12 @@ const Cards = (value) => {
                 body: JSON.stringify(bodydata)
             });
             GetCart()
+            if (data) {
+                toast.success('Added to Cart')
+            }
         } catch (error) {
             console.log(error)
+            toast.error("Failed to add Item ")
         }
 
 
@@ -67,9 +70,13 @@ const Cards = (value) => {
                 body: JSON.stringify(bodydata)
             });
             console.log(data);
+            if (data) {
+                toast.success('Added to Wishlist')
+            }
             GetWishList()
         } catch (error) {
             console.log(error)
+            toast.error('Unable to add Item')
         }
 
 
@@ -182,6 +189,7 @@ const Cards = (value) => {
 
     return (
         <>
+            <Toaster />
             <Link to={`/product/${value.value.slug}`}>
                 <div className={styles.card_container} >
 

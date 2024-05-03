@@ -104,7 +104,7 @@ export default function Footer() {
             </div>
 
             <div className='flex justify-center text-white items-center h-[70px] bg-[#222222] mt-3 font space-x-1'>
-                <div> @ Copy rights are reserved by </div>
+                <div> © Copy rights are reserved by </div>
                 <div className='text-[#58B310]'>Grocerify</div>
             </div>
         </div >

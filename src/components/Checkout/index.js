@@ -231,11 +231,11 @@ export default function Checkout() {
                     <div className='flex flex-col pl-6 space-y-4'>
 
                         <label htmlFor='cod' className='space-x-2'>
-                            <input className='accent-[#58B310]' type='radio' name='cod' id='cod' checked={paymentType === "cod"} onChange={handleChangepayment} />
+                            <input className='accent-[#58B310]' htmlFor='cod' type='radio' name='cod' id='cod' checked={paymentType === "cod"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>Cash On Delivery</span>
                         </label>
-                        <label htmlFor='Pay Online' className='space-x-2'>
-                            <input className='accent-[#58B310]' type='radio' name='online' id='online' checked={paymentType === "online"} onChange={handleChangepayment} />
+                        <label htmlFor='online' className='space-x-2'>
+                            <input className='accent-[#58B310]' htmlFor='online' type='radio' name='online' id='online' checked={paymentType === "online"} onChange={handleChangepayment} />
                             <span className='cursor-pointer'>Pay Online</span>
                         </label>
                     </div>

@@ -116,8 +116,8 @@ const ShopRegistration = () => {
                                     <input type="text" value={sellerDetails.PanCard} name="PanCard" onChange={handleChange} />
                                 </div>
                                 <div className="Form-inputs">
-                                    <label for="OwnerPan">Password</label>
-                                    <input type="text" value={sellerDetails.password} name="password" onChange={handleChange} />
+                                    <label for="Password">Password</label>
+                                    <input type="password" value={sellerDetails.password} name="password" onChange={handleChange} />
                                 </div>
 
                             </span>

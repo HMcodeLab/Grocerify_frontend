@@ -61,109 +61,104 @@ export default function Orders() {
     // console.log(OrderData)
 
 
-function ReviewModal(){
-    const [review, setreview] = useState('')
-    const [rating, setrating] = useState(0)
-    const [spinner, setspinner] = useState(false)
-    let navigate=useNavigate()
-    async function SubmitReview(){
-        try {
-            const body={product,review,rating}
-            setspinner(true)
-            const data=await fetch(BASE_URL+'api/addreview',{
-                method:'POST',
-                headers:{
-                    'Accept':'application/json',
-                    'Authorization':` Bearer ${localStorage.getItem('GROC_USER_TOKEN')}`,
-                    'Content-type':'application/json'
-                },
-                body:JSON.stringify(body)
-            })
-            const response=await data.json()
-            if(!response.error){
-                toast.success(response.message)
-                setspinner(false)
-                setTimeout(() => {
-                    setopenModal(false)
-                }, 1000);
-            }
-            else{
-                toast.error(response.message)
-                setTimeout(() => {
-                    setopenModal(false)
-                }, 1000);
+    function ReviewModal() {
+        const [review, setreview] = useState('')
+        const [rating, setrating] = useState(0)
+        const [spinner, setspinner] = useState(false)
+        let navigate = useNavigate()
+        async function SubmitReview() {
+            try {
+                const body = { product, review, rating }
+                setspinner(true)
+                const data = await fetch(BASE_URL + 'api/addreview', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': ` Bearer ${localStorage.getItem('GROC_USER_TOKEN')}`,
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                })
+                const response = await data.json()
+                if (!response.error) {
+                    toast.success(response.message)
+                    setspinner(false)
+                    setTimeout(() => {
+                        setopenModal(false)
+                    }, 1000);
+                }
+                else {
+                    toast.error(response.message)
+                    setTimeout(() => {
+                        setopenModal(false)
+                    }, 1000);
+
+                }
+                // console.log(response);
+
+            } catch (error) {
 
             }
-            // console.log(response);
-            
-        } catch (error) {
-            
         }
-    }
-        return(<>
-        <div  id="rating" className={`h-[100vh] w-[100vw]   justify-center items-center bg-[#00000099] z-10 fixed  top-0 right-0 ${openModal ? 'flex':'hidden'}`}>
+        return (<>
+            <div id="rating" className={`h-[100vh] w-[100vw]   justify-center items-center bg-[#00000099] z-10 fixed  top-0 right-0 ${openModal ? 'flex' : 'hidden'}`}>
                 <div className="h-[70%] w-[30%] z-50 bg-white rounded-xl ">
                     <div className="w-full flex justify-end p-3">
-                        <RxCross1 className="text-2xl cursor-pointer" onClick={()=>setopenModal(false)} />
+                        <RxCross1 className="text-2xl cursor-pointer" onClick={() => setopenModal(false)} />
                     </div>
-                   
-                   <div className="flex w-full justify-center ">
+
+                    <div className="flex w-full justify-center ">
                         <div className=" w-[80%] flex flex-col space-y-2">
-                        <div className="">
-                        <p className="text-xl font-semibold text-center">Rating</p>
-                        <div className="flex justify-center w-full">
-                        <div class="rating">
-                            <input value="5" onClick={()=>setrating(5)} name="rating" id="star5" type="radio"/>
-                            <label for="star5"></label>
-                            <input value="4" name="rating" onClick={()=>setrating(4)} id="star4" type="radio"/>
-                            <label for="star4"></label>
-                            <input value="3" name="rating" onClick={()=>setrating(3)} id="star3" type="radio"/>
-                            <label for="star3"></label>
-                            <input value="2" name="rating" onClick={()=>setrating(2)} id="star2" type="radio"/>
-                            <label for="star2"></label>
-                            <input value="1" name="rating" onClick={()=>setrating(1)} id="star1" type="radio"/>
-                            <label for="star1"></label>
+                            <div className="">
+                                <p className="text-xl font-semibold text-center">Rating</p>
+                                <div className="flex justify-center w-full">
+                                    <div class="rating">
+                                        <input value="5" onClick={() => setrating(5)} name="rating" id="star5" type="radio" />
+                                        <label for="star5"></label>
+                                        <input value="4" name="rating" onClick={() => setrating(4)} id="star4" type="radio" />
+                                        <label for="star4"></label>
+                                        <input value="3" name="rating" onClick={() => setrating(3)} id="star3" type="radio" />
+                                        <label for="star3"></label>
+                                        <input value="2" name="rating" onClick={() => setrating(2)} id="star2" type="radio" />
+                                        <label for="star2"></label>
+                                        <input value="1" name="rating" onClick={() => setrating(1)} id="star1" type="radio" />
+                                        <label for="star1"></label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className="">
+                                <p className="text-xl font-semibold text-center">Add a review</p>
+                                <textarea value={review} onChange={(e) => setreview(e.target.value)} placeholder="write a review.." className="w-full p-3 focus:outline-none border h-[200px] resize-none overflow-y-auto text-wrap" />
+                            </div>
+
+                            <div className="w-full flex justify-center mb-2 items-center gap-2">
+                                <button className="bg-[#58B310] text-white py-2 px-4 rounded-xl" onClick={SubmitReview}>Submit</button>
+                                {spinner ? <span className='ratingloader'></span> : ''}
+                            </div>
                         </div>
-    
-                        </div>    
                     </div>
-    
-                    <div className="">
-                        <p className="text-xl font-semibold text-center">Add a review</p>
-                        <textarea  value={review} onChange={(e)=>setreview(e.target.value)} placeholder="write a review.."  className="w-full p-3 focus:outline-none border h-[200px] resize-none overflow-y-auto text-wrap"/>
-                    </div>
-    
-                    <div className="w-full flex justify-center mb-2 items-center gap-2">
-                        <button className="bg-[#58B310] text-white py-2 px-4 rounded-xl" onClick={SubmitReview}>Submit</button>
-                       {spinner? <span className='ratingloader'></span>:''}
-                    </div>
-                        </div>
-                   </div>
                 </div>
-        </div>
+            </div>
         </>)
     }
-function Openfun(id){
-    setopenModal(true)
-    setproduct(id)
-}
+    function Openfun(id) {
+        setopenModal(true)
+        setproduct(id)
+    }
     return (<>
 
         <Toaster />
         <div className='my-4 relative '>
-        {
-    openModal?<ReviewModal />:''
-}
+            {
+                openModal ? <ReviewModal /> : ''
+            }
             <div className='flex space-x-4 text-[#848484] text-[16px] mt-4'>
-                {/* <div>1 order placed in</div>
-                <select className='bg-[#F3F3F3] outline-none px-2'>
-                    <option>Past 1 months</option>
-                    <option>Past 3 months</option>
-                    <option>Past 6 months</option>
-                </select> */}
+
             </div>
 
-            {OrderData?.orders.map((val, ind) => {
+            {Array.isArray(OrderData?.orders) && OrderData?.orders?.map((val, ind) => {
                 return (
                     <>
                         <div className='w-full text-[15px] border rounded-t-xl mt-3' key={ind} >
@@ -171,7 +166,7 @@ function Openfun(id){
                                 <div className="flex space-x-40">
                                     <div className="flex flex-col">
                                         <div className="">Order placed</div>
-                                        <div className="">{formatDate(val.ordered_on)}</div>
+                                        <div className="">{formatDate(val?.ordered_on)}</div>
                                     </div>
                                     <div className="flex flex-col">
                                         <div className="">Total</div>
@@ -179,7 +174,7 @@ function Openfun(id){
                                     </div>
                                     <div className="flex flex-col">
                                         <div className="">Shipped To</div>
-                                        <div className="">{val.shipping_address.full_name}</div>
+                                        <div className="">{val?.shipping_address?.full_name}</div>
                                     </div>
                                 </div>
 
@@ -196,14 +191,14 @@ function Openfun(id){
                                 <div className='flex items-center'>
                                     <div className='flex flex-col'>
                                         {/* <div className='text-[20px]'>Arriving Today</div> */}
-                                        <div className='text-[14px]'>{val.status}</div>
+                                        <div className='text-[14px]'>{val?.status}</div>
                                         <div className='h-36 w-36 flex justify-center items-center '>
-                                            <img className='h-[70px] w-auto' src={val.product.product_primary_image_url} />
+                                            <img className='h-[70px] w-auto' src={val?.product?.product_primary_image_url} />
                                         </div>
                                     </div>
                                     <div className='flex flex-col justify-start items-start gap-y-2'>
-                                     <div className='fontgob text-[14px] w-[50vw]'>{val.product.products_title}</div>
-                                   {(val.status == "delivered")?<button onClick={()=>Openfun(val.product._id)} className='text-[#58B310]'>Write a review</button>:''}
+                                        <div className='fontgob text-[14px] w-[50vw]'>{val?.product?.products_title}</div>
+                                        {(val.status == "delivered") ? <button onClick={() => Openfun(val?.product?._id)} className='text-[#58B310]'>Write a review</button> : ''}
                                     </div>
                                 </div>
 

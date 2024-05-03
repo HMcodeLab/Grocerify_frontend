@@ -28,3 +28,29 @@ export const cropString = (str, num) => {
         return result;
     } else return str;
 };
+
+export function getDateAfterFiveDays() {
+    const daysToAdd = 5;
+    const currentDate = new Date();
+    const futureDate = new Date(currentDate);
+    futureDate.setDate(currentDate.getDate() + daysToAdd);
+
+    // Get day and month names
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+
+    // Get day, month, and year
+    const day = futureDate.getDate();
+    const month = months[futureDate.getMonth()];
+    const year = futureDate.getFullYear();
+
+    // Format the date as "dd mmm"
+    const formattedDate = `${day} ${month}`;
+
+    return formattedDate;
+}
+
+
+
