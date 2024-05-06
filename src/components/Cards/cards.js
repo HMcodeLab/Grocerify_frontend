@@ -5,20 +5,21 @@ import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import { Globalinfo } from '../../App';
 import { BASE_URL } from '../../Api/api';
 
+
 import { useSearchParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { cropString } from '../../helpers/helper_function'
 import { RWebShare } from 'react-web-share';
 import { useLocation, useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
+import { useCheckCart } from '../../hooks/useCheckCart';
+import ConfirmCart from '../popUps/confirmCart';
 
 const Cards = (value) => {
     const location = useLocation()
     const navigate = useNavigate()
-    // console.log(location)
-    // console.log(window.location.origin)
-    // console.log(navigate)
-    // console.log(value)
+    const { checkIfSameStore, emptyCart } = useCheckCart()
+
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
     // console.log(value)
     const [searchParams, setSearchParams] = useSearchParams();
@@ -36,27 +37,59 @@ const Cards = (value) => {
     const [heartSize, setHeartSize] = useState(0);
     const [basketSize, setBasketSize] = useState(0);
     const [heartDirection, setHeartDirection] = useState(1); // 1 for increasing, -1 for decreasing
-    const [basketDirection, setBasketDirection] = useState(1); // 1 for increasing, -1 for decreasing
+    const [openDifferentStorePopUp, setopenDifferentStorePopUp] = useState(false)
+    const [basketDirection, setBasketDirection] = useState(1);
+    const [storeCart, setStoreCart] = useState({ id: "", storeid: "" })
 
     // add to cart function
 
-    async function Addtocart(id, storeid) {
-        try {
-            let url = BASE_URL + 'api/addtocart'
-            let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
-            const data = await fetch(url, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(bodydata)
-            });
-            GetCart()
-            if (data) {
-                toast.success('Added to Cart')
-            }
-        } catch (error) {
-            console.log(error)
+    const handleCart = (id, storeid) => {
+        console.log(id, storeid)
+        let url = BASE_URL + 'api/addtocart'
+        let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
+        fetch(url, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata)
+        }).then((response) => { if (response) { toast.success('Added to Cart'); GetCart() } }).catch((err) => {
+            console.log(err)
             toast.error("Failed to add Item ")
+        })
+    }
+
+    const Addtocart = async (id, storeid) => {
+        setStoreCart({ id: id, storeid: storeid })
+        checkIfSameStore(id, storeid).then((res) => {
+            console.log(res)
+            if (res === true) {
+
+                handleCart(id, storeid)
+
+            }
+            else {
+                setopenDifferentStorePopUp(true)
+            }
+
+
         }
+
+        );
+    }
+
+    const handleCartOfDiffStore = () => {
+
+        emptyCart().then((res) => {
+            console.log(res)
+            if (res.success) {
+                handleCart(storeCart.id, storeCart.storeid)
+            }
+            else {
+                toast.error("Error in Adding product to cart")
+            }
+        }).catch((err) => {
+            console.log(err)
+            toast.error("Error in Adding product to cart")
+        })
 
 
     }
@@ -187,6 +220,8 @@ const Cards = (value) => {
 
     }
 
+
+
     return (
         <>
             <Toaster />
@@ -294,6 +329,24 @@ const Cards = (value) => {
                     </div>
                 </div >
             </Link >
+            {openDifferentStorePopUp && (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "0px",
+                        left: "0px",
+                        height: "100vh",
+                        width: "100%",
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        display: "grid",
+                        placeItems: "center",
+                        zIndex: "9999"
+                    }}
+                    onClick={() => setopenDifferentStorePopUp(false)}
+                >
+                    <ConfirmCart close={setopenDifferentStorePopUp} handleCart={handleCartOfDiffStore} />{" "}
+                </div>
+            )}
         </>
     )
 }

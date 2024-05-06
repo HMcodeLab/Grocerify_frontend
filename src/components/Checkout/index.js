@@ -101,7 +101,7 @@ export default function Checkout() {
         let temp2 = [];
         // console.log(val)
         val?.forEach((val) => {
-            temp2.push({ productid: val.productid, quantity: val.quantity, shopid: val.shopid });
+            temp2.push({ productid: val.productid, quantity: val.quantity });
         })
         // console.log("value", val)
         // console.log(temp2)
@@ -115,7 +115,7 @@ export default function Checkout() {
                     },
 
                     shipping_address: userDetail.address[selectedAddress],
-                    products: [...temp2]
+                    products: [...temp2], shopid: val[0].shopid
 
                 }, {
                 headers: {

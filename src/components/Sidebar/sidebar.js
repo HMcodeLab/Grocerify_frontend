@@ -56,7 +56,7 @@ const Sidebar = (category) => {
                         <List />
                         <h3 style={{ textTransform: "capitalize" }}>{category.category || 'categories'}</h3>
                     </span>
-                    <Dropdown />
+                    {/* <Dropdown /> */}
 
                 </span>
                 {isDropdownOpen.includes(1) &&
@@ -70,19 +70,48 @@ const Sidebar = (category) => {
                                 <a href={'/products?category=dairy'}> <li>Dairy</li> </a>
                                 <a href={'/products?category=frozen'}>  <li>Frozen</li></a>
                                 <a href={'/products?category=poultary'}>  <li>Poultary</li></a>
-                            </ul> : <ul>
-                                {
-                                    subCategory.map((val, ind) => {
-                                        return (
-                                            <>
-                                                {console.log(searchParams.get('subcategory') === val?.Subcategory_Name)}
-                                                <a href={`/products?category=${searchParams.get('category')}&subcategory=` + val?.Subcategory_Name}  > <li style={searchParams.get('subcategory') === val?.Subcategory_Name ? { backgroundColor: "white" } : {}} >{val?.Subcategory_Name}</li></a>
-                                            </>
+                            </ul> :
+                            <>
 
-                                        )
-                                    })
-                                }
-                            </ul>}
+                                <ul key={1}>
+                                    {/* <a href={'/products?category=Clothing'}> <li>Clothing</li></a> */}
+                                    <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
+                                    <a href={'/products?category=Grocery'}> <li>Groceries</li></a>
+                                    <a href={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></a>
+                                    <a href={'/products?category=dairy'}> <li>Dairy</li> </a>
+                                    <a href={'/products?category=frozen'}>  <li>Frozen</li></a>
+                                    <a href={'/products?category=poultary'}>  <li>Poultary</li></a>
+                                </ul>
+                                <ul>
+                                    <span className={styles.heading}
+                                    // onClick={() => { isDropdownOpen === 1 ? setIsDropdownOpen(null) : setIsDropdownOpen(1) }}
+                                    >
+                                        <span>
+
+                                            <List />
+                                            <h3 style={{ textTransform: "capitalize" }}>{'Sub-Categories'}</h3>
+                                        </span>
+                                        {/* <Dropdown /> */}
+
+                                    </span>
+                                    {
+                                        subCategory.map((val, ind) => {
+                                            return (
+                                                <>
+                                                    {console.log(searchParams.get('subcategory') === val?.Subcategory_Name)}
+                                                    <a href={`/products?category=${searchParams.get('category')}&subcategory=` + val?.Subcategory_Name}  > <li style={searchParams.get('subcategory') === val?.Subcategory_Name ? { backgroundColor: "white" } : {}} >{val?.Subcategory_Name}</li></a>
+                                                </>
+
+                                            )
+                                        })
+                                    }
+                                </ul>
+
+
+                            </>
+
+
+                        }
                     </>
                 }
             </div>

@@ -109,7 +109,7 @@ export default function Editaddress(props) {
                 <Toaster />
                 <div className="flex font-semibold text-[#848484] pl-20 pt-3">
                         <Link to='/account' className="text-[#848484]">Your Account &gt;</Link>
-                        <Link to='/security' className="">Your Addresses &gt;</Link>
+                        <Link to='/account/address' className="">Your Addresses &gt;</Link>
                         <div className="text-[#58B310]">Edit Address</div>
                 </div>
                 <div className="flex justify-center w-full fontmons py-10">

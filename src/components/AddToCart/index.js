@@ -39,8 +39,6 @@ export default function Addtocart() {
 
 
     async function OrderSummery() {
-        // console.log(cartData)
-
         try {
             const final = cartData;
             let subttotal_amount = 0

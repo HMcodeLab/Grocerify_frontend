@@ -10,6 +10,8 @@ import { FaRegStar } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import './orders.css'
 import { useNavigate } from 'react-router-dom'
+import Stepper from '../trackOrder/trackOrder'
+import TracKOrder from '../trackOrder/trackOrder'
 
 
 export default function Orders() {
@@ -17,8 +19,10 @@ export default function Orders() {
     const isFetching = useIsFetching()
     const [btnLoader, setBtnLoader] = useState(false)
     const [openModal, setopenModal] = useState(false)
+    const [openTrackOrderModal, setopenTrackOrderModal] = useState(false)
 
-    const { data: OrderData, isError } = useQuery({
+
+    const { data: OrderData, isError, refetch } = useQuery({
         queryKey: ['orders'],
         queryFn: () =>
             fetch(`${BASE_URL}api/getorders`, {
@@ -50,6 +54,7 @@ export default function Orders() {
             })
             // console.log(res)
             setBtnLoader(false)
+            refetch()
             toast.success("Order Cancelled");
 
         } catch (error) {
@@ -147,6 +152,8 @@ export default function Orders() {
         setopenModal(true)
         setproduct(id)
     }
+
+    console.log(OrderData)
     return (<>
 
         <Toaster />
@@ -161,7 +168,7 @@ export default function Orders() {
             {Array.isArray(OrderData?.orders) && OrderData?.orders?.map((val, ind) => {
                 return (
                     <>
-                        <div className='w-full text-[15px] border rounded-t-xl mt-3' key={ind} >
+                        <div className='border rounded-t-xl my-4'>
                             <div className="flex justify-between fontmons bg-[#D9D9D9] pt-4 rounded-t-xl px-3 text-[#848484]">
                                 <div className="flex space-x-40">
                                     <div className="flex flex-col">
@@ -181,36 +188,49 @@ export default function Orders() {
                                 <div className="flex flex-col ">
                                     <div> #{val.order_id}</div>
                                     <div className="flex space-x-5">
-                                        {/* <div>View Order Details</div> */}
-                                        {/* <div className='flex items-center'>Inovoice <Down className='ml-1' /></div> */}
+
                                     </div>
                                 </div>
                             </div>
 
-                            <div className='flex justify-between items-center px-3 fontmons pt-3 text-[#848484]'>
-                                <div className='flex items-center'>
-                                    <div className='flex flex-col'>
-                                        {/* <div className='text-[20px]'>Arriving Today</div> */}
-                                        <div className='text-[14px]'>{val?.status}</div>
-                                        <div className='h-36 w-36 flex justify-center items-center '>
-                                            <img className='h-[70px] w-auto' src={val?.product?.product_primary_image_url} />
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col justify-start items-start gap-y-2'>
-                                        <div className='fontgob text-[14px] w-[50vw]'>{val?.product?.products_title}</div>
-                                        {(val.status == "delivered") ? <button onClick={() => Openfun(val?.product?._id)} className='text-[#58B310]'>Write a review</button> : ''}
-                                    </div>
-                                </div>
 
-                                <div className='flex flex-col space-y-10'>
+                            <span className='flex border justify-between items-center px-5'>
+                                <div>
+                                    {val.products.map((order, inde) => {
+                                        return (
+                                            <>
+                                                <div className='w-full text-[15px] ' key={ind} >
+
+                                                    <div className='flex justify-between items-center px-3 fontmons pt-3 text-[#848484]'>
+                                                        <div className='flex items-center'>
+                                                            <div className='flex flex-col'>
+                                                                {/* <div className='text-[20px]'>Arriving Today</div> */}
+
+                                                                <div className='h-36 w-36 flex justify-center items-center '>
+                                                                    <img className='h-[70px] w-auto' src={order.productid.product_primary_image_url} />
+                                                                </div>
+                                                            </div>
+                                                            <div className='flex flex-col justify-start items-start gap-y-2'>
+                                                                <div className='fontgob text-[14px] w-[50vw]'>{order.productid.products_title}</div>
+                                                                {(val.status == "delivered") ? <button onClick={() => Openfun(val?.product?._id)} className='text-[#58B310]'>Write a review</button> : ''}
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )
+                                    })
+                                    }
+                                </div>
+                                <div className='flex flex-col space-y-10 items-center border '>
                                     {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
                                     {(val.status == "shipped" || val.status == "ordered") ? <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button> : val.status === "cancelled" ? <button className='border border-red-700 px-3 py-[2px] text-red-700 rounded pointer-events-none cursor-not-allowed'>Cancelled</button> : <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' >Delivered</button>}
                                 </div>
-                            </div>
+                            </span>
                         </div>
-                        {/* <div className='w-full fontmons bg-[#D9D9D9] py-3 pl-3 rounded-b-xl'>
-                            <button className='text-[#58B310]'>Archieve Order</button>
-                        </div> */}
+
                     </>
                 )
             })}
@@ -220,5 +240,26 @@ export default function Orders() {
 
 
         </div>
+
+        {openTrackOrderModal && (
+            <div
+                style={{
+                    position: "fixed",
+                    top: "0px",
+                    left: "0px",
+                    height: "100vh",
+                    width: "100%",
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                    display: "grid",
+                    placeItems: "center",
+                    zIndex: "9999"
+                }}
+                onClick={() => setopenTrackOrderModal(false)}
+            >
+                <TracKOrder close={setopenTrackOrderModal} />{" "}
+            </div>
+        )}
+
+
     </>)
 }
