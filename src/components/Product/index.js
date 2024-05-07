@@ -59,7 +59,7 @@ export default function Product() {
                 const response1 = await data1.json()
 
                 setRatings(response1?.reviews)
-                // console.log(response)
+                console.log(response[0].stores)
                 setstore(response[0].stores)
                 setactualprice(price)
                 setimage(response[0].product_primary_image_url)
@@ -92,6 +92,7 @@ export default function Product() {
 
     async function addToCart(storeid) {
 
+
         if (localStorage.getItem('GROC_USER_TOKEN')) {
             let id = Data._id;
             try {
@@ -102,6 +103,7 @@ export default function Product() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(bodydata)
                 });
+                console.log(data)
                 GetCart()
                 toast.success('Added To Cart')
             } catch (error) {
@@ -200,40 +202,41 @@ export default function Product() {
                             {
                                 store.length > 0 && store.map((item) => {
                                     // console.log(item)
-                                    return (<>
-                                        <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4 h-full'>
-                                            <div className=' flex items-center justify-center relative'>
-                                                <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
-                                                    <div className='text-[10px]'>{item?.
-                                                        variants1_discount_per}%</div>
-                                                    <div className='text-[8px]'>off</div>
-                                                </div>
-                                                <img className='max-h-52 max-w-32' src={item?.store?.shopImages[0]} />
+                                    return (
+                                        <>
+                                            <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4 h-full' onClick={() => navigate('/store/' + item.store._id)}>
+                                                <div className=' flex items-center justify-center relative'>
+                                                    <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
+                                                        <div className='text-[10px]'>{item?.
+                                                            variants1_discount_per}%</div>
+                                                        <div className='text-[8px]'>off</div>
+                                                    </div>
+                                                    <img className='max-h-52 max-w-32' src={item?.store?.shopImages[0]} />
 
-                                            </div>
-                                            <div className='flex flex-col w-full fontmont text-[#848484] gap-2'>
-                                                <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                                    <div>{item.store.shopName}</div>
-                                                    <div className='flex '>
-                                                        <div>₹ {item.variants1_mrp_price - (item.variants1_mrp_price * (item.variants1_discount_per / 100))}</div>
-                                                        <div className='txtc text-[10px]'>₹ {item.variants1_mrp_price}</div>
+                                                </div>
+                                                <div className='flex flex-col w-full fontmont text-[#848484] gap-2'>
+                                                    <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
+                                                        <div>{item.store.shopName}</div>
+                                                        <div className='flex '>
+                                                            <div>₹ {item.variants1_mrp_price - (item.variants1_mrp_price * (item.variants1_discount_per / 100))}</div>
+                                                            <div className='txtc text-[10px]'>₹ {item.variants1_mrp_price}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='text-sm'>{item.store.ShopAddress}</div>
+                                                    {/* <div>Delivery by Sun, 12 Feb</div> */}
+                                                    {/* <div>2.1km</div> */}
+                                                    <div className='flex justify-between items-center'>
+                                                        <div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item.store.openingHours.to}</div>
+                                                        <div className='flex gap-3'>
+                                                            <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={(e) => { e.stopPropagation(); addToCart(item.store) }}>Add To Cart</button>
+                                                            <button className='border border-[var(--primary)] px-3 py-1' onClick={(e) => { e.stopPropagation(); handleBuy(item?.store) }}>Buy Now</button>
+
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                                <div className='text-sm'>{item.store.ShopAddress}</div>
-                                                {/* <div>Delivery by Sun, 12 Feb</div> */}
-                                                {/* <div>2.1km</div> */}
-                                                <div className='flex justify-between items-center'>
-                                                    <div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item.store.openingHours.to}</div>
-                                                    <div className='flex gap-3'>
-                                                        <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={() => addToCart(item.store)}>Add To Cart</button>
-                                                        <button className='border border-[var(--primary)] px-3 py-1' onClick={() => handleBuy(item?.store)}>Buy Now</button>
-
-                                                    </div>
-
-                                                </div>
                                             </div>
-                                        </div>
-                                    </>)
+                                        </>)
                                 })
 
                             }

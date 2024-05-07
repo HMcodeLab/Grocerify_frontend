@@ -26,7 +26,7 @@ const Cards = (value) => {
 
     const Menus = [
         { name: "Like", icon: "Heart-outline", dis: "translate-x-0" },
-        { name: "Cart", icon: "basket-outline", dis: "translate-x-16" },
+        // { name: "Cart", icon: "basket-outline", dis: "translate-x-16" },
         { name: "Share", icon: "share-outline", dis: "translate-x-32" },
         // { name: "Photos", icon: "camera-outline", dis: "translate-x-48" },
         // { name: "Settings", icon: "settings-outline", dis: "translate-x-64" },
@@ -252,7 +252,7 @@ const Cards = (value) => {
                         <div className={`relative max-h-[4.4rem] px-6 rounded-t-xl ${styles.actions}`}>
                             <ul className="flex relative">
                                 <span
-                                    className={` duration-500 ${Menus[active].dis} border-2 border-gray-900 h-16 w-16 absolute -top-5 rounded-full ${styles.rounded_div}`}
+                                    className={` duration-500 ${Menus[active].dis}  h-16 w-16 absolute -top-5 rounded-full ${styles.rounded_div}`}
                                     onClick={handleClick}
                                 >
                                     <span className="w-3.5 h-3.5 bg-transparent absolute top-4 -left-[18px] rounded-tr-[11px] shadow-myShadow1"></span>
@@ -299,7 +299,7 @@ const Cards = (value) => {
                                 ))}
                             </ul>
 
-                            {showBasketPopup && (
+                            {/* {showBasketPopup && (
                                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-200px]">
                                     <div
                                         className="p-4 rounded-lg border-gray-300"
@@ -311,8 +311,8 @@ const Cards = (value) => {
                                         />
                                     </div>
                                 </div>
-                            )}
-                            {showHeartPopup && (
+                            )} */}
+                            {/* {showHeartPopup && (
                                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-120px]">
                                     <div
                                         className="p-4 rounded-lg border-gray-300"
@@ -323,13 +323,13 @@ const Cards = (value) => {
                                         <img src="/wish_lg.svg" alt="" />
                                     </div>
                                 </div>
-                            )}
+                            )} */}
                         </div>
 
                     </div>
                 </div >
             </Link >
-            {openDifferentStorePopUp && (
+            {/* {openDifferentStorePopUp && (
                 <div
                     style={{
                         position: "fixed",
@@ -346,7 +346,7 @@ const Cards = (value) => {
                 >
                     <ConfirmCart close={setopenDifferentStorePopUp} handleCart={handleCartOfDiffStore} />{" "}
                 </div>
-            )}
+            )} */}
         </>
     )
 }

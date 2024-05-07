@@ -130,11 +130,11 @@ export default function Addtocart() {
     const handleCheckout = () => {
         console.log(cartData);
         let temp = [];
-        cartData.forEach((val) => {
-            temp.push({ productid: val.product._id, price: val.product.stores[0].variants1_mrp_price, discount: val.product.stores[0].variants1_discount_per, quantity: val.quantity, shopid: val.shopID })
-        })
+        // cartData.forEach((val) => {
+        //     temp.push({ productid: val.product._id, price: val.product.stores[0].variants1_mrp_price, discount: val.product.stores[0].variants1_discount_per, quantity: val.quantity, shopid: val.shopID })
+        // })
 
-        localStorage.setItem('CHECKOUT_DATA', JSON.stringify(temp));
+        localStorage.setItem('CHECKOUT_DATA', JSON.stringify(cartData));
         navigate('/checkout')
     }
 
@@ -162,8 +162,10 @@ export default function Addtocart() {
                                     <div className='flex flex-col w-full fontorder max-h-auto'>
                                         <div className='flex justify-between pr-5 font-semibold text-[16px]'>
                                             <div>{item?.product?.products_title} </div>
+
                                             <div >₹{price}</div>
                                         </div>
+                                        <h4> SHOP - {item.shopID?.shopName}</h4>
                                         <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price * item.quantity}</div>
                                         <div className='flex justify-between pr-5  items-center mt-4'>
                                             <div className='flex  items-center space-x-2  w-fit mb-2'>

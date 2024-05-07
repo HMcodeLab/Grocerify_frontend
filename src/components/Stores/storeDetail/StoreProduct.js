@@ -72,8 +72,8 @@ const StoreProduct = () => {
 
       <div className="flex flex-col gap-4 pt-4 pb-6 pl-8 pr-8 bg-[#F3F3F3] w-full">
         <div className="flex flex-col gap-2 w-full">
-          <div className="flex flex-row gap-2 w-full">
-            <img src={shopData?.shopImages[0]} className="w-3/5 h-auto" />
+          <div className="flex flex-row gap-2 w-full h-[50vh]">
+            <img src={shopData?.shopImages[0]} className="w-3/5 h-full object-cover" />
             <div className="flex flex-col gap-2 w-1/5 h-[100%]">
               <img src={shopData?.shopImages[1]} className="h-[50%]" />
               <img src={shopData?.shopImages[2]} className="h-[50%]" />

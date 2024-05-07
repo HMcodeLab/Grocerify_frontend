@@ -66,10 +66,11 @@ export default function Checkout() {
                 final?.forEach((item) => {
                     console.log(item)
 
-                    let price = item.price - (item.price * (item.discount / 100));
+                    let price = item.product.stores[0].variants1_mrp_price - (item.price * (item.variants1_discount_per / 100));
+
                     subttotal_amount += price;
 
-                    original_price += item.price;
+                    original_price += item.product.stores[0].variants1_mrp_price
 
 
                 })
@@ -192,7 +193,40 @@ export default function Checkout() {
     }
 
     return (<>
-        <div className='w-[89%] mx-auto mb-4 checkoutfont1 text-[#848484] pt-3'>
+        <div className='w-[89vw] mx-auto mb-4 checkoutfont1 text-[#848484] pt-3'>
+            <div className='flex flex-col pl-6 space-y-3 w-[77vw] my-3'>
+                <div className='text-[32px]'>Review Product ({checkoutData[0]?.shopID?.shopName}) </div>
+                {cartData.map((item, ind) => {
+                    if (item?.product) {
+
+                        var price = item?.product?.stores[0]?.variants1_mrp_price - (item?.product?.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100))
+                    }
+                    return (
+                        <div className='flex rounded-lg w-full border space-x-3 pl-2 items-center sm:flex-col sm:w-full '>
+                            <div className='w-28 h-28  flex justify-center items-center'>
+                                <img className='max-h-full max-w-full mix-blend-multiply' src={item?.product?.product_primary_image_url} />
+                            </div>
+                            <div className='flex flex-col w-full fontorder max-h-auto'>
+                                <div className='flex justify-between pr-5  text-[16px]'>
+                                    <div>{item?.product?.products_title} </div>
+
+                                    <div >₹{price}</div>
+                                </div>
+                                <h4> Quantity - {item.quantity}</h4>
+                                <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price * item.quantity}</div>
+                                <div className='flex justify-between pr-5  items-center mt-4'>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
+                <div className='space-y-2 mt-4'>
+                    <Link to={'/store/' + checkoutData[0]?.shopID?._id} className='text-[#58B310]'>+ Add More Product</Link>
+                    <div className='bg-[#58B310] w-[55%] h-[2px]'></div>
+                </div>
+            </div>
             <div className='text-[32px]'>Delivery Address</div>
             <div className="flex flex-col w-[90%] mt-3 pb-3 ">
                 <div className='shadow-lg px-4 space-y-8 py-4 rounded '>

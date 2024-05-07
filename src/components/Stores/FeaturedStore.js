@@ -50,6 +50,8 @@ const FeaturedStore = () => {
         autoplay: true,
     };
 
+    console.log(ShopData)
+
     return (
         <div className=" bg-[#F3F3F3]">
 
@@ -187,50 +189,46 @@ const FeaturedStore = () => {
 
                     <div className="pr-8 pl-8 space-y-6">
                         {/* order now */}
-                        <div className="bg-[#EDF1E0] relative">
+                        <div className="bg-[#EDF1E0] relative border h-[55vh]">
                             <img
                                 src="../assests/images/ordernowleft.svg"
-                                className=" h-full"
+                                className=" h-full object-cover"
+
                             />
                             <img
                                 src="../assests/images/ordernowgp.png"
-                                className="w-full h-full absolute top-0 "
+                                className="w-full h-full absolute top-0  object-cover"
                             />
-                            {/* <button className="absolute font-Montserrat bottom-[5%] left-[42%] bg-[#58B310] text-[#FFFFFF] rounded-2xl pt-1 pb-1 pr-4 pl-4 hover:bg-[#FFFFFF] hover:text-[#58B310] hover:text-bold hover:transition-all hover:scale-105">
-                                ORDER NOW
-                            </button> */}
+
                         </div>
 
                         {/* all stores */}
-                        <div className="bg-[#FFFFFF]">
-                            <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-lg pt-1 pb-1 pl-10 pr-10 hover:bg-[#58B310] hover:text-[#FFFFFF]">
-                                <p>FEATURED STORE</p>
-                                <p>
-                                    <Link to={"/view_store"}>
-                                        Show More <span className="cursor-pointer">&#9660;</span>
-                                    </Link>
-                                </p>
+                        <div className="bg-[#FFFFFF] ">
+                            <div className="flex flex-row justify-between font-Gorditas text-[#848484] text-3xl pt-3 pb-1 pl-10 pr-10 mt-3 hover:bg-[#58B310] hover:text-[#FFFFFF]">
+                                <p>Stores Nearby</p>
+
                             </div>
 
-                            <div className="grid grid-cols-2 gap-3 p-4">
+                            <div className="grid grid-cols-4 gap-3 p-4">
                                 {
                                     ShopData?.map((val, ind) => {
                                         return (
-                                            <div className="relative group" key={ind}>
+                                            <div className="group hover:scale-[0.97]" key={ind}>
                                                 <Link to={"/store/" + val._id}>
                                                     <img
                                                         src={val.shopImages[0]}
-                                                        className="w-full group-hover:brightness-50 transition-all duration-300"
+                                                        className="w-full h-[30vh]  transition-all duration-300 rounded-[15px] shadow-md"
                                                     />
-                                                    <p className="font-Gorditas text-[#FFFFFF] text-5xl text-center absolute top-32 left-0 w-full group-hover:text-[40px] transition-all duration-300">
+                                                    <p className="font-Gorditas  text-2xl  mt-2 top-32 left-0 w-full">
                                                         {val.shopName}
                                                     </p>
-                                                    <div className="grid grid-cols-2 absolute pl-6 text-[#FFFFFF] text-sm font-Montserrat bottom-6 gap-x-28 opacity-0 group-hover:opacity-100 group-hover:visible transition-opacity duration-300">
-                                                        <h4 className="font-Gorditas text-xl">
-                                                            {val.shopAddress}
+                                                    <div className="text-sm font-Montserrat">
+                                                        <h4 className="font-Gorditas text-sm truncate">
+                                                            {val.ShopAddress}
                                                         </h4>
-                                                        <h6 className="text-center pt-8">FURNITURE STORE</h6>
+
                                                         <p>1km</p>
+                                                        {/* <p>{ }</p> */}
                                                         <span className="text-2xl text-center text-[#FFB800]">
                                                             &#9733;&#9733;&#9733;&#9733;&#9734;
                                                         </span>
