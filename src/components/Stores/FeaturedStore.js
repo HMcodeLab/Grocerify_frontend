@@ -209,7 +209,7 @@ const FeaturedStore = () => {
 
                             </div>
 
-                            <div className="grid grid-cols-4 gap-3 p-4">
+                            <div className="grid grid-cols-3 gap-[2rem] px-10 py-4">
                                 {
                                     ShopData?.map((val, ind) => {
                                         return (

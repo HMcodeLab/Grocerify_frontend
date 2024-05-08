@@ -14,6 +14,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
 import { useCheckCart } from '../../hooks/useCheckCart';
 import ConfirmCart from '../popUps/confirmCart';
+import { CiHeart } from 'react-icons/ci';
+import { IoHeart } from 'react-icons/io5';
 
 const Cards = (value) => {
     const location = useLocation()
@@ -21,15 +23,13 @@ const Cards = (value) => {
     const { checkIfSameStore, emptyCart } = useCheckCart()
 
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
-    // console.log(value)
+    console.log(wishListData[0])
     const [searchParams, setSearchParams] = useSearchParams();
 
     const Menus = [
         { name: "Like", icon: "Heart-outline", dis: "translate-x-0" },
         // { name: "Cart", icon: "basket-outline", dis: "translate-x-16" },
         { name: "Share", icon: "share-outline", dis: "translate-x-32" },
-        // { name: "Photos", icon: "camera-outline", dis: "translate-x-48" },
-        // { name: "Settings", icon: "settings-outline", dis: "translate-x-64" },
     ];
     const [active, setActive] = useState(0);
     const [showHeartPopup, setShowHeartPopup] = useState(false);
@@ -40,6 +40,22 @@ const Cards = (value) => {
     const [openDifferentStorePopUp, setopenDifferentStorePopUp] = useState(false)
     const [basketDirection, setBasketDirection] = useState(1);
     const [storeCart, setStoreCart] = useState({ id: "", storeid: "" })
+    const [isWishlisted, setIsWishlisted] = useState(false);
+
+
+    useEffect(() => {
+        console.log(wishListData[0]?.product?._id)
+        const isWishlisted =
+            wishListData.some(obj => obj?.product?._id === value?.value?._id)
+
+        if (isWishlisted) {
+            setIsWishlisted(true)
+        }
+        else {
+            setIsWishlisted(false)
+        }
+    }, [wishListData])
+
 
     // add to cart function
 
@@ -56,6 +72,8 @@ const Cards = (value) => {
             toast.error("Failed to add Item ")
         })
     }
+
+
 
     const Addtocart = async (id, storeid) => {
         setStoreCart({ id: id, storeid: storeid })
@@ -93,7 +111,35 @@ const Cards = (value) => {
 
 
     }
-    async function AddtoWishlist(id, storeid) {
+    async function RemoveFromWishlist(id) {
+
+        let url2 = BASE_URL + 'api/removefromwishlist'
+        let bodydata2 = { mobile: userDetail?.mobile, productid: value?.value?._id }
+
+        const data2 = await fetch(url2, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bodydata2)
+        });
+        const response = await data2.json()
+        toast.success('Removed from Wishlist')
+
+        GetWishList()
+
+    }
+
+    const handleWishlist = () => {
+        if (isWishlisted) {
+            RemoveFromWishlist()
+        }
+        else {
+            AddtoWishlist()
+        }
+    }
+
+
+    async function AddtoWishlist(id = value?.value?._id, storeid = value?.value?.stores[0].store) {
+
         try {
             let url = BASE_URL + 'api/addtowishlist'
             let bodydata = { mobile: userDetail?.mobile, productid: id, shopID: storeid }
@@ -225,7 +271,7 @@ const Cards = (value) => {
     return (
         <>
             <Toaster />
-            <Link to={`/product/${value.value.slug}`}>
+            <div onClick={() => navigate(`/product/${value.value.slug}`)}>
                 <div className={styles.card_container} >
 
                     <div className={styles.inner_card_container}>
@@ -241,15 +287,22 @@ const Cards = (value) => {
 
 
                             </span>
-                            <span className={styles.stars}>
-                                <Star />
-                                <Star />
-                                <Star />
-                                <Star />
-                                <Star />
+                            <span className='flex flex-col items-center'>
+                                <span className={styles.stars}>
+                                    <Star />
+                                    <Star />
+                                    <Star />
+                                    <Star />
+                                    <Star />
+                                </span>
+                                <span className='mt-6' onClick={(e) => { e.stopPropagation(); handleWishlist() }} >
+
+                                    {isWishlisted ? <IoHeart size={24} color={"green"} /> : <CiHeart size={24} color={"black"} />}
+                                </span>
                             </span>
+
                         </div>
-                        <div className={`relative max-h-[4.4rem] px-6 rounded-t-xl ${styles.actions}`}>
+                        {/* <div className={`relative max-h-[4.4rem] px-6 rounded-t-xl ${styles.actions}`}>
                             <ul className="flex relative">
                                 <span
                                     className={` duration-500 ${Menus[active].dis}  h-16 w-16 absolute -top-5 rounded-full ${styles.rounded_div}`}
@@ -258,7 +311,7 @@ const Cards = (value) => {
                                     <span className="w-3.5 h-3.5 bg-transparent absolute top-4 -left-[18px] rounded-tr-[11px] shadow-myShadow1"></span>
                                     <span className="w-3.5 h-3.5 bg-transparent absolute top-4 -right-[18px] rounded-tl-[11px] shadow-myShadow2"></span>
                                 </span>
-                                {Menus.map((menu, index) => (
+                                 {Menus.map((menu, index) => (
                                     <li key={index} className="w-16" onClick={(e) => { handleIconClick(e, index) }}>
                                         <a
                                             className="flex flex-col text-center pt-6"
@@ -296,7 +349,7 @@ const Cards = (value) => {
                                             </span>
                                         </a>
                                     </li>
-                                ))}
+                                ))} 
                             </ul>
 
                             {/* {showBasketPopup && (
@@ -312,7 +365,7 @@ const Cards = (value) => {
                                     </div>
                                 </div>
                             )} */}
-                            {/* {showHeartPopup && (
+                        {/* {showHeartPopup && (
                                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-[-120px]">
                                     <div
                                         className="p-4 rounded-lg border-gray-300"
@@ -323,12 +376,12 @@ const Cards = (value) => {
                                         <img src="/wish_lg.svg" alt="" />
                                     </div>
                                 </div>
-                            )} */}
-                        </div>
+                            )}
+                        </div> */}
 
                     </div>
                 </div >
-            </Link >
+            </div >
             {/* {openDifferentStorePopUp && (
                 <div
                     style={{
