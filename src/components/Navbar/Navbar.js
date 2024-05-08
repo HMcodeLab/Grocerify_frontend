@@ -8,15 +8,16 @@ import { ReactComponent as User } from '../../Assets/Icons/user.svg'
 import { ReactComponent as Account } from '../../Assets/Icons/account.svg'
 import { ReactComponent as Search } from '../../Assets/Icons/search.svg'
 import logoimg from '../../Assets/Images/logo.png';
-import { Link } from 'react-router-dom'
+import { Link, Router } from 'react-router-dom'
 import { Globalinfo } from '../../App'
 import axios from 'axios'
 import { BASE_URL } from '../../Api/api'
 import { cropString } from '../../helpers/helper_function'
 import BottomNav from '../BottomNav/bottomnav'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
-
+    const navigate = useNavigate()
     const [location, setLocation] = useState("");
     const [token, settoken] = useState('')
     const [searchInput, setSearchInput] = useState('');
@@ -112,6 +113,17 @@ const Navbar = () => {
     }, [searchInput]);
 
 
+    const handelSearchClicked = (event) => {
+        if (event.key === 'Enter') {
+
+            // Update URL with search query and redirect
+            navigate(`/search?q=${searchInput}`);
+            setSearchInput('')
+        }
+
+    }
+
+
     return (
         <div className={`${styles.nav_main}`}>
             <div className={styles.nav_row}>
@@ -126,7 +138,7 @@ const Navbar = () => {
                     <div className={styles.search_icon}>
                         <Search />
                     </div>
-                    <input type="text" name="search" id="" placeholder='search here ....' onChange={handleSearchChange} />
+                    <input type="text" name="search" id="" placeholder='search here ....' onChange={handleSearchChange} onKeyDown={handelSearchClicked} />
                     {searchInput.length > 2 && <div className={styles.search_data}>
                         {
                             searchOutputData?.map((val, ind) => {

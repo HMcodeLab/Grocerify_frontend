@@ -20,12 +20,16 @@ import { ReactComponent as Starfilled } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
 import { ReactComponent as Empty } from '../../Assets/Icons/emptystar.svg'
 import { getDateAfterFiveDays } from '../../helpers/helper_function';
+import { useCheckCart } from '../../hooks/useCheckCart';
+import ConfirmCart from '../popUps/confirmCart';
+
 
 export default function Product() {
     const navigate = useNavigate();
 
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, checkoutData, setCheckoutData } = useContext(Globalinfo)
     const params = useParams();
+    const { checkIfSameStore, emptyCart } = useCheckCart();
 
     const [image, setimage] = useState('/mobile.png')
     const [show, setshow] = useState('h-[4rem]')
@@ -38,7 +42,8 @@ export default function Product() {
     const [video, setvideo] = useState([])
     const [store, setstore] = useState([])
     const [Ratings, setRatings] = useState([])
-    // const [showvideo, setshowvideo] = useState(false)
+    const [storeCart, setStoreCart] = useState({ id: "", storeid: "" })
+    const [openDifferentStorePopUp, setopenDifferentStorePopUp] = useState(false)
 
     const primaryRef = useRef(null);
     const secondaryRef = useRef(null);
@@ -90,9 +95,8 @@ export default function Product() {
         }
     }
 
-    async function addToCart(storeid) {
 
-
+    const handleCart = async (id, storeid) => {
         if (localStorage.getItem('GROC_USER_TOKEN')) {
             let id = Data._id;
             try {
@@ -114,11 +118,26 @@ export default function Product() {
         else {
             navigate('/login')
         }
-
-
-
-
     }
+
+    async function addToCart(storei) {
+        let storeid = storei._id
+        console.log(storeid)
+        setStoreCart({ id: Data._id, storeid: storeid })
+        checkIfSameStore(Data._id, storeid).then((res) => {
+
+            if (res === true) {
+
+                handleCart(Data._id, storeid)
+
+            }
+            else {
+                setopenDifferentStorePopUp(true)
+            }
+
+
+        })
+    };
 
     const handleBuy = async (storeid) => {
         // console.log(Data)
@@ -140,7 +159,54 @@ export default function Product() {
         }
         return con;
     }
-    // console.log(Data.products_description?.length)
+
+
+    async function AddtoWishlist(id, storeid) {
+        console.log(id, storeid)
+        try {
+            let url = BASE_URL + 'api/addtowishlist'
+            let bodydata = { mobile: userDetail?.mobile, productid: id, shopID: storeid }
+            const data = await fetch(url, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bodydata)
+            });
+            console.log(data);
+            if (data) {
+                // toast.success('Added to Wishlist')
+            }
+            GetWishList()
+        } catch (error) {
+            console.log(error)
+            toast.error('Unable to add Item')
+        }
+
+
+    }
+
+
+    const handleCartOfDiffStore = () => {
+        console.log(cartData)
+        cartData.forEach((val) => {
+            AddtoWishlist(val?.product._id, val.shopID._id)
+        })
+
+
+        emptyCart().then((res) => {
+            console.log(res)
+            if (res.success) {
+                handleCart(storeCart.id, storeCart.storeid)
+            }
+            else {
+                toast.error("Error in Adding product to cart")
+            }
+        }).catch((err) => {
+            console.log(err)
+            toast.error("Error in Adding product to cart")
+        })
+
+
+    }
 
     return (<>
         {/* <Extra /> */}
@@ -166,13 +232,7 @@ export default function Product() {
                                     Data.products_title
                                 }
                             </div>
-                            {/* <div className="flex space-x-2">
-                                <Star />
-                                <Star />
-                                <Star />
-                                <Star />
-                                <Star />
-                            </div> */}
+
 
 
                         </div>
@@ -229,7 +289,7 @@ export default function Product() {
                                                         <div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item.store.openingHours.to}</div>
                                                         <div className='flex gap-3'>
                                                             <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={(e) => { e.stopPropagation(); addToCart(item.store) }}>Add To Cart</button>
-                                                            <button className='border border-[var(--primary)] px-3 py-1' onClick={(e) => { e.stopPropagation(); handleBuy(item?.store) }}>Buy Now</button>
+                                                            {/* <button className='border border-[var(--primary)] px-3 py-1' onClick={(e) => { e.stopPropagation(); handleBuy(item?.store) }}>Buy Now</button> */}
 
                                                         </div>
 
@@ -369,5 +429,23 @@ export default function Product() {
 
         </div>
         <Toaster />
+        {openDifferentStorePopUp && (
+            <div
+                style={{
+                    position: "fixed",
+                    top: "0px",
+                    left: "0px",
+                    height: "100vh",
+                    width: "100%",
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                    display: "grid",
+                    placeItems: "center",
+                    zIndex: "9999"
+                }}
+                onClick={() => setopenDifferentStorePopUp(false)}
+            >
+                <ConfirmCart close={setopenDifferentStorePopUp} handleCart={handleCartOfDiffStore} />{" "}
+            </div>
+        )}
     </>)
 }

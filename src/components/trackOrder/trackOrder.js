@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./trackOrder.css";
 import { TiTick } from "react-icons/ti";
-const TracKOrder = ({ close, status }) => {
+const TracKOrder = ({ close, data }) => {
+    console.log(data)
+    let status = data.status;
     const [currentStep, setCurrentStep] = useState(1);
     const [complete, setComplete] = useState(false);
     const steps = [
@@ -54,18 +56,10 @@ const TracKOrder = ({ close, status }) => {
                         </div>
                     ))}
                 </div>
-                {/* {!complete && (
-                    <button
-                        className="btn"
-                        onClick={() => {
-                            currentStep === steps.length
-                                ? setComplete(true)
-                                : setCurrentStep((prev) => prev + 1);
-                        }}
-                    >
-                        {currentStep === steps.length ? "Finish" : "Next"}
-                    </button>
-                )} */}
+                <div className='show_address'>
+
+                </div>
+
             </div>
         </>
     );

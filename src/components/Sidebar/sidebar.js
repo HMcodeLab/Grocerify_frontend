@@ -13,12 +13,29 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../../Api/api';
+import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io";
 
-const Sidebar = (category) => {
+const Sidebar = ({ category, close }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState([1, 2, 3, 4, 5, 6]);
     // console.log(category.category)
     const [searchParams, setSearchParams] = useSearchParams();
     const [subCategory, setSubCategory] = useState([]);
+    const [Category, setCategory] = useState({
+        "Electronics": ["Phones", "Gaming", "Laptops"],
+        "Grocery": ["Packaged Food", "Snacks & Beverages"],
+        "Health and Beauty": ["Face Makeup", "Nails"],
+        "dairy": [],
+        "frozen": [],
+        "poultary": [],
+
+
+
+    })
+    const [activeCategory, setActiveCategory] = useState(null);
+    const handleCategoryClick = (category) => {
+        setActiveCategory(activeCategory === category ? null : category);
+    };
 
 
     const fetchSubCategory = async () => {
@@ -51,19 +68,42 @@ const Sidebar = (category) => {
                 <span className={styles.heading}
                 // onClick={() => { isDropdownOpen === 1 ? setIsDropdownOpen(null) : setIsDropdownOpen(1) }}
                 >
-                    <span>
+                    <span className='flex justify-between'>
 
-                        <List />
-                        <h3 style={{ textTransform: "capitalize" }}>{category.category || 'categories'}</h3>
+                        <IoMdArrowBack onClick={() => close(false)} size={22} />
+                        <h3 style={{ textTransform: "capitalize" }}>{'Categories'}</h3>
                     </span>
-                    {/* <Dropdown /> */}
+
 
                 </span>
-                {isDropdownOpen.includes(1) &&
+
+                <div className={styles.side_filter}>
+                    {Object.entries(Category).map(([title, values]) => (
+                        <div key={title} className={styles.category}>
+                            <span className='flex justify-between gap-2'>
+                                <a href={`/products?category=${title}`} >
+                                    {title}
+                                </a>
+                                <IoMdArrowDropdown onClick={() => handleCategoryClick(title)} size={24} color={"grey"} />
+                            </span>
+
+                            {activeCategory === title && (
+                                <ul className="values">
+                                    {values.map((value, index) => (
+                                        <li key={index}>{value}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    ))}
+                </div>
+
+                {/* {isDropdownOpen.includes(1) &&
                     <>
+                       
                         {searchParams.get('category') == null ?
                             <ul key={1}>
-                                {/* <a href={'/products?category=Clothing'}> <li>Clothing</li></a> */}
+                                
                                 <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
                                 <a href={'/products?category=Grocery'}> <li>Groceries</li></a>
                                 <a href={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></a>
@@ -74,7 +114,7 @@ const Sidebar = (category) => {
                             <>
 
                                 <ul key={1}>
-                                    {/* <a href={'/products?category=Clothing'}> <li>Clothing</li></a> */}
+                                   
                                     <a href={'/products?category=Electronics'}> <li>Electronics</li></a>
                                     <a href={'/products?category=Grocery'}> <li>Groceries</li></a>
                                     <a href={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></a>
@@ -83,17 +123,7 @@ const Sidebar = (category) => {
                                     <a href={'/products?category=poultary'}>  <li>Poultary</li></a>
                                 </ul>
                                 <ul>
-                                    <span className={styles.heading}
-                                    // onClick={() => { isDropdownOpen === 1 ? setIsDropdownOpen(null) : setIsDropdownOpen(1) }}
-                                    >
-                                        <span>
 
-                                            <List />
-                                            <h3 style={{ textTransform: "capitalize" }}>{'Sub-Categories'}</h3>
-                                        </span>
-                                        {/* <Dropdown /> */}
-
-                                    </span>
                                     {
                                         subCategory.map((val, ind) => {
                                             return (
@@ -113,7 +143,8 @@ const Sidebar = (category) => {
 
                         }
                     </>
-                }
+                } */}
+
             </div>
 
             {/* <div className={styles.sortBy_main}>

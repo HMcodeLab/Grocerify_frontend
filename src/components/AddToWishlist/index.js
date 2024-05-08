@@ -109,7 +109,7 @@ export default function AddToWishlist() {
                                             <div>₹{price}</div>
                                             <div className='flex space-x-3 font2'>
                                                 {item.product.stores[0].stock && <button className='bg-grey px-3 py-1 text-[16px] '>In Stock</button>}
-                                                <button className='bg-white px-3 py-1 text-[16px] shadow-lg' onClick={() => Addtocart(item.product._id, item.product.stores[0].store)}>Add To Cart</button>
+                                                {/* <button className='bg-white px-3 py-1 text-[16px] shadow-lg' onClick={() => Addtocart(item.product._id, item.product.stores[0].store)}>Add To Cart</button> */}
                                             </div>
                                         </div>
 

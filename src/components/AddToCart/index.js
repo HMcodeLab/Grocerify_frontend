@@ -192,14 +192,8 @@ export default function Addtocart() {
                         <div>Total items</div>
                         <div>₹{totalitems}</div>
                     </div>
-                    {/* <div className='flex justify-between fontorder'>
-                        <div>Tax</div>
-                        <div>₹0</div>
-                    </div> */}
-                    <div className='flex justify-between fontorder'>
-                        <div>Cupon code</div>
-                        <div>F5SFDI65</div>
-                    </div>
+
+
                     <div className='flex justify-between fontorder'>
                         <div>Delivery charges</div>
                         <div className='flex space-x-1'>

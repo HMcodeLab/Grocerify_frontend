@@ -28,7 +28,7 @@ const NavList = () => {
                 <div className={styles.sidebar_container}>
                     <div className={styles.top_div} onClick={() => setisOpenSidebar(false)}></div>
                     <div style={{ display: "flex" }}>
-                        <div className={styles.main_sidebar}> <Sidebar category={""} />
+                        <div className={styles.main_sidebar}> <Sidebar category={""} close={setisOpenSidebar} />
                         </div>
                         <div className={styles.overlay} onClick={() => setisOpenSidebar(false)}></div>
                     </div>

@@ -54,28 +54,23 @@ export default function Checkout() {
     useEffect(() => {
 
         async function OrderSummery() {
-
-
             try {
-                const final = checkoutData;
+                const final = cartData;
+                let original_price = 0;
                 let subttotal_amount = 0
                 let total_items = 0
-                let original_price = 0
 
 
                 final?.forEach((item) => {
-                    console.log(item)
+                    if (item?.product) {
+                        let original = item.product.stores[0].variants1_mrp_price;
 
-                    let price = item.product.stores[0].variants1_mrp_price - (item.price * (item.variants1_discount_per / 100));
-
-                    subttotal_amount += price;
-
-                    original_price += item.product.stores[0].variants1_mrp_price
-
-
+                        let price = item.product.stores[0].variants1_mrp_price - (item.product.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100));
+                        original_price += original * item.quantity
+                        subttotal_amount += price * item.quantity;
+                        total_items += item.quantity;
+                    }
                 })
-
-                console.log(subttotal_amount)
                 setOriginalPrice(original_price)
                 setsubtotal(subttotal_amount)
                 settotalitems(total_items)
@@ -84,7 +79,6 @@ export default function Checkout() {
 
 
             }
-
         }
 
 
@@ -102,7 +96,7 @@ export default function Checkout() {
         let temp2 = [];
         // console.log(val)
         val?.forEach((val) => {
-            temp2.push({ productid: val.productid, quantity: val.quantity });
+            temp2.push({ productid: val.product._id, quantity: val.quantity });
         })
         // console.log("value", val)
         // console.log(temp2)
@@ -116,7 +110,7 @@ export default function Checkout() {
                     },
 
                     shipping_address: userDetail.address[selectedAddress],
-                    products: [...temp2], shopid: val[0].shopid
+                    products: [...temp2], shopid: val[0].shopID._id
 
                 }, {
                 headers: {

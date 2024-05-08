@@ -34,6 +34,7 @@ import StoreProduct from '../components/Stores/storeDetail/StoreProduct';
 import StoreDetails from '../components/Stores/storeDetail';
 import ScrollToTop from '../components/scrollToTop';
 import Success from '../components/Success/success';
+import Search from '../components/search/search';
 
 const Router = () => {
 
@@ -135,6 +136,9 @@ const Router = () => {
                     </Route>
                     <Route exact path={'/test'} element={<Success />}>
 
+
+                    </Route>
+                    <Route exact path={'/search'} element={<Search />}>
                     </Route>
                 </Routes>
                 {/* <ChatBot /> */}

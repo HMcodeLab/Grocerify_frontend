@@ -9,7 +9,7 @@ export const useCheckCart = () => {
         console.log(storeid)
         if (cartData.length > 0) {
             console.log(cartData);
-            if (cartData[0].shopID == storeid) {
+            if (cartData[0].shopID._id == storeid) {
                 return true;
             }
             else {

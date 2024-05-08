@@ -19,7 +19,7 @@ export default function Orders() {
     const isFetching = useIsFetching()
     const [btnLoader, setBtnLoader] = useState(false)
     const [openModal, setopenModal] = useState(false)
-    const [openTrackOrderModal, setopenTrackOrderModal] = useState('')
+    const [openTrackOrderModal, setopenTrackOrderModal] = useState()
 
 
 
@@ -227,7 +227,7 @@ export default function Orders() {
                                 </div>
                                 <span className='flex flex-col justify-between gap-5'>
                                     <div>
-                                        {(val.status == "shipped" || val.status == "ordered") || val.status == "pickuped" ? <button className=' px-3 py-[2px] text-[#58B310] rounded' onClick={() => setopenTrackOrderModal(val.status)}>Track Order</button> : <></>}
+                                        {(val.status == "shipped" || val.status == "ordered") || val.status == "pickuped" ? <button className=' px-3 py-[2px] text-[#58B310] rounded' onClick={() => setopenTrackOrderModal(val)}>Track Order</button> : <></>}
                                     </div>
                                     <div className='flex flex-col space-y-10 items-center border '>
                                         {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
@@ -242,13 +242,9 @@ export default function Orders() {
                 )
             })}
 
-
-
-
-
         </div>
 
-        {openTrackOrderModal !== "" && (
+        {openTrackOrderModal && (
             <div
                 style={{
                     position: "fixed",
@@ -263,7 +259,7 @@ export default function Orders() {
                 }}
                 onClick={() => setopenTrackOrderModal('')}
             >
-                <TracKOrder close={setopenTrackOrderModal} status={openTrackOrderModal} />{" "}
+                <TracKOrder close={setopenTrackOrderModal} data={openTrackOrderModal} />{" "}
             </div>
         )}
 
