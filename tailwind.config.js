@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'Gorditas': ['Poppins'],
-        'Montserrat': ['Montserrat', 'sans-serif'],
+        'Montserrat': ['Roboto', 'sans - serif'],
         'Inter': ['Inter', 'sans-serif'],
       },
     },
