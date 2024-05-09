@@ -189,16 +189,13 @@ const FeaturedStore = () => {
 
                     <div className="pr-8 pl-8 space-y-6">
                         {/* order now */}
-                        <div className="bg-[#EDF1E0] relative border h-[55vh]">
+                        <div className="bg-[#EDF1E0] relative border h-fit">
                             <img
-                                src="../assests/images/ordernowleft.svg"
-                                className=" h-full object-cover"
+                                src="/assets/Images/shopBanner.png"
+                                className=" h-auto object-cover"
 
                             />
-                            <img
-                                src="../assests/images/ordernowgp.png"
-                                className="w-full h-full absolute top-0  object-cover"
-                            />
+
 
                         </div>
 

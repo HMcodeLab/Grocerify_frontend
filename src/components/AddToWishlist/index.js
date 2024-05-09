@@ -10,6 +10,7 @@ import { BASE_URL } from '../../Api/api';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
 import { RWebShare } from 'react-web-share';
+import { Link } from 'react-router-dom';
 
 export default function AddToWishlist() {
     const [Data, setData] = useState([])
@@ -74,7 +75,7 @@ export default function AddToWishlist() {
                             let starcount = item.product.rating;
 
                             return (<>
-                                <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center ' key={index}>
+                                <Link to={`/product/${item.product.slug}`} className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center ' key={index}>
                                     <div className='w-28 h-28  flex justify-center items-center '>
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
                                     </div>
@@ -85,7 +86,7 @@ export default function AddToWishlist() {
                                                 <RWebShare
                                                     data={{
                                                         text: "Web Share - Grocerify",
-                                                        url: "https://www.linkedin.com/in/davinder--kumar/",
+                                                        url: `https://hopingminds.co.in/product/${item.product.slug}`,
                                                         title: "Grocerify",
                                                     }}
                                                     onClick={() =>
@@ -114,7 +115,7 @@ export default function AddToWishlist() {
                                         </div>
 
                                     </div>
-                                </div>
+                                </Link>
                             </>)
                         })
                     }

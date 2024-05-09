@@ -25,7 +25,7 @@ const Sidebar = ({ category, close }) => {
         "Electronics": ["Phones", "Gaming", "Laptops"],
         "Grocery": ["Packaged Food", "Snacks & Beverages"],
         "Health and Beauty": ["Face Makeup", "Nails"],
-        "dairy": [],
+        "dairy": ["Engergy drink"],
         "frozen": [],
         "poultary": [],
 

@@ -12,9 +12,7 @@
   background-color: white;
   padding: 0vh 0vw;
 }
-.products_main div:nth-child(2) {
-  padding: 1vw 0.1vw;
-}
+
 .products_top {
   display: flex;
   justify-content: space-between;
@@ -22,7 +20,7 @@
   font-family: var(--second-font);
   font-weight: 400;
   align-items: center;
-  padding: 0.5vw 1vw;
+  padding: 0.5vw 2vw;
 }
 .products_top:hover {
   background-color: var(--primary);
