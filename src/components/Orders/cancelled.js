@@ -78,7 +78,7 @@ export default function Cancelled() {
                                     {/* <div className='text-[20px]'>Arriving Today</div>
                                     <div className='text-[14px]'>Not Yet Dispatched</div> */}
                                     <div className='h-36 w-36 flex justify-center items-center '>
-                                        <img className='h-[70px] w-auto' src={val.product.product_primary_image_url} />
+                                        <img className='h-[70px] w-auto' src={val.products[0].productid.product_primary_image_url} />
                                     </div>
                                 </div>
                                 <div className='fontgob text-[14px] w-[50vw]'>{val.product.products_title}</div>

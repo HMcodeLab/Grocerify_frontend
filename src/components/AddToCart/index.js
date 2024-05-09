@@ -156,17 +156,17 @@ export default function Addtocart() {
                             }
                             return (<>
                                 <div className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center sm:flex-col sm:w-full '>
-                                    <div className='w-28 h-28  flex justify-center items-center '>
+                                    <div className='w-[20vw] h-28  flex justify-center items-center '>
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item?.product?.product_primary_image_url} />
                                     </div>
-                                    <div className='flex flex-col w-full fontorder max-h-auto'>
-                                        <div className='flex justify-between pr-5 font-semibold text-[16px]'>
+                                    <div className='flex flex-col fontorder max-h-auto'>
+                                        <div className='flex justify-between pr-5 font-medium text-[16px] gap-[5vw]'>
                                             <div>{item?.product?.products_title} </div>
 
-                                            <div >₹{price}</div>
+                                            <div className='text-[#426B1F] fontcart text-[14px] mt-2' >₹{price * item.quantity}</div>
                                         </div>
                                         <h4> SHOP - {item.shopID?.shopName}</h4>
-                                        <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price * item.quantity}</div>
+                                        {/* <div className='text-[#426B1F] fontcart text-[14px] mt-2'>₹{price * item.quantity}</div> */}
                                         <div className='flex justify-between pr-5  items-center mt-4'>
                                             <div className='flex  items-center space-x-2  w-fit mb-2'>
                                                 <button value="minus" onClick={() => NegativeButtonhandle(item.product._id)} className={`flex items-center ${items[0]?.disable}`}><FaMinus /></button>
@@ -182,7 +182,7 @@ export default function Addtocart() {
                     }
 
                 </div>
-                <div className='ordersummery w-[30%] bg-[#FAFAF5] rounded-lg border px-4 space-y-3 py-4 h-fit sm:w-full sm:mt-4'>
+                {cartData?.length > 0 ? <div className='ordersummery w-[30%] bg-[#FAFAF5] rounded-lg border px-4 space-y-3 py-4 h-fit sm:w-full sm:mt-4'>
                     <div className='fontcart font-bold'>Order Summery</div>
                     <div className='flex justify-between fontorder'>
                         <div>Subtotal</div>
@@ -190,7 +190,7 @@ export default function Addtocart() {
                     </div>
                     <div className='flex justify-between fontorder'>
                         <div>Total items</div>
-                        <div>₹{totalitems}</div>
+                        <div>{totalitems}</div>
                     </div>
 
 
@@ -212,7 +212,7 @@ export default function Addtocart() {
                         <Arrow />
                     </button>
 
-                </div>
+                </div> : <div style={{ width: "100%" }}> <h2 style={{ fontSize: "1.6rem" }} > No Item in cart </h2> </div>}
             </div>
             {show ? <div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>
                 <Spinner className='' />

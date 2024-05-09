@@ -14,6 +14,7 @@ import electronicsBanner from '../../Assets/Images/electronicsBanner.png'
 import serum from '../../Assets/Images/products/serum.png'
 import banner_shirt from '../../Assets/Images/banner_shirt.jpg'
 import { BASE_URL } from '../../Api/api';
+import { Link } from 'react-router-dom';
 
 const MainContent = () => {
     const [productData, setProductData] = useState([]);
@@ -67,7 +68,7 @@ const MainContent = () => {
                 </Splide>
             </div>
             <div className={`${styles.newProducts_main} ${styles.products_main}`}>
-                <div className={`${styles.newProducts_top} ${styles.products_top}`}>
+                <div className={`${styles.newProducts_top} ${styles.products_top} `}>
                     <h1>New Products</h1>
                     {/* <span>
                         <h5>Show More </h5>
@@ -79,13 +80,15 @@ const MainContent = () => {
 
             </div>
             <div className={styles.banner_main}>
-                <div className='w-[70%] sm:w-full sm:h-[200px]'>
+
+                <Link to={`/products?category=Health and Beauty`} className='w-[70%] sm:w-full sm:h-[200px]'>
                     <img className='w-full h-full' src={banner3} alt="banner not found" />
                     <div className='relative bottom-[50%] translate-y-[-50%] w-[35%] left-[7%] sm:w-[55%]'>
                         <p className='font-Gorditas  text-white text-[30px] sm:text-[20px] '>Get  ready to slay with our Stunning Makeup Collection!!</p>
                     </div>
-                </div>
-                <div className={styles.hotdeals_main}>
+                </Link>
+
+                <Link to={`/products?category=Health and Beauty`} className={styles.hotdeals_main}>
                     <span className={styles.heading}>
                         <span>
 
@@ -144,7 +147,7 @@ const MainContent = () => {
                             </SplideSlide>
                         </Splide>
                     </div>
-                </div>
+                </Link>
 
             </div>
 
@@ -158,16 +161,27 @@ const MainContent = () => {
 
                     </span> */}
                 </div>
-                <Products data={productData.filter((val, id) => id <= 4)} />
+                <div>
+                    <Products data={productData.filter((val, id) => id <= 4)} />
+                </div>
 
             </div>
 
-            <div className={styles.banner2}>
-                <img src={banner_shirt} alt="banner not found" />
-                {/* <span className={styles.banner_tag}>
-                    <p>New</p>
-                </span> */}
-            </div>
+            <Link className="relative group h-[50vh] w-full" to={`/store/65d7338168bd195c22bc4bd0`}>
+                <img
+                    src={banner_shirt}
+                    alt="what's new"
+                    className=" group-hover:brightness-50 group-hover:blur-0 transition-all duration-300 h-[50vh] w-full object-cover"
+                />
+                <div className="absolute bottom-10 right-10 w-1/2 text-right space-y-1 opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <p className="font-Gorditas text-[40px] text-[#FFFFFF] leading-10">
+                        NEW SHIRT COLLECTION FOR MEN
+                    </p>
+                    <p className="font-Montserrat text-[#FFFFFF] text-[22px]">
+                        SAVE UPTO 40% OFF
+                    </p>
+                </div>
+            </Link>
             <div className={`${styles.featured_main} ${styles.products_main}`}>
                 <div className={`${styles.featured_top} ${styles.products_top}`}>
                     <h1>Top Rated Products</h1>

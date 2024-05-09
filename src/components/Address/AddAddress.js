@@ -99,31 +99,31 @@ export default function AddAddress() {
                                 <div className="font-bold text-[#848484] text-[32px] my-2 text-center fontgobs" >Add Address</div>
                                 <div className="w-full text-[#848484] space-y-5 fontmons">
 
-                                        <label htmlFor="full_name" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="full_name" className="w-full py-2 px-4">
                                                 <p className="font-semibold">Full Name</p>
                                                 <input required id="full_name" name="full_name" type="text" value={full_name} onChange={(e) => setfull_name(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                                         </label>
-                                        <label htmlFor="mobile" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="mobile" className="w-full py-2 px-4">
                                                 <p className="font-semibold">Mobile Number</p>
                                                 <input required id="mobile" name="mobile" type="number" value={mobile} onChange={(e) => setmobile(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                                         </label>
-                                        <label htmlFor="zip" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="zip" className="w-full py-2 px-4">
                                                 <p className="font-semibold">zip</p>
                                                 <input required id="zip" name="zip" type="number" value={zip} onChange={(e) => setzip(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                                         </label>
-                                        <label htmlFor="address_line_1" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="address_line_1" className="w-full py-2 px-4">
                                                 <p className="font-semibold">address_line_1 no, House no, Building ,Company </p>
                                                 <input required id="address_line_1" name="address_line_1" type="text" value={address_line_1} onChange={(e) => setaddress_line_1(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                                         </label>
-                                        <label htmlFor="address_line_2" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="address_line_2" className="w-full py-2 px-4">
                                                 <p className="font-semibold">address_line_2 , Street , Sector , Village </p>
                                                 <input required id="address_line_2" name="address_line_2" type="text" value={address_line_2} onChange={(e) => setaddress_line_2(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                                         </label>
-                                        <label htmlFor="Landmark" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="Landmark" className="w-full py-2 px-4">
                                                 <p className="font-semibold">Landmark</p>
                                                 <input required id="Landmark" name="Landmark" type="text" value={landmark} onChange={(e) => setlandmark(e.target.value)} className="w-full mt-2 outline-none border-[1px] pl-2 py-1" />
                                         </label>
-                                        <label htmlFor="country" className="w-full shadow-md py-2 px-4">
+                                        <label htmlFor="country" className="w-full py-2 px-4">
                                                 <p className="font-semibold">Country</p>
                                                 {/* <input required type="text" id="country" name="country" value={country} onChange={(e) => setcountry(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" /> */}
                                                 <CountrySelector
@@ -136,7 +136,7 @@ export default function AddAddress() {
                                                 />
                                         </label>
                                         <div className="flex w-full">
-                                                <label htmlFor="city" className="w-full shadow-md py-2 px-4">
+                                                <label htmlFor="city" className="w-full py-2 px-4">
 
                                                         <p className="font-semibold">State</p>
                                                         {/* <input required id="city" name="city" type="text" value={city} onChange={(e) => setcity(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" /> */}
@@ -148,7 +148,7 @@ export default function AddAddress() {
                                                                 styleContainer={{ padding: "0px !important" }}
                                                         />
                                                 </label>
-                                                <label htmlFor="state" className="w-full shadow-md py-2 px-4">
+                                                <label htmlFor="state" className="w-full py-2 px-4">
                                                         <p className="font-semibold">city</p>
                                                         {/* <input required id="state" name="state" type="text" value={state} onChange={(e) => setstate(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" /> */}
                                                         <CitySelector
@@ -162,7 +162,7 @@ export default function AddAddress() {
                                         </div>
                                         <div className="flex space-x-1">
                                                 <input onChange={(e) => setmake_default(e.target.checked)} className="h-5 w-5 accent-[#58B310] text-white" type="checkbox" />
-                                                <div>Make this my default browser</div>
+                                                <div>Make this my default Address</div>
                                         </div>
                                         <div className="flex w-full justify-center">
                                                 <button onClick={() => Addaddress()} className=" px-4 py-1 shadow-lg rounded bg-[#58B310] text-white">Save</button>

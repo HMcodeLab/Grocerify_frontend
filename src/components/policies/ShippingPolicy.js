@@ -9,7 +9,7 @@ const ShippingPolicy = () => {
 
   return (
     <Wrapper>
-      <div className="container">
+      <div className="container" style={{ flexDirection: "column" }}>
         <h2>Shipping Information</h2>
         <p>
           <strong>What are the delivery charges?</strong>

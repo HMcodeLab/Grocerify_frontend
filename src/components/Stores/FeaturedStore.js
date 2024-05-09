@@ -245,7 +245,7 @@ const FeaturedStore = () => {
                         </div>
 
                         {/* whats new */}
-                        <div className="relative group">
+                        <Link className="relative group" to={`/store/65d7338168bd195c22bc4bd0`}>
                             <img
                                 src="../assests/images/storeimg.svg"
                                 alt="what's new"
@@ -259,7 +259,7 @@ const FeaturedStore = () => {
                                     SAVE UPTO 40% OFF
                                 </p>
                             </div>
-                        </div>
+                        </Link>
 
                         {/* top rated store */}
                         {/* <div className="bg-[#FFFFFF]">

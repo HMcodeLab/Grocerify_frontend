@@ -7,7 +7,7 @@ const ReturnPolicy = () => {
 
     return (
         <Wrapper>
-            <div className="container">
+            <div className="container" style={{ flexDirection: "column" }}>
                 <h1>Order Cancellation and Return Policy</h1>
                 <h1> Cancellation Policy</h1>
                 <p className="cancellation_policy">

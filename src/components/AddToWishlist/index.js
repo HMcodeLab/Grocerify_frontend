@@ -66,7 +66,7 @@ export default function AddToWishlist() {
         <div className="w-full px-20 text-[#848484] space-y-4 py-5">
             <div className="text-[24px] fontcart">My Wishlist ({wishListData.length} Items)</div>
             <div className='h-[2px] w-full bg-[#848484] '></div>
-            <div className='flex justify-center '>
+            <div className='flex justify-start '>
                 <div className="w-[70%] space-y-5 ">
                     {
                         wishListData.map((item, index) => {
@@ -79,9 +79,9 @@ export default function AddToWishlist() {
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
                                     </div>
                                     <div className='flex flex-col w-full space-y-2 py-3'>
-                                        <div className='flex justify-between pr-5 font-bold font2 text-[18px]'>
+                                        <div className='flex justify-between pr-5 font-semibold font2 text-[16px] gap-[8vw]'>
                                             <div>{item.product.products_title}</div>
-                                            <div className='flex space-x-5 items-center '>
+                                            <div className='flex space-x-5 items-start'>
                                                 <RWebShare
                                                     data={{
                                                         text: "Web Share - Grocerify",

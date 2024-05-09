@@ -27,10 +27,10 @@ export default function MyOrders() {
             </div>
 
             <div className='fontmons flex space-x-10 text-[#848484] pl-1 font-[500px]'>
-                <button onClick={() => setShowComponent('orders')} style={{ color: ShowComponent == 'orders' ? "#58B310" : "#848484" }}>Orders</button>
+                {/* <button onClick={() => setShowComponent('orders')} style={{ color: ShowComponent == 'orders' ? "#58B310" : "#848484" }}>Orders</button> */}
                 {/* <button onClick={() => setShowComponent('buyagain')} style={{ color: ShowComponent == 'buyagain' ? "#58B310" : "#848484" }}>Buy Again</button> */}
                 {/* <button onClick={() => setShowComponent('notyetshipped')} style={{ color: ShowComponent == 'notyetshipped' ? "#58B310" : "#848484" }}>Not Yet Shipped</button> */}
-                <button onClick={() => setShowComponent('cancelled')} style={{ color: ShowComponent == 'cancelled' ? "#58B310" : "#848484" }}>Cancelled Orders</button>
+                {/* <button onClick={() => setShowComponent('cancelled')} style={{ color: ShowComponent == 'cancelled' ? "#58B310" : "#848484" }}>Cancelled Orders</button> */}
             </div>
             <div className='h-[2px] w-full bg-[#848484] mt-1'></div>
             {

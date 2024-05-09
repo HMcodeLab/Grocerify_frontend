@@ -16,6 +16,7 @@ import TracKOrder from '../trackOrder/trackOrder'
 
 export default function Orders() {
     const [product, setproduct] = useState('')
+    const navigate = useNavigate()
     const isFetching = useIsFetching()
     const [btnLoader, setBtnLoader] = useState(false)
     const [openModal, setopenModal] = useState(false)
@@ -166,7 +167,7 @@ export default function Orders() {
 
             </div>
 
-            {Array.isArray(OrderData?.orders) && OrderData?.orders?.map((val, ind) => {
+            {Array.isArray(OrderData?.orders) && OrderData?.orders?.reverse((value) => { return value }).map((val, ind) => {
                 return (
                     <>
                         <div className='border rounded-t-xl my-4'>
@@ -203,8 +204,8 @@ export default function Orders() {
                                                 <div className='w-full text-[15px] ' key={ind} >
 
                                                     <div className='flex justify-between items-center px-3 fontmons pt-3 text-[#848484]'>
-                                                        <div className='flex items-center'>
-                                                            <div className='flex flex-col'>
+                                                        <div className='flex items-center gap-4'>
+                                                            <div className='flex flex-col '>
                                                                 {/* <div className='text-[20px]'>Arriving Today</div> */}
 
                                                                 <div className='h-36 w-36 flex justify-center items-center '>
@@ -212,13 +213,18 @@ export default function Orders() {
                                                                 </div>
                                                             </div>
                                                             <div className='flex flex-col justify-start items-start gap-y-2'>
-                                                                <div className='fontgob text-[14px] w-[50vw]'>{order.productid.products_title}</div>
+                                                                <span className='flex flex-col'>
+                                                                    <div className='fontgob text-[14px] w-[50vw]'>{order.productid.products_title}</div>
+                                                                    {(val.status == "delivered" || val.status == "cancelled") ? <button className='w-[10vw] border border-[#58B310] my-4 px-3 py-[2px] text-[#58B310] rounded' onClick={() => { navigate(`/product/${order.productid.slug}`) }} >Buy Again</button> : <></>}
+                                                                </span>
+
                                                                 {(val.status == "delivered") ? <button onClick={() => Openfun(val?.product?._id)} className='text-[#58B310]'>Write a review</button> : ''}
                                                             </div>
                                                         </div>
 
 
                                                     </div>
+
                                                 </div>
                                             </>
                                         )
@@ -229,7 +235,7 @@ export default function Orders() {
                                     <div>
                                         {(val.status == "shipped" || val.status == "ordered") || val.status == "pickuped" ? <button className=' px-3 py-[2px] text-[#58B310] rounded' onClick={() => setopenTrackOrderModal(val)}>Track Order</button> : <></>}
                                     </div>
-                                    <div className='flex flex-col space-y-10 items-center border '>
+                                    <div className='flex flex-col space-y-10 items-center '>
                                         {/* <button className='bg-[#58B310] px-3 py-[2px] text-white rounded'>Track Order</button> */}
                                         {(val.status == "shipped" || val.status == "ordered") || val.status == "pickuped" ? <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' onClick={() => CancelOrder(val._id)}>Cancel Order</button> : val.status === "cancelled" ? <button className='border border-red-700 px-3 py-[2px] text-red-700 rounded pointer-events-none cursor-not-allowed'>Cancelled</button> : <button className='border border-[#58B310] px-3 py-[2px] text-[#58B310] rounded' >Delivered</button>}
                                     </div>

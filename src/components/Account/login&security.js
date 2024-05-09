@@ -212,7 +212,7 @@ export default function LoginAndSecurity() {
                 </div>
                 <div className="font-bold text-[#848484] text-[32px] my-2">Login and Security</div>
                 <div className="w-full text-[#848484] space-y-5">
-                    <label htmlFor="name" className="w-full shadow-md py-2 px-4">
+                    <label htmlFor="name" className="w-full py-2 px-4">
                         <div className="flex justify-between w-full">
                             <p className="font-bold">First Name</p>
                             {
@@ -221,7 +221,7 @@ export default function LoginAndSecurity() {
                         </div>
                         <input disabled={editname} type="text" id="name" name="name" value={firstName} onChange={(e) => setfirstName(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                     </label>
-                    <label htmlFor="lastName" className="w-full shadow-md py-2 px-4">
+                    <label htmlFor="lastName" className="w-full py-2 px-4">
                         <div className="flex justify-between w-full">
                             <p className="font-bold">Last Name</p>
                             {
@@ -230,7 +230,7 @@ export default function LoginAndSecurity() {
                         </div>
                         <input disabled={editlastName} type="text" id="lastName" name="lastName" value={lastName} onChange={(e) => setlastName(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                     </label>
-                    <label htmlFor="email" className="w-full shadow-md py-2 px-4">
+                    <label htmlFor="email" className="w-full py-2 px-4">
                         <div className="flex justify-between w-full">
                             <p className="font-bold">Email</p>
                             {
@@ -239,7 +239,7 @@ export default function LoginAndSecurity() {
                         </div>
                         <input disabled={editemail} id="email" name="email" type="email" value={email} onChange={(e) => setemail(e.target.value)} className="w-full mt-2 outline-none border-[0.5px] pl-2 py-1" />
                     </label>
-                    <label htmlFor="mobile" className="w-full shadow-md py-2 px-4">
+                    <label htmlFor="mobile" className="w-full py-2 px-4">
                         <div className="flex justify-between w-full">
                             <p className="font-bold">Primary Phone Number</p>
                             <div className="flex space-x-2">

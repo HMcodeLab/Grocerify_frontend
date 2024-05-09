@@ -10,7 +10,7 @@ import { ReactComponent as Star } from '../../Assets/Icons/star.svg'
 import productimg from '../../Assets/Images/product.png'
 import tv from '../../Assets/Images/products/tv.png'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../../Api/api';
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -81,7 +81,7 @@ const Sidebar = ({ category, close }) => {
                     {Object.entries(Category).map(([title, values]) => (
                         <div key={title} className={styles.category}>
                             <span className='flex justify-between gap-2'>
-                                <a href={`/products?category=${title}`} >
+                                <a href={`/products?category=${title}`} onClick={() => close(false)} >
                                     {title}
                                 </a>
                                 <IoMdArrowDropdown onClick={() => handleCategoryClick(title)} size={24} color={"grey"} />
@@ -90,7 +90,7 @@ const Sidebar = ({ category, close }) => {
                             {activeCategory === title && (
                                 <ul className="values">
                                     {values.map((value, index) => (
-                                        <li key={index}>{value}</li>
+                                        <Link to={`/products?category=${title}&subCategory=${value}`}> <li key={index} onClick={() => close(false)} >{value}</li></Link>
                                     ))}
                                 </ul>
                             )}

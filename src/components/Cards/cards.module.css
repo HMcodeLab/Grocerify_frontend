@@ -2,6 +2,7 @@
   height: 230px;
   width: 100%;
   padding-block: 2vh;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   /* border: 1px solid red; */
   display: flex;

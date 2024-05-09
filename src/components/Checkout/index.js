@@ -11,6 +11,7 @@ import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
 import CircularProgress from '@mui/joy/CircularProgress';
 import { useSearchParams } from 'react-router-dom';
+import { useCheckCart } from '../../hooks/useCheckCart';
 
 
 
@@ -18,6 +19,7 @@ export default function Checkout() {
     const navigate = useNavigate()
     const [searchparams, setSearchParams] = useSearchParams();
     const jsonString = (searchparams.get('item'));
+    const { emptyCart } = useCheckCart()
     // const parsedString = (jsonString)
     // console.log(jsonString)
 
@@ -99,7 +101,7 @@ export default function Checkout() {
             temp2.push({ productid: val.product._id, quantity: val.quantity });
         })
         // console.log("value", val)
-        // console.log(temp2)
+        // console.log(temp2)emptyCart
         setbtnLoader(true)
         try {
             const res = await axios.post(`${BASE_URL}api/order`,
@@ -119,6 +121,10 @@ export default function Checkout() {
             })
             console.log(res)
             setbtnLoader(false)
+            emptyCart()
+            GetCart()
+            getUserDetails()
+
             toast.success("Order Placed Successfully");
             navigate('/success')
         } catch (error) {
