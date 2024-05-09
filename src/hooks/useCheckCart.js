@@ -26,6 +26,7 @@ export const useCheckCart = () => {
         try {
             let url2 = BASE_URL + 'api/removefromcart'
             let bodydata2 = { mobile: userDetail?.mobile, operation: "deleteCart" }
+            console.log(bodydata2)
 
             const data2 = await fetch(url2, {
                 method: 'post',
@@ -34,6 +35,8 @@ export const useCheckCart = () => {
             });
             const response = await data2.json()
             console.log(response);
+            GetCart()
+            getUserDetails()
             return response
 
         } catch (error) {
