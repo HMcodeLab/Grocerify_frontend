@@ -159,7 +159,7 @@ export default function LoginAndSecurity() {
                         theme: "colored",
                         // transition: 'Bounce'
                     });
-                    navigate('/account')
+                    // navigate('/account')
                 }
                 else {
                     toast.error('Server error', {
