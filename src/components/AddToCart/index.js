@@ -159,7 +159,7 @@ export default function Addtocart() {
                                     <div className='w-[20vw] h-28  flex justify-center items-center '>
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item?.product?.product_primary_image_url} />
                                     </div>
-                                    <div className='flex flex-col fontorder max-h-auto'>
+                                    <div className='flex flex-col fontorder max-h-auto w-full'>
                                         <div className='flex justify-between pr-5 font-medium text-[16px] gap-[5vw]'>
                                             <div>{item?.product?.products_title} </div>
 
