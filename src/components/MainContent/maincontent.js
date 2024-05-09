@@ -57,13 +57,13 @@ const MainContent = () => {
 
                     }}>
                     <SplideSlide>
-                        <img src={Heroimage} alt="banner  not found" />
+                        <img src={'/assets/Images/3.png'} alt="banner  not found" />
                     </SplideSlide>
                     <SplideSlide>
-                        <img src={grocery2} alt="banner  not found" />
+                        <img src={'/assets/Images/2.png'} alt="banner  not found" />
                     </SplideSlide>
                     <SplideSlide>
-                        <img src={electronicsBanner} alt="banner not found" />
+                        <img src={'/assets/Images/1.png'} alt="banner not found" />
                     </SplideSlide>
                 </Splide>
             </div>
