@@ -127,6 +127,7 @@ export default function Checkout() {
 
             toast.success("Order Placed Successfully");
             navigate('/success')
+            window.location.reload()
         } catch (error) {
             console.log(error)
             setbtnLoader(false)

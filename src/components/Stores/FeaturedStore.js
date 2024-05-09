@@ -192,7 +192,7 @@ const FeaturedStore = () => {
                         <div className="bg-[#EDF1E0] relative border h-fit">
                             <img
                                 src="/assets/Images/shopBanner.png"
-                                className=" h-auto object-cover"
+                                className=" h-auto object-cover  w-full"
 
                             />
 
