@@ -9,7 +9,7 @@ const Products = (data) => {
         <>
             <div className={styles.products_main}>
                 {
-                    data?.data?.map((val, ind) => {
+                    data?.data?.filter((data, index) => data.stores.length > 0)?.map((val, ind) => {
                         return (
                             <div key={ind}>
                                 {/* <Link to={'/product/new'}>  */}

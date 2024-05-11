@@ -24,7 +24,7 @@ const MainContent = () => {
         try {
             const res = await fetch(`${BASE_URL}api/products`);
             const response = await res.json();
-            // console.log(response);
+            console.log(response);
             setProductData(response)
         } catch (error) {
             console.log(error)
@@ -76,7 +76,7 @@ const MainContent = () => {
 
                     </span> */}
                 </div>
-                <Products data={productData.filter((val, id) => (id >= 2 && id <= 6))} />
+                <Products data={productData.filter((val, id) => (id >= 2 && id <= 6) && val?.stores?.length > 0)} />
 
             </div>
             <div className={styles.banner_main}>
@@ -162,7 +162,7 @@ const MainContent = () => {
                     </span> */}
                 </div>
                 <div>
-                    <Products data={productData.filter((val, id) => id <= 4)} />
+                    <Products data={productData.filter((val, id) => id <= 4 && val?.stores?.length > 0)} />
                 </div>
 
             </div>
@@ -191,7 +191,7 @@ const MainContent = () => {
 
                     </span> */}
                 </div>
-                <Products data={productData} />
+                <Products data={productData.filter((val, id) => val?.stores?.length > 0)} />
 
             </div>
             <div className='flex flex-col gap-0'>

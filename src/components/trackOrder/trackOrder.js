@@ -22,7 +22,7 @@ const TracKOrder = ({ close, data }) => {
             case 'shipped':
                 setCurrentStep(3);
                 break;
-            case 'pickedup':
+            case 'pickuped':
                 setCurrentStep(4);
                 break;
             case 'delivered':
@@ -39,6 +39,18 @@ const TracKOrder = ({ close, data }) => {
     return (
         <>
             <div className="main_container" onClick={(e) => e.stopPropagation()}>
+                <div className="border border-green-400 p-4 border-2 rounded-[10px]">
+                    <h1>Ordered From</h1>
+                    <h2>{data.shop?.shopName} , {data?.shop?.ShopAddress}</h2>
+
+
+                </div>
+                <div className="border border-green-400 p-4 border-2 rounded-[10px] my-4">
+                    <h1>Delivery Boy details</h1>
+                    <h2>{data.deliveryBoy[0]?.firstName} {data.deliveryBoy[0]?.lastName}</h2>
+                    <h2>{data.deliveryBoy[0]?.mobile}</h2>
+
+                </div>
                 <div className="container">
                     {steps?.map((data, i) => (
                         <div
@@ -56,8 +68,19 @@ const TracKOrder = ({ close, data }) => {
                         </div>
                     ))}
                 </div>
-                <div className='show_address'>
+                <div className='show_address border border-green-400 p-4 border-2 rounded-[10px] my-4'>
+                    <h3 className="font-bold">Shipping Address</h3>
+                    <ul>
+                        <li>{data?.shipping_address?.full_name}</li>
+                        <li>{data?.shipping_address?.address_line_1}</li>
+                        <li>{data?.shipping_address?.address_line_2}</li>
+                        <li>{data?.shipping_address?.landmark}</li>
 
+                        <li>{data?.shipping_address?.city},{data?.shipping_address?.country},{data?.shipping_address?.zip} </li>
+                        <li>{data?.shipping_address?.mobile}</li>
+
+                    </ul>
+                    <p></p>
                 </div>
 
             </div>

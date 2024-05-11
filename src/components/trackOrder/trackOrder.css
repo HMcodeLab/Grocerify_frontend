@@ -78,6 +78,11 @@
   background-color: #4a5568;
 }
 
+.show_address {
+  padding: 1vh 2vw;
+  width: fit-content;
+}
+
 @media screen and (max-width: 600px) {
   .container {
     width: 90%;

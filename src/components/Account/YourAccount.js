@@ -110,8 +110,8 @@ const YourAccount = () => {
               <img src="../assests/icons/addstore.svg" alt="Order" />
             </div>
             <div className="cd-body">
-              <h5 className="cd-title">Add Your store</h5>
-              <p className="cd-text">Become a seller</p>
+              <h5 className="cd-title">Become a seller</h5>
+              {/* <p className="cd-text"></p> */}
             </div>
           </div>
         </Link>

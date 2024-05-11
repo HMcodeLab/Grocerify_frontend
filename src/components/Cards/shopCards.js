@@ -190,6 +190,9 @@ const ShopCard = (value) => {
     }
 
     console.log(shopData)
+    if (shopData == undefined) {
+        return <h1>Loading Shop Data...</h1>
+    }
     return (
         <>
             <Toaster />
@@ -217,7 +220,7 @@ const ShopCard = (value) => {
                                     <Star />
                                     <Star />
                                 </span>
-                                <span className='mt-6 flex items-center justify-center gap-2' >
+                                <span className='mt-6 flex items-center justify-center gap-2 ' style={{ opacity: isShopOpen(shopData.openingHours.from, shopData.openingHours.to) ? "1" : "0.5", pointerEvents: isShopOpen(shopData.openingHours.from, shopData.openingHours.to) ? "unset" : "none" }} onClick={() => toast.warning('Store is Closed')} >
                                     <span onClick={(e) => { e.stopPropagation(); handleWishlist() }}>
                                         {isWishlisted ? <IoHeart size={24} color={"green"} /> : <CiHeart size={24} color={"black"} />}
 
@@ -254,7 +257,8 @@ const ShopCard = (value) => {
                 >
                     <ConfirmCart close={setopenDifferentStorePopUp} handleCart={handleCartOfDiffStore} />{" "}
                 </div>
-            )}
+            )
+            }
 
         </>
     )
