@@ -23,7 +23,7 @@ const Navbar = () => {
     const [searchInput, setSearchInput] = useState('');
     const [searchOutputData, setSearchOutputData] = useState();
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
-    console.log(userDetail)
+    // console.log(userDetail)
 
 
 
@@ -140,15 +140,18 @@ const Navbar = () => {
                     </div>
                     <input type="text" name="search" id="" placeholder='search here ....' onChange={handleSearchChange} onKeyDown={handelSearchClicked} />
                     {searchInput.length > 2 && <div className={styles.search_data}>
-                        {
-                            searchOutputData?.map((val, ind) => {
-                                return (
-                                    <>
-                                        <a href={`/product/${val.slug}`}> <p>{cropString(val.products_title, 27)}</p></a>
-                                    </>
-                                )
-                            })
-                        }
+                        <>
+                            {
+
+                                searchOutputData?.map((val, ind) => {
+                                    return (
+                                        <>
+                                            <a href={`/product/${val.slug}`}> <p>{cropString(val.products_title, 27)}</p></a>
+                                        </>
+                                    )
+                                })
+                            }
+                        </>
                     </div>}
                 </div>
                 <div className={styles.location}>

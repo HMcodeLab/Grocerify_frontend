@@ -64,31 +64,31 @@ export default function Footer() {
                 </div>
 
                 <div className=" text-[#FFFFFF] flex flex-col  space-y-4 sm:space-y-3 ">
-                    <Link className='font' to={'/about'}>About Us</Link>
-                    <Link className='font' to={'/contact_us'}>Contact Us</Link>
+                    <Link className='font' to={'/about'} onClick={handelClick}>About Us</Link>
+                    <Link className='font' to={'/contact_us'} onClick={handelClick}>Contact Us</Link>
                     {/* <Link className='font' to='/about#teams'>Our Team</Link> */}
 
                 </div>
 
                 <div className="text-[#FFFFFF] flex flex-col  space-y-4 sm:space-y-3 sm:justify-start">
-                    <Link to={'/products?category=Electronics'}> Electronics</Link>
-                    <Link className='font' to={'/products?category=Grocery'}> Groceries</Link>
-                    <Link className='font' to={'/products?category=Health and Beauty'}> Health & Beauty</Link>
-                    <Link className='font' to={'/products?category=dairy'}> Dairy </Link>
-                    <Link className='font' to={'/products?category=frozen'}>  Frozen</Link>
-                    <Link className='font' to={'/products?category=poultary'}>  Poultary</Link>
+                    <Link to={'/products?category=Electronics'} onClick={handelClick}> Electronics</Link>
+                    <Link className='font' to={'/products?category=Grocery'} onClick={handelClick}> Groceries</Link>
+                    <Link className='font' to={'/products?category=Health and Beauty'} onClick={handelClick}> Health & Beauty</Link>
+                    <Link className='font' to={'/products?category=dairy'} onClick={handelClick}> Dairy </Link>
+                    <Link className='font' to={'/products?category=frozen'} onClick={handelClick}>  Frozen</Link>
+                    <Link className='font' to={'/products?category=poultary'} onClick={handelClick}>  Poultary</Link>
                     <Link className='font' to={'/stores'}> Stores</Link>
                 </div>
 
                 <div className="text-[#FFFFFF] flex flex-col   space-y-4 sm:space-y-3 pl-5">
 
                     {/* <Link to={'/privacy_policy'} className='font'>Privacy Policy</Link> */}
-                    <Link to={'/return_policy'} className='font'>Return Policy</Link>
-                    <Link to={'shipping_policy'} className='font'>Shipping Policy</Link>
+                    <Link to={'/return_policy'} className='font' onClick={handelClick}>Return Policy</Link>
+                    <Link to={'shipping_policy'} className='font' onClick={handelClick}>Shipping Policy</Link>
                     {/* <Link to={'/terms'} className='font'>Terms Of Service</Link> */}
-                    <Link className='font' to={'/faq'}>FAQ</Link>
+                    <Link className='font' to={'/faq'} onClick={handelClick}>FAQ</Link>
                     {/* <Link to={'/account/coupons'} className='font'>Coupons</Link> */}
-                    <Link to={'/shop_registration'} className='flex space-x-2 justify-self-start items-center'>
+                    <Link to={'/shop_registration'} className='flex space-x-2 justify-self-start items-center' onClick={handelClick}>
                         <img className='w-[23px] ' src={Mask} alt="" /> <h4>PARTNER WITH US</h4> </Link>
                 </div>
 

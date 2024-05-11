@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './register.module.css';
 import { FaCircleCheck } from "react-icons/fa6";
 import { ReactComponent as User } from '../../Assets/Icons/userRegister.svg';
@@ -18,9 +18,11 @@ import VerifyOTP from '../verifyOTP/verifyOTP';
 import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail } from '../../helpers';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { Globalinfo } from '../../App';
 
 const Register = () => {
     const navigate = useNavigate();
+    const { userDetail, getUserDetails, GetCart, GetWishList } = useContext(Globalinfo)
     const [showOTPModal, setshowOTPModal] = useState(false)
     const [showPassword, setShowPassword] = useState(false);
     const [btnLoader, setBtnLoader] = useState(false);
@@ -61,8 +63,11 @@ const Register = () => {
                 })
                 console.log(res);
                 localStorage.setItem('GROC_USER_TOKEN', res.data.token)
+                getUserDetails()
+                GetCart()
+                GetWishList()
                 if (res.status === 201) {
-                    navigate('/login');
+                    navigate('/');
                     setTimeout(() => {
                         toast.success('Registered Successfully')
 

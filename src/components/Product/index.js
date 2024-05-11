@@ -19,7 +19,7 @@ import axios from 'axios';
 import { ReactComponent as Starfilled } from '../../Assets/Icons/star.svg'
 import { ReactComponent as Delete } from '../../Assets/Icons/delete.svg'
 import { ReactComponent as Empty } from '../../Assets/Icons/emptystar.svg'
-import { getDateAfterFiveDays } from '../../helpers/helper_function';
+import { getDateAfterFiveDays, isShopOpen } from '../../helpers/helper_function';
 import { useCheckCart } from '../../hooks/useCheckCart';
 import ConfirmCart from '../popUps/confirmCart';
 
@@ -266,36 +266,37 @@ export default function Product() {
                                         <>
                                             <div className='flex rounded-lg w-full border bg-[#FAFAF5] py-4 space-x-5 px-3 mt-4 h-full' onClick={() => navigate('/store/' + item.store._id)}>
                                                 <div className=' flex items-center justify-center relative'>
-                                                    <div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
+                                                    {item?.variants1_discount_per > 0 && <div div className='absolute bg-[#58B310] h-8 w-8 rounded-full -top-2 -left-2  text-center fontgo text-white flex flex-col pt-[2px]'>
                                                         <div className='text-[10px]'>{item?.
                                                             variants1_discount_per}%</div>
                                                         <div className='text-[8px]'>off</div>
-                                                    </div>
+                                                    </div>}
                                                     <img className='max-h-52 max-w-32' src={item?.store?.shopImages[0]} />
 
                                                 </div>
                                                 <div className='flex flex-col w-full fontmont text-[#848484] gap-2'>
                                                     <div className='flex justify-between  font-bold fontmont text-[16px] text-[#848484]'>
-                                                        <div>{item.store.shopName}</div>
+                                                        <div>{item?.store?.shopName}</div>
                                                         <div className='flex '>
-                                                            <div>₹ {item.variants1_mrp_price - (item.variants1_mrp_price * (item.variants1_discount_per / 100))}</div>
-                                                            <div className='txtc text-[10px]'>₹ {item.variants1_mrp_price}</div>
+                                                            <div>₹ {item?.variants1_mrp_price - (item?.variants1_mrp_price * (item?.variants1_discount_per / 100))}</div>
+                                                            <div className='txtc text-[10px]'>₹ {item?.variants1_mrp_price}</div>
                                                         </div>
                                                     </div>
-                                                    <div className='text-sm'>{item.store.ShopAddress}</div>
+                                                    <div className='text-sm'>{item?.store?.ShopAddress}</div>
                                                     {/* <div>Delivery by Sun, 12 Feb</div> */}
                                                     {/* <div>2.1km</div> */}
                                                     <div className='flex justify-between items-center'>
-                                                        <div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item.store.openingHours.to}</div>
+                                                        {isShopOpen(item?.store?.openingHours?.from, item?.store?.openingHours?.to)
+                                                            ? <div div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item?.store?.openingHours?.to}</div> : <div className='flex flex-col opacity-[0.5]'> <div div className='text-[14px] text-red-500 font-semibold'>{item?.store?.openingHours?.from}- {item?.store?.openingHours?.to}</div> <div className='text-[14px] text-red-500 font-semibold' >This Shop is Currently Closed</div>  </div>}
                                                         <div className='flex gap-3'>
-                                                            <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={(e) => { e.stopPropagation(); addToCart(item.store) }}>Add To Cart</button>
+                                                            <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={(e) => { e.stopPropagation(); addToCart(item.store) }} style={{ opacity: isShopOpen(item?.store?.openingHours?.from, item?.store?.openingHours?.to) ? "1" : "0.5", pointerEvents: isShopOpen(item.store.openingHours.from, item.store.openingHours.to) ? "unset" : "none" }} >Add To Cart</button>
                                                             {/* <button className='border border-[var(--primary)] px-3 py-1' onClick={(e) => { e.stopPropagation(); handleBuy(item?.store) }}>Buy Now</button> */}
 
                                                         </div>
 
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div >
                                         </>)
                                 })
 
@@ -427,25 +428,27 @@ export default function Product() {
 
             {/* PickThis *************************************************************************************************************************** */}
 
-        </div>
+        </div >
         <Toaster />
-        {openDifferentStorePopUp && (
-            <div
-                style={{
-                    position: "fixed",
-                    top: "0px",
-                    left: "0px",
-                    height: "100vh",
-                    width: "100%",
-                    backgroundColor: "rgba(0,0,0,0.5)",
-                    display: "grid",
-                    placeItems: "center",
-                    zIndex: "9999"
-                }}
-                onClick={() => setopenDifferentStorePopUp(false)}
-            >
-                <ConfirmCart close={setopenDifferentStorePopUp} handleCart={handleCartOfDiffStore} />{" "}
-            </div>
-        )}
+        {
+            openDifferentStorePopUp && (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: "0px",
+                        left: "0px",
+                        height: "100vh",
+                        width: "100%",
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        display: "grid",
+                        placeItems: "center",
+                        zIndex: "9999"
+                    }}
+                    onClick={() => setopenDifferentStorePopUp(false)}
+                >
+                    <ConfirmCart close={setopenDifferentStorePopUp} handleCart={handleCartOfDiffStore} />{" "}
+                </div>
+            )
+        }
     </>)
 }

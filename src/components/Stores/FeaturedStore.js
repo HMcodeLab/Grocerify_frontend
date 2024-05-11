@@ -5,6 +5,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import Sidebar from "../Sidebar/sidebar";
 import { BASE_URL } from "../../Api/api";
+import { isShopOpen } from "../../helpers/helper_function";
 
 const FeaturedStore = () => {
     const [index, setIndex] = useState(0);

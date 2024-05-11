@@ -3,16 +3,18 @@ import styles from './Navlist.module.css'
 import { Link } from 'react-router-dom'
 import { ReactComponent as HamBurger } from '../../Assets/Icons/hamburger.svg'
 import Sidebar from '../Sidebar/sidebar'
+import { useLocation } from 'react-router-dom'
 
 const NavList = () => {
-
+    const location = useLocation();
+    console.log(location.pathname)
     const [isOpenSidebar, setisOpenSidebar] = useState(false)
     return (
         <>
             <div className={styles.nav_list_main}>
 
                 <ul className={styles.nav_list}>
-                    <li onClick={() => setisOpenSidebar(true)}>   <HamBurger /> <p>All</p> </li>
+                    {location.pathname.includes('store') ? <></> : <li onClick={() => setisOpenSidebar(true)}>   <HamBurger /> <p>All</p> </li>}
                     <Link to={'/products?category=Electronics'}> <li>Electronics</li></Link>
                     <Link to={'/products?category=Grocery'}> <li>Groceries</li></Link>
                     <Link to={'/products?category=Health and Beauty'}> <li>Health & Beauty</li></Link>

@@ -52,5 +52,27 @@ export function getDateAfterFiveDays() {
     return formattedDate;
 }
 
+export function isShopOpen(fromTime, toTime) {
+    // Convert time strings to Date objects
+    const now = new Date();
+    const from = new Date();
+    const to = new Date();
+
+    // Set hours and minutes for fromTime
+    const fromParts = fromTime.split(":");
+    from.setHours(parseInt(fromParts[0]), parseInt(fromParts[1]), 0, 0);
+
+    // Set hours and minutes for toTime
+    const toParts = toTime.split(":");
+    to.setHours(parseInt(toParts[0]), parseInt(toParts[1]), 0, 0);
+
+    // Check if current time is within the time slot
+    if (now >= from && now <= to) {
+        return true;
+    } else {
+        // console.error("The shop is closed. Current time is not within the specified time slot.");
+        return false;
+    }
+}
 
 

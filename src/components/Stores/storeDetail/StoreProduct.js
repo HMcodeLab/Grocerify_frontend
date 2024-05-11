@@ -3,8 +3,9 @@ import { BASE_URL } from "../../../Api/api";
 import Products from "../../Products/products";
 import { useParams } from 'react-router-dom';
 import Spinner from "../../Spinner";
-import { cropString } from "../../../helpers/helper_function";
+import { cropString, isShopOpen } from "../../../helpers/helper_function";
 import Cards from "../../Cards/cards";
+import ShopCard from "../../Cards/shopCards";
 
 const StoreProduct = () => {
   const params = useParams();
@@ -81,9 +82,13 @@ const StoreProduct = () => {
             <img src={shopData?.shopImages[3]} className="w-1/5" />
           </div>
           <div className="flex flex-col">
-            <p className="text-[#000000] text-[40px] font-Gorditas">
-              {shopData?.shopName}{" "}
-            </p>
+            {isShopOpen(shopData?.openingHours?.from, shopData?.openingHours?.to) ? <p className="text-[#000000] text-[40px] font-Gorditas">
+              {shopData?.shopName}
+
+            </p> : <><p className="text-[#000000] text-[40px] font-Gorditas">
+              {shopData?.shopName}
+              <span className="text-red-500 text-[30px]"> (Closed)</span>
+            </p> </>}
             <p className="text-[#222222] text-[20px] font-Montserrat w-[400px]">
               {shopData?.ShopAddress}
             </p>
@@ -172,24 +177,8 @@ const StoreProduct = () => {
             shopProducts?.map((val, ind) => {
               return (
                 <>
-                  <Cards value={val} />
-                  {/* <div className="flex flex-col gap-2 p-4 hover:bg-[#F3F3F3] transform transition-transform duration-300 ease-in-out hover:scale-105">
-                    <img src={val.product_primary_image_url} className="w-auto h-[140px] object-contain" />
-                    <div className="flex flex-col text-[#848484]">
-                      <div className="flex flex-row justify-between items-center">
-                        <p className="font-Gorditas">{val.brand} </p>
-                        <span className="text-xl text-center text-[#FFB800]">
-                          &#9733;&#9733;&#9733;&#9733;&#9734;
-                        </span>
-                      </div>
-                      <p className="font-Montserrat font-semibold text-[14px]">
-                        {cropString(val.products_title, 10)}
-                      </p>
-                      <p className="font-Montserrat font-semibold text-[14px]">
-                        ₹10,000
-                      </p>
-                    </div>
-                  </div> */}
+                  <ShopCard value={val} />
+
                 </>
               )
             })
@@ -249,7 +238,7 @@ const StoreProduct = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

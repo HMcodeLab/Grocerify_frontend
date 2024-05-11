@@ -43,8 +43,8 @@ const Search = () => {
     }, [searchParams.get('q')]);
 
     return (
-        <div className='grid grid-cols-5 p-[2rem]'>
-            {
+        <div className='grid grid-cols-5 p-[2rem] w-full justify-center'>
+            {searchOutputData?.length > 0 ? <> {
                 searchOutputData?.map((val, ind) => {
                     return (
                         <>
@@ -52,6 +52,11 @@ const Search = () => {
                         </>
                     )
                 })
+            }
+            </> : <div className='h-[80vh] w-[90vw] flex flex-col items-center justify-center gap-5'>
+                <h2 className='text-4xl'>No Result Found</h2>
+                <img src="/assets/Images/Search.png" alt="search not found" className='w-auto h-[50vh]' />
+            </div>
             }
         </div>
     )
