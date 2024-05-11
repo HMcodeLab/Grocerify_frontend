@@ -98,7 +98,7 @@ const StoreProduct = () => {
           </div>
           <div className="flex flex-row gap-2">
             <p className="text-[#58B310] text-[14px] font-Montserrat">
-              Open now -
+              Open at -
             </p>
             <p className="text-[#222222] text-[14px] font-Montserrat">
               {shopData?.openingHours?.from} am - {shopData?.openingHours?.to}pm(Today)
