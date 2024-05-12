@@ -12,6 +12,13 @@ export function formatDate(dateString) {
     const formattedDate = `${day} ${months[monthIndex]} ${year}`;
     return formattedDate;
 }
+export function validateEmail(email) {
+    // Regular expression pattern for validating email addresses
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Test the email against the pattern and return true or false
+    return emailPattern.test(email);
+}
 
 export const cropString = (str, num) => {
     // console.log(str);

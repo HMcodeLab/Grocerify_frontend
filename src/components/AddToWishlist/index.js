@@ -10,15 +10,16 @@ import { BASE_URL } from '../../Api/api';
 import { Globalinfo } from '../../App';
 import Spinner from '../Spinner';
 import { RWebShare } from 'react-web-share';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function AddToWishlist() {
     const [Data, setData] = useState([])
+    const navigate = useNavigate()
     const [Subtotal, setSubtotal] = useState(0)
     const [show, setshow] = useState(false)
     const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
 
-    console.log(wishListData)
+    // console.log(wishListData)
     // It is used to apply operation on decreasing the quantity of items
 
     function StarPrint(count) {
@@ -74,29 +75,28 @@ export default function AddToWishlist() {
                             let price = item.product.stores[0].variants1_mrp_price - (item.product.stores[0].variants1_mrp_price * (item.product.stores[0].variants1_discount_per / 100))
                             let starcount = item.product.rating;
 
-                            return (<>
-                                <Link to={`/product/${item.product.slug}`} className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center ' key={index}>
+                            return (<div>
+                                <div onClick={() => navigate(`/product/${item.product.slug}`)} className='flex rounded-lg w-full border bg-[#FAFAF5] space-x-3 pl-2 items-center cursor-pointer ' key={index}>
                                     <div className='w-28 h-28  flex justify-center items-center '>
                                         <img className='max-h-full max-w-full mix-blend-multiply' src={item.product.product_primary_image_url} />
                                     </div>
                                     <div className='flex flex-col w-full space-y-2 py-3'>
                                         <div className='flex justify-between pr-5 font-semibold font2 text-[16px] gap-[8vw]'>
                                             <div>{item.product.products_title}</div>
-                                            <div className='flex space-x-5 items-start'>
+                                            <div className='flex space-x-5 items-start' >
                                                 <RWebShare
                                                     data={{
                                                         text: "Web Share - Grocerify",
                                                         url: `https://hopingminds.co.in/product/${item.product.slug}`,
                                                         title: "Grocerify",
                                                     }}
-                                                    onClick={() =>
-                                                        console.log("shared successfully!")
-                                                    }
+
                                                 >
-                                                    <button className=''><Share /> </button>
+                                                    <button className='' onClick={(e) => e.stopPropagation()
+                                                    }><Share onClick={(e) => e.stopPropagation()} /> </button>
 
                                                 </RWebShare>
-                                                <button className='' onClick={() => RemoveFromWishlist(item.product._id)}><Delete /></button>
+                                                <button className='' onClick={(e) => { e.stopPropagation(); RemoveFromWishlist(item.product._id) }}><Delete /></button>
                                             </div>
 
                                         </div>
@@ -115,8 +115,8 @@ export default function AddToWishlist() {
                                         </div>
 
                                     </div>
-                                </Link>
-                            </>)
+                                </div >
+                            </div >)
                         })
                     }
 
@@ -125,14 +125,14 @@ export default function AddToWishlist() {
 
 
 
-                </div>
+                </div >
 
-            </div>
+            </div >
             {show ? <div className='w-full h-screen fixed -top-4 left-0 bg-[#b4cca1] opacity-80'>
-                <Spinner className='' />
+                < Spinner className='' />
 
-            </div> : ''}
-        </div>
+            </div > : ''}
+        </div >
 
     </>)
 }

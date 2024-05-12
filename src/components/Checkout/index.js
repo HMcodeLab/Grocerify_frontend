@@ -23,7 +23,7 @@ export default function Checkout() {
     // const parsedString = (jsonString)
     // console.log(jsonString)
 
-    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails } = useContext(Globalinfo)
+    const { cartData, GetCart, wishListData, GetWishList, userDetail, getUserDetails, clearCart, clearWishList } = useContext(Globalinfo)
 
     const [checkoutData, setCheckoutData] = useState([]);
 
@@ -131,8 +131,21 @@ export default function Checkout() {
         } catch (error) {
             console.log(error)
             setbtnLoader(false)
-            toast.error("An ");
+            toast.error("Your token has Expired! . Login again ");
+            handleLogOut()
+
         }
+    }
+
+    const handleLogOut = async () => {
+        localStorage.removeItem('GROC_USER_TOKEN')
+        navigate('/')
+
+        getUserDetails();
+        clearCart();
+        clearWishList();
+
+
     }
 
     const handleOrder = async () => {

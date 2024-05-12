@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { BASE_URL } from '../../Api/api';
 import CircularProgress from '@mui/joy/CircularProgress';
+import { validateEmail } from '../../helpers/helper_function';
 
 const ShopRegistration = () => {
 
@@ -38,6 +39,23 @@ const ShopRegistration = () => {
 
     const handleSubmit = async () => {
         setBtnLoader(true);
+        if (sellerDetails.OwnerMobile.length !== 10) {
+            toast.error('Enter valid Mobile Number')
+            setBtnLoader(false)
+            return;
+        }
+        if (validateEmail(sellerDetails.OwnerEmail)) {
+            toast.error('Enter valid Email address')
+            setBtnLoader(false)
+            return;
+        }
+        if (sellerDetails.Aadhar.length !== 16) {
+            toast.error('Enter valid Aadhar number')
+            setBtnLoader(false)
+            return;
+        }
+
+
         if (sellerDetails.OwnerName === "" ||
             sellerDetails.OwnerMobile === "" ||
             sellerDetails.OwnerEmail === "" ||
@@ -47,7 +65,7 @@ const ShopRegistration = () => {
             sellerDetails.PanCard === "" ||
             sellerDetails.password === ""
         ) {
-            toast.error("Enter Valid Credentials")
+            toast.error("Fill all Credentials")
             setBtnLoader(false)
 
         }

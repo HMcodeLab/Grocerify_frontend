@@ -4,7 +4,7 @@ import styles from './productPage.module.css'
 import Products from '../Products/products';
 import { TopRatedProducts } from '../../Data/db';
 import { ReactComponent as Dropdown } from '../../Assets/Icons/dropdown.svg'
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Heroimage from '../../Assets/Images/electronics.jpg'
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
@@ -14,6 +14,7 @@ import { getCategoryBanner } from '../../helpers';
 const ProductPage = (props) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [categoryData, setCategoryData] = useState();
+    const navigate = useNavigate()
 
 
     const checkForQuery = () => {
@@ -42,9 +43,9 @@ const ProductPage = (props) => {
 
 
     useEffect(() => {
-        console.log(searchParams.get('category'))
+        // console.log(searchParams.get('category'))
         const query = checkForQuery()
-        console.log(query)
+        // console.log(query)
 
     }, [])
 
@@ -52,7 +53,7 @@ const ProductPage = (props) => {
         try {
             const res = await fetch(`${BASE_URL}api/products?${checkForQuery()}`);
             const response = await res.json();
-            console.log(response);
+            // console.log(response);
             setCategoryData(response)
         } catch (error) {
             console.log(error)
@@ -78,15 +79,15 @@ const ProductPage = (props) => {
                             wheel: false,
                             arrows: false,
                             autoplay: true,
-                            interval: 2000,
-                            speed: 1000,
-                            delay: 2,
+                            interval: 3000,
+                            speed: 2000,
+                            delay: 3,
                             pauseOnHover: true,
-                            drag: true,
+                            drag: false,
 
                         }}>
                         <SplideSlide >
-                            <img src={getCategoryBanner(searchParams.get('category'))[0]} alt="banner  not found" />
+                            <img src={getCategoryBanner(searchParams.get('category'))[0]} alt="banner  not found" onClick={() => navigate('/store/65d87ed34331e28142b6190d')} />
                         </SplideSlide>
                         <SplideSlide>
                             <img src={getCategoryBanner(searchParams.get('category'))[1]} alt="banner  not found" />

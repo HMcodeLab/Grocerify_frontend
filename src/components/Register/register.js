@@ -41,16 +41,19 @@ const Register = () => {
 
         if (!user.firstName || !user.lastName || !user.email || !user.mobile || !user.password) {
             toast.error('Please Enter valid Credentials');
+            return
 
         }
         else if (!validateEmail(user.email)) {
             toast.error("Please Enter valid Email")
+            return
         }
 
-        else if (!ismobileVerified) {
-            toast.error("Please verify your mobile first");
+        // else if (!ismobileVerified) {
+        //     toast.error("Please verify your mobile first");
 
-        }
+
+        // }
         else {
             try {
                 const res = await axios.post(`${BASE_URL}api/register`, {

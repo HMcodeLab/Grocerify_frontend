@@ -34,6 +34,7 @@ const Login = () => {
             if (!validateEmail(user.email)) {
                 toast.error('Enter valid Email  Address')
                 setBtnLoader(false)
+                return;
             }
             else {
                 try {
@@ -68,6 +69,8 @@ const Login = () => {
 
             if (user.mobile.length != 10) {
                 toast.error('Enter valid Mobile Number')
+                setBtnLoader(false)
+                return;
             }
             else {
                 try {

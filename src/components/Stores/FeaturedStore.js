@@ -397,15 +397,13 @@ const FeaturedStore = () => {
                                         className="w-full"
                                     />
                                     <div className="flex flex-row justify-between text-xl">
-                                        <h4 className="font-Gorditas text-[#000000]">Nemo enim</h4>
+                                        <h4 className="font-Gorditas text-[#000000]">Ritika Raj</h4>
                                         <span className="text-[#FFB800]">
                                             &#9733;&#9733;&#9733;&#9733;&#9734;
                                         </span>
                                     </div>
                                     <p className="font-andika text-sm">
-                                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis…”
+                                        I've been using this online grocery store for months now, and I couldn't be happier with the service. The website is user-friendly, making it easy to find everything I need.
                                     </p>
                                 </div>
                                 <div className="p-4 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
@@ -414,15 +412,13 @@ const FeaturedStore = () => {
                                         className="w-full"
                                     />
                                     <div className="flex flex-row justify-between text-xl">
-                                        <h4 className="font-Gorditas text-[#000000]">Amlo Sinha</h4>
+                                        <h4 className="font-Gorditas text-[#000000]">Anmol Sinha</h4>
                                         <span className="text-[#FFB800]">
                                             &#9733;&#9733;&#9733;&#9733;&#9734;
                                         </span>
                                     </div>
                                     <p className="font-andika text-sm">
-                                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis…”
+                                        I've tried several online grocery stores, but this one stands out for its excellent selection and quality of produce
                                     </p>
                                 </div>
                                 <div className="p-4 pb-6 hover:bg-[#f3f3f3] space-y-1 hover:scale-105">
@@ -431,15 +427,13 @@ const FeaturedStore = () => {
                                         className="w-full"
                                     />
                                     <div className="flex flex-row justify-between text-xl">
-                                        <h4 className="font-Gorditas text-[#000000]">Mauscosf</h4>
+                                        <h4 className="font-Gorditas text-[#000000]">Sameer</h4>
                                         <span className="text-[#FFB800]">
                                             &#9733;&#9733;&#9733;&#9733;&#9734;
                                         </span>
                                     </div>
                                     <p className="font-andika text-sm">
-                                        “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                                        aliqua. Ut enim ad minim veniam, quis…”
+                                        I had an issue with my order, and I must say, the customer service team went above and beyond to resolve it promptly.
                                     </p>
                                 </div>
                             </div>
