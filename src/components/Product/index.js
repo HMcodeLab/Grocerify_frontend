@@ -246,10 +246,9 @@ export default function Product() {
         else {
             if (quantity[id] > 1) {
                 let temp = { ...quantity };
+                temp[id] = temp[id] - 1
+                setQuantity({ ...temp })
 
-                setQuantity({
-                    id: 1,
-                })
             }
         }
     }
