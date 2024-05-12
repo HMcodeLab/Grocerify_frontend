@@ -44,6 +44,7 @@ export default function Product() {
     const [Ratings, setRatings] = useState([])
     const [storeCart, setStoreCart] = useState({ id: "", storeid: "" })
     const [openDifferentStorePopUp, setopenDifferentStorePopUp] = useState(false)
+    const [quantity, setQuantity] = useState({})
 
     const primaryRef = useRef(null);
     const secondaryRef = useRef(null);
@@ -101,7 +102,7 @@ export default function Product() {
             let id = Data._id;
             try {
                 let url = BASE_URL + 'api/addtocart'
-                let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: 1, shopID: storeid }
+                let bodydata = { mobile: userDetail?.mobile, productid: id, quantity: quantity[storeid], shopID: storeid }
                 const data = await fetch(url, {
                     method: 'post',
                     headers: { 'Content-Type': 'application/json' },
@@ -208,6 +209,51 @@ export default function Product() {
 
     }
 
+    function isEmpty(obj) {
+        for (const prop in obj) {
+            if (Object.hasOwn(obj, prop)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    useEffect(() => {
+        let temp = {};
+        store?.forEach((val, ind) => {
+            temp[val.store._id] = 1
+
+        })
+        setQuantity({ ...temp })
+    }, [store])
+
+    console.log(quantity)
+    if (isEmpty(quantity)) {
+        return <>Loading...</>
+    }
+
+
+    const updateQuantity = (e, id, method) => {
+        e.stopPropagation()
+        console.log(id, method)
+        if (method == 'increase') {
+            let temp = { ...quantity }
+            temp[id] = temp[id] + 1
+            setQuantity({ ...temp })
+
+        }
+        else {
+            if (quantity[id] > 1) {
+                let temp = { ...quantity };
+
+                setQuantity({
+                    id: 1,
+                })
+            }
+        }
+    }
+
     return (<>
         {/* <Extra /> */}
 
@@ -286,11 +332,31 @@ export default function Product() {
                                                     {/* <div>Delivery by Sun, 12 Feb</div> */}
                                                     {/* <div>2.1km</div> */}
                                                     <div className='flex justify-between items-center'>
+
                                                         {isShopOpen(item?.store?.openingHours?.from, item?.store?.openingHours?.to)
-                                                            ? <div div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item?.store?.openingHours?.to}</div> : <div className='flex flex-col opacity-[0.5]'> <div div className='text-[14px] text-red-500 font-semibold'>{item?.store?.openingHours?.from}- {item?.store?.openingHours?.to}</div> <div className='text-[14px] text-red-500 font-semibold' >This Shop is Currently Closed</div>  </div>}
+                                                            ? <div div className='text-[14px] text-[#58B310] font-semibold'>{item.store.openingHours.from}- {item?.store?.openingHours?.to}</div> : <div className='flex flex-col opacity-[0.5]'> <div div className='text-[14px] text-red-500 font-semibold'>{item?.store?.openingHours?.from}- {item?.store?.openingHours?.to}</div> <div className='text-[14px] text-red-500 font-semibold' >Closed</div>  </div>}
+                                                        <div className='actions'>
+
+
+                                                            <div className='quantity_container' >
+                                                                <div onClick={(e) => updateQuantity(e, item.store._id, "decrease")}>-</div>
+                                                                <div className='qc_value'>
+                                                                    {quantity[item.store._id]}
+                                                                </div>
+                                                                <div
+                                                                    className='qc_increase'
+                                                                    onClick={(e) => updateQuantity(e, item.store._id, "increase")}>
+                                                                    +
+                                                                </div>
+                                                            </div>
+
+
+
+
+                                                        </div>
                                                         <div className='flex gap-3'>
                                                             <button className='border border-[var(--primary)] rounded-sm px-3 py-1' onClick={(e) => { e.stopPropagation(); addToCart(item.store) }} style={{ opacity: isShopOpen(item?.store?.openingHours?.from, item?.store?.openingHours?.to) ? "1" : "0.5", pointerEvents: isShopOpen(item.store.openingHours.from, item.store.openingHours.to) ? "unset" : "none" }} >Add To Cart</button>
-                                                            {/* <button className='border border-[var(--primary)] px-3 py-1' onClick={(e) => { e.stopPropagation(); handleBuy(item?.store) }}>Buy Now</button> */}
+
 
                                                         </div>
 
